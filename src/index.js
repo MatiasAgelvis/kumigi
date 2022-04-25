@@ -140,7 +140,7 @@ app.get("/gradient", seed, background, gradient, text, (req, res) => {
     return res.send(toHTML(res));
 });
 
-app.listen(3001, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log("\n\n\n");
     console.log("──────────────────────────");
     console.log(" ┌───────────────────────┐");
