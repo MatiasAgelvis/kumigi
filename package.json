@@ -1,14 +1,14 @@
 {
-  "name": "express",
+  "name": "avatara",
   "version": "1.0.0",
-  "description": "",
+  "description": "Create simple initials avatar from a simple API",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["avatar"],
+  "author": "Matias Agelvis",
   "license": "ISC",
   "dependencies": {
     "canvas": "^2.9.1",
