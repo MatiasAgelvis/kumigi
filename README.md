@@ -21,7 +21,7 @@ Images are 200x200
 
 ## Exmaple
 
-	http://<TBD domain>/circle?back=fff&fore=234567&text=MAD&textColor=fff&font=courier
+	https://thawing-oasis-92640.herokuapp.com/circle?back=fff&fore=234567&text=MAD&textColor=fff&font=courier
 
 <p align="center">
 <img src="example.png">
