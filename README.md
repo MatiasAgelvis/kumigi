@@ -13,13 +13,13 @@ Create simple avatars with your initials from a simple API
 - `back` : hexadecimal color string without # (ex. 32689a)
 - `fore` : hexadecimal color string without # (ex. 82ff1a)
 - `textColor` : hexadecimal color string without # (ex. aaa)
-- `text` : string, up to 3 characters are accpeted
+- `text` : string, up to 3 characters are accepted
 - `font` : one of [ plex, courier, cousine, pt, roboto ]
 
 ## Size
 Images are 200x200
 
-## Exmaple
+## Example
 
 	https://thawing-oasis-92640.herokuapp.com/circle?back=fff&fore=234567&text=MAD&textColor=fff&font=courier
 
