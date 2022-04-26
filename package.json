@@ -1,7 +1,7 @@
 {
   "name": "avatara",
   "version": "1.0.0",
-  "description": "Create simple initials avatar from a simple API",
+  "description": "Create simple avatars with your initials from a simple API",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",

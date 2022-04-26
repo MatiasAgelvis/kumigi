@@ -1,7 +1,7 @@
 ![](avatara.png)
 # Avatara
 
-Create simple initials avatar from a simple API
+Create simple avatars with your initials from a simple API
 
 ## paths
 - `basic` : colored background and text
