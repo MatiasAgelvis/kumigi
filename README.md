@@ -21,7 +21,7 @@ Images are 200x200
 
 ## Example
 
-	https://thawing-oasis-92640.herokuapp.com/circle?back=fff&fore=234567&text=MAD&textColor=fff&font=courier
+	https://avatara.herokuapp.com/circle?back=fff&fore=234567&text=MAD&textColor=fff&font=courier
 
 <p align="center">
 <img src="example.png">
