@@ -1,4 +1,5 @@
 const { createCanvas, registerFont } = require("canvas");
+const Color = require('color');
 
 const Fonts = Object.freeze({
     PLEX: "plex",
@@ -34,18 +35,18 @@ Avatara.prototype.fonts = function () {
     return Object.values(Fonts);
 };
 
-Avatara.prototype.background = function (color = "000") {
-    this.ctx.fillStyle = `#${color}`;
+Avatara.prototype.background = function (color = "#000") {
+    this.ctx.fillStyle = Color(color).rgb().string();
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     return this;
 };
 
-Avatara.prototype.foreground = function () {
-    // ¯\_(ツ)_/¯
+Avatara.prototype.basic = function () {
+    return this;
 };
 
-Avatara.prototype.rectangle = function (color = "000") {
-    this.ctx.fillStyle = `#${color}`;
+Avatara.prototype.rectangle = function (color = "#000") {
+    this.ctx.fillStyle = Color(color).rgb().string();
     this.ctx.fillRect(
         0,
         0.2 * this.canvas.height,
@@ -55,8 +56,8 @@ Avatara.prototype.rectangle = function (color = "000") {
     return this;
 };
 
-Avatara.prototype.square = function (color = "000") {
-    this.ctx.fillStyle = `#${color}`;
+Avatara.prototype.square = function (color = "#000") {
+    this.ctx.fillStyle = Color(color).rgb().string();
     this.ctx.fillRect(
         0.13 * this.canvas.width,
         0.13 * this.canvas.height,
@@ -66,7 +67,7 @@ Avatara.prototype.square = function (color = "000") {
     return this;
 };
 
-Avatara.prototype.circle = function (color) {
+Avatara.prototype.circle = function (color = '#777') {
     this.ctx.arc(
         this.canvas.width / 2,
         this.canvas.height / 2,
@@ -75,12 +76,12 @@ Avatara.prototype.circle = function (color) {
         2 * Math.PI
     );
 
-    this.ctx.fillStyle = `#${color}`;
+    this.ctx.fillStyle = Color(color).rgb().string();
     this.ctx.fill();
     return this;
 };
 
-Avatara.prototype.gradient = function (back = "000", fore = "fff") {
+Avatara.prototype.gradient = function (color = "#00f") {
     // Create a linear gradient
     var gradient = this.ctx.createLinearGradient(
         0,
@@ -90,8 +91,8 @@ Avatara.prototype.gradient = function (back = "000", fore = "fff") {
     );
 
     // Add three color stops
-    gradient.addColorStop(0, `#${back}`);
-    gradient.addColorStop(1, `#${fore}`);
+    gradient.addColorStop(0, Color(color).alpha(0).rgb().string());
+    gradient.addColorStop(1, Color(color).rgb().string());
 
     // Set the fill style and draw a rectangle
     this.ctx.fillStyle = gradient;
@@ -99,11 +100,11 @@ Avatara.prototype.gradient = function (back = "000", fore = "fff") {
     return this;
 };
 
-Avatara.prototype.text = function (text = "", color = "fff", font = "Plex") {
+Avatara.prototype.text = function (text = "", color = "#fff", font = "Plex") {
     let fontName = getKeyByValue(Fonts, font.toLowerCase());
     let fontFacor = fontFactos[Fonts[fontName]] * this.canvas.width;
 
-    this.ctx.fillStyle = `#${color}`;
+    this.ctx.fillStyle = Color(color).rgb().string();
     this.ctx.font = `bold ${fontFacor}px ${Fonts[fontName]}`;
     this.ctx.textAlign = "center";
     this.ctx.textBaseline = "middle";
