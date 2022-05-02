@@ -26,13 +26,17 @@ function circular(X, i) {
 
 function parseArrayOfColors(arrayString) {
     return arrayString
+        // remove brackets
         .replace(/\[|\]/g, "")
+        // replace , not inside parenthesis with |
         .replace(/,(?![^(]*\))/g, "|")
-        .split("|");
+        // split by |
+        .split("|")
+        // ensure that all characters are lowercase
+        .map(x => x.toLowerCase());
 }
 
 app.get("/*", (req, res) => {
-    // first two are '' and 'compose'
     const shapes = req.path.split("/").slice(1);
 
     const {
@@ -48,7 +52,6 @@ app.get("/*", (req, res) => {
     const colors = parseArrayOfColors(colorsString);
 
     let avatar = new Avatara(width, height);
-    console.log(avatar);
 
     shapes.forEach((shape, i) => {
         avatar[shape](circular(colors, i));
