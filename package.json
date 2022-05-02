@@ -4,10 +4,11 @@
   "description": "Create simple avatars with your initials from a simple API",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "back": "nodemon src/back/server.js"
+    "start"  : "next start",
+    "dev"    : "next dev",
+    "build"  : "next build",
+    "export" : "next export",
+    "back"   : "nodemon src/back/server.js"
   },
   "keywords": [
     "avatar"
