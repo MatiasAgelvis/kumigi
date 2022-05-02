@@ -1,5 +1,5 @@
 const { createCanvas, registerFont } = require("canvas");
-const Color = require('color');
+const Color = require("color");
 
 const Fonts = Object.freeze({
     PLEX: "plex",
@@ -67,7 +67,7 @@ Avatara.prototype.square = function (color = "#000") {
     return this;
 };
 
-Avatara.prototype.circle = function (color = '#777') {
+Avatara.prototype.circle = function (color = "#777") {
     this.ctx.arc(
         this.canvas.width / 2,
         this.canvas.height / 2,

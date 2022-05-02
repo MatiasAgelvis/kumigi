@@ -25,15 +25,17 @@ function circular(X, i) {
 }
 
 function parseArrayOfColors(arrayString) {
-    return arrayString
-        // remove brackets
-        .replace(/\[|\]/g, "")
-        // replace , not inside parenthesis with |
-        .replace(/,(?![^(]*\))/g, "|")
-        // split by |
-        .split("|")
-        // ensure that all characters are lowercase
-        .map(x => x.toLowerCase());
+    return (
+        arrayString
+            // remove brackets
+            .replace(/\[|\]/g, "")
+            // replace , not inside parenthesis with |
+            .replace(/,(?![^(]*\))/g, "|")
+            // split by |
+            .split("|")
+            // ensure that all characters are lowercase
+            .map((x) => x.toLowerCase())
+    );
 }
 
 app.get("/*", (req, res) => {
