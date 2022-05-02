@@ -2,7 +2,7 @@ const express = require("express");
 const { createCanvas, registerFont } = require("canvas");
 const compression = require("compression");
 const helmet = require("helmet");
-const Avatara = require("../lib/avarata");
+const Avatara = require("../lib/avatara");
 
 const app = express();
 
