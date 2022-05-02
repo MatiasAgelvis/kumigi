@@ -13,7 +13,7 @@ app.get("/favicon.ico", (req, res) => res.status(204));
 
 app.get("/", (req, res) => {
     res.json({
-        paths: ["basic", "rectangle", "circle", "gradient"],
+        shapes: ["basic", "rectangle", "circle", "gradient"],
         colors: ["back", "fore", "textColor"],
         text: ["string"],
         fonts: new Avatara().fonts(),
@@ -24,13 +24,16 @@ function circular(X, i) {
     return X[i % X.length];
 }
 
-function parseToArrayOfStrings(arrayString){
-    return arrayString.replace(/\[|\]/g,'').split(',')
+function parseArrayOfColors(arrayString) {
+    return arrayString
+        .replace(/\[|\]/g, "")
+        .replace(/,(?![^(]*\))/g, "|")
+        .split("|");
 }
 
-app.get("/compose/*", (req, res) => {
+app.get("/*", (req, res) => {
     // first two are '' and 'compose'
-    const shapes = req.path.split("/").slice(2);
+    const shapes = req.path.split("/").slice(1);
 
     const {
         height = 200,
@@ -42,45 +45,28 @@ app.get("/compose/*", (req, res) => {
     } = req.query;
 
     // make array of colors form query
-    const colors = parseToArrayOfStrings(colorsString);
+    const colors = parseArrayOfColors(colorsString);
 
     let avatar = new Avatara(width, height);
+    console.log(avatar);
 
     shapes.forEach((shape, i) => {
         avatar[shape](circular(colors, i));
     });
 
+    if (text) {
+        avatar.text(text, textColor, font);
+    }
+
     return res.send(avatar.toHTML());
-});
-
-app.get("/:shape", (req, res) => {
-    const {
-        height = 200,
-        width = 200,
-        back = "#000",
-        fore = "#999",
-        text = "",
-        textColor = "#fff",
-        font = "Plex",
-    } = req.query;
-
-    let avatar = new Avatara(width, height);
-
-    return res.send(
-        avatar
-            .background(back)
-            [req.params.shape](fore)
-            .text(text, textColor, font)
-            .toHTML()
-    );
 });
 
 app.listen(process.env.PORT || 3000, () => {
     console.log("\n\n\n");
-    console.log("──────────────────────────");
-    console.log(" ┌───────────────────────┐");
-    console.log(" │---------START---------│");
-    console.log(" └───────────────────────┘");
-    console.log("──────────────────────────");
+    console.log("───────────────────────────");
+    console.log(" ┌───────────────────────┐ ");
+    console.log(" │---------START---------│ ");
+    console.log(" └───────────────────────┘ ");
+    console.log("───────────────────────────");
     console.log("\n");
 });
