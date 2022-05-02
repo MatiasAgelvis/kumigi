@@ -9,11 +9,13 @@ const Fonts = Object.freeze({
     ROBOTO: "roboto",
 });
 
-registerFont("./fonts/IBMPlexMono-Bold.ttf", { family: Fonts.PLEX });
-registerFont("./fonts/CourierPrime-Bold.ttf", { family: Fonts.COURIER });
-registerFont("./fonts/Cousine-Bold.ttf", { family: Fonts.COUSINE });
-registerFont("./fonts/PTMono-Regular.ttf", { family: Fonts.PT });
-registerFont("./fonts/RobotoMono-Bold.ttf", { family: Fonts.ROBOTO });
+if (typeof possibleFunction === typeof Function) {
+    registerFont("./fonts/IBMPlexMono-Bold.ttf", { family: Fonts.PLEX });
+    registerFont("./fonts/CourierPrime-Bold.ttf", { family: Fonts.COURIER });
+    registerFont("./fonts/Cousine-Bold.ttf", { family: Fonts.COUSINE });
+    registerFont("./fonts/PTMono-Regular.ttf", { family: Fonts.PT });
+    registerFont("./fonts/RobotoMono-Bold.ttf", { family: Fonts.ROBOTO });
+}
 
 const fontFactos = {};
 fontFactos[Fonts.PLEX] = 0.35;
@@ -118,6 +120,10 @@ Avatara.prototype.text = function (text = "", color = "#fff", font = "Plex") {
 
 Avatara.prototype.toHTML = function () {
     return `<img src=" ${this.canvas.toDataURL()} " />`;
+};
+
+Avatara.prototype.toDataURL = function () {
+    return this.canvas.toDataURL();
 };
 
 module.exports = Avatara;
