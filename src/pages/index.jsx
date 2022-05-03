@@ -2,7 +2,7 @@ import Avatara from "../lib/avatara";
 import { useState, useEffect } from "react";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
-import { HexColorPicker } from "react-colorful";
+import { RgbaStringColorPicker } from "react-colorful";
 
 const avatar = new Avatara();
 
@@ -42,7 +42,7 @@ function App() {
         placeholder="Select an option"
       />
       <div>Enter Color</div>
-      <HexColorPicker color={color} onChange={setColor} />
+      <RgbaStringColorPicker color={color} onChange={setColor} />
       <br />
       <button onClick={updateShape}>Enter</button>
       <br />
