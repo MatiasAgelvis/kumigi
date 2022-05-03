@@ -4,11 +4,11 @@
   "description": "Create simple avatars with your initials from a simple API",
   "main": "index.js",
   "scripts": {
-    "start"  : "next start",
-    "dev"    : "next dev",
-    "build"  : "next build",
-    "export" : "next export",
-    "back"   : "nodemon src/back/server.js"
+    "start": "next start",
+    "dev": "next dev",
+    "build": "next build",
+    "export": "next export",
+    "back": "nodemon src/back/server.js"
   },
   "keywords": [
     "avatar"
@@ -23,7 +23,9 @@
     "helmet": "^5.0.2",
     "next": "^12.1.5",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-colorful": "^5.5.1",
+    "react-dom": "^18.1.0",
+    "react-dropdown": "^1.10.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
