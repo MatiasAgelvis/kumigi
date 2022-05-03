@@ -1,11 +1,12 @@
 import Avatara from "../lib/avatara";
 import { useState, useEffect } from "react";
 import Select from 'react-select'
-import Image from "next/image";
 import { RgbaStringColorPicker } from "react-colorful";
 
+const width = 200
+const height = 200
 
-const avatar = new Avatara();
+const avatar = new Avatara(width, height);
 
 function App() {
   const options = [
@@ -45,7 +46,7 @@ function App() {
       <RgbaStringColorPicker color={color} onChange={setColor} />
       <button onClick={updateShape}>Enter</button>
       <br/>
-      <Image src={image} width={200} height={200}/>
+      <img src={image} width={width} height={height}/>
     </div>
   );
 }
