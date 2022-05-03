@@ -20,12 +20,12 @@ function App() {
   const [color, setColor] = useState("#fff");
   const [image, setImage] = useState(avatar.toDataURL());
 
-  const onChange = (setter) => (event) => setter(event.target.value);
+  const onChange = (setter) => (event) => setter(event.value);
+  // const onChange = (setter) => (event) => console.log(event.value);
 
   const updateShape = () => {
-    let shape_ = shape['value'] 
     console.log(shape)
-    avatar[shape_](color);
+    avatar[shape](color);
     setImage(avatar.toDataURL());
     setShape("");
     setColor("");
@@ -38,7 +38,7 @@ function App() {
       <Dropdown
         options={options}
         onChange={onChange(setShape)}
-        value={defaultOption}
+        value={shape}
         placeholder="Select an option"
       />
       <div>Enter Color</div>
