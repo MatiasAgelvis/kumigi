@@ -1,14 +1,22 @@
 import Avatara from "../lib/avatara";
 import { useState, useEffect } from "react";
-import Select from 'react-select'
-import { RgbaStringColorPicker } from "react-colorful";
+import { ReactSortable } from "react-sortablejs";
+import Card from "../components/card";
 
-const width = 200
-const height = 200
+const width = 200;
+const height = 200;
 
-const avatar = new Avatara(width, height);
+function applyLayers(avatar, layers) {
+  for (let [key, layer] of Object.entries(layers)){
+    if (layer.shape) {
+      avatar[layer.shape](layer.color);
+    }
+  }
+}
 
 function App() {
+  const avatar = new Avatara(width, height);
+
   const options = [
     { value: "background", label: "Background" },
     { value: "square", label: "Square" },
@@ -16,37 +24,38 @@ function App() {
     { value: "rectangle", label: "Rectangle" },
     { value: "gradient", label: "Gradient" },
   ];
-  const defaultOption = options[0];
 
-  const [shape, setShape] = useState(null);
-  const [color, setColor] = useState("rgba(80,200,100,1)");
   const [image, setImage] = useState(avatar.toDataURL());
+  const [layers, setLayers] = useState({});
+  const layersString = JSON.stringify(layers);
 
-  const onChange = (setter) => (event) => {console.log(event.value); setter(event.value);}
+  applyLayers(avatar, layers);
 
-  const updateShape = () => {
-    console.log(shape)
-    if (shape){
-      avatar[shape](color);
-      setImage(avatar.toDataURL());
-    }
-    else{alert('Select a Shape 乁| ･ 〰 ･ |ㄏ')}
+
+  const updateLayer = (id, update) => {
+    setLayers({
+      ...layers,
+      [id]: { shape: update.shape, color: update.color },
+    });
   };
 
+  useEffect(() => {
+    applyLayers(avatar, layers);
+    setImage(avatar.toDataURL());
+  }, [layersString]);
 
   return (
-    <div>
-      <div>Enter Shape</div>
-      <Select
-        options={options}
-        onChange={(x) => setShape(x.value)}
-        styles={{menu: (provided, state) => ({...provided,zIndex: 4})}}
-      />
-      <div>Enter Color</div>
-      <RgbaStringColorPicker color={color} onChange={setColor} />
-      <button onClick={updateShape}>Enter</button>
-      <br/>
-      <img src={image} width={width} height={height}/>
+    <div className="columns">
+      <div className="column">
+      {Array.from(Array(10).keys()).map((_,i) =>
+        <Card id={i} updateLayer={updateLayer} options={options} />
+        )}
+
+        <button>+</button>
+      </div>
+      <div className="column">
+        <img src={image} width={width} height={height} />
+      </div>
     </div>
   );
 }
