@@ -7,7 +7,7 @@ const width = 200;
 const height = 200;
 
 function applyLayers(avatar, layers) {
-  for (let [key, layer] of Object.entries(layers)){
+  for (let [ key, layer ] of Object.entries(layers)) {
     if (layer.shape) {
       avatar[layer.shape](layer.color);
     }
@@ -27,10 +27,10 @@ function App() {
 
   const [image, setImage] = useState(avatar.toDataURL());
   const [layers, setLayers] = useState({});
+  const [list, setList] = useState([0]);
   const layersString = JSON.stringify(layers);
 
   applyLayers(avatar, layers);
-
 
   const updateLayer = (id, update) => {
     setLayers({
@@ -47,11 +47,16 @@ function App() {
   return (
     <div className="columns">
       <div className="column">
-      {Array.from(Array(10).keys()).map((_,i) =>
-        <Card id={i} updateLayer={updateLayer} options={options} />
-        )}
+        <ReactSortable list={list} setList={setList}>
+          {list.map((_, i) => (
+            <div key={i}>
+              Layer {i}
+              <Card id={i} updateLayer={updateLayer} options={options} />
+            </div>
+          ))}
+        </ReactSortable>
 
-        <button>+</button>
+        <button onClick={() => setList([...list, list.length])}>+</button>
       </div>
       <div className="column">
         <img src={image} width={width} height={height} />
