@@ -1,0 +1,29 @@
+/* PLEX */
+@font-face {
+    font-family: 'plex';
+    src: url('../../public/fonts/IBMPlexMono-Bold.ttf'), url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@700&display=swap')
+}
+
+/* COURIER */
+@font-face {
+    font-family: 'courier';
+    src: url('../../public/fonts/CourierPrime-Bold.ttf'), url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap')
+}
+
+/* COUSINE */
+@font-face {
+    font-family: 'cousine';
+    src: url('../../public/fonts/Cousine-Bold.ttf'), url('https://fonts.googleapis.com/css2?family=Cousine:wght@700&display=swap')
+}
+
+/* PT */
+@font-face {
+    font-family: 'pt';
+    src: url('../../public/fonts/PTMono-Regular.ttf'), url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap')
+}
+
+/* ROBOTO */
+@font-face {
+    font-family: 'roboto';
+    src: url('../../public/fonts/RobotoMono-Bold.ttf'), url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap')
+}

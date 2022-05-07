@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import namer from "color-namer";
 
-function Card({ index, updateLayer, options }) {
+function Card({ index, updateLayer, options, fonts }) {
   const [shape, setShape] = useState(null);
   const [color, setColor] = useState("rgba(1,1,1,1)");
   const [text, setText] = useState("");
@@ -26,8 +26,8 @@ function Card({ index, updateLayer, options }) {
   const textRef = useRef(null);
 
   useEffect(() => {
-    console.log(text);
-    updateLayer({ shape: shape, color: color, text: text, font: 'pt' });
+    console.log(font);
+    updateLayer({ shape: shape, color: color, text: text, font: font? font: 'pt' });
   }, [shape, color, text, font]);
 
   function capitalize(string) {
@@ -60,7 +60,7 @@ function Card({ index, updateLayer, options }) {
             onChange={(e) => setShape(event.target.value)}
           >
             {options.map((op) => (
-              <option value={op.value}>{op.label}</option>
+              <option key={op.value} value={op.value}>{op.label}</option>
             ))}
           </Select>
         </GridItem>
@@ -83,14 +83,26 @@ function Card({ index, updateLayer, options }) {
 
         {shape == "text" ? (
           <GridItem>
-            <PinInput type="alphanumeric" ref={textRef} value={text} autoFocus onChange={setText} onClick={console.log}>
+            <PinInput type="alphanumeric" ref={textRef} value={text} autoFocus onChange={setText}>
             <PinInputField/>
             <PinInputField/>
             <PinInputField/>
             </PinInput>
-
           </GridItem>
         ) : null}
+        {shape == "text" ? (
+          <GridItem>
+          <Select
+            placeholder="Select a Font"
+            onChange={(e) => setFont(event.target.value)}
+          >
+            {fonts.map((op) => (
+              <option key={op} value={op}>{capitalize(op)}</option>
+            ))}
+          </Select>
+        </GridItem>
+        ) : null}
+        
       </Grid>
     </Box>
   );

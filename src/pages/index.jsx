@@ -39,6 +39,8 @@ function App() {
     { value: "text", label: "Text" },
   ];
 
+  const fonts = avatar.fonts()
+
   const [image, setImage] = useState(avatar.toDataURL());
   const [list, setList] = useState([0]);
 
@@ -79,7 +81,7 @@ function App() {
               >
                 {layers.map((layer, i) => (
                   <div key={layer.id}>
-                    <Card index={i} updateLayer={updateLayer(i)} options={options} />
+                    <Card index={i} updateLayer={updateLayer(i)} options={options} fonts={fonts}/>
                   </div>
                 ))}
               </ReactSortable>

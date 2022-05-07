@@ -1,21 +1,11 @@
-import {
-  RecoilRoot,
-  // atom,
-  // selector,
-  // useRecoilState,
-  // useRecoilValue,
-} from "recoil";
-
-import "bulma/css/bulma.css";
 import { ChakraProvider } from "@chakra-ui/react";
+import '../../public/css/fonts.css'
 
 function App({ Component, pageProps }) {
   return (
-    <RecoilRoot>
       <ChakraProvider>
         <Component {...pageProps} />
       </ChakraProvider>
-    </RecoilRoot>
   );
 }
 
