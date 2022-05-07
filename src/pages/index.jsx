@@ -21,7 +21,8 @@ const height = 200;
 function applyLayers(avatar, layers) {
   for (let [key, layer] of Object.entries(layers)) {
     if (layer.shape) {
-      avatar[layer.shape](layer.color);
+      if (layer.shape != 'text'){avatar[layer.shape](layer.color);}
+      else {avatar[layer.shape](layer.text, layer.color, layer.font);}
     }
   }
 }
@@ -35,6 +36,7 @@ function App() {
     { value: "circle", label: "Circle" },
     { value: "rectangle", label: "Rectangle" },
     { value: "gradient", label: "Gradient" },
+    { value: "text", label: "Text" },
   ];
 
   const [image, setImage] = useState(avatar.toDataURL());
@@ -78,7 +80,7 @@ function App() {
               >
                 {layers.map((layer, i) => (
                   <div key={layer.id}>
-                    <Card updateLayer={updateLayer(i)} options={options} />
+                    <Card index={i} updateLayer={updateLayer(i)} options={options} />
                   </div>
                 ))}
               </ReactSortable>
@@ -97,7 +99,7 @@ function App() {
       </GridItem>
       </Box>
       <GridItem>
-      <Box borderWidth='3px' borderRadius='lg' p={5} shadow='md' sx={{ position: '-webkit-sticky', position: 'sticky', top: '0', }}>
+      <Box borderWidth='3px' mt={20} borderRadius='lg' p={5} shadow='md' sx={{ position: '-webkit-sticky', position: 'sticky', top: '20', }}>
         <Center>
           <Image src={image} border='1px' borderColor={'gray.200'} shadow='md' htmlWidth={width} htmlHeight={height} />
         </Center>
