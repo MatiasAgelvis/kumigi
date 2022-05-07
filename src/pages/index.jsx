@@ -54,8 +54,7 @@ function App() {
     let layersUpdate = [...layers];
     layersUpdate[index] = {
       ...layersUpdate[index],
-      shape: update.shape,
-      color: update.color,
+      ...update
     };
     setLayers(layersUpdate);
   };
@@ -76,7 +75,7 @@ function App() {
                 setList={setLayers}
                 animation={200}
                 delayOnTouchStart={true}
-                delay={2}
+                fallbackTolerance={5}
               >
                 {layers.map((layer, i) => (
                   <div key={layer.id}>
