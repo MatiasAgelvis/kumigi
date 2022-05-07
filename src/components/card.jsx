@@ -1,6 +1,5 @@
 // import Select from "react-select";
 import { useState, useEffect, useRef } from "react";
-import { RgbaStringColorPicker } from "react-colorful";
 import {
   Accordion,
   AccordionItem,
@@ -15,9 +14,10 @@ import {
   PinInputField,
   PinInput,
   Switch,
-  CloseButton
+  CloseButton,
 } from "@chakra-ui/react";
 import namer from "color-namer";
+import ColorPicker from "../components/colorPicker";
 
 function Card({ index, updateLayer, options, fonts, deleteLayer }) {
   const [shape, setShape] = useState(null);
@@ -28,7 +28,12 @@ function Card({ index, updateLayer, options, fonts, deleteLayer }) {
   const textRef = useRef(null);
 
   useEffect(() => {
-    updateLayer({ shape: displayLayer? shape : null, color: color, text: text, font: font? font: 'pt' });
+    updateLayer({
+      shape: displayLayer ? shape : null,
+      color: color,
+      text: text,
+      font: font ? font : "pt",
+    });
   }, [shape, color, text, font, displayLayer]);
 
   function capitalize(string) {
@@ -50,7 +55,11 @@ function Card({ index, updateLayer, options, fonts, deleteLayer }) {
     >
       <Grid templateColumns="repeat(12, 2fr)" gap={4}>
         <GridItem colSpan={1}>
-        <Switch id='displayLayer' defaultChecked onChange={() => setdisplayLayer(!displayLayer)}/>
+          <Switch
+            id="displayLayer"
+            defaultChecked
+            onChange={() => setdisplayLayer(!displayLayer)}
+          />
         </GridItem>
         <GridItem colSpan={10}>
           <h2>{`Layer ${index + 1}: ${colorName(color, "pantone")} ${capitalize(
@@ -58,60 +67,56 @@ function Card({ index, updateLayer, options, fonts, deleteLayer }) {
           )}`}</h2>
         </GridItem>
         <GridItem colSpan={1}>
-        <CloseButton onClick={() => deleteLayer()}/>
+          <CloseButton onClick={() => deleteLayer()} />
         </GridItem>
-        </Grid>
-        <br/>
-        <Grid templateColumns="repeat(2, 2fr)" gap={4}>
+      </Grid>
+      <br />
+      <Grid templateColumns="repeat(2, 2fr)" gap={4}>
         <GridItem>
           <Select
             placeholder="Select a shape"
             onChange={(e) => setShape(event.target.value)}
           >
             {options.map((op) => (
-              <option key={op.value} value={op.value}>{op.label}</option>
+              <option key={op.value} value={op.value}>
+                {op.label}
+              </option>
             ))}
           </Select>
         </GridItem>
         <GridItem>
-          <Accordion allowToggle>
-            <AccordionItem>
-              <AccordionButton>
-                <Box flex="1" textAlign="left">
-                  {colorName(color, "basic")}
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-
-              <AccordionPanel pb={4}>
-                <RgbaStringColorPicker color={color} onChange={setColor} />
-              </AccordionPanel>
-            </AccordionItem>
-          </Accordion>
+          <ColorPicker color={color} setColor={setColor} />
         </GridItem>
 
         {shape == "text" ? (
           <GridItem colSpan={1}>
-            <PinInput type="alphanumeric" ref={textRef} value={text} autoFocus onChange={setText}>
-            <PinInputField/>
-            <PinInputField/>
-            <PinInputField/>
+            <PinInput
+              type="alphanumeric"
+              ref={textRef}
+              value={text}
+              autoFocus
+              onChange={setText}
+            >
+              <PinInputField />
+              <PinInputField />
+              <PinInputField />
             </PinInput>
           </GridItem>
         ) : null}
         {shape == "text" ? (
           <GridItem colSpan={1}>
-          <Select
-            placeholder="Select a Font"
-            onChange={(e) => setFont(event.target.value)}
-          >
-            {fonts.map((op) => (
-              <option key={op} value={op}>{capitalize(op)}</option>
-            ))}
-          </Select>
-        </GridItem>
+            <Select
+              placeholder="Select a Font"
+              onChange={(e) => setFont(event.target.value)}
+            >
+              {fonts.map((op) => (
+                <option key={op} value={op}>
+                  {capitalize(op)}
+                </option>
+              ))}
+            </Select>
+          </GridItem>
         ) : null}
-        
       </Grid>
     </Box>
   );
