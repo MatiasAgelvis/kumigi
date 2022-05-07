@@ -56,12 +56,12 @@ app.get("/*", (req, res) => {
     let avatar = new Avatara(width, height);
 
     shapes.forEach((shape, i) => {
-        avatar[shape](circular(colors, i));
+        if (shape != "text") {
+            avatar[shape](circular(colors, i));
+        } else {
+            avatar[shape](text, color, font);
+        }
     });
-
-    if (text) {
-        avatar.text(text, textColor, font);
-    }
 
     return res.send(avatar.toHTML());
 });
