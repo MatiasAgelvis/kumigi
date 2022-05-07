@@ -21,8 +21,11 @@ const height = 200;
 function applyLayers(avatar, layers) {
   for (let [key, layer] of Object.entries(layers)) {
     if (layer.shape) {
-      if (layer.shape != 'text'){avatar[layer.shape](layer.color);}
-      else {avatar[layer.shape](layer.text, layer.color, layer.font);}
+      if (layer.shape != "text") {
+        avatar[layer.shape](layer.color);
+      } else {
+        avatar[layer.shape](layer.text, layer.color, layer.font);
+      }
     }
   }
 }
@@ -39,7 +42,7 @@ function App() {
     { value: "text", label: "Text" },
   ];
 
-  const fonts = avatar.fonts()
+  const fonts = avatar.fonts();
 
   const [image, setImage] = useState(avatar.toDataURL());
   const [list, setList] = useState([0]);
@@ -56,8 +59,13 @@ function App() {
     let layersUpdate = [...layers];
     layersUpdate[index] = {
       ...layersUpdate[index],
-      ...update
+      ...update,
     };
+    setLayers(layersUpdate);
+  };
+
+  const deleteLayer = (index) => () => {
+    let layersUpdate = layers.filter((_, i) => i != index);
     setLayers(layersUpdate);
   };
 
@@ -68,10 +76,10 @@ function App() {
 
   return (
     <Grid templateColumns="repeat(2, 2fr)" gap={4}>
-        <Box borderWidth='3px' borderRadius='lg' p={5} shadow='md'>
-      <GridItem>
-        <Grid templateColumns="repeat(1, 2fr)" gap={4}>
-          <GridItem>
+      <Box borderWidth="3px" borderRadius="lg" p={5} shadow="md">
+        <GridItem>
+          <Grid templateColumns="repeat(1, 2fr)" gap={4}>
+            <GridItem>
               <ReactSortable
                 list={layers}
                 setList={setLayers}
@@ -81,29 +89,49 @@ function App() {
               >
                 {layers.map((layer, i) => (
                   <div key={layer.id}>
-                    <Card index={i} updateLayer={updateLayer(i)} options={options} fonts={fonts}/>
+                    <Card
+                      index={i}
+                      updateLayer={updateLayer(i)}
+                      options={options}
+                      fonts={fonts}
+                      deleteLayer={deleteLayer(i)}
+                    />
                   </div>
                 ))}
               </ReactSortable>
-          </GridItem>
-          <GridItem>
-            <Button
-              variant="outline"
-              colorScheme="teal"
-              width="100%"
-              onClick={() => setLayers([...layers, createCard()])}
-            >
-              +
-            </Button>
-          </GridItem>
-        </Grid>
-      </GridItem>
+            </GridItem>
+            <GridItem>
+              <Button
+                variant="outline"
+                colorScheme="teal"
+                width="100%"
+                onClick={() => setLayers([...layers, createCard()])}
+              >
+                +
+              </Button>
+            </GridItem>
+          </Grid>
+        </GridItem>
       </Box>
       <GridItem>
-      <Box borderWidth='3px' mt={20} borderRadius='lg' p={5} shadow='md' sx={{ position: '-webkit-sticky', position: 'sticky', top: '20', }}>
-        <Center>
-          <Image src={image} border='1px' borderColor={'gray.200'} shadow='md' htmlWidth={width} htmlHeight={height} />
-        </Center>
+        <Box
+          borderWidth="3px"
+          mt={20}
+          borderRadius="lg"
+          p={5}
+          shadow="md"
+          sx={{ position: "-webkit-sticky", position: "sticky", top: "20" }}
+        >
+          <Center>
+            <Image
+              src={image}
+              border="1px"
+              borderColor={"gray.200"}
+              shadow="md"
+              htmlWidth={width}
+              htmlHeight={height}
+            />
+          </Center>
         </Box>
       </GridItem>
     </Grid>

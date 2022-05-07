@@ -15,10 +15,11 @@ import {
   PinInputField,
   PinInput,
   Switch,
+  CloseButton
 } from "@chakra-ui/react";
 import namer from "color-namer";
 
-function Card({ index, updateLayer, options, fonts }) {
+function Card({ index, updateLayer, options, fonts, deleteLayer }) {
   const [shape, setShape] = useState(null);
   const [color, setColor] = useState("rgba(1,1,1,1)");
   const [text, setText] = useState("");
@@ -51,10 +52,13 @@ function Card({ index, updateLayer, options, fonts }) {
         <GridItem colSpan={1}>
         <Switch id='displayLayer' defaultChecked onChange={() => setdisplayLayer(!displayLayer)}/>
         </GridItem>
-        <GridItem colSpan={6}>
+        <GridItem colSpan={10}>
           <h2>{`Layer ${index + 1}: ${colorName(color, "pantone")} ${capitalize(
             shape ? shape : ""
           )}`}</h2>
+        </GridItem>
+        <GridItem colSpan={1}>
+        <CloseButton onClick={() => deleteLayer()}/>
         </GridItem>
         </Grid>
         <br/>
@@ -87,7 +91,7 @@ function Card({ index, updateLayer, options, fonts }) {
         </GridItem>
 
         {shape == "text" ? (
-          <GridItem>
+          <GridItem colSpan={1}>
             <PinInput type="alphanumeric" ref={textRef} value={text} autoFocus onChange={setText}>
             <PinInputField/>
             <PinInputField/>
@@ -96,7 +100,7 @@ function Card({ index, updateLayer, options, fonts }) {
           </GridItem>
         ) : null}
         {shape == "text" ? (
-          <GridItem>
+          <GridItem colSpan={1}>
           <Select
             placeholder="Select a Font"
             onChange={(e) => setFont(event.target.value)}
