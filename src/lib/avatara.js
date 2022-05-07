@@ -10,11 +10,11 @@ const Fonts = Object.freeze({
 });
 
 if (typeof possibleFunction === typeof Function) {
-    registerFont("./fonts/IBMPlexMono-Bold.ttf", { family: Fonts.PLEX });
-    registerFont("./fonts/CourierPrime-Bold.ttf", { family: Fonts.COURIER });
-    registerFont("./fonts/Cousine-Bold.ttf", { family: Fonts.COUSINE });
-    registerFont("./fonts/PTMono-Regular.ttf", { family: Fonts.PT });
-    registerFont("./fonts/RobotoMono-Bold.ttf", { family: Fonts.ROBOTO });
+    registerFont("./public/fonts/IBMPlexMono-Bold.ttf", { family: Fonts.PLEX });
+    registerFont("./public/fonts/CourierPrime-Bold.ttf", { family: Fonts.COURIER });
+    registerFont("./public/fonts/Cousine-Bold.ttf", { family: Fonts.COUSINE });
+    registerFont("./public/fonts/PTMono-Regular.ttf", { family: Fonts.PT });
+    registerFont("./public/fonts/RobotoMono-Bold.ttf", { family: Fonts.ROBOTO });
 }
 
 const fontFactos = {};
