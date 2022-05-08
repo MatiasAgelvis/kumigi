@@ -1,19 +1,18 @@
 // import Select from "react-select";
-import { useState } from "react";
 import { Select } from "@chakra-ui/react";
 
 function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function FontSelect({ fontOptions, font, setFont }) {
+function OptionSelect({ options, state, setState, placeholder }) {
   return (
     <Select
-      placeholder="Select a Font"
-      value={font}
-      onChange={(e) => setFont(event.target.value)}
+      placeholder={placeholder}
+      value={state}
+      onChange={(e) => setState(event.target.value)}
     >
-      {fontOptions.map((op) => (
+      {options.map((op) => (
         <option key={op} value={op}>
           {capitalize(op)}
         </option>
@@ -22,4 +21,4 @@ function FontSelect({ fontOptions, font, setFont }) {
   );
 }
 
-export default FontSelect;
+export default OptionSelect;

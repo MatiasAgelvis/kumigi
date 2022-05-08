@@ -1,25 +1,19 @@
 // import Select from "react-select";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import {
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
   Box,
   Grid,
   GridItem,
-  Select,
-  HStack,
-  PinInputField,
-  PinInput,
+  Heading,
   Switch,
   CloseButton,
+  Divider,
+  Center
 } from "@chakra-ui/react";
 import namer from "color-namer";
 import ColorPicker from "../components/colorPicker";
 import TextInput from "../components/textInput";
-import FontSelect from "../components/fontSelect";
+import OptionSelect from "../components/optionSelect";
 
 function Card({ index, updateLayer, options, fonts, deleteLayer }) {
   const [shape, setShape] = useState(null);
@@ -63,42 +57,48 @@ function Card({ index, updateLayer, options, fonts, deleteLayer }) {
           />
         </GridItem>
         <GridItem colSpan={10}>
-          <h2>{`Layer ${index + 1}: ${colorName(color, "pantone")} ${capitalize(
-            shape ? shape : ""
-          )}`}</h2>
+          <Heading as="h4" size="md">{`Layer ${index + 1}: ${colorName(
+            color,
+            "pantone"
+          )} ${capitalize(shape ? shape : "")}`}</Heading>
         </GridItem>
         <GridItem colSpan={1}>
           <CloseButton onClick={() => deleteLayer()} />
         </GridItem>
       </Grid>
-      <br />
+
+      <Center height="20px">
+        <Divider orientation="horizontal" border={2} borderColor='gray.300' borderRadius='8'/>
+      </Center>
+
       <Grid templateColumns="repeat(2, 2fr)" gap={4}>
         <GridItem>
-          <Select
+          <OptionSelect
+            options={options}
+            state={shape}
+            setState={setShape}
             placeholder="Select a shape"
-            onChange={(e) => setShape(event.target.value)}
-          >
-            {options.map((op) => (
-              <option key={op.value} value={op.value}>
-                {op.label}
-              </option>
-            ))}
-          </Select>
+          />
         </GridItem>
         <GridItem>
           <ColorPicker color={color} setColor={setColor} />
         </GridItem>
 
-        {shape == "text" ? (
+        {shape == "text" && (
           <GridItem colSpan={1}>
             <TextInput text={text} setText={setText} />
           </GridItem>
-        ) : null}
-        {shape == "text" ? (
+        )}
+        {shape == "text" && (
           <GridItem colSpan={1}>
-            <FontSelect fontOptions={fonts} font={font} setFont={setFont} />
+            <OptionSelect
+              options={fonts}
+              state={font}
+              setState={setFont}
+              placeholder="Select a Font"
+            />
           </GridItem>
-        ) : null}
+        )}
       </Grid>
     </Box>
   );

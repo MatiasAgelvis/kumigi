@@ -9,14 +9,22 @@ import {
   Grid,
   GridItem,
   Center,
+  Heading,
   VStack,
   StackDivider,
   Box,
-  Image,
+  Image,Divider
 } from "@chakra-ui/react";
 
 const width = 200;
 const height = 200;
+
+const boxOptions = {
+  borderWidth: "3px",
+  borderRadius: "lg",
+  p: 5,
+  shadow: "md",
+};
 
 function applyLayers(avatar, layers) {
   for (let [key, layer] of Object.entries(layers)) {
@@ -34,12 +42,12 @@ function App() {
   const avatar = new Avatara(width, height);
 
   const options = [
-    { value: "background", label: "Background" },
-    { value: "square", label: "Square" },
-    { value: "circle", label: "Circle" },
-    { value: "rectangle", label: "Rectangle" },
-    { value: "gradient", label: "Gradient" },
-    { value: "text", label: "Text" },
+    "background",
+    "square",
+    "circle",
+    "rectangle",
+    "gradient",
+    "text",
   ];
 
   const fonts = avatar.fonts();
@@ -75,66 +83,77 @@ function App() {
   }, [layersString]);
 
   return (
-    <Grid templateColumns="repeat(2, 2fr)" gap={4}>
-      <Box borderWidth="3px" borderRadius="lg" p={5} shadow="md">
-        <GridItem>
-          <Grid templateColumns="repeat(1, 2fr)" gap={4}>
-            <GridItem>
-              <ReactSortable
-                list={layers}
-                setList={setLayers}
-                animation={200}
-                delayOnTouchStart={true}
-                fallbackTolerance={5}
-              >
-                {layers.map((layer, i) => (
-                  <div key={layer.id}>
-                    <Card
-                      index={i}
-                      updateLayer={updateLayer(i)}
-                      options={options}
-                      fonts={fonts}
-                      deleteLayer={deleteLayer(i)}
-                    />
-                  </div>
-                ))}
-              </ReactSortable>
-            </GridItem>
-            <GridItem>
-              <Button
-                variant="outline"
-                colorScheme="teal"
-                width="100%"
-                onClick={() => setLayers([...layers, createCard()])}
-              >
-                +
-              </Button>
-            </GridItem>
-          </Grid>
-        </GridItem>
-      </Box>
-      <GridItem>
-        <Box
-          borderWidth="3px"
-          mt={20}
-          borderRadius="lg"
-          p={5}
-          shadow="md"
-          sx={{ position: "-webkit-sticky", position: "sticky", top: "20" }}
-        >
-          <Center>
-            <Image
-              src={image}
-              border="1px"
-              borderColor={"gray.200"}
-              shadow="md"
-              htmlWidth={width}
-              htmlHeight={height}
-            />
-          </Center>
+    <Box
+      {...boxOptions}
+      minHeight={"99.9vh"}
+    >
+      <Grid templateColumns="repeat(2, 2fr)" gap={4}>
+        <Box {...boxOptions}>
+          <GridItem>
+            <Grid templateColumns="repeat(1, 2fr)" gap={4}>
+              <GridItem>
+                <ReactSortable
+                  list={layers}
+                  setList={setLayers}
+                  animation={200}
+                  delayOnTouchStart={true}
+                  fallbackTolerance={5}
+                >
+                  {layers.map((layer, i) => (
+                    <div key={layer.id}>
+                      <Card
+                        index={i}
+                        updateLayer={updateLayer(i)}
+                        options={options}
+                        fonts={fonts}
+                        deleteLayer={deleteLayer(i)}
+                      />
+                    </div>
+                  ))}
+                </ReactSortable>
+              </GridItem>
+              <GridItem>
+                <Button
+                  variant="outline"
+                  colorScheme="teal"
+                  width="100%"
+                  onClick={() => setLayers([...layers, createCard()])}
+                >
+                  +
+                </Button>
+              </GridItem>
+            </Grid>
+          </GridItem>
         </Box>
-      </GridItem>
-    </Grid>
+        <GridItem>
+          <Box
+            {...boxOptions}
+            sx={{ position: "-webkit-sticky", position: "sticky", top: "30%" }}
+          >
+            <Center>
+              <Heading>Avatara</Heading>
+            </Center>
+        <Divider orientation="horizontal" border={2} borderColor='gray.300' borderRadius='8' m={5}/>
+            <Center>
+              <Image
+                src={image}
+                border="1px"
+                borderColor={"gray.200"}
+                shadow="md"
+                htmlWidth={width}
+                htmlHeight={height}
+              />
+            </Center>
+
+        {/*<Divider orientation="horizontal" border={2} borderColor='gray.300' borderRadius='8' m={5}/>
+
+            cURL: www.5rriente.com*/}
+          </Box>
+        </GridItem>
+
+
+      </Grid>
+    </Box>
   );
 }
 
