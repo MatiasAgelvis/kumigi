@@ -18,6 +18,8 @@ import {
 } from "@chakra-ui/react";
 import namer from "color-namer";
 import ColorPicker from "../components/colorPicker";
+import TextInput from "../components/textInput";
+import FontSelect from "../components/fontSelect";
 
 function Card({ index, updateLayer, options, fonts, deleteLayer }) {
   const [shape, setShape] = useState(null);
@@ -25,7 +27,6 @@ function Card({ index, updateLayer, options, fonts, deleteLayer }) {
   const [text, setText] = useState("");
   const [font, setFont] = useState("");
   const [displayLayer, setdisplayLayer] = useState(true);
-  const textRef = useRef(null);
 
   useEffect(() => {
     updateLayer({
@@ -90,31 +91,12 @@ function Card({ index, updateLayer, options, fonts, deleteLayer }) {
 
         {shape == "text" ? (
           <GridItem colSpan={1}>
-            <PinInput
-              type="alphanumeric"
-              ref={textRef}
-              value={text}
-              autoFocus
-              onChange={setText}
-            >
-              <PinInputField />
-              <PinInputField />
-              <PinInputField />
-            </PinInput>
+            <TextInput text={text} setText={setText} />
           </GridItem>
         ) : null}
         {shape == "text" ? (
           <GridItem colSpan={1}>
-            <Select
-              placeholder="Select a Font"
-              onChange={(e) => setFont(event.target.value)}
-            >
-              {fonts.map((op) => (
-                <option key={op} value={op}>
-                  {capitalize(op)}
-                </option>
-              ))}
-            </Select>
+            <FontSelect fontOptions={fonts} font={font} setFont={setFont} />
           </GridItem>
         ) : null}
       </Grid>
