@@ -22,7 +22,7 @@ function ColorPicker({ color, setColor }) {
     <Popover>
       <HStack>
         <PopoverTrigger>
-          <Button bg={color} />
+          <Button bg={color} border='1px' borderColor='gray.200'/>
         </PopoverTrigger>
         <Input
           value={rgba2hex(color)}
