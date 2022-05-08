@@ -1,18 +1,10 @@
 import {
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  Box,
-  Grid,
-  GridItem,
-  Select,
   HStack,
-  PinInputField,
-  PinInput,
-  Switch,
-  CloseButton,
+  Button,
+  Input,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
 } from "@chakra-ui/react";
 import { RgbaStringColorPicker, HexColorInput } from "react-colorful";
 import colorString from "color-string";
@@ -25,29 +17,27 @@ function hex2rgba(color) {
   return colorString.to.rgb(colorString.get.rgb(color));
 }
 
-function ColorPicker({color, setColor}) {
+function ColorPicker({ color, setColor }) {
   return (
-    <Accordion allowToggle>
-      <AccordionItem>
-        <AccordionButton>
-          <Box flex="1" textAlign="left">
-            <HexColorInput
-              color={rgba2hex(color)}
-              onChange={(hex) => {
-                if (colorString.get(hex)) {
-                  setColor(hex2rgba(hex));
-                }
-              }}
-            />
-          </Box>
-          <AccordionIcon />
-        </AccordionButton>
+    <Popover>
+      <HStack>
+        <PopoverTrigger>
+          <Button bg={color} />
+        </PopoverTrigger>
+        <Input
+          value={rgba2hex(color)}
+          onChange={(e) => {
+            if (colorString.get(e.target.value)) {
+              setColor(hex2rgba(e.target.value));
+            }
+          }}
+        />
+      </HStack>
 
-        <AccordionPanel pb={4}>
-          <RgbaStringColorPicker color={color} onChange={setColor} />
-        </AccordionPanel>
-      </AccordionItem>
-    </Accordion>
+      <PopoverContent style={{ width: "fit-content" }}>
+        <RgbaStringColorPicker color={color} onChange={setColor} />
+      </PopoverContent>
+    </Popover>
   );
 }
 
