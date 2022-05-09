@@ -2,13 +2,13 @@
 import { useState, useEffect } from "react";
 import {
   Box,
-  Grid,
-  GridItem,
   Heading,
   Switch,
   CloseButton,
   Divider,
-  Center
+  Center,
+  Flex,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import namer from "color-namer";
 import ColorPicker from "../components/colorPicker";
@@ -48,58 +48,52 @@ function Card({ index, updateLayer, options, fonts, deleteLayer }) {
       my={3}
       bg="white"
     >
-      <Grid templateColumns="repeat(12, 2fr)" gap={4}>
-        <GridItem colSpan={1}>
-          <Switch
-            id="displayLayer"
-            defaultChecked
-            onChange={() => setdisplayLayer(!displayLayer)}
-          />
-        </GridItem>
-        <GridItem colSpan={10}>
-          <Heading as="h4" size="md">{`Layer ${index + 1}: ${colorName(
-            color,
-            "pantone"
-          )} ${capitalize(shape ? shape : "")}`}</Heading>
-        </GridItem>
-        <GridItem colSpan={1}>
-          <CloseButton onClick={() => deleteLayer()} />
-        </GridItem>
-      </Grid>
+      <Flex justify="space-between" gap={4}>
+        <Switch
+          id="displayLayer"
+          defaultChecked
+          onChange={() => setdisplayLayer(!displayLayer)}
+        />
+        <CloseButton onClick={() => deleteLayer()} />
+      </Flex>
+      <Heading as="h4" size="md" pl='0.2rem'>{`Layer ${index + 1}: ${colorName(
+        color,
+        "pantone"
+      )} ${capitalize(shape ? shape : "")}`}</Heading>
 
       <Center height="20px">
-        <Divider orientation="horizontal" border={2} borderColor='gray.300' borderRadius='8'/>
+        <Divider
+          orientation="horizontal"
+          border={2}
+          borderColor="gray.300"
+          borderRadius="8"
+        />
       </Center>
 
-      <Grid templateColumns="repeat(2, 2fr)" gap={4}>
-        <GridItem>
-          <OptionSelect
-            options={options}
-            state={shape}
-            setState={setShape}
-            placeholder="Select a shape"
-          />
-        </GridItem>
-        <GridItem>
-          <ColorPicker color={color} setColor={setColor} />
-        </GridItem>
+      <SimpleGrid columns={[1,2]} spacing={10}>
+        <OptionSelect
+          options={options}
+          state={shape}
+          setState={setShape}
+          placeholder="Select a shape"
+        />
+        <ColorPicker color={color} setColor={setColor} />
 
         {shape == "text" && (
-          <GridItem colSpan={1}>
+          <Center>
             <TextInput text={text} setText={setText} />
-          </GridItem>
+          </Center>
         )}
+
         {shape == "text" && (
-          <GridItem colSpan={1}>
-            <OptionSelect
-              options={fonts}
-              state={font}
-              setState={setFont}
-              placeholder="Select a Font"
-            />
-          </GridItem>
+          <OptionSelect
+            options={fonts}
+            state={font}
+            setState={setFont}
+            placeholder="Select a Font"
+          />
         )}
-      </Grid>
+      </SimpleGrid>
     </Box>
   );
 }
