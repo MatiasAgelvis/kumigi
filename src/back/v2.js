@@ -14,7 +14,7 @@ router.use((req, res) => {
   const {
     height = 200,
     width = 200,
-    colors: colorsString = "[#000]",
+    colors: colorsString = "[000]",
     texts: textString = "",
     fonts: fontsString = "plex",
   } = req.query;
