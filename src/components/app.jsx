@@ -17,16 +17,11 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { AddIcon } from '@chakra-ui/icons'
+import boxOptions from '../utils/boxOptions'
 
 const width = 200;
 const height = 200;
 
-const boxOptions = {
-  borderWidth: "3px",
-  borderRadius: "lg",
-  p: 5,
-  shadow: "md",
-};
 
 function applyLayers(avatar, layers) {
   for (let [key, layer] of Object.entries(layers)) {
@@ -104,6 +99,7 @@ function App({ setURL }) {
               animation={200}
               delayOnTouchStart={true}
               fallbackTolerance={5}
+              handle=".dragHandle"
             >
               {layers.map((layer, i) => (
                 <div key={layer.id}>

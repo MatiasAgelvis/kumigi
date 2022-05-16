@@ -1,11 +1,5 @@
 import { Flex, Box, Heading, Text, Link } from "@chakra-ui/react";
-
-const boxOptions = {
-	borderWidth: "3px",
-	borderRadius: "lg",
-	p: 5,
-	shadow: "md",
-};
+import boxOptions from '../utils/boxOptions'
 
 const Header = () => {
 	return (
