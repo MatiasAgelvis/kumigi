@@ -14,7 +14,9 @@ import {
   Image,
   Divider,
   Flex,
+  IconButton,
 } from "@chakra-ui/react";
+import { AddIcon } from '@chakra-ui/icons'
 
 const width = 200;
 const height = 200;
@@ -119,14 +121,13 @@ function App({ setURL }) {
 
           {/* New Layer Button */}
           <GridItem>
-            <Button
+            <IconButton
               variant="outline"
               colorScheme="teal"
               width="100%"
               onClick={() => setLayers([...layers, createCard()])}
-            >
-              +
-            </Button>
+              icon={<AddIcon/>}
+            />
           </GridItem>
         </Grid>
       </Box>
