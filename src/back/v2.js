@@ -17,7 +17,12 @@ router.use((req, res) => {
     // make array of colors form query
     const colors = parseArrayString(colorsString, (x) => x.toLowerCase());
     const texts = parseArrayString(textString);
-    const fonts = parseArrayString(fontsString, (x) => x.toLowerCase());
+    let fonts = parseArrayString(fontsString, (x) => x.toLowerCase());
+
+    // if only one font is given it will be reused for all texts
+    if (fonts.length == 1){
+      fonts = texts.map(() => fonts[0])
+    }
 
     let avatar = new Avatara(width, height);
 
