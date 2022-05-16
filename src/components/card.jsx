@@ -9,6 +9,7 @@ import {
   Center,
   Flex,
   SimpleGrid,
+  HStack,
 } from "@chakra-ui/react";
 import namer from "color-namer";
 import ColorPicker from "../components/colorPicker";
@@ -27,7 +28,7 @@ function Card({ index, updateLayer, options, fonts, deleteLayer }) {
       shape: displayLayer ? shape : null,
       color: color,
       text: text,
-      font: font ? font : text&&"pt",
+      font: font ? font : text && "pt",
     });
   }, [shape, color, text, font, displayLayer]);
 
@@ -49,14 +50,19 @@ function Card({ index, updateLayer, options, fonts, deleteLayer }) {
       bg="white"
     >
       <Flex justify="space-between" gap={4}>
+        <HStack>
         <Switch
           id="displayLayer"
           defaultChecked
           onChange={() => setdisplayLayer(!displayLayer)}
         />
+        <Heading as="h4" size="md" pl="0.2rem">
+          {`Layer ${index + 1}`}
+        </Heading>
+        </HStack>
         <CloseButton onClick={() => deleteLayer()} />
       </Flex>
-      <Heading as="h4" size="md" pl="0.2rem">{`Layer ${index + 1}: ${colorName(
+      <Heading as="h4" size="md" pl="0.2rem">{`${colorName(
         color,
         "pantone"
       )} ${capitalize(shape ? shape : "")}`}</Heading>
