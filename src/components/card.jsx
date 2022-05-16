@@ -47,10 +47,11 @@ function Card({ index, updateLayer, options, fonts, deleteLayer }) {
     <Box
       {...boxOptions}
       my={3}
+      bg='white'
     >
       <HStack>
-        <Center className="dragHandle">
-          <DragHandleIcon mr='1rem'/>
+        <Center className="dragHandle" py='0.7rem' pr='0.5rem' mr='0.5rem'>
+          <DragHandleIcon />
         </Center>
         <Box w="100%">
           <Flex justify="space-between" gap={4}>
