@@ -102,7 +102,7 @@ Avatara.prototype.gradient = function (color = "#00f") {
     return this;
 };
 
-Avatara.prototype.text = function (text = "", color = "#fff", font = "Plex") {
+Avatara.prototype.text = function (text = "", color = "#fff", font = "plex") {
     let fontName = getKeyByValue(Fonts, font.toLowerCase());
     let fontFacor = fontFactos[Fonts[fontName]] * this.canvas.width;
 

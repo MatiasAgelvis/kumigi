@@ -28,6 +28,7 @@
     "express": "^4.17.3",
     "framer-motion": "^6",
     "helmet": "^5.0.2",
+    "hex-color-regex": "^1.1.0",
     "next": "^12.1.5",
     "react": "^18.1.0",
     "react-colorful": "^5.5.1",
@@ -36,6 +37,8 @@
     "react-sortablejs": "^6.1.1",
     "recoil": "^0.7.2",
     "sortablejs": "^1.15.0",
+    "url-join": "^5.0.0",
+    "urlencode": "^1.1.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
