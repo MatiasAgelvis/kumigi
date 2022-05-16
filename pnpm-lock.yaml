@@ -13,6 +13,7 @@ specifiers:
   color-string: ^1.9.1
   compression: ^1.7.4
   express: ^4.17.3
+  file-saver: ^2.0.5
   framer-motion: ^6
   helmet: ^5.0.2
   hex-color-regex: ^1.1.0
@@ -41,6 +42,7 @@ dependencies:
   color-string: 1.9.1
   compression: 1.7.4
   express: 4.18.1
+  file-saver: 2.0.5
   framer-motion: 6.3.3_ef5jwxihqo6n7gxfmzogljlgcm
   helmet: 5.0.2
   hex-color-regex: 1.1.0
@@ -2117,6 +2119,10 @@ packages:
     resolution: {integrity: sha512-sdBImtzkq2HpkdRLtlLWDa6w4DX22ijZLKx8BMPUuKe1c5lbN6xwQDQCxSfxBQnHZ13ls/FH0MQZx/q/gr6FQg==}
     dependencies:
       type: 2.6.0
+    dev: false
+
+  /file-saver/2.0.5:
+    resolution: {integrity: sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA==}
     dev: false
 
   /fill-range/7.0.1:

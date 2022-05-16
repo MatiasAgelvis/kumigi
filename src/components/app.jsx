@@ -15,13 +15,14 @@ import {
   Divider,
   Flex,
   IconButton,
+  VStack,
 } from "@chakra-ui/react";
-import { AddIcon } from '@chakra-ui/icons'
-import boxOptions from '../utils/boxOptions'
+import { AddIcon } from "@chakra-ui/icons";
+import boxOptions from "../utils/boxOptions";
+import DownloadButton from "./downloadButton";
 
 const width = 200;
 const height = 200;
-
 
 function applyLayers(avatar, layers) {
   for (let [key, layer] of Object.entries(layers)) {
@@ -122,7 +123,7 @@ function App({ setURL }) {
               colorScheme="teal"
               width="100%"
               onClick={() => setLayers([...layers, createCard()])}
-              icon={<AddIcon/>}
+              icon={<AddIcon />}
             />
           </GridItem>
         </Grid>
@@ -135,14 +136,17 @@ function App({ setURL }) {
           sx={{ position: "-webkit-sticky", position: "sticky", top: "20%" }}
         >
           <Center>
-            <Image
-              src={image}
-              border="1px"
-              borderColor={"gray.200"}
-              shadow="md"
-              htmlWidth={width}
-              htmlHeight={height}
-            />
+            <VStack gap={4}>
+              <Image
+                src={image}
+                border="1px"
+                borderColor={"gray.200"}
+                shadow="md"
+                htmlWidth={width}
+                htmlHeight={height}
+              />
+              <DownloadButton canvas={avatar.canvas}/>
+            </VStack>
           </Center>
         </Box>
       </Box>
