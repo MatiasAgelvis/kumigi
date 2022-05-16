@@ -28,9 +28,15 @@ Create simple avatars with text from a simple and composable API.
 		<img src="images/background.circle%3Fcolors%3Dblack%2Cgrey.png">
 	</p>
 <dt>gradient</dt>
-	<dd>Overlays diagonally a linear gradient form transparent to the given color, used with `background` creates a two color transition.</dd>
+	<dd>Overlays diagonally a linear gradient form transparent to the given color, used with <code>background</code> creates a two color transition.</dd>
 	<p align="right">
 		<img src="images/background.gradient%3Fcolors%3Dblack%2Cgrey.png">
+	</p>
+
+<dt>text</dt>
+	<dd>Overlays a string of up to 3 characters, if its longer only the first 3 chars are going to be used. the text to display is passed with the <code>texts</code> parameter.</dd>
+	<p align="right">
+		<img src="images/background.text%3Fcolors%3Dblack%2Cgrey.png">
 	</p>
 </dl>
 
@@ -40,23 +46,22 @@ The following parameters can be passed to all queries.
 
 -   `width` : Number, sets the width of the resulting image (ex. `width=300`)
 -   `height` : Number, sets the height of the resulting image (ex. `height=140`)
--   `colors` : String of comma separated CSS parsable colors (ex. `colors=rgb(100,0,200),dodgerblue`)
--   `textColor` : CSS parsable color string (ex. `textColor=rgba(12,78,230,0.7)`)
--   `text` : String of up to 3 characters, if its longer only the first 3 chars are going to be used (ex. text=ABC)
--   `font` : One of [ plex, courier, cousine, pt, roboto ] (ex. font=pt)
+-   `colors` : String of comma separated CSS parsable colors (ex. `colors=rgb(100,0,200),dodgerblue`), colors in HEX should not be prepended with a #.
+-   `texts` : String of comma separated strings (ex. `texts=abc,123,xyz`)
+-   `fonts` : String of comma separated strings of [ plex, courier, cousine, pt, roboto ] (ex. font=[pt,cousine])
 
 
 ## Example
 
 
-`https://avatara.herokuapp.com/circle?colors=#234567&text=MAD&textColor=fff&font=courier`
+`https://avatara.herokuapp.com/v2/circle/text?colors=#234567,white&texts=MAD&fonts=courier`
 
 <p align="center">
 <img src="images/example.png">
 </p>
 
 
-`https://avatara.herokuapp.com/background/gradient/circle/square/rectangle/gradient?colors=black,grey,blue,yellow,red,green`
+`https://avatara.herokuapp.com/v2/background/gradient/circle/square/rectangle/gradient?colors=black,grey,blue,yellow,red,green`
 
 
 <p align="center">
@@ -65,7 +70,7 @@ The following parameters can be passed to all queries.
 
 
 
-`https://avatara.herokuapp.com/background/circle/square/rectangle/gradient?colors=crimson,tan,mediumblue,green,teal&text=777&textColor=gold`
+`https://avatara.herokuapp.com/background/circle/square/rectangle/gradient/text?colors=crimson,tan,mediumblue,green,teal,gold&texts=[777]`
 
 <p align="center">
 <img src="images/background.circle.square.rectangle.gradient%3Fcolors%3Dcrimson%2Ctan%2Cmediumblue%2Cgreen%2Cteal%26text%3D777%26textColor%3Dgold.png">
