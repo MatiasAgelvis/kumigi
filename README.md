@@ -54,7 +54,7 @@ The following parameters can be passed to all queries.
 ## Example
 
 
-`https://avatara.herokuapp.com/v2/circle/text?colors=#234567,white&texts=MAD&fonts=courier`
+`https://avatara.herokuapp.com/v2/circle/text?colors=234567,white&texts=MAD&fonts=courier`
 
 <p align="center">
 <img src="images/example.png">
