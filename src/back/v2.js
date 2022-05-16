@@ -21,8 +21,9 @@ router.use((req, res) => {
 
   // make array of colors form query
 
-  const colors = parseArrayString(colorsString, (x) =>
-    (testHexColor(x) ? "#" : "") + x.toLowerCase()
+  const colors = parseArrayString(
+    colorsString,
+    (x) => (testHexColor(x) ? "#" : "") + x.toLowerCase()
   );
   const texts = parseArrayString(textString);
   let fonts = parseArrayString(fontsString, (x) => x.toLowerCase());
