@@ -70,7 +70,7 @@ The following parameters can be passed to all queries.
 
 
 
-`https://avatara.herokuapp.com/background/circle/square/rectangle/gradient/text?colors=crimson,tan,mediumblue,green,teal,gold&texts=[777]`
+`https://avatara.herokuapp.com/v2/background/circle/square/rectangle/gradient/text?colors=crimson,tan,mediumblue,green,teal,gold&texts=[777]`
 
 <p align="center">
 <img src="images/background.circle.square.rectangle.gradient%3Fcolors%3Dcrimson%2Ctan%2Cmediumblue%2Cgreen%2Cteal%26text%3D777%26textColor%3Dgold.png">
