@@ -10,11 +10,14 @@ import {
   Flex,
   SimpleGrid,
   HStack,
+  Icon,
 } from "@chakra-ui/react";
 import namer from "color-namer";
 import ColorPicker from "../components/colorPicker";
 import TextInput from "../components/textInput";
 import OptionSelect from "../components/optionSelect";
+import { DragHandleIcon } from "@chakra-ui/icons";
+import boxOptions from '../utils/boxOptions'
 
 function Card({ index, updateLayer, options, fonts, deleteLayer }) {
   const [shape, setShape] = useState(null);
@@ -42,31 +45,33 @@ function Card({ index, updateLayer, options, fonts, deleteLayer }) {
 
   return (
     <Box
-      borderWidth="3px"
-      borderRadius="lg"
-      p={5}
-      shadow="md"
+      {...boxOptions}
       my={3}
-      bg="white"
     >
-      <Flex justify="space-between" gap={4}>
-        <HStack>
-        <Switch
-          id="displayLayer"
-          defaultChecked
-          onChange={() => setdisplayLayer(!displayLayer)}
-        />
-        <Heading as="h4" size="md" pl="0.2rem">
-          {`Layer ${index + 1}`}
-        </Heading>
-        </HStack>
-        <CloseButton onClick={() => deleteLayer()} />
-      </Flex>
-      <Heading as="h4" size="md" pl="0.2rem">{`${colorName(
-        color,
-        "pantone"
-      )} ${capitalize(shape ? shape : "")}`}</Heading>
-
+      <HStack>
+        <Center className="dragHandle">
+          <DragHandleIcon mr='1rem'/>
+        </Center>
+        <Box w="100%">
+          <Flex justify="space-between" gap={4}>
+            <HStack>
+              <Switch
+                id="displayLayer"
+                defaultChecked
+                onChange={() => setdisplayLayer(!displayLayer)}
+              />
+              <Heading as="h4" size="md" pl="0.2rem">
+                {`Layer ${index + 1}`}
+              </Heading>
+            </HStack>
+            <CloseButton onClick={() => deleteLayer()} />
+          </Flex>
+          <Heading as="h4" size="md" pl="0.2rem">{`${colorName(
+            color,
+            "pantone"
+          )} ${capitalize(shape ? shape : "")}`}</Heading>
+        </Box>
+      </HStack>
       <Center height="20px">
         <Divider
           orientation="horizontal"
