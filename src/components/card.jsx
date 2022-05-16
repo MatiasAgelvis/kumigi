@@ -17,7 +17,7 @@ import OptionSelect from "../components/optionSelect";
 
 function Card({ index, updateLayer, options, fonts, deleteLayer }) {
   const [shape, setShape] = useState(null);
-  const [color, setColor] = useState("rgba(1,1,1,1)");
+  const [color, setColor] = useState("rgba(0,0,0,1)");
   const [text, setText] = useState("");
   const [font, setFont] = useState("");
   const [displayLayer, setdisplayLayer] = useState(true);
@@ -27,7 +27,7 @@ function Card({ index, updateLayer, options, fonts, deleteLayer }) {
       shape: displayLayer ? shape : null,
       color: color,
       text: text,
-      font: font ? font : "pt",
+      font: font ? font : text&&"pt",
     });
   }, [shape, color, text, font, displayLayer]);
 
@@ -56,7 +56,7 @@ function Card({ index, updateLayer, options, fonts, deleteLayer }) {
         />
         <CloseButton onClick={() => deleteLayer()} />
       </Flex>
-      <Heading as="h4" size="md" pl='0.2rem'>{`Layer ${index + 1}: ${colorName(
+      <Heading as="h4" size="md" pl="0.2rem">{`Layer ${index + 1}: ${colorName(
         color,
         "pantone"
       )} ${capitalize(shape ? shape : "")}`}</Heading>
@@ -70,7 +70,7 @@ function Card({ index, updateLayer, options, fonts, deleteLayer }) {
         />
       </Center>
 
-      <SimpleGrid columns={[1,2]} spacing={10}>
+      <SimpleGrid columns={[1, 2]} spacing={10}>
         <OptionSelect
           options={options}
           state={shape}
