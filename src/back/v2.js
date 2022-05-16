@@ -25,7 +25,6 @@ router.use((req, res) => {
     (testHexColor(x) ? "#" : "") + x.toLowerCase()
   );
   const texts = parseArrayString(textString);
-  console.log(colorsString, colors);
   let fonts = parseArrayString(fontsString, (x) => x.toLowerCase());
 
   // if only one font is given it will be reused for all texts

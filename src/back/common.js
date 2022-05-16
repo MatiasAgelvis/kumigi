@@ -28,4 +28,9 @@ function applyLayers(avatar, layers) {
     }
 }
 
-module.exports = {circular, parseArrayString, applyLayers}
+const hexColorRegex = require("hex-color-regex");
+function testHexColor(color) {
+    return hexColorRegex().test("#" + color);
+}
+
+module.exports = { circular, parseArrayString, applyLayers, testHexColor };
