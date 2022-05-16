@@ -4,9 +4,10 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import { v4 as uuidv4 } from "uuid";
 import { Grid, GridItem } from "@chakra-ui/react";
+import { BASE } from '../utils/url'
 
 function Main() {
-  const [url, setURL] = useState(null)
+  const [url, setURL] = useState(BASE)
 
   return (
     <Grid templateRows='repeat(3, auto)'>

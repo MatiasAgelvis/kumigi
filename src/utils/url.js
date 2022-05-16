@@ -1,4 +1,5 @@
 import urlJoin from "url-join";
+export const BASE = "https://avatara.herokuapp.com/v2";
 
 function extractProps(array, prop) {
 	return array.map((x) => x[prop]);
@@ -9,7 +10,6 @@ function urlParam(name, value) {
 }
 
 export default function URLfromLayers(layers) {
-	const BASE = "https://avatara.herokuapp.com/v2";
 
 	const shapes = extractProps(layers, "shape").filter((x) => x);
 	const colors = extractProps(layers, "color")
