@@ -6,7 +6,7 @@ import {
   PopoverTrigger,
   PopoverContent,
 } from "@chakra-ui/react";
-import { RgbaStringColorPicker, HexColorInput } from "react-colorful";
+import { RgbaStringColorPicker } from "react-colorful";
 import colorString from "color-string";
 import { useEffect, useState } from "react";
 
