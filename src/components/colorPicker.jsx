@@ -20,13 +20,22 @@ function hex2rgba(color) {
 
 function ColorPicker({ color, setColor }) {
   const [hexPicker, setHexPicker] = useState(rgba2hex(color));
+  const [attached, setAttached] = useState(true);
 
   useEffect(() => {
     // if the current input is a valid color update color
-    if (colorString.get(hexPicker)) {
+    setAttached(false);
+    if (colorString.get(hexPicker) && !attached) {
       setColor(hex2rgba(hexPicker));
     }
   }, [hexPicker]);
+
+  useEffect(() => {
+    setAttached(true);
+    if (attached) {
+      setHexPicker(rgba2hex(color));
+    }
+  }, [color]);
 
   return (
     <Popover>
@@ -36,6 +45,7 @@ function ColorPicker({ color, setColor }) {
         </PopoverTrigger>
         <Input
           value={hexPicker}
+          textTransform="uppercase"
           onChange={(e) => setHexPicker(e.target.value)}
         />
       </HStack>
