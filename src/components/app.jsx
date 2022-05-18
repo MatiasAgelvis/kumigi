@@ -6,23 +6,12 @@ import URLfromLayers from "../utils/url";
 import { v4 as uuidv4 } from "uuid";
 import {
   Button,
-  Grid,
-  GridItem,
   Center,
-  Heading,
   Box,
   Image,
-  Divider,
   Flex,
   IconButton,
   VStack,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  HStack,
-  Text,
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import boxOptions from "../utils/boxOptions";
@@ -93,7 +82,15 @@ function App({ setURL }) {
   function mainUpdate() {
     applyLayers(avatar, layers);
     setImage(avatar.toDataURL());
-    setURL(URLfromLayers(layers));
+    setURL(
+      URLfromLayers(layers, [
+        {
+          name: "height",
+          value: height,
+        },
+        { name: "width", value: width },
+      ])
+    );
   }
 
   useEffect(() => {
@@ -113,7 +110,7 @@ function App({ setURL }) {
       wrap="wrap-reverse"
       direction="row"
       gap="4"
-      justifyContent='center'
+      justifyContent="center"
     >
       {/*    Editor    */}
       <Box {...boxOptions}>
