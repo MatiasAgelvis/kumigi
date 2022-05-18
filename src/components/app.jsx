@@ -21,12 +21,14 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-  HStack,Text
+  HStack,
+  Text,
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import boxOptions from "../utils/boxOptions";
 import DownloadButton from "./downloadButton";
 import NumberInput from "../components/numberInput";
+import AccordionMenu from "./accordionMenu/accordionMenu";
 
 function applyLayers(avatar, layers) {
   for (let [key, layer] of Object.entries(layers)) {
@@ -45,13 +47,21 @@ function App({ setURL }) {
   const [width, setWidth] = useState(200);
   let avatar = new Avatara(width, height);
 
-  const options = [
+  const ShapeOptions = [
     "background",
     "square",
     "circle",
     "rectangle",
     "gradient",
     "text",
+  ];
+
+  const sizeOptions = [
+    {
+      name: "Height",
+      input: <NumberInput value={height} setValue={setHeight} />,
+    },
+    { name: "Width", input: <NumberInput value={width} setValue={setWidth} /> },
   ];
 
   const fonts = avatar.fonts();
@@ -80,19 +90,19 @@ function App({ setURL }) {
     setLayers(layersUpdate);
   };
 
-  function mainUpdate(){
+  function mainUpdate() {
     applyLayers(avatar, layers);
     setImage(avatar.toDataURL());
     setURL(URLfromLayers(layers));
   }
 
   useEffect(() => {
-    mainUpdate()
+    mainUpdate();
   }, [layersString]);
 
   useEffect(() => {
     avatar = new Avatara(width, height);
-    mainUpdate()
+    mainUpdate();
   }, [height, width]);
 
   return (
@@ -103,9 +113,10 @@ function App({ setURL }) {
       wrap="wrap-reverse"
       direction="row"
       gap="4"
+      justifyContent='center'
     >
       {/*    Editor    */}
-      <Box {...boxOptions} minWidth="50%">
+      <Box {...boxOptions}>
         <VStack spacing={4} align="stretch">
           {/* Layer Stack */}
           <ReactSortable
@@ -121,7 +132,7 @@ function App({ setURL }) {
                 <Card
                   index={i}
                   updateLayer={updateLayer(i)}
-                  options={options}
+                  options={ShapeOptions}
                   fonts={fonts}
                   deleteLayer={deleteLayer(i)}
                 />
@@ -138,31 +149,12 @@ function App({ setURL }) {
             icon={<AddIcon />}
           />
 
-          <Accordion allowToggle>
-            <AccordionItem>
-              <AccordionButton>
-                <Box flex="1" textAlign="left">
-                  Size
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-              <AccordionPanel pb={4} pl={6}>
-              <Flex wrap='wrap' direction='row' justifyContent='space-between'>
-                <Text>Height</Text>
-                <NumberInput value={height} setValue={setHeight}/>
-              </Flex>
-              <Flex wrap='wrap' direction='row' justifyContent='space-between'>
-                <Text>Width</Text>
-                <NumberInput value={width} setValue={setWidth}/>
-              </Flex>
-              </AccordionPanel>
-            </AccordionItem>
-          </Accordion>
+          <AccordionMenu name="Size" options={sizeOptions} />
         </VStack>
       </Box>
 
       {/*    Image    */}
-      <Box sx={{ alignSelf: "stretch" }}>
+      <Box sx={{ alignSelf: "stretch" }} maxWidth="50%">
         <Box
           {...boxOptions}
           sx={{ position: "-webkit-sticky", position: "sticky", top: "20%" }}
