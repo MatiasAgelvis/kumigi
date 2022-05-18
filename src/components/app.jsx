@@ -16,13 +16,17 @@ import {
   Flex,
   IconButton,
   VStack,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  HStack,Text
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import boxOptions from "../utils/boxOptions";
 import DownloadButton from "./downloadButton";
-
-const width = 200;
-const height = 200;
+import NumberInput from "../components/numberInput";
 
 function applyLayers(avatar, layers) {
   for (let [key, layer] of Object.entries(layers)) {
@@ -37,7 +41,9 @@ function applyLayers(avatar, layers) {
 }
 
 function App({ setURL }) {
-  const avatar = new Avatara(width, height);
+  const [height, setHeight] = useState(200);
+  const [width, setWidth] = useState(200);
+  let avatar = new Avatara(width, height);
 
   const options = [
     "background",
@@ -74,11 +80,20 @@ function App({ setURL }) {
     setLayers(layersUpdate);
   };
 
-  useEffect(() => {
+  function mainUpdate(){
     applyLayers(avatar, layers);
     setImage(avatar.toDataURL());
     setURL(URLfromLayers(layers));
+  }
+
+  useEffect(() => {
+    mainUpdate()
   }, [layersString]);
+
+  useEffect(() => {
+    avatar = new Avatara(width, height);
+    mainUpdate()
+  }, [height, width]);
 
   return (
     <Flex
@@ -91,42 +106,59 @@ function App({ setURL }) {
     >
       {/*    Editor    */}
       <Box {...boxOptions} minWidth="50%">
-        <Grid templateColumns="repeat(1, 2fr)" gap={4}>
+        <VStack spacing={4} align="stretch">
           {/* Layer Stack */}
-          <GridItem>
-            <ReactSortable
-              list={layers}
-              setList={setLayers}
-              animation={200}
-              delayOnTouchStart={true}
-              fallbackTolerance={5}
-              handle=".dragHandle"
-            >
-              {layers.map((layer, i) => (
-                <div key={layer.id}>
-                  <Card
-                    index={i}
-                    updateLayer={updateLayer(i)}
-                    options={options}
-                    fonts={fonts}
-                    deleteLayer={deleteLayer(i)}
-                  />
-                </div>
-              ))}
-            </ReactSortable>
-          </GridItem>
+          <ReactSortable
+            list={layers}
+            setList={setLayers}
+            animation={200}
+            delayOnTouchStart={true}
+            fallbackTolerance={5}
+            handle=".dragHandle"
+          >
+            {layers.map((layer, i) => (
+              <div key={layer.id}>
+                <Card
+                  index={i}
+                  updateLayer={updateLayer(i)}
+                  options={options}
+                  fonts={fonts}
+                  deleteLayer={deleteLayer(i)}
+                />
+              </div>
+            ))}
+          </ReactSortable>
 
           {/* New Layer Button */}
-          <GridItem>
-            <IconButton
-              variant="outline"
-              colorScheme="teal"
-              width="100%"
-              onClick={() => setLayers([...layers, createCard()])}
-              icon={<AddIcon />}
-            />
-          </GridItem>
-        </Grid>
+          <IconButton
+            variant="outline"
+            colorScheme="teal"
+            width="100%"
+            onClick={() => setLayers([...layers, createCard()])}
+            icon={<AddIcon />}
+          />
+
+          <Accordion allowToggle>
+            <AccordionItem>
+              <AccordionButton>
+                <Box flex="1" textAlign="left">
+                  Size
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+              <AccordionPanel pb={4} pl={6}>
+              <Flex wrap='wrap' direction='row' justifyContent='space-between'>
+                <Text>Height</Text>
+                <NumberInput value={height} setValue={setHeight}/>
+              </Flex>
+              <Flex wrap='wrap' direction='row' justifyContent='space-between'>
+                <Text>Width</Text>
+                <NumberInput value={width} setValue={setWidth}/>
+              </Flex>
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
+        </VStack>
       </Box>
 
       {/*    Image    */}
@@ -145,7 +177,7 @@ function App({ setURL }) {
                 htmlWidth={width}
                 htmlHeight={height}
               />
-              <DownloadButton canvas={avatar.canvas}/>
+              <DownloadButton canvas={avatar.canvas} />
             </VStack>
           </Center>
         </Box>
