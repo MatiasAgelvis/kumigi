@@ -1,7 +1,9 @@
 import express from "express";
 import compression from "compression";
 import helmet from "helmet";
+import getPort, {portNumbers} from 'get-port';
 import Avatara from "../lib/avatara.js";
+import 'dotenv/config'
 
 import v1 from "./v1.js";
 import v2 from "./v2.js";
@@ -24,11 +26,15 @@ app.get("/", (req, res) => {
 app.use("/v1", v1);
 app.use("/v2", v2);
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log("\n\n\n");
+const envPort = parseInt(process.env.PORT)
+const port = await getPort({port: portNumbers(envPort, envPort + 100)})
+
+app.listen(port, () => {
+    console.log("\n\n");
     console.log("───────────────────────────");
     console.log(" ┌───────────────────────┐ ");
     console.log(" │---------START---------│ ");
+    console.log(` │------ PORT ${port} ------│ `);
     console.log(" └───────────────────────┘ ");
     console.log("───────────────────────────");
     console.log("\n");
