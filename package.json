@@ -17,7 +17,7 @@
   "author": "Matias Agelvis",
   "license": "ISC",
   "engines": {
-    "node": "16.14"
+    "node": ">=16"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.0",
