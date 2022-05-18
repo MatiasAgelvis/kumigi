@@ -20,7 +20,7 @@ import { DragHandleIcon } from "@chakra-ui/icons";
 import boxOptions from '../utils/boxOptions'
 
 function Card({ index, updateLayer, options, fonts, deleteLayer }) {
-  const [shape, setShape] = useState(null);
+  const [shape, setShape] = useState('');
   const [color, setColor] = useState("rgba(0,0,0,1)");
   const [text, setText] = useState("");
   const [font, setFont] = useState("");
