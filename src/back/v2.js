@@ -1,21 +1,29 @@
 import { Router } from "express";
 import Avatara from "../lib/avatara.js";
-import { circular, parseArrayString, applyLayers, testHexColor } from "./common.js";
+import {
+  circular,
+  parseArrayString,
+  applyLayers,
+  testHexColor,
+} from "./common.js";
 var router = Router();
 
 router.use((req, res) => {
   const shapes = req.path.split("/").slice(1);
 
   const {
-    height = 200,
-    width = 200,
+    height: heightString = 200,
+    width: widthString = 200,
     colors: colorsString = "[000]",
     texts: textString = "",
     fonts: fontsString = "plex",
   } = req.query;
 
-  // make array of colors form query
+  // parse the height and width
+  const height = parseInt(heightString);
+  const width = parseInt(widthString);
 
+  // make array of colors form query
   const colors = parseArrayString(
     colorsString,
     (x) => (testHexColor(x) ? "#" : "") + x.toLowerCase()
@@ -28,7 +36,7 @@ router.use((req, res) => {
     fonts = texts.map(() => fonts[0]);
   }
 
-  let avatar = new Avatara(width, height);
+  const avatar = new Avatara(width, height);
 
   shapes.forEach((shape, i) => {
     if (shape !== "text") {

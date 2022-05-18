@@ -7,14 +7,17 @@ router.use((req, res) => {
     const shapes = req.path.split("/").slice(1);
 
     const {
-        height = 200,
-        width = 200,
+        height: heightString = 200,
+        width: widthString = 200,
         colors: colorsString = "[#000]",
         text = "",
         textColor = "#fff",
         font = "Plex",
     } = req.query;
 
+    const height = parseInt(heightString);
+    const width = parseInt(widthString);
+    
     // make array of colors form query
     const colors = parseArrayString(colorsString, (x) => x.toLowerCase());
 
