@@ -1,7 +1,7 @@
-const express = require("express");
-const Avatara = require("../lib/avatara");
-const { circular, parseArrayString } = require("./common");
-var router = express.Router();
+import { Router } from "express";
+import Avatara from "../lib/avatara.js";
+import { circular, parseArrayString } from "./common.js";
+var router = Router();
 
 router.use((req, res) => {
     const shapes = req.path.split("/").slice(1);
@@ -32,4 +32,4 @@ router.use((req, res) => {
     return res.send(avatar.toHTML());
 });
 
-module.exports = router;
+export default router;

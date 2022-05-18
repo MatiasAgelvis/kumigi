@@ -1,12 +1,7 @@
-const express = require("express");
-const Avatara = require("../lib/avatara");
-var router = express.Router();
-const {
-  circular,
-  parseArrayString,
-  applyLayers,
-  testHexColor,
-} = require("./common");
+import { Router } from "express";
+import Avatara from "../lib/avatara.js";
+import { circular, parseArrayString, applyLayers, testHexColor } from "./common.js";
+var router = Router();
 
 router.use((req, res) => {
   const shapes = req.path.split("/").slice(1);
@@ -46,4 +41,4 @@ router.use((req, res) => {
   return res.send(avatar.toHTML());
 });
 
-module.exports = router;
+export default router;

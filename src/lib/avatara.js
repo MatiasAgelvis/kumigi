@@ -1,5 +1,7 @@
-const { createCanvas, registerFont } = require("canvas");
-const Color = require("color");
+import Canvas from "canvas";
+import Color from "color";
+
+const { createCanvas, registerFont } = Canvas
 
 const Fonts = Object.freeze({
     PLEX: "plex",
@@ -130,4 +132,4 @@ Avatara.prototype.toDataURL = function () {
     return this.canvas.toDataURL();
 };
 
-module.exports = Avatara;
+export default Avatara;

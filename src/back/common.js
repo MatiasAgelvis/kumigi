@@ -1,3 +1,5 @@
+import hexColorRegex from "hex-color-regex";
+
 function circular(X, i) {
     return X[i % X.length];
 }
@@ -28,9 +30,8 @@ function applyLayers(avatar, layers) {
     }
 }
 
-const hexColorRegex = require("hex-color-regex");
 function testHexColor(color) {
     return hexColorRegex().test("#" + color);
 }
 
-module.exports = { circular, parseArrayString, applyLayers, testHexColor };
+export { circular, parseArrayString, applyLayers, testHexColor };

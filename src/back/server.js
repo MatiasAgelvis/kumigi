@@ -1,10 +1,10 @@
-const express = require("express");
-const compression = require("compression");
-const helmet = require("helmet");
-const Avatara = require("../lib/avatara");
+import express from "express";
+import compression from "compression";
+import helmet from "helmet";
+import Avatara from "../lib/avatara.js";
 
-const v1 = require("./v1");
-const v2 = require("./v2");
+import v1 from "./v1.js";
+import v2 from "./v2.js";
 
 const app = express();
 
