@@ -1,14 +1,13 @@
 // import Select from "react-select";
-import { useState } from "react";
-import { PinInputField, PinInput } from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
 
 function TextInput({ text, setText }) {
   return (
-    <PinInput type="alphanumeric" value={text} autoFocus onChange={setText}>
-      <PinInputField />
-      <PinInputField />
-      <PinInputField />
-    </PinInput>
+    <Input
+      value={text}
+      onChange={(event) => setText(event.target.value)}
+      maxLength={3}
+    />
   );
 }
 
