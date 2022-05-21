@@ -1,26 +1,25 @@
 // import Select from "react-select";
-import { useState, useEffect } from "react";
+import { DragHandleIcon } from "@chakra-ui/icons";
 import {
   Box,
-  Heading,
-  Switch,
+  Center,
   CloseButton,
   Divider,
-  Center,
   Flex,
-  SimpleGrid,
+  Heading,
   HStack,
-  Icon,
+  SimpleGrid,
+  Switch,
 } from "@chakra-ui/react";
 import namer from "color-namer";
+import { useEffect, useState } from "react";
 import ColorPicker from "../components/colorPicker";
-import TextInput from "../components/textInput";
 import OptionSelect from "../components/optionSelect";
-import { DragHandleIcon } from "@chakra-ui/icons";
-import boxOptions from '../utils/boxOptions'
+import TextInput from "../components/textInput";
+import boxOptions from "../utils/boxOptions";
 
 function Card({ index, updateLayer, options, fonts, deleteLayer }) {
-  const [shape, setShape] = useState('');
+  const [shape, setShape] = useState("");
   const [color, setColor] = useState("rgba(0,0,0,1)");
   const [text, setText] = useState("");
   const [font, setFont] = useState("");
@@ -44,13 +43,9 @@ function Card({ index, updateLayer, options, fonts, deleteLayer }) {
   }
 
   return (
-    <Box
-      {...boxOptions}
-      my={3}
-      bg='white'
-    >
+    <Box {...boxOptions} my={3} bg="white">
       <HStack>
-        <Center className="dragHandle" py='0.7rem' pr='0.5rem' mr='0.5rem'>
+        <Center className="dragHandle" py="0.7rem" pr="0.5rem" mr="0.5rem">
           <DragHandleIcon />
         </Center>
         <Box w="100%">
