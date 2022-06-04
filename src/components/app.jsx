@@ -12,6 +12,7 @@ import {
   Flex,
   IconButton,
   VStack,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import boxOptions from "../utils/boxOptions";
@@ -103,75 +104,87 @@ function App({ setURL }) {
   }, [height, width]);
 
   return (
-    <Flex
+    <SimpleGrid
+      columns={[1, 1, 2]}
       m="1rem"
-      align="start"
-      justify="space-evenly"
-      wrap="wrap-reverse"
-      direction="row"
       gap="4"
-      justifyContent="center"
+      templateAreas={["'image' 'editor'", "'image' 'editor'", "'editor image'"]}
     >
       {/*    Editor    */}
-      <Box {...boxOptions}>
-        <VStack spacing={4} align="stretch">
-          {/* Layer Stack */}
-          <ReactSortable
-            list={layers}
-            setList={setLayers}
-            animation={200}
-            delayOnTouchStart={true}
-            fallbackTolerance={5}
-            handle=".dragHandle"
-          >
-            {layers.map((layer, i) => (
-              <div key={layer.id}>
-                <Card
-                  index={i}
-                  updateLayer={updateLayer(i)}
-                  options={ShapeOptions}
-                  fonts={fonts}
-                  deleteLayer={deleteLayer(i)}
-                />
-              </div>
-            ))}
-          </ReactSortable>
-
-          {/* New Layer Button */}
-          <IconButton
-            variant="outline"
-            colorScheme="teal"
-            width="100%"
-            onClick={() => setLayers([...layers, createCard()])}
-            icon={<AddIcon />}
-          />
-
-          <AccordionMenu name="Size" options={sizeOptions} />
-        </VStack>
-      </Box>
-
-      {/*    Image    */}
-      <Box sx={{ alignSelf: "stretch" }} maxWidth="50%">
+      <Flex justify={["center", "center", "right"]} gridArea="editor">
         <Box
           {...boxOptions}
-          sx={{ position: "-webkit-sticky", position: "sticky", top: "20%" }}
+          mx={["auto", "auto", "auto", "4"]}
+          maxW="700px"
+          height="fit-content"
         >
-          <Center>
+          <VStack spacing={4} align="stretch">
+            {/* Layer Stack */}
+            <ReactSortable
+              list={layers}
+              setList={setLayers}
+              animation={200}
+              delayOnTouchStart={true}
+              fallbackTolerance={5}
+              handle=".dragHandle"
+            >
+              {layers.map((layer, i) => (
+                <div key={layer.id}>
+                  <Card
+                    index={i}
+                    updateLayer={updateLayer(i)}
+                    options={ShapeOptions}
+                    fonts={fonts}
+                    deleteLayer={deleteLayer(i)}
+                  />
+                </div>
+              ))}
+            </ReactSortable>
+
+            {/* New Layer Button */}
+            <IconButton
+              variant="outline"
+              colorScheme="teal"
+              width="100%"
+              onClick={() => setLayers([...layers, createCard()])}
+              icon={<AddIcon />}
+            />
+
+            <AccordionMenu name="Size" options={sizeOptions} />
+          </VStack>
+        </Box>
+      </Flex>
+
+      {/*    Image    */}
+      <Flex justify={["center", "center", "left"]} gridArea="image">
+        <Box
+          sx={{ alignSelf: "stretch" }}
+          w="clamp(1px,min-content,1000px)"
+          mx={["auto", "auto", "auto", "4"]}
+        >
+          <Box
+            {...boxOptions}
+            sx={{ position: "-webkit-sticky", position: "sticky", top: "2%" }}
+            w="fit-content"
+            h="fit-content"
+            maxW="100%"
+          >
             <VStack gap={4}>
               <Image
                 src={image}
                 border="1px"
                 borderColor={"gray.200"}
                 shadow="md"
-                htmlWidth={width}
-                htmlHeight={height}
+                // {...boxOptions}
+                fit="scale-down"
+                maxH="70vh"
               />
               <DownloadButton canvas={avatar.canvas} />
             </VStack>
-          </Center>
+          </Box>
         </Box>
-      </Box>
-    </Flex>
+      </Flex>
+    </SimpleGrid>
   );
 }
 
