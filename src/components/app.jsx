@@ -5,14 +5,13 @@ import Card from "./card";
 import URLfromLayers from "../utils/url";
 import { v4 as uuidv4 } from "uuid";
 import {
-  Button,
-  Center,
   Box,
   Image,
   Flex,
   IconButton,
   VStack,
   SimpleGrid,
+  SlideFade,
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import boxOptions from "../utils/boxOptions";
@@ -129,15 +128,17 @@ function App({ setURL }) {
               handle=".dragHandle"
             >
               {layers.map((layer, i) => (
-                <div key={layer.id}>
-                  <Card
-                    index={i}
-                    updateLayer={updateLayer(i)}
-                    options={ShapeOptions}
-                    fonts={fonts}
-                    deleteLayer={deleteLayer(i)}
-                  />
-                </div>
+                <SlideFade in={true}>
+                  <Box key={layer.id}>
+                    <Card
+                      index={i}
+                      updateLayer={updateLayer(i)}
+                      options={ShapeOptions}
+                      fonts={fonts}
+                      deleteLayer={deleteLayer(i)}
+                    />
+                  </Box>
+                </SlideFade>
               ))}
             </ReactSortable>
 
@@ -172,10 +173,10 @@ function App({ setURL }) {
             <VStack gap={4}>
               <Image
                 src={image}
+                {...boxOptions}
                 border="1px"
                 borderColor={"gray.200"}
                 shadow="md"
-                // {...boxOptions}
                 fit="scale-down"
                 maxH="70vh"
               />
