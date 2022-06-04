@@ -7,6 +7,7 @@ function TextInput({ text, setText }) {
       value={text}
       onChange={(event) => setText(event.target.value)}
       maxLength={3}
+      placeholder="Input your text"
     />
   );
 }
