@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import boxOptions from "../utils/boxOptions";
+import buttonOptions from "../utils/buttonOptions";
 import DownloadButton from "./downloadButton";
 import NumberInput from "../components/numberInput";
 import AccordionMenu from "./accordionMenu/accordionMenu";
@@ -145,9 +146,7 @@ function App({ setURL }) {
 
             {/* New Layer Button */}
             <IconButton
-              variant="outline"
-              colorScheme="teal"
-              width="100%"
+              {...buttonOptions}
               onClick={() => setLayers([...layers, createCard()])}
               icon={<AddIcon />}
             />
