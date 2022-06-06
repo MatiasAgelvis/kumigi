@@ -18,6 +18,7 @@ import boxOptions from "../utils/boxOptions";
 import DownloadButton from "./downloadButton";
 import NumberInput from "../components/numberInput";
 import AccordionMenu from "./accordionMenu/accordionMenu";
+import ImageBox from "./imageBox";
 
 function applyLayers(avatar, layers) {
   for (let [key, layer] of Object.entries(layers)) {
@@ -171,15 +172,7 @@ function App({ setURL }) {
             maxW="100%"
           >
             <VStack gap={4}>
-              <Image
-                src={image}
-                {...boxOptions}
-                border="1px"
-                borderColor={"gray.200"}
-                shadow="md"
-                fit="scale-down"
-                maxH="70vh"
-              />
+              <ImageBox image={image} />
               <DownloadButton canvas={avatar.canvas} />
             </VStack>
           </Box>
