@@ -4,7 +4,14 @@ import { ReactSortable } from "react-sortablejs";
 import Card from "./card";
 import URLfromLayers from "../utils/url";
 import { v4 as uuidv4 } from "uuid";
-import { Box, Flex, IconButton, VStack, SimpleGrid } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  IconButton,
+  VStack,
+  SimpleGrid,
+  SlideFade,
+} from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import boxOptions from "../utils/boxOptions";
 import buttonOptions from "../utils/buttonOptions";
@@ -39,7 +46,7 @@ function App({ setURL }) {
   const fonts = avatar.fonts();
 
   const createCard = () => {
-    return { id: uuidv4() };
+    return { id: uuidv4(), display: true };
   };
 
   const [image, setImage] = useState(avatar.toDataURL());
@@ -57,8 +64,14 @@ function App({ setURL }) {
     setLayers(layersUpdate);
   };
 
+  const addLayer = () => {
+    setLayers([...layers.filter((x) => x.display), createCard()]);
+  };
+
   const deleteLayer = (index) => () => {
-    let layersUpdate = layers.filter((_, i) => i != index);
+    // let layersUpdate = layers.filter((_, i) => i != index);
+    let layersUpdate = [...layers];
+    layersUpdate[index].display = false;
     setLayers(layersUpdate);
   };
 
@@ -97,7 +110,7 @@ function App({ setURL }) {
         <Box
           {...boxOptions}
           mx={["auto", "auto", "auto", "4"]}
-          maxW="700px"
+          w="clamp(200px,100%,700px)"
           height="fit-content"
         >
           <VStack spacing={4} align="stretch">
@@ -111,21 +124,27 @@ function App({ setURL }) {
               handle=".dragHandle"
             >
               {layers.map((layer, i) => (
-                <Card
+                <SlideFade
                   key={layer.id}
-                  index={i}
-                  updateLayer={updateLayer(i)}
-                  options={ShapeOptions}
-                  fonts={fonts}
-                  deleteLayer={deleteLayer(i)}
-                />
+                  in={layer.display}
+                  unmountOnExit={true}
+                  offsetY="20px"
+                >
+                  <Card
+                    index={i}
+                    updateLayer={updateLayer(i)}
+                    options={ShapeOptions}
+                    fonts={fonts}
+                    deleteLayer={deleteLayer(i)}
+                  />
+                </SlideFade>
               ))}
             </ReactSortable>
 
             {/* New Layer Button */}
             <IconButton
               {...buttonOptions}
-              onClick={() => setLayers([...layers, createCard()])}
+              onClick={() => addLayer()}
               icon={<AddIcon />}
             />
 
