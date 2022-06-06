@@ -1,5 +1,5 @@
 import { Flex, Box, Heading, Text, Link } from "@chakra-ui/react";
-import boxOptions from '../utils/boxOptions'
+import boxOptions from "../utils/boxOptions";
 
 const Header = () => {
 	return (
@@ -9,7 +9,11 @@ const Header = () => {
 				<Text>
 					by
 					<Link href="https://matiasagelvis.com">
-						<Heading as="h4" size="md">
+						<Heading
+							as="h4"
+							size="md"
+							w={["min-content", "fit-content"]}
+						>
 							Matias Agelvis
 						</Heading>
 					</Link>
