@@ -6,7 +6,6 @@ import URLfromLayers from "../utils/url";
 import { v4 as uuidv4 } from "uuid";
 import {
   Box,
-  Image,
   Flex,
   IconButton,
   VStack,
@@ -20,18 +19,7 @@ import DownloadButton from "./downloadButton";
 import NumberInput from "../components/numberInput";
 import AccordionMenu from "./accordionMenu/accordionMenu";
 import ImageBox from "./imageBox";
-
-function applyLayers(avatar, layers) {
-  for (let [key, layer] of Object.entries(layers)) {
-    if (layer.shape) {
-      if (layer.shape != "text") {
-        avatar[layer.shape](layer.color);
-      } else {
-        avatar[layer.shape](layer.text, layer.color, layer.font);
-      }
-    }
-  }
-}
+import applyLayers from "../utils/applyLayers";
 
 function App({ setURL }) {
   const [height, setHeight] = useState(200);
