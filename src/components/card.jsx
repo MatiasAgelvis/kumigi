@@ -18,7 +18,7 @@ import OptionSelect from "../components/optionSelect";
 import TextInput from "../components/textInput";
 import boxOptions from "../utils/boxOptions";
 
-function Card({ index, updateLayer, options, fonts, deleteLayer }) {
+function Card({ index, updateLayer, options, fonts, deleteLayer, ...props }) {
   const [shape, setShape] = useState("");
   const [color, setColor] = useState("rgba(0,0,0,1)");
   const [text, setText] = useState("");
@@ -43,7 +43,7 @@ function Card({ index, updateLayer, options, fonts, deleteLayer }) {
   }
 
   return (
-    <Box {...boxOptions} my={3} bg="white">
+    <Box {...boxOptions} my={3} bg="white" {...props}>
       <HStack>
         <Center className="dragHandle" py="0.7rem" pr="0.5rem" mr="0.5rem">
           <DragHandleIcon />

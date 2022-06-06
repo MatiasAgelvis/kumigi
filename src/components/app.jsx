@@ -118,17 +118,14 @@ function App({ setURL }) {
               handle=".dragHandle"
             >
               {layers.map((layer, i) => (
-                <SlideFade in={true}>
-                  <Box key={layer.id}>
-                    <Card
-                      index={i}
-                      updateLayer={updateLayer(i)}
-                      options={ShapeOptions}
-                      fonts={fonts}
-                      deleteLayer={deleteLayer(i)}
-                    />
-                  </Box>
-                </SlideFade>
+                <Card
+                  key={layer.id}
+                  index={i}
+                  updateLayer={updateLayer(i)}
+                  options={ShapeOptions}
+                  fonts={fonts}
+                  deleteLayer={deleteLayer(i)}
+                />
               ))}
             </ReactSortable>
 
