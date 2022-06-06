@@ -4,14 +4,7 @@ import { ReactSortable } from "react-sortablejs";
 import Card from "./card";
 import URLfromLayers from "../utils/url";
 import { v4 as uuidv4 } from "uuid";
-import {
-  Box,
-  Flex,
-  IconButton,
-  VStack,
-  SimpleGrid,
-  SlideFade,
-} from "@chakra-ui/react";
+import { Box, Flex, IconButton, VStack, SimpleGrid } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import boxOptions from "../utils/boxOptions";
 import buttonOptions from "../utils/buttonOptions";
