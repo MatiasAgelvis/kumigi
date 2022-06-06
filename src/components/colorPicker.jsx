@@ -47,6 +47,7 @@ function ColorPicker({ color, setColor }) {
           value={hexPicker}
           textTransform="uppercase"
           onChange={(e) => setHexPicker(e.target.value)}
+          fontSize={["md", "md", "sm", "md"]}
         />
       </HStack>
 
