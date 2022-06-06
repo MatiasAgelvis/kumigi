@@ -43,9 +43,16 @@ function Card({ index, updateLayer, options, fonts, deleteLayer, ...props }) {
   }
 
   return (
-    <Box {...boxOptions} my={3} bg="white" {...props}>
+    <Box {...boxOptions} my={3} bg="white" {...props} p={["0.7rem", 5]}>
       <HStack>
-        <Center className="dragHandle" py="0.7rem" pr="0.5rem" mr="0.5rem">
+        <Center
+          className="dragHandle"
+          py="0.7rem"
+          // increases the click box
+          pr={["0.4rem", "0.5rem"]}
+          // gives more room
+          mr={["0.1rem", "0.4rem"]}
+        >
           <DragHandleIcon />
         </Center>
         <Box w="100%">
@@ -56,7 +63,7 @@ function Card({ index, updateLayer, options, fonts, deleteLayer, ...props }) {
                 defaultChecked
                 onChange={() => setdisplayLayer(!displayLayer)}
               />
-              <Heading as="h4" size="md" pl="0.2rem">
+              <Heading as="h4" size="md" pl="0.2rem" fontSize={["lg", "xl"]}>
                 {`Layer ${index + 1}`}
               </Heading>
             </HStack>

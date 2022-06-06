@@ -112,6 +112,7 @@ function App({ setURL }) {
           mx={["auto", "auto", "auto", "4"]}
           w="clamp(200px,100%,700px)"
           height="fit-content"
+          p={["0.5rem", 5]}
         >
           <VStack spacing={4} align="stretch">
             {/* Layer Stack */}
