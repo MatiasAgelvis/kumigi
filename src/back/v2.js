@@ -1,11 +1,7 @@
 import { Router } from "express";
 import Avatara from "../lib/avatara.js";
-import {
-  circular,
-  parseArrayString,
-  applyLayers,
-  testHexColor,
-} from "./common.js";
+import applyLayers from "../utils/applyLayers.js";
+import { circular, parseArrayString, testHexColor } from "./common.js";
 var router = Router();
 
 router.use((req, res) => {
@@ -37,14 +33,17 @@ router.use((req, res) => {
   }
 
   const avatar = new Avatara(width, height);
+  const layers = {};
 
   shapes.forEach((shape, i) => {
-    if (shape !== "text") {
-      avatar[shape](circular(colors, i));
-    } else {
-      avatar[shape](texts.shift(), circular(colors, i), fonts.shift());
+    layers[i] = { shape: shape, color: circular(colors, i) };
+
+    if (shape == "text") {
+      layers[i] = { ...layers[i], text: texts.shift(), font: fonts.shift() };
     }
   });
+
+  applyLayers(avatar, layers);
 
   return res.send(avatar.toHTML());
 });
