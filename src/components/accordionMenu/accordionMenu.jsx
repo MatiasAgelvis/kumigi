@@ -20,10 +20,10 @@ function AccordionMenu({ name, options }) {
           <AccordionIcon />
         </AccordionButton>
         <AccordionPanel pb={4} pl={6}>
-          <VStack spacing={4} align='stretch'>
-          {options.map((x) => (
-            <Item name={x.name} input={x.input} />
-          ))}
+          <VStack spacing={4} align="stretch">
+            {options.map((option, i) => (
+              <Item key={i} name={option.name} input={option.input} />
+            ))}
           </VStack>
         </AccordionPanel>
       </AccordionItem>
