@@ -20,6 +20,7 @@ import NumberInput from "../components/numberInput";
 import AccordionMenu from "./accordionMenu/accordionMenu";
 import ImageBox from "./imageBox";
 import applyLayers from "../utils/applyLayers";
+import { motion, AnimatePresence } from "framer-motion";
 
 function App({ setURL }) {
   const [height, setHeight] = useState(200);
@@ -46,7 +47,7 @@ function App({ setURL }) {
   const fonts = avatar.fonts();
 
   const createCard = () => {
-    return { id: uuidv4(), display: true };
+    return { id: uuidv4() };
   };
 
   const [image, setImage] = useState(avatar.toDataURL());
@@ -69,11 +70,7 @@ function App({ setURL }) {
   };
 
   const deleteLayer = (index) => () => {
-    let layersUpdate = [...layers];
-    layersUpdate[index].display = false;
-    setLayers(layersUpdate);
-    // layersUpdate = layers.filter((_, i) => i != index);
-    // setLayers(layersUpdate);
+    setLayers(layers.filter((_, i) => i != index));
   };
 
   function mainUpdate() {
@@ -91,8 +88,7 @@ function App({ setURL }) {
   }
 
   useEffect(() => {
-    let layersUpdate = layers.filter((x) => x.display);
-    setLayers(layersUpdate);
+    setLayers(layers);
     mainUpdate();
   }, [layersString]);
 
@@ -127,17 +123,24 @@ function App({ setURL }) {
               fallbackTolerance={5}
               handle=".dragHandle"
             >
-              {layers.map((layer, i) => (
-                <SlideFade key={layer.id} in={layer.display}>
-                  <Card
-                    index={i}
-                    updateLayer={updateLayer(i)}
-                    options={ShapeOptions}
-                    fonts={fonts}
-                    deleteLayer={deleteLayer(i)}
-                  />
-                </SlideFade>
-              ))}
+              <AnimatePresence>
+                {layers.map((layer, i) => (
+                  <motion.div
+                    key={layer.id}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 20, opacity: 0, scale: 0.9 }}
+                  >
+                    <Card
+                      index={i}
+                      updateLayer={updateLayer(i)}
+                      options={ShapeOptions}
+                      fonts={fonts}
+                      deleteLayer={deleteLayer(i)}
+                    />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </ReactSortable>
 
             {/* New Layer Button */}
