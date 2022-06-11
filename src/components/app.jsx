@@ -65,14 +65,15 @@ function App({ setURL }) {
   };
 
   const addLayer = () => {
-    setLayers([...layers.filter((x) => x.display), createCard()]);
+    setLayers([...layers, createCard()]);
   };
 
   const deleteLayer = (index) => () => {
-    // let layersUpdate = layers.filter((_, i) => i != index);
     let layersUpdate = [...layers];
     layersUpdate[index].display = false;
     setLayers(layersUpdate);
+    // layersUpdate = layers.filter((_, i) => i != index);
+    // setLayers(layersUpdate);
   };
 
   function mainUpdate() {
@@ -90,6 +91,8 @@ function App({ setURL }) {
   }
 
   useEffect(() => {
+    let layersUpdate = layers.filter((x) => x.display);
+    setLayers(layersUpdate);
     mainUpdate();
   }, [layersString]);
 
@@ -125,12 +128,7 @@ function App({ setURL }) {
               handle=".dragHandle"
             >
               {layers.map((layer, i) => (
-                <SlideFade
-                  key={layer.id}
-                  in={layer.display}
-                  unmountOnExit={true}
-                  offsetY="20px"
-                >
+                <SlideFade key={layer.id} in={layer.display}>
                   <Card
                     index={i}
                     updateLayer={updateLayer(i)}
