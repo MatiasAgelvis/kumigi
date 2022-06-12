@@ -4,14 +4,7 @@ import { ReactSortable } from "react-sortablejs";
 import Card from "./card";
 import URLfromLayers from "../utils/url";
 import { v4 as uuidv4 } from "uuid";
-import {
-  Box,
-  Flex,
-  IconButton,
-  VStack,
-  SimpleGrid,
-  SlideFade,
-} from "@chakra-ui/react";
+import { Box, Flex, IconButton, VStack, SimpleGrid } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import boxOptions from "../utils/boxOptions";
 import buttonOptions from "../utils/buttonOptions";
@@ -21,6 +14,7 @@ import AccordionMenu from "./accordionMenu/accordionMenu";
 import ImageBox from "./imageBox";
 import applyLayers from "../utils/applyLayers";
 import { motion, AnimatePresence } from "framer-motion";
+import FontFaceObserver from "fontfaceobserver";
 
 function App({ setURL }) {
   const [height, setHeight] = useState(200);
@@ -45,6 +39,14 @@ function App({ setURL }) {
   ];
 
   const fonts = avatar.fonts();
+
+  useEffect(() => {
+    var fontsLoader = fonts.map((font) => new FontFaceObserver(font));
+    fontsLoader.map(
+      (font) => font.load()
+      // .then(function () {console.log("My Family has loaded");})
+    );
+  }, []);
 
   const createCard = () => {
     return { id: uuidv4() };
@@ -151,6 +153,11 @@ function App({ setURL }) {
             />
 
             <AccordionMenu name="Size" options={sizeOptions} />
+            {/*<Box display="none">
+              {fonts.map((font) => (
+                <span style={{ fontFamily: { font } }}>.</span>
+              ))}
+            </Box>*/}
           </VStack>
         </Box>
       </Flex>

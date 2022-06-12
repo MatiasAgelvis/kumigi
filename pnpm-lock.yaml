@@ -19,6 +19,7 @@ specifiers:
   express: ^4.17.3
   file-saver: ^2.0.5
   find-port-sync: ^1.1.1
+  fontfaceobserver: ^2.3.0
   framer-motion: ^6
   get-port: ^6.1.2
   helmet: ^5.0.2
@@ -54,6 +55,7 @@ dependencies:
   express: 4.18.1
   file-saver: 2.0.5
   find-port-sync: 1.1.1
+  fontfaceobserver: 2.3.0
   framer-motion: 6.3.3_ef5jwxihqo6n7gxfmzogljlgcm
   get-port: 6.1.2
   helmet: 5.1.0
@@ -2301,6 +2303,10 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       tslib: 2.4.0
+    dev: false
+
+  /fontfaceobserver/2.3.0:
+    resolution: {integrity: sha512-6FPvD/IVyT4ZlNe7Wcn5Fb/4ChigpucKYSvD6a+0iMoLn2inpo711eyIcKjmDtE5XNcgAkSH9uN/nfAeZzHEfg==}
     dev: false
 
   /forwarded/0.2.0:
