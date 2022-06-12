@@ -1,14 +1,23 @@
 // import Select from "react-select";
-import { Input } from "@chakra-ui/react";
+import { Input, InputGroup, InputRightAddon, Code } from "@chakra-ui/react";
 
-function TextInput({ text, setText }) {
+function TextInput({ text, setText, maxLength = 3 }) {
   return (
-    <Input
-      value={text}
-      onChange={(event) => setText(event.target.value)}
-      maxLength={3}
-      placeholder="Input your text"
-    />
+    <InputGroup>
+      <Input
+        value={text}
+        onChange={(event) => setText(event.target.value)}
+        maxLength={maxLength}
+        placeholder="Input your text"
+      />
+      <InputRightAddon
+        children={
+          <Code>
+            {text.length}/{maxLength}
+          </Code>
+        }
+      />
+    </InputGroup>
   );
 }
 
