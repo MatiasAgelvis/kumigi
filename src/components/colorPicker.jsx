@@ -51,7 +51,7 @@ function ColorPicker({ color, setColor }) {
         />
       </HStack>
 
-      <PopoverContent style={{ width: "fit-content" }}>
+      <PopoverContent style={{ width: "fit-content" }} mx={5}>
         <RgbaStringColorPicker color={color} onChange={setColor} />
       </PopoverContent>
     </Popover>
