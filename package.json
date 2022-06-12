@@ -23,6 +23,7 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@types/sortablejs": "1",
+    "browser-or-node": "^2.0.0",
     "bulma": "^0.9.3",
     "canvas": "^2.9.1",
     "color": "^4.2.3",
