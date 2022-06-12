@@ -1,7 +1,10 @@
 import Canvas from "canvas";
 import Color from "color";
+import {
+    isNode, //isBrowser, isWebWorker, isJsDom, isDeno,
+} from "browser-or-node";
 
-const { createCanvas, registerFont } = Canvas
+const { createCanvas, registerFont } = Canvas;
 
 const Fonts = Object.freeze({
     PLEX: "plex",
@@ -11,7 +14,7 @@ const Fonts = Object.freeze({
     ROBOTO: "roboto",
 });
 
-if (typeof possibleFunction === typeof Function) {
+if (isNode) {
     registerFont("./public/fonts/IBMPlexMono-Bold.ttf", { family: Fonts.PLEX });
     registerFont("./public/fonts/CourierPrime-Bold.ttf", {
         family: Fonts.COURIER,
@@ -110,10 +113,10 @@ Avatara.prototype.gradient = function (color = "#00f") {
 
 Avatara.prototype.text = function (text = "", color = "#fff", font = "plex") {
     let fontName = getKeyByValue(Fonts, font.toLowerCase());
-    let fontFacor = fontFactos[Fonts[fontName]] * this.canvas.width;
+    let fontFactor = fontFactos[Fonts[fontName]] * this.canvas.width;
 
     this.ctx.fillStyle = Color(color).rgb().string();
-    this.ctx.font = `bold ${fontFacor}px ${Fonts[fontName]}`;
+    this.ctx.font = `bold ${fontFactor}px ${Fonts[fontName]}`;
     this.ctx.textAlign = "center";
     this.ctx.textBaseline = "middle";
     this.ctx.fillText(
