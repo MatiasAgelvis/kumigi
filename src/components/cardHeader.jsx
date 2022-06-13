@@ -9,6 +9,7 @@ import {
   CloseIcon,
 } from "@chakra-ui/icons";
 import namer from "color-namer";
+import capitalize from "../utils/capitalize";
 
 function CardHeader({
   shape,
@@ -20,10 +21,6 @@ function CardHeader({
   onEditorToggle,
   ...props
 }) {
-  function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
   function colorName(color, pick = "basic") {
     return capitalize(namer(color, { pick: [pick] })[pick][0].name);
   }

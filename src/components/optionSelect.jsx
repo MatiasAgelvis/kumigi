@@ -1,9 +1,6 @@
 // import Select from "react-select";
 import { Select } from "@chakra-ui/react";
-
-function capitalize(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
+import capitalize from "../utils/capitalize";
 
 function OptionSelect({ options, state, setState, placeholder }) {
   return (

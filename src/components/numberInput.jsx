@@ -6,10 +6,15 @@ import {
 	NumberDecrementStepper,
 } from "@chakra-ui/react";
 
-const RangeInput = ({value, setValue}) => {
-
+const RangeInput = ({ value, setValue, min = 1, max = 1000, ...props }) => {
 	return (
-		<NumberInput value={value} min={50} max={1000} onChange={setValue}>
+		<NumberInput
+			value={value}
+			min={min}
+			max={max}
+			onChange={setValue}
+			{...props}
+		>
 			<NumberInputField />
 			<NumberInputStepper>
 				<NumberIncrementStepper />

@@ -35,9 +35,12 @@ function App({ setURL }) {
   const sizeOptions = [
     {
       name: "Height",
-      input: <NumberInput value={height} setValue={setHeight} />,
+      input: <NumberInput value={height} setValue={setHeight} max={2000} />,
     },
-    { name: "Width", input: <NumberInput value={width} setValue={setWidth} /> },
+    {
+      name: "Width",
+      input: <NumberInput value={width} setValue={setWidth} max={2000} />,
+    },
   ];
 
   const fonts = avatar.fonts();
