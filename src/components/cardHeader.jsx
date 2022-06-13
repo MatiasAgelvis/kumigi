@@ -4,11 +4,13 @@ import {
   Box,
   Center,
   CloseButton,
+  IconButton,
   Flex,
   Heading,
   HStack,
   Switch,
 } from "@chakra-ui/react";
+import { EditIcon, LockIcon } from "@chakra-ui/icons";
 import namer from "color-namer";
 import {
   mobileOnly,
@@ -16,7 +18,15 @@ import {
   chakraViewportSplit,
 } from "../utils/responsiveLayouts";
 
-function CardTopRow({ shape, color, setdisplayLayer, ...props }) {
+function CardHeader({
+  shape,
+  color,
+  setdisplayLayer,
+  closeButton,
+  isOpen,
+  onToggle,
+  ...props
+}) {
   function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -53,20 +63,26 @@ function CardTopRow({ shape, color, setdisplayLayer, ...props }) {
               size="md"
               pl="0.2rem"
               fontSize={["lg", "xl"]}
-              display={desktopOnly}
+              display={["none", "block"]}
             >{`${colorName(color, "pantone")} ${capitalize(
               shape ? shape : ""
             )}`}</Heading>
           </HStack>
-          <CloseButton onClick={() => deleteLayer()} />
+          <HStack>
+            <IconButton
+              onClick={onToggle}
+              icon={isOpen ? <LockIcon /> : <EditIcon />}
+            />
+            <CloseButton onClick={() => closeButton()} />
+          </HStack>
         </Flex>
 
         <Heading
           as="h4"
           size="md"
           pl="0.2rem"
-          display={mobileOnly}
-          fontSize={["lg", "xl"]}
+          display={["block", "none"]}
+          fontSize={["lg", "lg", "xl"]}
         >{`${colorName(color, "pantone")} ${capitalize(
           shape ? shape : ""
         )}`}</Heading>
@@ -75,4 +91,4 @@ function CardTopRow({ shape, color, setdisplayLayer, ...props }) {
   );
 }
 
-export default CardTopRow;
+export default CardHeader;
