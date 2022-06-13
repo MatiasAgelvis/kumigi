@@ -3,14 +3,18 @@ import { DragHandleIcon } from "@chakra-ui/icons";
 import {
   Box,
   Center,
-  CloseButton,
   IconButton,
   Flex,
   Heading,
   HStack,
-  Switch,
 } from "@chakra-ui/react";
-import { EditIcon, LockIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import {
+  EditIcon,
+  LockIcon,
+  ViewIcon,
+  ViewOffIcon,
+  CloseIcon,
+} from "@chakra-ui/icons";
 import namer from "color-namer";
 // import {
 //   mobileOnly,
@@ -71,7 +75,7 @@ function CardHeader({
               onClick={onEditorToggle}
               icon={isEditorOpen ? <LockIcon /> : <EditIcon />}
             />
-            <CloseButton onClick={() => closeButton()} />
+            <IconButton onClick={() => closeButton()} icon={<CloseIcon />} />
           </HStack>
         </Flex>
 
