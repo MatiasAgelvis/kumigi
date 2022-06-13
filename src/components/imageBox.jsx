@@ -5,8 +5,8 @@ function ImageBox({ image }) {
   return (
     <Image
       src={image}
-      {...boxOptions}
-      border="1px"
+      // {...boxOptions}
+      border="2px"
       borderColor={"gray.200"}
       shadow="md"
       fit="scale-down"
