@@ -41,6 +41,7 @@ function CardHeader({
         pr={["0.4rem", "0.5rem"]}
         // gives more room
         mr={["0.1rem", "0.4rem"]}
+        _hover={{ cursor: "grab" }}
       >
         <DragHandleIcon />
       </Center>
