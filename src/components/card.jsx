@@ -50,6 +50,7 @@ function Card({
       <CardHeader
         shape={shape}
         color={color}
+        displayLayer={displayLayer}
         setdisplayLayer={setdisplayLayer}
         closeButton={deleteLayer}
         onEditorToggle={onEditorToggle}

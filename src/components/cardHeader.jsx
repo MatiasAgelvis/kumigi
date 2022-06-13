@@ -21,6 +21,7 @@ import namer from "color-namer";
 function CardHeader({
   shape,
   color,
+  displayLayer,
   setdisplayLayer,
   closeButton,
   isEditorOpen,
@@ -50,14 +51,6 @@ function CardHeader({
       <Box w="100%">
         <Flex justify="space-between" gap={4}>
           <HStack>
-            <Switch
-              id="displayLayer"
-              defaultChecked
-              onChange={() => setdisplayLayer(!displayLayer)}
-            />
-            {/*<Heading as="h4" size="md" pl="0.2rem" fontSize={["lg", "xl"]}>
-                {`Layer ${index + 1}`}
-              </Heading>*/}
             <Heading
               as="h4"
               size="md"
@@ -70,10 +63,10 @@ function CardHeader({
           </HStack>
 
           <HStack>
-            {/*<IconButton
-              // onClick={}
-              // icon={isOpen ? <ViewIcon /> : <ViewOffIcon />}
-            />*/}
+            <IconButton
+              onClick={() => setdisplayLayer(!displayLayer)}
+              icon={displayLayer ? <ViewIcon /> : <ViewOffIcon />}
+            />
             <IconButton
               onClick={onEditorToggle}
               icon={isEditorOpen ? <LockIcon /> : <EditIcon />}
