@@ -19,6 +19,8 @@ import FontFaceObserver from "fontfaceobserver";
 function App({ setURL }) {
   const [height, setHeight] = useState(200);
   const [width, setWidth] = useState(200);
+  const [dragTarget, setDragTarget] = useState(-1);
+  const [dragEvent, setDragEvent] = useState(false);
   let avatar = new Avatara(width, height);
 
   const ShapeOptions = [
@@ -121,9 +123,15 @@ function App({ setURL }) {
               list={layers}
               setList={setLayers}
               animation={200}
+              // delay={100}
               delayOnTouchStart={true}
-              fallbackTolerance={5}
+              // touchStartThreshold={5}
+              fallbackTolerance={2}
               handle=".dragHandle"
+              onChoose={(e) => setDragTarget(e.oldIndex)}
+              onStart={() => setDragEvent(true)}
+              onEnd={() => setDragEvent(false)}
+              onUnchoose={() => setDragTarget(-1)}
             >
               <AnimatePresence>
                 {layers.map((layer, i) => (
@@ -139,6 +147,8 @@ function App({ setURL }) {
                       options={ShapeOptions}
                       fonts={fonts}
                       deleteLayer={deleteLayer(i)}
+                      dragEvent={dragEvent}
+                      dragTarget={i == dragTarget}
                     />
                   </motion.div>
                 ))}
@@ -153,11 +163,6 @@ function App({ setURL }) {
             />
 
             <AccordionMenu name="Size" options={sizeOptions} />
-            {/*<Box display="none">
-              {fonts.map((font) => (
-                <span style={{ fontFamily: { font } }}>.</span>
-              ))}
-            </Box>*/}
           </VStack>
         </Box>
       </Flex>

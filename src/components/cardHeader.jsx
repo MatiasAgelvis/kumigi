@@ -10,21 +10,21 @@ import {
   HStack,
   Switch,
 } from "@chakra-ui/react";
-import { EditIcon, LockIcon } from "@chakra-ui/icons";
+import { EditIcon, LockIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import namer from "color-namer";
-import {
-  mobileOnly,
-  desktopOnly,
-  chakraViewportSplit,
-} from "../utils/responsiveLayouts";
+// import {
+//   mobileOnly,
+//   desktopOnly,
+//   chakraViewportSplit,
+// } from "../utils/responsiveLayouts";
 
 function CardHeader({
   shape,
   color,
   setdisplayLayer,
   closeButton,
-  isOpen,
-  onToggle,
+  isEditorOpen,
+  onEditorToggle,
   ...props
 }) {
   function capitalize(string) {
@@ -68,10 +68,15 @@ function CardHeader({
               shape ? shape : ""
             )}`}</Heading>
           </HStack>
+
           <HStack>
+            {/*<IconButton
+              // onClick={}
+              // icon={isOpen ? <ViewIcon /> : <ViewOffIcon />}
+            />*/}
             <IconButton
-              onClick={onToggle}
-              icon={isOpen ? <LockIcon /> : <EditIcon />}
+              onClick={onEditorToggle}
+              icon={isEditorOpen ? <LockIcon /> : <EditIcon />}
             />
             <CloseButton onClick={() => closeButton()} />
           </HStack>
