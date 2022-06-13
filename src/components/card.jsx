@@ -17,6 +17,12 @@ import ColorPicker from "../components/colorPicker";
 import OptionSelect from "../components/optionSelect";
 import TextInput from "../components/textInput";
 import boxOptions from "../utils/boxOptions";
+import CardTopRow from "./cardTopRow";
+import {
+  mobileOnly,
+  desktopOnly,
+  chakraViewportSplit,
+} from "../utils/responsiveLayouts";
 
 function Card({ index, updateLayer, options, fonts, deleteLayer, ...props }) {
   const [shape, setShape] = useState("");
@@ -44,37 +50,11 @@ function Card({ index, updateLayer, options, fonts, deleteLayer, ...props }) {
 
   return (
     <Box {...boxOptions} my={3} bg="white" {...props} p={["0.7rem", 5]}>
-      <HStack>
-        <Center
-          className="dragHandle"
-          py="0.7rem"
-          // increases the click box
-          pr={["0.4rem", "0.5rem"]}
-          // gives more room
-          mr={["0.1rem", "0.4rem"]}
-        >
-          <DragHandleIcon />
-        </Center>
-        <Box w="100%">
-          <Flex justify="space-between" gap={4}>
-            <HStack>
-              <Switch
-                id="displayLayer"
-                defaultChecked
-                onChange={() => setdisplayLayer(!displayLayer)}
-              />
-              <Heading as="h4" size="md" pl="0.2rem" fontSize={["lg", "xl"]}>
-                {`Layer ${index + 1}`}
-              </Heading>
-            </HStack>
-            <CloseButton onClick={() => deleteLayer()} />
-          </Flex>
-          <Heading as="h4" size="md" pl="0.2rem">{`${colorName(
-            color,
-            "pantone"
-          )} ${capitalize(shape ? shape : "")}`}</Heading>
-        </Box>
-      </HStack>
+      <CardTopRow
+        shape={shape}
+        color={color}
+        setdisplayLayer={setdisplayLayer}
+      />
       <Center height="20px">
         <Divider
           orientation="horizontal"
@@ -93,12 +73,7 @@ function Card({ index, updateLayer, options, fonts, deleteLayer, ...props }) {
         />
         <ColorPicker color={color} setColor={setColor} />
 
-        {shape == "text" && (
-          <Center>
-            <TextInput text={text} setText={setText} />
-          </Center>
-        )}
-
+        {shape == "text" && <TextInput text={text} setText={setText} />}
         {shape == "text" && (
           <OptionSelect
             options={fonts}
