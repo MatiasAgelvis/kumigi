@@ -1,13 +1,6 @@
 // import Select from "react-select";
 import { DragHandleIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Center,
-  IconButton,
-  Flex,
-  Heading,
-  HStack,
-} from "@chakra-ui/react";
+import { Box, Center, IconButton, Heading, HStack } from "@chakra-ui/react";
 import {
   EditIcon,
   LockIcon,
@@ -16,11 +9,6 @@ import {
   CloseIcon,
 } from "@chakra-ui/icons";
 import namer from "color-namer";
-// import {
-//   mobileOnly,
-//   desktopOnly,
-//   chakraViewportSplit,
-// } from "../utils/responsiveLayouts";
 
 function CardHeader({
   shape,
@@ -40,6 +28,10 @@ function CardHeader({
     return capitalize(namer(color, { pick: [pick] })[pick][0].name);
   }
 
+  function layerName(color, shape) {
+    return `${colorName(color, "pantone")} ${capitalize(shape ? shape : "")}`;
+  }
+
   return (
     <HStack {...props}>
       <Center
@@ -53,41 +45,27 @@ function CardHeader({
         <DragHandleIcon />
       </Center>
       <Box w="100%">
-        <Flex justify="space-between" gap={4}>
-          <HStack>
-            <Heading
-              as="h4"
-              size="md"
-              pl="0.2rem"
-              fontSize={["lg", "xl"]}
-              display={["none", "block"]}
-            >{`${colorName(color, "pantone")} ${capitalize(
-              shape ? shape : ""
-            )}`}</Heading>
-          </HStack>
-
-          <HStack>
-            <IconButton
-              onClick={() => setdisplayLayer(!displayLayer)}
-              icon={displayLayer ? <ViewIcon /> : <ViewOffIcon />}
-            />
-            <IconButton
-              onClick={onEditorToggle}
-              icon={isEditorOpen ? <LockIcon /> : <EditIcon />}
-            />
-            <IconButton onClick={() => closeButton()} icon={<CloseIcon />} />
-          </HStack>
-        </Flex>
+        <HStack float="right">
+          <IconButton
+            onClick={() => setdisplayLayer(!displayLayer)}
+            icon={displayLayer ? <ViewIcon /> : <ViewOffIcon />}
+          />
+          <IconButton
+            onClick={onEditorToggle}
+            icon={isEditorOpen ? <LockIcon /> : <EditIcon />}
+          />
+          <IconButton onClick={() => closeButton()} icon={<CloseIcon />} />
+        </HStack>
 
         <Heading
           as="h4"
+          my="0.5rem"
+          p="0.2rem"
           size="md"
-          pl="0.2rem"
-          display={["block", "none"]}
-          fontSize={["lg", "lg", "xl"]}
-        >{`${colorName(color, "pantone")} ${capitalize(
-          shape ? shape : ""
-        )}`}</Heading>
+          fontSize={["lg", "xl"]}
+        >
+          {layerName(color, shape)}
+        </Heading>
       </Box>
     </HStack>
   );
