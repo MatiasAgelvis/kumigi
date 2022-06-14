@@ -28,7 +28,11 @@ function App({ setURL }) {
     "square",
     "circle",
     "rectangle",
-    "gradient",
+    "triangle",
+    "diamond",
+    "squircle",
+    "linear",
+    "radial",
     "text",
   ];
 
