@@ -23,16 +23,35 @@ Create simple avatars with text from a simple and composable API.
 		<img src="images/background.square%3Fcolors%3Dblack%2Cgrey.png">
 	</p>
 <dt>circle</dt>
-	<dd>Elliptical Shape that will have the same margins in the both axis.</dd>
+	<dd>Circle with radius smaller than the smallest dimension.</dd>
 	<p align="right">
 		<img src="images/background.circle%3Fcolors%3Dblack%2Cgrey.png">
 	</p>
-<dt>gradient</dt>
+<dt>squircle</dt>
+	<dd>Super-elliptical Shape intermediate between a square and a circle.</dd>
+	<p align="right">
+		<img src="images/background.circle%3Fcolors%3Dblack%2Cgrey.png">
+	</p>
+<dt>diamond</dt>
+	<dd>Rectangle that touches the midpoint of the four sides of the canvas.</dd>
+	<p align="right">
+		<img src="images/background.circle%3Fcolors%3Dblack%2Cgrey.png">
+	</p>
+<dt>triangle</dt>
+	<dd>Polygon that goes from the midpoint of the top side of the canvas to both of the low vertexes.</dd>
+	<p align="right">
+		<img src="images/background.circle%3Fcolors%3Dblack%2Cgrey.png">
+	</p>
+<dt>linear</dt>
 	<dd>Overlays diagonally a linear gradient form transparent to the given color, used with <code>background</code> creates a two color transition.</dd>
 	<p align="right">
-		<img src="images/background.gradient%3Fcolors%3Dblack%2Cgrey.png">
+		<img src="images/background.linear%3Fcolors%3Dblack%2Cgrey.png">
 	</p>
-
+<dt>Radial</dt>
+	<dd>Overlays diagonally a radial gradient form transparent to the given color, its radius is equal to the smallest dimension, used with <code>background</code> creates a two color transition.</dd>
+	<p align="right">
+		<img src="images/background.linear%3Fcolors%3Dblack%2Cgrey.png">
+	</p>
 <dt>text</dt>
 	<dd>Overlays a string of up to 3 characters, if its longer only the first 3 chars are going to be used. the text to display is passed with the <code>texts</code> parameter.</dd>
 	<p align="right">
@@ -50,9 +69,7 @@ The following parameters can be passed to all queries.
 -   `texts` : String of comma separated strings (ex. `texts=abc,123,xyz`)
 -   `fonts` : String of comma separated strings of [ plex, courier, cousine, pt, roboto ] (ex. font=[pt,cousine])
 
-
 ## Example
-
 
 `https://avatara.herokuapp.com/v2/circle/text?colors=234567,white&texts=MAD&fonts=courier`
 
@@ -60,18 +77,14 @@ The following parameters can be passed to all queries.
 <img src="images/example.png">
 </p>
 
-
-`https://avatara.herokuapp.com/v2/background/gradient/circle/square/rectangle/gradient?colors=black,grey,blue,yellow,red,green`
-
+`https://avatara.herokuapp.com/v2/background/linear/circle/square/rectangle/linear?colors=black,grey,blue,yellow,red,green`
 
 <p align="center">
-<img src="images/background.gradient.circle.square.rectangle.gradient%3Fcolors%3Dblack%2Cgrey%2Cblue%2Cyellow%2Cred%2Cgreen.png">
+<img src="images/background.linear.circle.square.rectangle.linear%3Fcolors%3Dblack%2Cgrey%2Cblue%2Cyellow%2Cred%2Cgreen.png">
 </p>
 
-
-
-`https://avatara.herokuapp.com/v2/background/circle/square/rectangle/gradient/text?colors=crimson,tan,mediumblue,green,teal,gold&texts=[777]`
+`https://avatara.herokuapp.com/v2/background/circle/square/rectangle/linear/text?colors=crimson,tan,mediumblue,green,teal,gold&texts=[777]`
 
 <p align="center">
-<img src="images/background.circle.square.rectangle.gradient%3Fcolors%3Dcrimson%2Ctan%2Cmediumblue%2Cgreen%2Cteal%26text%3D777%26textColor%3Dgold.png">
+<img src="images/background.circle.square.rectangle.linear%3Fcolors%3Dcrimson%2Ctan%2Cmediumblue%2Cgreen%2Cteal%26text%3D777%26textColor%3Dgold.png">
 </p>
