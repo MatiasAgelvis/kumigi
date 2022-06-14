@@ -43,7 +43,7 @@ function CardHeader({
         <DragHandleIcon />
       </Center>
       <Box w="100%">
-        <HStack float="right">
+        <HStack float="right" mb="0.7rem" ml="5px">
           <IconButton
             onClick={() => setdisplayLayer(!displayLayer)}
             icon={displayLayer ? <ViewIcon /> : <ViewOffIcon />}
