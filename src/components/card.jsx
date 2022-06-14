@@ -54,7 +54,8 @@ function Card({
         setdisplayLayer={setdisplayLayer}
         closeButton={deleteLayer}
         onEditorToggle={onEditorToggle}
-        isEditorOpen={isEditorOpen && !dragEvent && !dragTarget}
+        isEditorOpen={isEditorOpen}
+        displayButtons={!dragEvent && !dragTarget}
       />
       {!dragTarget && (
         <Collapse in={isEditorOpen && !dragEvent}>

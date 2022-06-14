@@ -19,6 +19,7 @@ function CardHeader({
   closeButton,
   isEditorOpen,
   onEditorToggle,
+  displayButtons,
   ...props
 }) {
   function colorName(color, pick = "basic") {
@@ -33,6 +34,7 @@ function CardHeader({
     <HStack {...props}>
       <Center
         className="dragHandle"
+        alignSelf="start"
         py="0.7rem"
         // increases the click box
         pr={["0.4rem", "0.5rem"]}
@@ -43,17 +45,19 @@ function CardHeader({
         <DragHandleIcon />
       </Center>
       <Box w="100%">
-        <HStack float="right" mb="0.7rem" ml="5px">
-          <IconButton
-            onClick={() => setdisplayLayer(!displayLayer)}
-            icon={displayLayer ? <ViewIcon /> : <ViewOffIcon />}
-          />
-          <IconButton
-            onClick={onEditorToggle}
-            icon={isEditorOpen ? <LockIcon /> : <EditIcon />}
-          />
-          <IconButton onClick={() => closeButton()} icon={<CloseIcon />} />
-        </HStack>
+        {displayButtons && (
+          <HStack float="right" mb="0.7rem" ml="5px">
+            <IconButton
+              onClick={() => setdisplayLayer(!displayLayer)}
+              icon={displayLayer ? <ViewIcon /> : <ViewOffIcon />}
+            />
+            <IconButton
+              onClick={onEditorToggle}
+              icon={isEditorOpen ? <LockIcon /> : <EditIcon />}
+            />
+            <IconButton onClick={() => closeButton()} icon={<CloseIcon />} />
+          </HStack>
+        )}
 
         <Heading
           as="h4"
