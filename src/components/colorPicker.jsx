@@ -5,10 +5,10 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
+  chakra,
 } from "@chakra-ui/react";
-import { RgbaStringColorPicker } from "react-colorful";
+import { RgbaStringColorPicker, HexColorInput } from "react-colorful";
 import colorString from "color-string";
-import { useEffect, useState } from "react";
 
 function rgba2hex(color) {
   return colorString.to.hex(colorString.get.rgb(color));
@@ -19,39 +19,25 @@ function hex2rgba(color) {
 }
 
 function ColorPicker({ color, setColor }) {
-  const [hexPicker, setHexPicker] = useState(rgba2hex(color));
-  const [attached, setAttached] = useState(true);
-
-  useEffect(() => {
-    // if the current input is a valid color update color
-    setAttached(false);
-    if (colorString.get(hexPicker) && !attached) {
-      setColor(hex2rgba(hexPicker));
-    }
-  }, [hexPicker]);
-
-  useEffect(() => {
-    setAttached(true);
-    if (attached) {
-      setHexPicker(rgba2hex(color));
-    }
-  }, [color]);
+  const ChakraHexColorInput = chakra(({ col0r, ...props }) => (
+    <HexColorInput color={col0r} {...props} />
+  ));
 
   return (
-    <Popover>
+    <Popover isLazy>
       <HStack>
         <PopoverTrigger>
-          <Button bg={color} border="1px" borderColor="gray.200" />
+          <Button bg={color} border="1px" borderColor="gray.200"></Button>
         </PopoverTrigger>
         <Input
-          value={hexPicker}
-          textTransform="uppercase"
-          onChange={(e) => setHexPicker(e.target.value)}
-          fontSize={["md", "md", "sm", "md"]}
+          as={ChakraHexColorInput}
+          col0r={rgba2hex(color)}
+          onChange={(color) => setColor(hex2rgba(color))}
+          prefixed
+          alpha
         />
       </HStack>
-
-      <PopoverContent style={{ width: "fit-content" }} mx={5}>
+      <PopoverContent w="fit-content" mx={5}>
         <RgbaStringColorPicker color={color} onChange={setColor} />
       </PopoverContent>
     </Popover>
