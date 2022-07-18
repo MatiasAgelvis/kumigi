@@ -27,7 +27,12 @@ function ColorPicker({ color, setColor }) {
     <Popover isLazy>
       <HStack>
         <PopoverTrigger>
-          <Button bg={color} border="1px" borderColor="gray.200"></Button>
+          <Button
+            bg={color}
+            border="1px"
+            borderColor="gray.200"
+            _dark={{ borderColor: "gray.600" }}
+          ></Button>
         </PopoverTrigger>
         <Input
           as={ChakraHexColorInput}

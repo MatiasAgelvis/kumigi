@@ -46,7 +46,7 @@ function Card({
   }, [shape, color, text, font, displayLayer]);
 
   return (
-    <Box {...boxOptions} my={3} bg="white" {...props} p={["0.7rem", 5]}>
+    <Box {...boxOptions} my={3} {...props} p={["0.7rem", 5]}>
       <CardHeader
         shape={shape}
         color={color}
@@ -59,16 +59,7 @@ function Card({
       />
       {!dragTarget && (
         <Collapse in={isEditorOpen && !dragEvent}>
-          <Center height="20px">
-            {/*<Divider
-                        orientation="horizontal"
-                        border={2}
-                        borderColor="gray.300"
-                        borderRadius="8"
-                      />*/}
-          </Center>
-
-          <SimpleGrid columns={[1, 2]} spacing={[5, 5, 7]}>
+          <SimpleGrid columns={[1, 2]} spacing={[5, null, 7]}>
             <OptionSelect
               options={options}
               state={shape}

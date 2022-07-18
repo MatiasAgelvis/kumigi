@@ -7,7 +7,8 @@ function ImageBox({ image }) {
       src={image}
       // {...boxOptions}
       border="2px"
-      borderColor={"gray.200"}
+      borderColor="gray.200"
+      _dark={{ borderColor: "gray.600" }}
       shadow="md"
       fit="scale-down"
       maxH="70vh"
