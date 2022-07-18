@@ -30,17 +30,17 @@ Create simple avatars with text from a simple and composable API.
 <dt>squircle</dt>
 	<dd>Super-elliptical Shape intermediate between a square and a circle.</dd>
 	<p align="right">
-		<img src="images/background.circle%3Fcolors%3Dblack%2Cgrey.png">
+		<img src="images/background.squircle%3Fcolors%3Dblack%2Cgrey.png">
 	</p>
 <dt>diamond</dt>
 	<dd>Rectangle that touches the midpoint of the four sides of the canvas.</dd>
 	<p align="right">
-		<img src="images/background.circle%3Fcolors%3Dblack%2Cgrey.png">
+		<img src="images/background.diamond%3Fcolors%3Dblack%2Cgrey.png">
 	</p>
 <dt>triangle</dt>
 	<dd>Polygon that goes from the midpoint of the top side of the canvas to both of the low vertexes.</dd>
 	<p align="right">
-		<img src="images/background.circle%3Fcolors%3Dblack%2Cgrey.png">
+		<img src="images/background.triangle%3Fcolors%3Dblack%2Cgrey.png">
 	</p>
 <dt>linear</dt>
 	<dd>Overlays diagonally a linear gradient form transparent to the given color, used with <code>background</code> creates a two color transition.</dd>
