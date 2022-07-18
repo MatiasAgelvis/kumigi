@@ -1,6 +1,6 @@
-import { Flex, Box, Heading, Text, Link } from "@chakra-ui/react";
+import { Flex, Box, Heading, Text, Link, HStack } from "@chakra-ui/react";
 import boxOptions from "../utils/boxOptions";
-
+import ColorToggle from "./colorToggle";
 const Header = () => {
 	return (
 		<Box {...boxOptions} m="1rem">
@@ -13,18 +13,9 @@ const Header = () => {
 				<Heading as="h1" mr={4}>
 					Avatara
 				</Heading>
-				<Flex ml="auto" direction={["row", "column"]}>
-					<Text mr={1}>by</Text>
-					<Link href="https://matiasagelvis.com">
-						<Heading
-							as="h4"
-							size={["sm", "md"]}
-							w={["max-content"]}
-						>
-							Matias Agelvis
-						</Heading>
-					</Link>
-				</Flex>
+				<HStack spacing={4}>
+					<ColorToggle />
+				</HStack>
 			</Flex>
 		</Box>
 	);
