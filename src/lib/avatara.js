@@ -131,6 +131,7 @@ Avatara.prototype.triangle = function (color = "#000") {
     this.ctx.moveTo(this.canvas.width / 2, 0);
     this.ctx.lineTo(0, this.canvas.height);
     this.ctx.lineTo(this.canvas.width, this.canvas.height);
+    this.ctx.closePath();
     this.ctx.fill();
     return this;
 };
@@ -142,6 +143,7 @@ Avatara.prototype.diamond = function (color = "#000") {
     this.ctx.lineTo(this.canvas.width, this.canvas.height / 2);
     this.ctx.lineTo(this.canvas.width / 2, this.canvas.height);
     this.ctx.lineTo(0, this.canvas.height / 2);
+    this.ctx.closePath();
     this.ctx.fill();
     return this;
 };
