@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { ReactSortable } from "react-sortablejs";
 import Card from "./card";
 import URLfromLayers from "../utils/url";
-import { v4 as uuidv4 } from "uuid";
 import { Box, Flex, IconButton, VStack, SimpleGrid } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import boxOptions from "../utils/boxOptions";
@@ -15,12 +14,16 @@ import ImageBox from "./imageBox";
 import applyLayers from "../utils/applyLayers";
 import { motion, AnimatePresence } from "framer-motion";
 import FontFaceObserver from "fontfaceobserver";
+import { useRecoilState } from "recoil";
+import { createCard } from "../utils/createCard";
+import { layersAtom, urlAtom } from "../utils/store";
 
-function App({ setURL }) {
+function App() {
   const [height, setHeight] = useState(200);
   const [width, setWidth] = useState(200);
   const [dragTarget, setDragTarget] = useState(-1);
   const [dragEvent, setDragEvent] = useState(false);
+  const [_, setURL] = useRecoilState(urlAtom);
   let avatar = new Avatara(width, height);
 
   const ShapeOptions = [
@@ -57,12 +60,8 @@ function App({ setURL }) {
     );
   }, []);
 
-  const createCard = () => {
-    return { id: uuidv4() };
-  };
-
   const [image, setImage] = useState(avatar.toDataURL());
-  const [layers, setLayers] = useState([createCard()]);
+  const [layers, setLayers] = useRecoilState(layersAtom);
   const layersString = JSON.stringify(layers);
 
   applyLayers(avatar, layers);
@@ -127,7 +126,7 @@ function App({ setURL }) {
           <VStack spacing={4} align="stretch">
             {/* Layer Stack */}
             <ReactSortable
-              list={layers}
+              list={layers.map((x) => ({ ...x, chosen: true }))}
               setList={setLayers}
               animation={200}
               // delay={100}

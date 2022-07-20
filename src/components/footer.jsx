@@ -9,8 +9,11 @@ import {
 } from "@chakra-ui/react";
 import APIurl from "./apiUrl";
 import boxOptions from "../utils/boxOptions";
+import { urlAtom } from "../utils/store";
+import { useRecoilState } from "recoil";
 
-const Footer = ({ url }) => {
+const Footer = () => {
+	const [url, _] = useRecoilState(urlAtom);
 	return (
 		<Box>
 			<Box {...boxOptions} m="1rem">
