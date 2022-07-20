@@ -23,7 +23,11 @@ function CardHeader({
   ...props
 }) {
   function colorName(color, pick = "basic") {
-    return capitalize(namer(color, { pick: [pick] })[pick][0].name);
+    try {
+      return capitalize(namer(color, { pick: [pick] })[pick][0].name);
+    } catch {
+      return "";
+    }
   }
 
   function layerName(color, shape) {
