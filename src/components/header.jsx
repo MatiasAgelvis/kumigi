@@ -1,7 +1,12 @@
-import { Flex, Box, Heading, Text, Link, HStack } from "@chakra-ui/react";
+import { Flex, Box, Heading, HStack, Button } from "@chakra-ui/react";
+import { useRecoilState } from "recoil";
 import boxOptions from "../utils/boxOptions";
 import ColorToggle from "./colorToggle";
+import { layersAtom } from "../utils/store";
+import { layers__Default } from "../utils/createCard";
+
 const Header = () => {
+	const [layers, setLayers] = useRecoilState(layersAtom);
 	return (
 		<Box {...boxOptions} m="1rem">
 			<Flex
@@ -14,6 +19,12 @@ const Header = () => {
 					Avatara
 				</Heading>
 				<HStack spacing={4}>
+					<Button
+						colorScheme="red"
+						onClick={() => setLayers(layers__Default)}
+					>
+						Reset
+					</Button>
 					<ColorToggle />
 				</HStack>
 			</Flex>
