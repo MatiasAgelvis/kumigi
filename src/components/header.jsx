@@ -19,10 +19,7 @@ const Header = () => {
 					Avatara
 				</Heading>
 				<HStack spacing={4}>
-					<Button
-						colorScheme="red"
-						onClick={() => setLayers(layers__Default)}
-					>
+					<Button colorScheme="red" onClick={() => setLayers([])}>
 						Reset
 					</Button>
 					<ColorToggle />
