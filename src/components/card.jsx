@@ -27,7 +27,7 @@ function Card({
   dragTarget,
   ...props
 }) {
-  const [shape, setShape] = useState("");
+  const [shape, setShape] = useState(null);
   const [color, setColor] = useState("rgba(0,0,0,1)");
   const [text, setText] = useState("");
   const [font, setFont] = useState("");
