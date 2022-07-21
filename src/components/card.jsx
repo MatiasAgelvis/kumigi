@@ -19,6 +19,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 function Card({
   index,
+  layer,
   updateLayer,
   options,
   fonts,
@@ -27,10 +28,10 @@ function Card({
   dragTarget,
   ...props
 }) {
-  const [shape, setShape] = useState(null);
-  const [color, setColor] = useState("rgba(0,0,0,1)");
-  const [text, setText] = useState("");
-  const [font, setFont] = useState("");
+  const [shape, setShape] = useState(layer.shape);
+  const [color, setColor] = useState(layer.color);
+  const [text, setText] = useState(layer.text ? layer.text : "");
+  const [font, setFont] = useState(layer.font ? layer.font : "");
   const [displayLayer, setdisplayLayer] = useState(true);
   const { isOpen: isEditorOpen, onToggle: onEditorToggle } = useDisclosure({
     defaultIsOpen: true,
