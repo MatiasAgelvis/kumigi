@@ -29,6 +29,7 @@ specifiers:
   react: ^18.1.0
   react-colorful: ^5.5.1
   react-dom: ^18.1.0
+  react-icons: ^4.4.0
   react-select: ^5.3.1
   react-sortablejs: ^6.1.1
   recoil: ^0.7.2
@@ -64,6 +65,7 @@ dependencies:
   react: 18.1.0
   react-colorful: 5.5.1_ef5jwxihqo6n7gxfmzogljlgcm
   react-dom: 18.1.0_react@18.1.0
+  react-icons: 4.4.0_react@18.1.0
   react-select: 5.3.2_xo6immqsjyo4gikaj7lupjgtgy
   react-sortablejs: 6.1.1_kjz72dk5lh6hp4ogspefhm7r2u
   recoil: 0.7.2_ef5jwxihqo6n7gxfmzogljlgcm
@@ -3328,6 +3330,14 @@ packages:
       use-sidecar: 1.1.2_react@18.1.0
     transitivePeerDependencies:
       - '@types/react'
+    dev: false
+
+  /react-icons/4.4.0_react@18.1.0:
+    resolution: {integrity: sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.1.0
     dev: false
 
   /react-is/16.13.1:
