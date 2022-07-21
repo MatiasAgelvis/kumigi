@@ -64,8 +64,8 @@ function App() {
     setLayers(layersUpdate);
   };
 
-  const addLayer = () => {
-    setLayers([...layers, createCard()]);
+  const addLayer = (layer) => {
+    setLayers([...layers, layer]);
   };
 
   const deleteLayer = (index) => () => {
@@ -98,16 +98,16 @@ function App() {
 
   return (
     <SimpleGrid
-      columns={[1, 1, 2]}
+      columns={[1, null, 2]}
       m="1rem"
-      gap="4"
-      templateAreas={["'image' 'editor'", "'image' 'editor'", "'editor image'"]}
+      gap={4}
+      templateAreas={["'image' 'editor'", null, "'editor image'"]}
     >
       {/*    Editor    */}
       <Flex justify={["center", "center", "right"]} gridArea="editor">
         <Box
           {...boxOptions}
-          mx={["auto", "auto", "auto", "4"]}
+          mx={["auto", "auto", "auto", 4]}
           w="clamp(200px,100%,700px)"
           height="fit-content"
           p={["0.5rem", 5]}
@@ -138,6 +138,7 @@ function App() {
                   >
                     <Card
                       index={i}
+                      layer={layer}
                       updateLayer={updateLayer(i)}
                       options={ShapeOptions}
                       fonts={fonts}
@@ -153,9 +154,14 @@ function App() {
             {/* New Layer Button */}
             <IconButton
               {...buttonOptions}
-              onClick={() => addLayer()}
+              onClick={() => addLayer(createCard())}
               icon={<AddIcon />}
             />
+            {/*<IconButton
+                {...buttonOptions}
+                onClick={() => addLayer(avatar.randomLayers()[0])}
+                icon={<AddIcon />}
+              />*/}
 
             <AccordionMenu name="Size" options={sizeOptions} />
           </VStack>
