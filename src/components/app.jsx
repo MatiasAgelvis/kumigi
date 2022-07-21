@@ -26,18 +26,7 @@ function App() {
   const [_, setURL] = useRecoilState(urlAtom);
   let avatar = new Avatara(width, height);
 
-  const ShapeOptions = [
-    "background",
-    "square",
-    "circle",
-    "rectangle",
-    "triangle",
-    "diamond",
-    "squircle",
-    "linear",
-    "radial",
-    "text",
-  ];
+  const ShapeOptions = avatar.shapes();
 
   const sizeOptions = [
     {
