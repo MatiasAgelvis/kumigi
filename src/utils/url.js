@@ -12,10 +12,11 @@ function urlParam(name, value) {
 		: "";
 }
 
-export default function URLfromLayers(layers, parameters=[]) {
+export default function URLfromLayers(layers, parameters = []) {
 	const shapes = extractProps(layers, "shape").filter((x) => x);
 	const colors = extractProps(layers, "color")
 		.filter((x) => x)
+		.map((color) => color.replace("#", ""))
 		.toString();
 	const texts = extractProps(layers, "text")
 		.filter((x) => x)
@@ -28,7 +29,7 @@ export default function URLfromLayers(layers, parameters=[]) {
 		urlParam("colors", colors) +
 		urlParam("texts", texts) +
 		urlParam("fonts", fonts) +
-		parameters.map((x) => urlParam(x.name, x.value)).join('');
+		parameters.map((x) => urlParam(x.name, x.value)).join("");
 
 	const URL = (
 		urlJoin(BASE, ...shapes) + (shapes.length > 0 ? "?" + params : "")
