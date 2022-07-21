@@ -3,7 +3,14 @@ import { useState, useEffect } from "react";
 import { ReactSortable } from "react-sortablejs";
 import Card from "./card";
 import URLfromLayers from "../utils/url";
-import { Box, Flex, IconButton, VStack, SimpleGrid } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  IconButton,
+  VStack,
+  SimpleGrid,
+  Grid,
+} from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import boxOptions from "../utils/boxOptions";
 import buttonOptions from "../utils/buttonOptions";
@@ -15,8 +22,9 @@ import applyLayers from "../utils/applyLayers";
 import { motion, AnimatePresence } from "framer-motion";
 import FontFaceObserver from "fontfaceobserver";
 import { useRecoilState } from "recoil";
-import { createCard } from "../utils/createCard";
+import { createCard, idCard } from "../utils/createCard";
 import { layersAtom, urlAtom } from "../utils/store";
+import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
 
 function App() {
   const [height, setHeight] = useState(200);
@@ -28,7 +36,20 @@ function App() {
 
   const ShapeOptions = avatar.shapes();
 
-  const sizeOptions = [
+  const advancedOptions = [
+    {
+      name: "Random Layer",
+      input: (
+        <IconButton
+          {...buttonOptions}
+          colorScheme="blue"
+          w={["100%", "60%", "40%"]}
+          onClick={() => addLayer(idCard(avatar.randomLayers()[0]))}
+          fontSize={"2rem"}
+          icon={<GiPerspectiveDiceSixFacesRandom />}
+        />
+      ),
+    },
     {
       name: "Height",
       input: <NumberInput value={height} setValue={setHeight} max={2000} />,
@@ -152,18 +173,15 @@ function App() {
             </ReactSortable>
 
             {/* New Layer Button */}
+
             <IconButton
               {...buttonOptions}
+              fontSize={"1.4rem"}
               onClick={() => addLayer(createCard())}
               icon={<AddIcon />}
             />
-            {/*<IconButton
-                {...buttonOptions}
-                onClick={() => addLayer(avatar.randomLayers()[0])}
-                icon={<AddIcon />}
-              />*/}
 
-            <AccordionMenu name="Size" options={sizeOptions} />
+            <AccordionMenu name="Advanced" options={advancedOptions} />
           </VStack>
         </Box>
       </Flex>
