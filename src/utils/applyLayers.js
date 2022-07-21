@@ -4,7 +4,7 @@ export default function applyLayers(avatar, layers) {
       if (layer.shape != "text") {
         avatar[layer.shape](layer.color);
       } else {
-        avatar[layer.shape](layer.text, layer.color, layer.font);
+        avatar[layer.shape](layer.color, layer.text, layer.font);
       }
     }
   }
