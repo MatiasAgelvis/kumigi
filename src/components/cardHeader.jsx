@@ -1,6 +1,13 @@
 // import Select from "react-select";
 import { DragHandleIcon } from "@chakra-ui/icons";
-import { Box, Center, IconButton, Heading, HStack } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  IconButton,
+  Heading,
+  HStack,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import {
   EditIcon,
   LockIcon,
@@ -52,14 +59,20 @@ function CardHeader({
         {displayButtons && (
           <HStack float="right" mb="0.7rem" ml="5px">
             <IconButton
+              size={useBreakpointValue({ base: "sm", md: "md" })}
               onClick={() => setdisplayLayer(!displayLayer)}
               icon={displayLayer ? <ViewIcon /> : <ViewOffIcon />}
             />
             <IconButton
+              size={useBreakpointValue({ base: "sm", md: "md" })}
               onClick={onEditorToggle}
               icon={isEditorOpen ? <LockIcon /> : <EditIcon />}
             />
-            <IconButton onClick={() => closeButton()} icon={<CloseIcon />} />
+            <IconButton
+              size={useBreakpointValue({ base: "sm", md: "md" })}
+              onClick={() => closeButton()}
+              icon={<CloseIcon />}
+            />
           </HStack>
         )}
 
