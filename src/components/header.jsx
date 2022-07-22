@@ -19,7 +19,7 @@ const Header = () => {
 	const [layers, setLayers] = useRecoilState(layersAtom);
 	return (
 		<SimpleGrid columns={[1, 2]} {...boxOptions} m="1rem">
-			<Heading as="h1" mr={4} mb={4}>
+			<Heading as="h1" mr={4} mb={[4, 0]}>
 				Avatara
 			</Heading>
 			<Wrap spacing={4} justify="end">
