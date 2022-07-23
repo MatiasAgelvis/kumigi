@@ -166,14 +166,17 @@ Avatara.prototype.diamond = function (color = "#000") {
 };
 
 Avatara.prototype.circle = function (color = "#777") {
-  this.ctx.arc(
+  this.ctx.beginPath();
+  this.ctx.ellipse(
     this.canvas.width / 2,
     this.canvas.height / 2,
-    Math.min(this.canvas.width, this.canvas.height) * 0.45,
+    this.canvas.width * 0.45,
+    this.canvas.height * 0.45,
+    0,
     0,
     2 * Math.PI
   );
-
+  this.ctx.closePath();
   this.ctx.fillStyle = Color(color).rgb().string();
   this.ctx.fill();
   return this;
