@@ -23,7 +23,7 @@ Create simple avatars with text from a simple and composable API.
 		<img src="images/background.square%3Fcolors%3Dblack%2Cgrey.png">
 	</p>
 <dt>circle</dt>
-	<dd>Circle with radius smaller than the smallest dimension.</dd>
+	<dd>Ellipse with each radii equal to the 45% its dimension.</dd>
 	<p align="right">
 		<img src="images/background.circle%3Fcolors%3Dblack%2Cgrey.png">
 	</p>
@@ -63,11 +63,11 @@ Create simple avatars with text from a simple and composable API.
 
 The following parameters can be passed to all queries.
 
--   `width` : Number, sets the width of the resulting image (ex. `width=300`)
--   `height` : Number, sets the height of the resulting image (ex. `height=140`)
--   `colors` : String of comma separated CSS parsable colors (ex. `colors=rgb(100,0,200),dodgerblue`), colors in HEX should not be prepended with a #.
--   `texts` : String of comma separated strings (ex. `texts=abc,123,xyz`)
--   `fonts` : String of comma separated strings of [ plex, courier, cousine, pt, roboto ] (ex. font=[pt,cousine])
+- `width` : Number, sets the width of the resulting image (ex. `width=300`)
+- `height` : Number, sets the height of the resulting image (ex. `height=140`)
+- `colors` : String of comma separated CSS parsable colors (ex. `colors=rgb(100,0,200),dodgerblue`), colors in HEX should not be prepended with a #.
+- `texts` : String of comma separated strings (ex. `texts=abc,123,xyz`)
+- `fonts` : String of comma separated strings of [ plex, courier, cousine, pt, roboto ] (ex. font=[pt,cousine])
 
 ## Example
 
