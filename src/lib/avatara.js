@@ -3,6 +3,7 @@ import Color from "color";
 import {
   isNode, //isBrowser, isWebWorker, isJsDom, isDeno,
 } from "browser-or-node";
+import GraphemeSplitter from "grapheme-splitter";
 
 const { createCanvas, registerFont } = Canvas;
 
@@ -223,6 +224,7 @@ Avatara.prototype.radial = function (color = "#00f") {
 };
 
 Avatara.prototype.text = function (color = "#fff", text = "", font = "plex") {
+  const splitter = new GraphemeSplitter();
   let fontName = getKeyByValue(Fonts, font.toLowerCase());
   let fontFactor = fontFactos[Fonts[fontName]] * this.canvas.width;
 
@@ -231,7 +233,7 @@ Avatara.prototype.text = function (color = "#fff", text = "", font = "plex") {
   this.ctx.textAlign = "center";
   this.ctx.textBaseline = "middle";
   this.ctx.fillText(
-    text.slice(0, 3),
+    splitter.splitGraphemes(text).slice(0, 3).join(""),
     this.canvas.width / 2,
     this.canvas.height / 2
   );

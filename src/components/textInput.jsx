@@ -1,7 +1,9 @@
 // import Select from "react-select";
 import { Input, InputGroup, InputRightAddon, Code } from "@chakra-ui/react";
+import GraphemeSplitter from "grapheme-splitter";
 
 function TextInput({ text, setText, maxLength = 3 }) {
+  const splitter = new GraphemeSplitter();
   return (
     <InputGroup>
       <Input
@@ -13,7 +15,7 @@ function TextInput({ text, setText, maxLength = 3 }) {
       <InputRightAddon
         children={
           <Code>
-            {text.length}/{maxLength}
+            {splitter.splitGraphemes(text).length}/{maxLength}
           </Code>
         }
       />
