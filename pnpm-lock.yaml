@@ -22,6 +22,7 @@ specifiers:
   fontfaceobserver: ^2.3.0
   framer-motion: ^6
   get-port: ^6.1.2
+  grapheme-splitter: ^1.0.4
   helmet: ^5.0.2
   hex-color-regex: ^1.1.0
   next: ^12.1.6
@@ -59,6 +60,7 @@ dependencies:
   fontfaceobserver: 2.3.0
   framer-motion: 6.3.3_ef5jwxihqo6n7gxfmzogljlgcm
   get-port: 6.1.2
+  grapheme-splitter: 1.0.4
   helmet: 5.1.0
   hex-color-regex: 1.1.0
   next: 12.1.6_xo6immqsjyo4gikaj7lupjgtgy
@@ -2493,6 +2495,10 @@ packages:
 
   /graceful-fs/4.2.10:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
+
+  /grapheme-splitter/1.0.4:
+    resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
+    dev: false
 
   /hamt_plus/1.0.2:
     resolution: {integrity: sha1-4hwlKWjH4zsg9qGwlM2FeHomVgE=}
