@@ -1,5 +1,5 @@
 export default function applyLayers(avatar, layers) {
-  for (let [key, layer] of Object.entries(layers)) {
+  layers.forEach((layer) => {
     if (layer.shape) {
       if (layer.shape != "text") {
         avatar[layer.shape](layer.color);
@@ -7,5 +7,5 @@ export default function applyLayers(avatar, layers) {
         avatar[layer.shape](layer.color, layer.text, layer.font);
       }
     }
-  }
+  }) 
 }
