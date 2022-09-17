@@ -1,5 +1,5 @@
 import urlJoin from "url-join";
-export const BASE = "https://avatara.herokuapp.com/v2";
+export const BASE = "https://avatara.vercel.app/api";
 
 function extractProps(array, prop) {
 	return array.map((x) => x[prop]);
