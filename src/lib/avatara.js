@@ -248,6 +248,10 @@ Avatara.prototype.toDataURL = function () {
   return this.canvas.toDataURL();
 };
 
+Avatara.prototype.toBuffer = function () {
+  return this.canvas.toBuffer();
+};
+
 function choose(choices) {
   const index = Math.floor(Math.random() * choices.length);
   return choices[index];
