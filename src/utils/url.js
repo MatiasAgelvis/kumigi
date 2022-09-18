@@ -1,5 +1,4 @@
 import urlJoin from "url-join";
-export const BASE = "https://avatara.vercel.app/api";
 
 function extractProps(array, prop) {
 	return array.map((x) => x[prop]);
@@ -12,7 +11,7 @@ function urlParam(name, value) {
 		: "";
 }
 
-export default function URLfromLayers(layers, parameters = []) {
+export default function URLfromLayers(BASE, layers, parameters = []) {
 	const shapes = extractProps(layers, "shape").filter((x) => x);
 	const colors = extractProps(layers, "color")
 		.filter((x) => x)

@@ -32,6 +32,7 @@ function App() {
   const [dragTarget, setDragTarget] = useState(-1);
   const [dragEvent, setDragEvent] = useState(false);
   const [_, setURL] = useRecoilState(urlAtom);
+  const [BASE, setBASE] = useState('')
   let avatar = new Avatara(width, height);
 
   const ShapeOptions = avatar.shapes();
@@ -68,6 +69,10 @@ function App() {
       (font) => font.load()
       // .then(function () {console.log("My Family has loaded");})
     );
+
+    if (typeof window !== 'undefined') {
+      setBASE(window.location.origin + '/api')
+    }
   }, []);
 
   const [image, setImage] = useState(avatar.toDataURL());
@@ -96,15 +101,13 @@ function App() {
   function mainUpdate() {
     applyLayers(avatar, layers);
     setImage(avatar.toDataURL());
-    setURL(
-      URLfromLayers(layers, [
-        {
-          name: "height",
-          value: height,
-        },
-        { name: "width", value: width },
-      ])
-    );
+    setURL(URLfromLayers(BASE, layers, [
+      {
+        name: "height",
+        value: height,
+      },
+      { name: "width", value: width },
+    ]));
   }
 
   useEffect(() => {

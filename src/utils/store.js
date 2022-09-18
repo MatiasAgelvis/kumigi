@@ -1,6 +1,5 @@
 import { atom } from "recoil";
 import { layers__Default } from "./createCard";
-import { BASE } from "./url";
 
 export const layersAtom = atom({
   key: "layersState",
@@ -9,5 +8,5 @@ export const layersAtom = atom({
 
 export const urlAtom = atom({
   key: "urlState",
-  default: BASE,
+  default: '',
 });
