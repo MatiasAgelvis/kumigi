@@ -1,11 +1,9 @@
-import Canvas from "canvas";
+import { createCanvas, registerFont } from "canvas";
 import Color from "color";
 import {
   isNode, //isBrowser, isWebWorker, isJsDom, isDeno,
 } from "browser-or-node";
 import GraphemeSplitter from "grapheme-splitter";
-
-const { createCanvas, registerFont } = Canvas;
 
 const Fonts = Object.freeze({
   PLEX: "plex",
