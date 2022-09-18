@@ -8,7 +8,8 @@
     "dev": "next dev",
     "build": "next build",
     "export": "next export",
-    "back": "nodemon src/back/server.js"
+    "back": "nodemon src/back/server.js",
+    "vercel-build": "yum install libuuid-devel libmount-devel && cp /lib64/{libuuid,libmount,libblkid}.so.1 node_modules/canvas/build/Release/ && next build"
   },
   "keywords": [
     "avatar"
@@ -18,29 +19,28 @@
   "license": "ISC",
   "dependencies": {
     "@chakra-ui/icons": "^2.0.0",
-    "@chakra-ui/react": "^1.8.8",
+    "@chakra-ui/react": "^2.3.2",
+    "@chakra-ui/styled-system": ">=2.0.0",
     "@chakra-ui/system": "^2.0.2",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@types/sortablejs": "1",
     "browser-or-node": "^2.0.0",
-    "bulma": "^0.9.3",
     "canvas": "^2.9.1",
     "color": "^4.2.3",
     "color-namer": "^1.4.0",
     "color-string": "^1.9.1",
-    "compression": "^1.7.4",
+    "compression": "latest",
     "dotenv": "^16.0.1",
-    "express": "^4.17.3",
     "file-saver": "^2.0.5",
     "find-port-sync": "^1.1.1",
     "fontfaceobserver": "^2.3.0",
     "framer-motion": "^6",
     "get-port": "^6.1.2",
     "grapheme-splitter": "^1.0.4",
-    "helmet": "^5.0.2",
+    "helmet": "latest",
     "hex-color-regex": "^1.1.0",
-    "next": "^12.1.6",
+    "next": "^12.3.0",
     "react": "^18.1.0",
     "react-colorful": "^5.5.1",
     "react-dom": "^18.1.0",
@@ -54,7 +54,6 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.10",
     "nodemon": "^2.0.15"
   }
 }
