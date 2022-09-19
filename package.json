@@ -7,9 +7,7 @@
     "start": "next start",
     "dev": "next dev",
     "build": "next build",
-    "export": "next export",
-    "back": "nodemon src/back/server.js",
-    "vercel-build": "yum install libuuid-devel libmount-devel && cp /lib64/{libuuid,libmount,libblkid}.so.1 node_modules/canvas/build/Release/ && next build"
+    "export": "next export"
   },
   "keywords": [
     "avatar"
@@ -18,32 +16,29 @@
   "author": "Matias Agelvis",
   "license": "ISC",
   "dependencies": {
-    "@chakra-ui/icons": "^2.0.0",
-    "@chakra-ui/react": "^2.3.2",
-    "@chakra-ui/styled-system": ">=2.0.0",
-    "@chakra-ui/system": "^2.0.2",
+    "@chakra-ui/icons": "^2",
+    "@chakra-ui/react": "^2",
+    "@chakra-ui/styled-system": "^2",
+    "@chakra-ui/system": "^2",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@types/sortablejs": "1",
     "browser-or-node": "^2.0.0",
-    "canvas": "^2.9.1",
+    "canvas": "^2.10.1",
     "color": "^4.2.3",
     "color-namer": "^1.4.0",
     "color-string": "^1.9.1",
-    "compression": "latest",
     "dotenv": "^16.0.1",
     "file-saver": "^2.0.5",
     "find-port-sync": "^1.1.1",
     "fontfaceobserver": "^2.3.0",
     "framer-motion": "^6",
-    "get-port": "^6.1.2",
     "grapheme-splitter": "^1.0.4",
-    "helmet": "latest",
     "hex-color-regex": "^1.1.0",
     "next": "^12.3.0",
-    "react": "^18.1.0",
+    "react": "^18.2.0",
     "react-colorful": "^5.5.1",
-    "react-dom": "^18.1.0",
+    "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
     "react-select": "^5.3.1",
     "react-sortablejs": "^6.1.1",
@@ -54,6 +49,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@babel/core": ">=7.0.0 <8.0.0",
     "nodemon": "^2.0.15"
   }
 }
