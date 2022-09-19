@@ -1,4 +1,4 @@
-import { parseArrayString, testHexColor } from '../back/common'
+import { parseArrayString, testHexColor } from '../utils/common'
 import { makeLayers } from './makeLayers';
 
 export function parseAvataraQuery(query, shapes) {

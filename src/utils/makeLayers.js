@@ -1,4 +1,4 @@
-import { circular } from "../back/common";
+import { circular } from "../utils/common";
 
 export function makeLayers(shapes, colors, texts, fonts) {
 	return shapes.map((shape, i) => {
