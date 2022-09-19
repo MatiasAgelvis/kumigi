@@ -71,19 +71,19 @@ The following parameters can be passed to all queries.
 
 ## Example
 
-`https://avatara-dev.onrender.com/api/circle/text?colors=234567,white&texts=MAD&fonts=courier`
+`https://avatara.onrender.com/api/circle/text?colors=234567,white&texts=MAD&fonts=courier`
 
 <p align="center">
 <img src="images/example.png">
 </p>
 
-`https://avatara-dev.onrender.com/api/background/linear/circle/square/rectangle/linear?colors=black,grey,blue,yellow,red,green`
+`https://avatara.onrender.com/api/background/linear/circle/square/rectangle/linear?colors=black,grey,blue,yellow,red,green`
 
 <p align="center">
 <img src="images/background.gradient.circle.square.rectangle.gradient%3Fcolors=black%2Cgrey%2Cblue%2Cyellow%2Cred%2Cgreen.png">
 </p>
 
-`https://avatara-dev.onrender.com/api/background/circle/square/rectangle/linear/text?colors=crimson,tan,mediumblue,green,teal,gold&texts=[777]`
+`https://avatara.onrender.com/api/background/circle/square/rectangle/linear/text?colors=crimson,tan,mediumblue,green,teal,gold&texts=[777]`
 
 <p align="center">
 <img src="images/background.circle.square.rectangle.gradient%3Fcolors%3Dcrimson%2Ctan%2Cmediumblue%2Cgreen%2Cteal%26text%3D777%26textColor%3Dgold.png">
