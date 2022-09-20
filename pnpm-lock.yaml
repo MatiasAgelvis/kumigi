@@ -23,6 +23,7 @@ specifiers:
   hex-color-regex: ^1.1.0
   next: ^12.3.0
   nodemon: ^2.0.15
+  prettier: ^2.7.1
   react: ^18.2.0
   react-colorful: ^5.5.1
   react-dom: ^18.2.0
@@ -71,6 +72,7 @@ dependencies:
 devDependencies:
   '@babel/core': 7.19.1
   nodemon: 2.0.20
+  prettier: 2.7.1
 
 packages:
 
@@ -2776,6 +2778,12 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
     dev: false
+
+  /prettier/2.7.1:
+    resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
 
   /prop-types/15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
