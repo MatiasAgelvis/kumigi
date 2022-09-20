@@ -27,18 +27,17 @@ const Shapes = Object.freeze([
 ]);
 
 if (isNode) {
-  import('canvas')
-    .then(({ registerFont }) => {
-      registerFont("./public/fonts/IBMPlexMono-Bold.ttf", { family: Fonts.PLEX });
-      registerFont("./public/fonts/CourierPrime-Bold.ttf", {
-        family: Fonts.COURIER,
-      });
-      registerFont("./public/fonts/Cousine-Bold.ttf", { family: Fonts.COUSINE });
-      registerFont("./public/fonts/PTMono-Regular.ttf", { family: Fonts.PT });
-      registerFont("./public/fonts/RobotoMono-Bold.ttf", {
-        family: Fonts.ROBOTO,
-      });
+  import("canvas").then(({ registerFont }) => {
+    registerFont("./public/fonts/IBMPlexMono-Bold.ttf", { family: Fonts.PLEX });
+    registerFont("./public/fonts/CourierPrime-Bold.ttf", {
+      family: Fonts.COURIER,
     });
+    registerFont("./public/fonts/Cousine-Bold.ttf", { family: Fonts.COUSINE });
+    registerFont("./public/fonts/PTMono-Regular.ttf", { family: Fonts.PT });
+    registerFont("./public/fonts/RobotoMono-Bold.ttf", {
+      family: Fonts.ROBOTO,
+    });
+  });
 }
 
 const fontFactos = {};
@@ -278,12 +277,13 @@ function randomText() {
   return text;
 }
 
-function randomLayer() {
+export function randomLayer() {
   const shape = choose(Shapes);
-  const base = { shape: shape, color: randomColor() };
-  return shape == "text"
-    ? { ...base, text: randomText(), font: choose(Fonts) }
-    : base;
+  return {
+    shape: shape,
+    color: randomColor(),
+    ...(shape == "text" && { text: randomText(), font: choose(Fonts) }),
+  };
 }
 
 Avatara.prototype.randomLayers = function () {
