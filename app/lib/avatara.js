@@ -4,6 +4,7 @@ import {
   isNode, //isBrowser, isWebWorker, isJsDom, isDeno,
 } from "browser-or-node";
 import GraphemeSplitter from "grapheme-splitter";
+import emoji from "node-emoji";
 
 export const Fonts = Object.freeze({
   PLEX: "plex",
@@ -242,7 +243,11 @@ Avatara.prototype.text = function (color = "#fff", text = "", font = "plex") {
   this.ctx.textAlign = "center";
   this.ctx.textBaseline = "middle";
   this.ctx.fillText(
-    splitter.splitGraphemes(text).slice(0, 3).join(""),
+    splitter
+      .splitGraphemes(emoji.emojify(text))
+      .slice(0, 3)
+      .join("")
+      .normalize(),
     this.canvas.width / 2,
     this.canvas.height / 2
   );
