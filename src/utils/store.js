@@ -8,5 +8,5 @@ export const layersAtom = atom({
 
 export const urlAtom = atom({
   key: "urlState",
-  default: '',
+  default: "",
 });

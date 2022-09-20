@@ -7,5 +7,5 @@ export default function applyLayers(avatar, layers) {
         avatar[layer.shape](layer.color, layer.text, layer.font);
       }
     }
-  }) 
+  });
 }

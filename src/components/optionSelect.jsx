@@ -6,7 +6,7 @@ function OptionSelect({ options, state, setState, placeholder }) {
   return (
     <Select
       placeholder={placeholder}
-      value={state || ''}
+      value={state || ""}
       onChange={(e) => setState(event.target.value)}
     >
       {options.map((op) => (
