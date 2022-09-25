@@ -8,8 +8,8 @@ import {
   Center,
 } from "@chakra-ui/react";
 import APIurl from "./apiUrl";
-import boxOptions from "../utils/boxOptions";
-import { urlAtom } from "../utils/store";
+import boxOptions from "../../utils/boxOptions";
+import { urlAtom } from "../../utils/store";
 import { useRecoilState } from "recoil";
 
 const Footer = () => {

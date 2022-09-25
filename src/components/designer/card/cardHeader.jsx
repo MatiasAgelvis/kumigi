@@ -16,7 +16,7 @@ import {
   CloseIcon,
 } from "@chakra-ui/icons";
 import namer from "color-namer";
-import capitalize from "../utils/capitalize";
+import capitalize from "../../../utils/capitalize";
 
 function CardHeader({
   shape,

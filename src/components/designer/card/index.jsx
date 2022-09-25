@@ -1,21 +1,12 @@
 // import Select from "react-select";
-import {
-  Box,
-  Center,
-  Divider,
-  SimpleGrid,
-  useDisclosure,
-  Collapse,
-  Button,
-} from "@chakra-ui/react";
+import { Box, SimpleGrid, useDisclosure, Collapse } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { dragged } from "sortablejs";
-import ColorPicker from "../components/colorPicker";
-import OptionSelect from "../components/optionSelect";
-import TextInput from "../components/textInput";
-import boxOptions from "../utils/boxOptions";
+import ColorPicker from "./colorPicker";
+import OptionSelect from "./optionSelect";
+import TextInput from "./textInput";
+import boxOptions from "../../../utils/boxOptions";
 import CardHeader from "./cardHeader";
-import { motion, AnimatePresence } from "framer-motion";
+import { useColorModeValue } from "@chakra-ui/react";
 
 function Card({
   index,
@@ -36,6 +27,7 @@ function Card({
   const { isOpen: isEditorOpen, onToggle: onEditorToggle } = useDisclosure({
     defaultIsOpen: true,
   });
+  const backgroundColor = useColorModeValue("teal.50", "teal.900");
 
   useEffect(() => {
     updateLayer({
@@ -47,7 +39,13 @@ function Card({
   }, [shape, color, text, font, displayLayer]);
 
   return (
-    <Box {...boxOptions} my={3} {...props} p={["0.7rem", 5]}>
+    <Box
+      {...boxOptions}
+      {...(dragTarget && { background: backgroundColor })}
+      my={3}
+      p={["0.7rem", 5]}
+      {...props}
+    >
       <CardHeader
         shape={shape}
         color={color}

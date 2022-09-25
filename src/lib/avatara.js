@@ -5,7 +5,7 @@ import {
 } from "browser-or-node";
 import GraphemeSplitter from "grapheme-splitter";
 
-const Fonts = Object.freeze({
+export const Fonts = Object.freeze({
   PLEX: "plex",
   COURIER: "courier",
   COUSINE: "cousine",
@@ -13,7 +13,7 @@ const Fonts = Object.freeze({
   ROBOTO: "roboto",
 });
 
-const Shapes = Object.freeze([
+export const Shapes = Object.freeze([
   "background",
   "square",
   "circle",
@@ -286,13 +286,13 @@ export function randomLayer() {
   };
 }
 
-Avatara.prototype.randomLayers = function () {
-  let numLayers = Math.ceil(Math.random() * 5) + 1;
+export function randomLayers(min = 1, max = 5) {
+  let numLayers = Math.ceil(Math.random() * max) + min;
   return Array.from(Array(numLayers)).map((_) => randomLayer());
-};
+}
 
 Avatara.prototype.randomAvatar = function () {
-  let layers = this.randomLayers();
+  let layers = randomLayers();
   layers.forEach((layer) => {
     if (layer.shape != "text") {
       this[layer.shape](layer.color);

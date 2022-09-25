@@ -1,19 +1,16 @@
 import {
-  Flex,
-  Box,
-  Heading,
-  HStack,
   Button,
+  Heading,
+  SimpleGrid,
   useBreakpointValue,
   Wrap,
-  SimpleGrid,
 } from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
-import boxOptions from "../utils/boxOptions";
+import { randomLayers } from "../../lib/avatara";
+import boxOptions from "../../utils/boxOptions";
+import { createCard, idCard } from "../../utils/createCard";
+import { layersAtom } from "../../utils/store";
 import ColorToggle from "./colorToggle";
-import { layersAtom } from "../utils/store";
-import Avatara from "../lib/avatara";
-import { idCard } from "../utils/createCard";
 
 const Header = () => {
   const [layers, setLayers] = useRecoilState(layersAtom);
@@ -27,9 +24,7 @@ const Header = () => {
           size={useBreakpointValue({ base: "sm", md: "md" })}
           colorScheme="blue"
           onClick={() =>
-            setLayers(
-              new Avatara().randomLayers().map((layer) => idCard(layer))
-            )
+            setLayers(randomLayers().map((layer) => idCard(layer)))
           }
         >
           Randomize
@@ -37,7 +32,13 @@ const Header = () => {
         <Button
           size={useBreakpointValue({ base: "sm", md: "md" })}
           colorScheme="red"
-          onClick={() => setLayers([])}
+          onClick={() => {
+            try {
+              setLayers([createCard()]);
+            } catch (e) {
+              console.log(e);
+            }
+          }}
         >
           Reset
         </Button>

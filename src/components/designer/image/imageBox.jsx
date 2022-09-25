@@ -1,5 +1,4 @@
 import { Image } from "@chakra-ui/react";
-import boxOptions from "../utils/boxOptions";
 
 function ImageBox({ image }) {
   return (

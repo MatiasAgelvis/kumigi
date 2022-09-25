@@ -10,3 +10,13 @@ export const urlAtom = atom({
   key: "urlState",
   default: "",
 });
+
+export const heightAtom = atom({
+  key: "heightState",
+  default: 200,
+});
+
+export const widthAtom = atom({
+  key: "widthState",
+  default: 200,
+});
