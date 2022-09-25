@@ -8,7 +8,7 @@ import { useRecoilState } from "recoil";
 import boxOptions from "../../../utils/boxOptions";
 import buttonOptions from "../../../utils/buttonOptions";
 import { randomLayer } from "../../../lib/avatara";
-import { createCard } from "../../../utils/createCard";
+import { createCard, idCard } from "../../../utils/createCard";
 import { heightAtom, widthAtom } from "../../../utils/store";
 import AccordionMenu from "../accordionMenu/accordionMenu";
 import Card from "../card";
