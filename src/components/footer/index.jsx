@@ -18,7 +18,7 @@ const Footer = () => {
     <Box>
       <Box {...boxOptions} m="1rem">
         <Flex w="100%" alignItems="center" justifyContent="space-between">
-          <Text wordBreak="break-all">
+          <Text wordBreak="break-all" style={{ "line-break": "anywhere" }}>
             <APIurl url={url} />
           </Text>
         </Flex>
