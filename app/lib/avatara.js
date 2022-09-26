@@ -11,6 +11,7 @@ export const Fonts = Object.freeze({
   COUSINE: "cousine",
   PT: "pt",
   ROBOTO: "roboto",
+  EMOJI: "emoji",
 });
 
 export const Shapes = Object.freeze([
@@ -28,14 +29,21 @@ export const Shapes = Object.freeze([
 
 if (isNode) {
   import("canvas").then(({ registerFont }) => {
-    registerFont("./public/fonts/IBMPlexMono-Bold.ttf", { family: Fonts.PLEX });
-    registerFont("./public/fonts/CourierPrime-Bold.ttf", {
+    registerFont("public/fonts/IBMPlexMono-Bold.ttf", {
+      family: Fonts.PLEX,
+    });
+    registerFont("public/fonts/CourierPrime-Bold.ttf", {
       family: Fonts.COURIER,
     });
-    registerFont("./public/fonts/Cousine-Bold.ttf", { family: Fonts.COUSINE });
-    registerFont("./public/fonts/PTMono-Regular.ttf", { family: Fonts.PT });
-    registerFont("./public/fonts/RobotoMono-Bold.ttf", {
+    registerFont("public/fonts/Cousine-Bold.ttf", {
+      family: Fonts.COUSINE,
+    });
+    registerFont("public/fonts/PTMono-Regular.ttf", { family: Fonts.PT });
+    registerFont("public/fonts/RobotoMono-Bold.ttf", {
       family: Fonts.ROBOTO,
+    });
+    registerFont("public/fonts/NotoEmoji-Bold.ttf", {
+      family: Fonts.EMOJI,
     });
   });
 }
@@ -46,6 +54,7 @@ fontFactos[Fonts.COURIER] = 0.36;
 fontFactos[Fonts.COUSINE] = 0.35;
 fontFactos[Fonts.PT] = 0.35;
 fontFactos[Fonts.ROBOTO] = 0.35;
+fontFactos[Fonts.EMOJI] = 0.35;
 
 function getKeyByValue(object, value) {
   return Object.keys(object).find((key) => object[key] === value);
@@ -229,7 +238,7 @@ Avatara.prototype.text = function (color = "#fff", text = "", font = "plex") {
   let fontFactor = fontFactos[Fonts[fontName]] * this.canvas.width;
 
   this.ctx.fillStyle = Color(color).rgb().string();
-  this.ctx.font = `bold ${fontFactor}px ${Fonts[fontName]}`;
+  this.ctx.font = `bold ${fontFactor}px ${Fonts[fontName]}, bold ${Fonts.EMOJI}`;
   this.ctx.textAlign = "center";
   this.ctx.textBaseline = "middle";
   this.ctx.fillText(
