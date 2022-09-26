@@ -7,6 +7,7 @@ import TextInput from "./textInput";
 import boxOptions from "../../../utils/boxOptions";
 import CardHeader from "./cardHeader";
 import { useColorModeValue } from "@chakra-ui/react";
+import emoji from "node-emoji";
 
 function Card({
   index,
@@ -33,7 +34,7 @@ function Card({
     updateLayer({
       shape: displayLayer ? shape : null,
       color: color,
-      text: text,
+      text: emoji.unemojify(text),
       font: font ? font : text && "pt",
     });
   }, [shape, color, text, font, displayLayer]);
