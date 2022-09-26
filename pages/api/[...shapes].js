@@ -1,6 +1,6 @@
-import Avatara from "../../lib/avatara";
-import applyLayers from "../../utils/applyLayers";
-import { parseAvataraQuery } from "../../utils/parseAvataraQuery";
+import Avatara from "../../app/lib/avatara";
+import { parseAvataraQuery } from "../../app/utils/parseAvataraQuery";
+import applyLayers from "../../app/utils/applyLayers";
 
 const avatar = (req, res) => {
   const [height, width, layers] = parseAvataraQuery(
@@ -19,11 +19,8 @@ const avatar = (req, res) => {
     "Content-Disposition",
     "attachment;filename=" + "avatara" + ".png"
   );
-  return res.send(avatar.toBuffer());
 
-  // return an html page just with the image
-  // res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  // return res.send(avatar.toHTML());
+  return res.send(avatar.toBuffer());
 };
 
 export default avatar;
