@@ -1,5 +1,9 @@
+// @ts-check
+const { withBlitz } = require("@blitzjs/next")
 
-const nextConfig = {
-}
+/**
+ * @type {import('@blitzjs/next').BlitzConfig}
+ **/
+const config = {}
 
-export default nextConfig
+module.exports = withBlitz(config)
