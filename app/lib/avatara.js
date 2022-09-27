@@ -233,24 +233,28 @@ Avatara.prototype.radial = function (color = "#00f") {
   return this;
 };
 
-Avatara.prototype.text = function (color = "#fff", text = "", font = "plex") {
+Avatara.prototype.text = async function (
+  color = "#fff",
+  text = "",
+  font = "plex"
+) {
   const splitter = new GraphemeSplitter();
   let fontName = getKeyByValue(Fonts, font.toLowerCase());
   let fontFactor = fontFactos[Fonts[fontName]] * this.canvas.width;
+  let str = splitter
+    .splitGraphemes(emoji.emojify(text))
+    .slice(0, 3)
+    .join("")
+    .normalize();
+  const updated = str;
+  console.log(updated);
 
   this.ctx.fillStyle = Color(color).rgb().string();
-  this.ctx.font = `bold ${fontFactor}px ${Fonts[fontName]}, bold ${Fonts.EMOJI}`;
+  this.ctx.font = `bold ${fontFactor}px ${Fonts[fontName]}, ${Fonts.EMOJI}`;
   this.ctx.textAlign = "center";
   this.ctx.textBaseline = "middle";
-  this.ctx.fillText(
-    splitter
-      .splitGraphemes(emoji.emojify(text))
-      .slice(0, 3)
-      .join("")
-      .normalize(),
-    this.canvas.width / 2,
-    this.canvas.height / 2
-  );
+  this.ctx.fillText(updated, this.canvas.width / 2, this.canvas.height / 2);
+
   return this;
 };
 
