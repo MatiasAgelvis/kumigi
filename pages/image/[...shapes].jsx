@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
+import Avatara from "../../app/lib/avatara";
+import { parseAvataraQuery } from "../../app/utils/parseAvataraQuery";
+import applyLayers from "../../app/utils/applyLayers";
 import { useEffect, useState } from "react";
-import Avatara from "../../lib/avatara";
-import applyLayers from "../../utils/applyLayers";
-import { parseAvataraQuery } from "../../utils/parseAvataraQuery";
 
 export default function Page() {
   const [html, setHtml] = useState({ __html: null });
