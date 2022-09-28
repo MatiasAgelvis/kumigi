@@ -1,5 +1,5 @@
 import { AddIcon } from "@chakra-ui/icons";
-import { Box, Flex, IconButton, VStack } from "@chakra-ui/react";
+import { Box, ButtonGroup, Flex, IconButton, VStack } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
@@ -15,25 +15,12 @@ import Card from "../card";
 import NumberInput from "./numberInput";
 
 function Editor({ layers, setLayers, avatar, shapes, fonts, ...props }) {
-  const [height, setHeight] = useRecoilState(heightAtom);
-  const [width, setWidth] = useRecoilState(widthAtom);
   const [dragTarget, setDragTarget] = useState(-1);
   const [dragEvent, setDragEvent] = useState(false);
+  const [height, setHeight] = useRecoilState(heightAtom);
+  const [width, setWidth] = useRecoilState(widthAtom);
 
   const advancedOptions = [
-    {
-      name: "Random Layer",
-      input: (
-        <IconButton
-          {...buttonOptions}
-          colorScheme="blue"
-          w={["100%", "60%", "40%"]}
-          onClick={() => addLayer(idCard(randomLayer()))}
-          fontSize={"2rem"}
-          icon={<GiPerspectiveDiceSixFacesRandom />}
-        />
-      ),
-    },
     {
       name: "Height",
       input: <NumberInput value={height} setValue={setHeight} max={2000} />,
@@ -111,15 +98,27 @@ function Editor({ layers, setLayers, avatar, shapes, fonts, ...props }) {
           </ReactSortable>
 
           {/* New Layer Button */}
-
-          <IconButton
-            {...buttonOptions}
-            fontSize={"1.4rem"}
-            onClick={() => addLayer(createCard())}
-            icon={<AddIcon />}
+          <ButtonGroup isAttached>
+            <IconButton
+              {...buttonOptions}
+              fontSize={"1.4rem"}
+              onClick={() => addLayer(createCard())}
+              icon={<AddIcon />}
+            />
+            <IconButton
+              {...buttonOptions}
+              colorScheme="blue"
+              w={["full", "90%", "60%"]}
+              onClick={() => addLayer(idCard(randomLayer()))}
+              fontSize={"2rem"}
+              icon={<GiPerspectiveDiceSixFacesRandom />}
+            />
+          </ButtonGroup>
+          <AccordionMenu
+            name="Size Options"
+            options={advancedOptions}
+            buttonProps={buttonOptions}
           />
-
-          <AccordionMenu name="Advanced" options={advancedOptions} />
         </VStack>
       </Box>
     </Flex>
