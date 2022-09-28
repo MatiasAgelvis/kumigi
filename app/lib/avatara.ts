@@ -3,7 +3,6 @@ import Color from "color";
 import {
   isNode, //isBrowser, isWebWorker, isJsDom, isDeno,
 } from "browser-or-node";
-import GraphemeSplitter from "grapheme-splitter";
 import emoji from "node-emoji";
 import shapes, { Layer, Shape } from "./shapes";
 
@@ -39,11 +38,11 @@ if (isNode) {
 
 const FONT_FACTOR = 0.35;
 
-function getKeyByValue(object, value) {
+export function getKeyByValue(object, value) {
   return Object.keys(object).find((key) => object[key] === value);
 }
 
-function Avatara(width = 200, height = 200) {
+export function Avatara(width = 200, height = 200) {
   this.canvas = createCanvas(width, height);
   this.ctx = this.canvas.getContext("2d");
 }
@@ -62,19 +61,25 @@ Object.entries(shapes).map(([shape, func]) => {
   };
 });
 
+export function graphemeSplitter(str: string) {
+  return Array.from(new Intl.Segmenter().segment(str)).map(
+    (segment) => segment.segment
+  );
+}
+
+export function textLength(str: string) {
+  return graphemeSplitter(emoji.emojify(str)).length;
+}
+
 Avatara.prototype.text = async function ({
   color = "#fff",
   text = "",
   font = "plex",
 }) {
-  const splitter = new GraphemeSplitter();
   const fontName = getKeyByValue(Fonts, font.toLowerCase());
   const fontFactor = 3 * FONT_FACTOR * this.canvas.width;
-  let str = splitter
-    .splitGraphemes(emoji.emojify(text))
-    .slice(0, 3)
-    .join("")
-    .normalize();
+  let str = graphemeSplitter(emoji.emojify(text)).slice(0, 3).join("");
+  // .normalize();
 
   this.ctx.fillStyle = Color(color).rgb().string();
 
