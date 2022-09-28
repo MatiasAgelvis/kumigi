@@ -74,13 +74,14 @@ function Editor({ layers, setLayers, avatar, shapes, fonts, ...props }) {
             onEnd={() => setDragEvent(false)}
             onUnchoose={() => setDragTarget(-1)}
           >
-            <AnimatePresence>
+            <AnimatePresence initial={false} mode={"popLayout"}>
               {layers.map((layer, i) => (
                 <motion.div
                   key={layer.id}
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: 20, opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <Card
                     index={i}
