@@ -13,6 +13,7 @@ import { heightAtom, widthAtom } from "../../../utils/store";
 import AccordionMenu from "../accordionMenu/accordionMenu";
 import Card from "../card";
 import NumberInput from "./numberInput";
+import animationOptions from "app/utils/animationOptions";
 
 function Editor({ layers, setLayers, avatar, shapes, fonts, ...props }) {
   const [dragTarget, setDragTarget] = useState(-1);
@@ -49,40 +50,37 @@ function Editor({ layers, setLayers, avatar, shapes, fonts, ...props }) {
   };
 
   return (
-    <Flex justify={["center", null, "right"]} {...props}>
-      {/*    Editor    */}
-      <Box
-        {...boxOptions}
-        mx={["auto", "auto", "auto", 4]}
-        w="clamp(200px,100%,700px)"
-        height="fit-content"
-        p={["0.5rem", 5]}
-      >
-        <VStack spacing={4} align="stretch">
-          {/* Layer Stack */}
-          <ReactSortable
-            list={layers.map((x) => ({ ...x, chosen: true }))}
-            setList={setLayers}
-            animation={200}
-            // delay={100}
-            delayOnTouchStart={true}
-            // touchStartThreshold={5}
-            fallbackTolerance={2}
-            handle=".dragHandle"
-            onChoose={(e) => setDragTarget(e.oldIndex)}
-            onStart={() => setDragEvent(true)}
-            onEnd={() => setDragEvent(false)}
-            onUnchoose={() => setDragTarget(-1)}
-          >
-            <AnimatePresence initial={false} mode={"popLayout"}>
+    <AnimatePresence initial={false} mode={"popLayout"}>
+      <Flex justify={["center", null, "right"]} mx="1rem" {...props}>
+        {/*    Editor    */}
+
+        <Box
+          {...boxOptions}
+          // mx={["auto", "auto", "auto", 4]}
+          w="clamp(200px,100%,700px)"
+          // height="fit-content"
+          p={["0.5rem", 5]}
+          as={motion.div}
+          {...animationOptions}
+        >
+          <VStack spacing={4} align="stretch">
+            {/* Layer Stack */}
+            <ReactSortable
+              list={layers.map((x) => ({ ...x, chosen: true }))}
+              setList={setLayers}
+              animation={200}
+              // delay={100}
+              delayOnTouchStart={true}
+              // touchStartThreshold={5}
+              fallbackTolerance={2}
+              handle=".dragHandle"
+              onChoose={(e) => setDragTarget(e.oldIndex)}
+              onStart={() => setDragEvent(true)}
+              onEnd={() => setDragEvent(false)}
+              onUnchoose={() => setDragTarget(-1)}
+            >
               {layers.map((layer, i) => (
-                <motion.div
-                  key={layer.id}
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: 20, opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.2 }}
-                >
+                <motion.div key={layer.id} {...animationOptions}>
                   <Card
                     index={i}
                     layer={layer}
@@ -95,34 +93,34 @@ function Editor({ layers, setLayers, avatar, shapes, fonts, ...props }) {
                   />
                 </motion.div>
               ))}
-            </AnimatePresence>
-          </ReactSortable>
+            </ReactSortable>
+            {/* New Layer Button */}
 
-          {/* New Layer Button */}
-          <ButtonGroup isAttached>
-            <IconButton
-              {...buttonOptions}
-              fontSize={"1.4rem"}
-              onClick={() => addLayer(createCard())}
-              icon={<AddIcon />}
+            <ButtonGroup isAttached>
+              <IconButton
+                {...buttonOptions}
+                fontSize={"1.4rem"}
+                onClick={() => addLayer(createCard())}
+                icon={<AddIcon />}
+              />
+              <IconButton
+                {...buttonOptions}
+                colorScheme="blue"
+                w={["full", "90%", "60%"]}
+                onClick={() => addLayer(idCard(randomLayer()))}
+                fontSize={"2rem"}
+                icon={<GiPerspectiveDiceSixFacesRandom />}
+              />
+            </ButtonGroup>
+            <AccordionMenu
+              name="Size Options"
+              options={advancedOptions}
+              buttonProps={buttonOptions}
             />
-            <IconButton
-              {...buttonOptions}
-              colorScheme="blue"
-              w={["full", "90%", "60%"]}
-              onClick={() => addLayer(idCard(randomLayer()))}
-              fontSize={"2rem"}
-              icon={<GiPerspectiveDiceSixFacesRandom />}
-            />
-          </ButtonGroup>
-          <AccordionMenu
-            name="Size Options"
-            options={advancedOptions}
-            buttonProps={buttonOptions}
-          />
-        </VStack>
-      </Box>
-    </Flex>
+          </VStack>
+        </Box>
+      </Flex>
+    </AnimatePresence>
   );
 }
 
