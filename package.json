@@ -41,7 +41,7 @@
     "file-saver": "^2.0.5",
     "final-form": "4.20.7",
     "fontfaceobserver": "^2.3.0",
-    "framer-motion": "^6",
+    "framer-motion": "7",
     "hex-color-regex": "^1.1.0",
     "next": "12.2.5",
     "node-emoji": "^1.11.0",
