@@ -28,7 +28,9 @@ function Card({
   const { isOpen: isEditorOpen, onToggle: onEditorToggle } = useDisclosure({
     defaultIsOpen: true,
   });
-  const backgroundColor = useColorModeValue("teal.50", "teal.900");
+
+  const backgroundColor = useColorModeValue("whiteAlpha.900", "gray.800");
+  const backgroundColorOnDrag = useColorModeValue("teal.50", "teal.900");
 
   useEffect(() => {
     updateLayer({
@@ -42,9 +44,10 @@ function Card({
   return (
     <Box
       {...boxOptions}
-      {...(dragTarget && { background: backgroundColor })}
       my={3}
       p={["0.7rem", 5]}
+      backgroundColor={backgroundColor}
+      {...(dragTarget && { backgroundColor: backgroundColorOnDrag })}
       {...props}
     >
       <CardHeader
