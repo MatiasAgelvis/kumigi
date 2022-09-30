@@ -1,21 +1,21 @@
-import { useMutation } from "@blitzjs/rpc"
-import { Routes } from "@blitzjs/next"
-import { Box, Button } from "@chakra-ui/react"
-import { useCurrentUser } from "app/core/hooks/useCurrentUser"
-import Link from "next/link"
-import logout from "app/auth/mutations/logout"
+import { useMutation } from "@blitzjs/rpc";
+import { Routes } from "@blitzjs/next";
+import { Box, Button, HStack } from "@chakra-ui/react";
+import { useCurrentUser } from "app/core/hooks/useCurrentUser";
+import Link from "next/link";
+import logout from "app/auth/mutations/logout";
 
 export default function UserInfo() {
-  const currentUser = useCurrentUser()
-  const [logoutMutation] = useMutation(logout)
+  const currentUser = useCurrentUser();
+  const [logoutMutation] = useMutation(logout);
 
   return (
-    <>
+    <HStack spacing={4}>
       {currentUser ? (
         <Box>
           <Button
             onClick={async () => {
-              await logoutMutation()
+              await logoutMutation();
             }}
           >
             Logout
@@ -40,6 +40,6 @@ export default function UserInfo() {
           </Link>
         </Box>
       )}
-    </>
-  )
+    </HStack>
+  );
 }
