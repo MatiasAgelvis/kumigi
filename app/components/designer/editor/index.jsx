@@ -16,11 +16,12 @@ import NumberInput from "./numberInput";
 import animationOptions from "app/utils/animationOptions";
 import Toolbar from "./toolbar";
 
-function Editor({ layers, setLayers, avatar, shapes, fonts, ...props }) {
+function Editor({ layerState, avatar, shapes, fonts, ...props }) {
   const [dragTarget, setDragTarget] = useState(-1);
   const [dragEvent, setDragEvent] = useState(false);
   const [height, setHeight] = useRecoilState(heightAtom);
   const [width, setWidth] = useRecoilState(widthAtom);
+  const [{ present: layers }, { set: setLayers }] = layerState;
 
   const advancedOptions = [
     {
@@ -34,6 +35,7 @@ function Editor({ layers, setLayers, avatar, shapes, fonts, ...props }) {
   ];
 
   const updateLayer = (index) => (update) => {
+    console.log("update", index, layers[index], update);
     let layersUpdate = [...layers];
     layersUpdate[index] = {
       ...layersUpdate[index],
@@ -53,78 +55,70 @@ function Editor({ layers, setLayers, avatar, shapes, fonts, ...props }) {
   return (
     <Flex justify={["center", null, "right"]} mx="1rem" {...props}>
       {/*    Editor    */}
-      <Box as={motion.div} w="full">
-        <Box
-          {...boxOptions}
-          // mx={["auto", "auto", "auto", 4]}
-          w="clamp(200px,100%,700px)"
-          // height="fit-content"
-          p={["0.5rem", 5]}
-        >
-          <VStack spacing={4} align="stretch">
-            <Toolbar layers={layers} setLayers={setLayers} />
 
-            {/* Layer Stack */}
-            <ReactSortable
-              list={layers.map((x) => ({ ...x, chosen: true }))}
-              setList={setLayers}
-              animation={200}
-              // delay={100}
-              delayOnTouchStart={true}
-              // touchStartThreshold={5}
-              fallbackTolerance={2}
-              handle=".dragHandle"
-              onChoose={(e) => setDragTarget(e.oldIndex)}
-              onStart={() => setDragEvent(true)}
-              onEnd={() => setDragEvent(false)}
-              onUnchoose={() => setDragTarget(-1)}
-            >
-              <AnimatePresence initial={false} mode={"popLayout"}>
-                {layers.map((layer, i) => (
-                  <motion.div key={layer.id} {...animationOptions}>
-                    <Card
-                      index={i}
-                      layer={layer}
-                      updateLayer={updateLayer(i)}
-                      options={shapes}
-                      fonts={fonts}
-                      deleteLayer={deleteLayer(i)}
-                      dragEvent={dragEvent}
-                      dragTarget={i == dragTarget}
-                    />
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </ReactSortable>
-            {/* New Layer Button */}
+      <Box
+        {...boxOptions}
+        // mx={["auto", "auto", "auto", 4]}
+        w="clamp(200px,100%,700px)"
+        // height="fit-content"
+        p={["0.5rem", 5]}
+      >
+        <VStack spacing={4} align="stretch">
+          <Toolbar layerState={layerState} />
 
-            <motion.div {...animationOptions}>
-              <VStack spacing={4} align="stretch">
-                <ButtonGroup isAttached w="full">
-                  <IconButton
-                    {...buttonOptions}
-                    fontSize={"1.4rem"}
-                    onClick={() => addLayer(createCard())}
-                    icon={<AddIcon />}
-                  />
-                  <IconButton
-                    {...buttonOptions}
-                    colorScheme="blue"
-                    w={["full", "90%", "60%"]}
-                    onClick={() => addLayer(idCard(randomLayer()))}
-                    fontSize={"2rem"}
-                    icon={<GiPerspectiveDiceSixFacesRandom />}
-                  />
-                </ButtonGroup>
-                <AccordionMenu
-                  name="Size Options"
-                  options={advancedOptions}
-                  buttonProps={buttonOptions}
-                />
-              </VStack>
-            </motion.div>
-          </VStack>
-        </Box>
+          {/* Layer Stack */}
+          <ReactSortable
+            list={layers.map((x) => ({ ...x, chosen: true }))}
+            setList={setLayers}
+            animation={200}
+            // delay={100}
+            delayOnTouchStart={true}
+            // touchStartThreshold={5}
+            fallbackTolerance={2}
+            handle=".dragHandle"
+            onChoose={(e) => setDragTarget(e.oldIndex)}
+            onStart={() => setDragEvent(true)}
+            onEnd={() => setDragEvent(false)}
+            onUnchoose={() => setDragTarget(-1)}
+          >
+            {layers.map((layer, i) => (
+              <Card
+                key={layer.id}
+                index={i}
+                layer={layer}
+                updateLayer={updateLayer(i)}
+                options={shapes}
+                fonts={fonts}
+                deleteLayer={deleteLayer(i)}
+                dragEvent={dragEvent}
+                dragTarget={i == dragTarget}
+              />
+            ))}
+          </ReactSortable>
+          {/* New Layer Button */}
+
+          <ButtonGroup isAttached w="full">
+            <IconButton
+              {...buttonOptions}
+              fontSize={"1.4rem"}
+              onClick={() => addLayer(createCard())}
+              icon={<AddIcon />}
+            />
+            <IconButton
+              {...buttonOptions}
+              colorScheme="blue"
+              w={["full", "90%", "60%"]}
+              onClick={() => addLayer(idCard(randomLayer()))}
+              fontSize={"2rem"}
+              icon={<GiPerspectiveDiceSixFacesRandom />}
+            />
+          </ButtonGroup>
+          <AccordionMenu
+            name="Size Options"
+            options={advancedOptions}
+            buttonProps={buttonOptions}
+          />
+        </VStack>
       </Box>
     </Flex>
   );
