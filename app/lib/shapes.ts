@@ -5,8 +5,8 @@ export type Shape = keyof typeof shapes;
 export type Layer = {
   shape: Shape;
   color: string;
-  text?: string;
-  font?: string;
+  text: string;
+  font: string;
 };
 
 const shapes = {

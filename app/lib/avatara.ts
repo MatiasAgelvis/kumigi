@@ -130,16 +130,17 @@ function randomText() {
   return text;
 }
 
-export function randomLayer() {
+export function randomLayer(): Layer {
   const shape = choose(Object.keys(shapes));
   return {
     shape: shape,
     color: randomColor(),
-    ...(shape == "text" && { text: randomText(), font: choose(Fonts) }),
+    text: randomText(),
+    font: choose(Fonts),
   };
 }
 
-export function randomLayers(min = 1, max = 5) {
+export function randomLayers(min = 1, max = 5): Array<Layer> {
   let numLayers = Math.ceil(Math.random() * max) + min;
   return Array.from(Array(numLayers)).map((_) => randomLayer());
 }
