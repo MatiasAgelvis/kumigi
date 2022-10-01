@@ -55,6 +55,7 @@ specifiers:
   typescript: ^4.5.3
   url-join: ^5.0.0
   urlencode: ^1.1.0
+  use-undo: ^1.1.0
   uuid: ^8.3.2
   zod: 3.17.3
 
@@ -93,6 +94,7 @@ dependencies:
   two.js: 0.8.10
   url-join: 5.0.0
   urlencode: 1.1.0
+  use-undo: 1.1.0_biqbaboplfbrettd7655fr4n2y
   uuid: 8.3.2
   zod: 3.17.3
 
@@ -10625,6 +10627,16 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /use-undo/1.1.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-z1a6nt9fYky+lwA786L5KxoOfvj02U71937EZeEH7IJKU3M2tZlDS3jvHcQc9DFarwrz1Cl8bqPAcPfnWicnNw==}
+    peerDependencies:
+      react: ^16.8.6
+      react-dom: ^16.8.6
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /use/3.1.1:
