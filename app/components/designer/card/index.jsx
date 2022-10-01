@@ -8,6 +8,7 @@ import boxOptions from "../../../utils/boxOptions";
 import CardHeader from "./cardHeader";
 import { useColorModeValue } from "@chakra-ui/react";
 import emoji from "node-emoji";
+import useDidMountEffect from "app/hooks/useDidMountEffect";
 
 function Card({
   index,
@@ -32,7 +33,7 @@ function Card({
   const backgroundColor = useColorModeValue("whiteAlpha.900", "gray.800");
   const backgroundColorOnDrag = useColorModeValue("teal.50", "teal.900");
 
-  useEffect(() => {
+  useDidMountEffect(() => {
     updateLayer({
       shape: displayLayer ? shape : null,
       color: color,
