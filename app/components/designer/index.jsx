@@ -8,8 +8,10 @@ import URLfromLayers from "../../utils/url";
 import { heightAtom, layersAtom, urlAtom, widthAtom } from "../../utils/store";
 import Editor from "./editor";
 import Image from "./image";
+import useUndo from "use-undo";
+import { createCard, idCard, layers__Default } from "app/utils/createCard";
 
-function Designer() {
+function Designer({ initialLayersState = layers__Default }) {
   const [height, setHeight] = useRecoilState(heightAtom);
   const [width, setWidth] = useRecoilState(widthAtom);
   const [_, setURL] = useRecoilState(urlAtom);
@@ -32,7 +34,10 @@ function Designer() {
   }, []);
 
   const [image, setImage] = useState(avatar.toDataURL());
-  const [layers, setLayers] = useRecoilState(layersAtom);
+
+  const layerState = useUndo(initialLayersState);
+
+  const [{ present: layers }, { set: setLayers }] = layerState;
 
   applyLayers(avatar, layers);
 
@@ -51,7 +56,7 @@ function Designer() {
   }
 
   useEffect(() => {
-    setLayers(layers);
+    console.log(layers);
     mainUpdate();
   }, [JSON.stringify(layers)]);
 
@@ -68,14 +73,15 @@ function Designer() {
       templateAreas={["'image' 'editor'", null, "'editor image'"]}
     >
       {/*    Editor    */}
+
       <Editor
-        layers={layers}
-        setLayers={setLayers}
+        layerState={layerState}
         avatar={avatar}
         shapes={shapes}
         fonts={fonts}
         gridArea="editor"
       />
+
       {/*    Image    */}
       <Image image={image} canvas={avatar.canvas} gridArea="image" />
     </SimpleGrid>
