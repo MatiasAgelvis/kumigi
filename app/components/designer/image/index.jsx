@@ -5,7 +5,7 @@ import DownloadButton from "./downloadButton";
 
 function Image({ image, canvas, ...props }) {
   return (
-    <Flex justify={["center", "center", "left"]} {...props}>
+    <Flex justify={"center"} {...props}>
       <Box
         sx={{ alignSelf: "stretch" }}
         w="clamp(1px,min-content,1000px)"
