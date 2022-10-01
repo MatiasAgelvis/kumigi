@@ -52,8 +52,8 @@ function Card({
       {...props}
     >
       <CardHeader
-        shape={shape}
-        color={color}
+        shape={layer.shape}
+        color={layer.color}
         displayLayer={displayLayer}
         setdisplayLayer={setdisplayLayer}
         closeButton={deleteLayer}
@@ -66,17 +66,19 @@ function Card({
           <SimpleGrid columns={[1, 2]} spacing={[5, null, 7]}>
             <OptionSelect
               options={options}
-              state={shape}
+              state={layer.shape}
               setState={setShape}
               placeholder="Select a shape"
             />
             <ColorPicker color={color} setColor={setColor} />
 
-            {shape == "text" && <TextInput text={text} setText={setText} />}
+            {shape == "text" && (
+              <TextInput text={layer.text} setText={setText} />
+            )}
             {shape == "text" && (
               <OptionSelect
                 options={fonts}
-                state={font}
+                state={layer.font}
                 setState={setFont}
                 placeholder="Select a Font"
               />
