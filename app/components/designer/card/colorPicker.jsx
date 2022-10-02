@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { RgbaStringColorPicker, HexColorInput } from "react-colorful";
 import colorString from "color-string";
+import { useState } from "react";
 
 function rgba2hex(color) {
   return colorString.to.hex(colorString.get.rgb(color));
@@ -18,7 +19,8 @@ function hex2rgba(color) {
   return colorString.to.rgb(colorString.get.rgb(color));
 }
 
-function ColorPicker({ color, setColor }) {
+export default function ColorPicker({ color, setColor }) {
+  const [internalColor, setInternalColor] = useState(color);
   const ChakraHexColorInput = chakra(({ col0r, ...props }) => (
     <HexColorInput color={col0r} {...props} />
   ));
@@ -43,10 +45,14 @@ function ColorPicker({ color, setColor }) {
         />
       </HStack>
       <PopoverContent w="fit-content" mx={5}>
-        <RgbaStringColorPicker color={color} onChange={setColor} />
+        <RgbaStringColorPicker
+          color={color}
+          onChange={setInternalColor}
+          onMouseUp={() => setColor(internalColor)}
+          onMouseLeave={() => setColor(internalColor)}
+          onTouchEnd={() => setColor(internalColor)}
+        />
       </PopoverContent>
     </Popover>
   );
 }
-
-export default ColorPicker;
