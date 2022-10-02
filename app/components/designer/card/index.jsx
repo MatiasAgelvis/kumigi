@@ -70,7 +70,7 @@ function Card({
               setState={setShape}
               placeholder="Select a shape"
             />
-            <ColorPicker color={color} setColor={setColor} />
+            <ColorPicker color={layer.color} setColor={setColor} />
 
             {shape == "text" && (
               <TextInput text={layer.text} setText={setText} />
