@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "mongodb"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -13,7 +13,7 @@ generator client {
 // --------------------------------------
 
 model User {
-  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  id             Int      @id @default(autoincrement())
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   name           String?
@@ -26,7 +26,7 @@ model User {
 }
 
 model Session {
-  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+  id                 Int       @id @default(autoincrement())
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
   expiresAt          DateTime?
@@ -36,12 +36,12 @@ model Session {
   publicData         String?
   privateData        String?
 
-  userId String? @db.ObjectId
-  user   User?   @relation(fields: [userId], references: [id])
+  user   User? @relation(fields: [userId], references: [id])
+  userId Int?
 }
 
 model Token {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          Int      @id @default(autoincrement())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   hashedToken String
@@ -51,8 +51,8 @@ model Token {
   expiresAt   DateTime
   sentTo      String
 
-  userId String @db.ObjectId
-  user   User   @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
 
   @@unique([hashedToken, type])
 }
