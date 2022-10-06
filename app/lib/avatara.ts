@@ -74,9 +74,9 @@ export function textLength(str: string) {
 Avatara.prototype.text = async function ({
   color = "#fff",
   text = "",
-  font = "pt",
+  font = "plex",
 }) {
-  const fontName = getKeyByValue(Fonts, font.toLowerCase()) || "pt";
+  const fontName = getKeyByValue(Fonts, font.toLowerCase());
   const fontFactor = 3 * FONT_FACTOR * this.canvas.width;
   let str = graphemeSplitter(emoji.emojify(text)).slice(0, 3).join("");
   // .normalize();
