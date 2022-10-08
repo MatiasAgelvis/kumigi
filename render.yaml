@@ -7,6 +7,6 @@ services:
       blitz build &&
       blitz prisma migrate deploy
     startCommand: blitz start
-    envVars:
-      - key: NODE_ENV
-        value: development
+    # envVars:
+    #   - key: NODE_ENV
+    #     value: development
