@@ -74,9 +74,9 @@ export function textLength(str: string) {
 Avatara.prototype.text = async function ({
   color = "#fff",
   text = "",
-  font = "plex",
+  font = "pt",
 }) {
-  const fontName = getKeyByValue(Fonts, font.toLowerCase());
+  const fontName = getKeyByValue(Fonts, font.toLowerCase()) || "pt";
   const fontFactor = 3 * FONT_FACTOR * this.canvas.width;
   let str = graphemeSplitter(emoji.emojify(text)).slice(0, 3).join("");
   // .normalize();
@@ -105,7 +105,7 @@ Avatara.prototype.toBuffer = function () {
   return this.canvas.toBuffer();
 };
 
-function choose(choices) {
+function choose(choices: Array<any> | string) {
   const index = Math.floor(Math.random() * choices.length);
   return choices[index];
 }
@@ -131,12 +131,11 @@ function randomText() {
 }
 
 export function randomLayer(): Layer {
-  const shape = choose(Object.keys(shapes));
   return {
-    shape: shape,
+    shape: choose(Object.keys(shapes)),
     color: randomColor(),
     text: randomText(),
-    font: choose(Fonts),
+    font: choose(Object.values(Fonts)),
   };
 }
 
