@@ -1,66 +1,96 @@
-import { forwardRef, ComponentPropsWithoutRef, PropsWithoutRef } from "react"
-import { useField, UseFieldConfig } from "react-final-form"
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  HStack,
+  IconButton,
+  Input,
+  InputGroup,
+  InputRightElement,
+} from "@chakra-ui/react";
+import {
+  forwardRef,
+  ComponentPropsWithoutRef,
+  PropsWithoutRef,
+  useState,
+  cloneElement,
+} from "react";
+import { useField, UseFieldConfig } from "react-final-form";
 
-export interface LabeledTextFieldProps extends PropsWithoutRef<JSX.IntrinsicElements["input"]> {
+export interface LabeledTextFieldProps
+  extends PropsWithoutRef<JSX.IntrinsicElements["input"]> {
   /** Field name. */
-  name: string
+  name: string;
   /** Field label. */
-  label: string
+  label: string;
   /** Field type. Doesn't include radio buttons and checkboxes */
-  type?: "text" | "password" | "email" | "number"
-  outerProps?: PropsWithoutRef<JSX.IntrinsicElements["div"]>
-  labelProps?: ComponentPropsWithoutRef<"label">
-  fieldProps?: UseFieldConfig<string>
+  type?: "text" | "password" | "email" | "number";
+  outerProps?: PropsWithoutRef<JSX.IntrinsicElements["div"]>;
+  labelProps?: ComponentPropsWithoutRef<"label">;
+  fieldProps?: UseFieldConfig<string>;
 }
 
-export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldProps>(
-  ({ name, label, outerProps, fieldProps, labelProps, ...props }, ref) => {
-    const {
-      input,
-      meta: { touched, error, submitError, submitting },
-    } = useField(name, {
-      parse:
-        props.type === "number"
-          ? (Number as any)
-          : // Converting `""` to `null` ensures empty values will be set to null in the DB
-            (v) => (v === "" ? null : v),
-      ...fieldProps,
-    })
+const Control = ({ name, ...rest }) => {
+  const {
+    meta: { error, touched },
+  } = useField(name, { subscription: { touched: true, error: true } });
+  return <FormControl {...rest} isInvalid={error && touched} />;
+};
 
-    const normalizedError = Array.isArray(error) ? error.join(", ") : error || submitError
+const Error = ({ name }) => {
+  const {
+    meta: { error },
+  } = useField(name, { subscription: { error: true } });
+  return <FormErrorMessage>{error}</FormErrorMessage>;
+};
 
-    return (
-      <div {...outerProps}>
-        <label {...labelProps}>
-          {label}
-          <input {...input} disabled={submitting} {...props} ref={ref} />
-        </label>
+const PasswordInput = ({ input }) => {
+  const [showPassword, setShowPassword] = useState(false);
 
-        {touched && normalizedError && (
-          <div role="alert" style={{ color: "red" }}>
-            {normalizedError}
-          </div>
-        )}
+  return (
+    <InputGroup>
+      {cloneElement(input, { type: showPassword ? "text" : "password" })}
 
-        <style jsx>{`
-          label {
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-            font-size: 1rem;
-          }
-          input {
-            font-size: 1rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 3px;
-            border: 1px solid purple;
-            appearance: none;
-            margin-top: 0.5rem;
-          }
-        `}</style>
-      </div>
-    )
-  }
-)
+      <InputRightElement h={"full"}>
+        <IconButton
+          aria-label={showPassword ? "hide password" : "show password"}
+          variant={"ghost"}
+          icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
+          onClick={() => setShowPassword((showPassword) => !showPassword)}
+        ></IconButton>
+      </InputRightElement>
+    </InputGroup>
+  );
+};
 
-export default LabeledTextField
+const LabeledTextField = ({ name, label, type = "text" }) => {
+  const { input, meta } = useField(name);
+
+  const inputComponent = (
+    <Input
+      {...input}
+      isInvalid={meta.error && meta.touched}
+      id={name}
+      type={type}
+      placeholder={label}
+    />
+  );
+  return (
+    <Control name={name} my={4}>
+      <FormLabel htmlFor={name}>{label}</FormLabel>
+
+      {type == "password" ? (
+        <PasswordInput input={inputComponent} />
+      ) : (
+        inputComponent
+      )}
+
+      <Error name={name} />
+    </Control>
+  );
+};
+
+export { LabeledTextField };
