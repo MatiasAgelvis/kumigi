@@ -16,13 +16,9 @@ import { layers__Default } from "app/utils/createCard";
 
 const Home: BlitzPage = () => {
   return (
-    <Layout title="Home">
+    <Layout title="Home" withFooter>
       <main>
-        <VStack w="full" alignItems={"stretch"}>
-          <Header />
-          <Designer initialLayersState={layers__Default} />
-          <Footer />
-        </VStack>
+        <Designer initialLayersState={layers__Default} />
       </main>
     </Layout>
   );
