@@ -1,11 +1,15 @@
-import Head from "next/head"
-import React, { FC } from "react"
-import { BlitzLayout } from "@blitzjs/next"
+import Head from "next/head";
+import React, { FC } from "react";
+import { BlitzLayout } from "@blitzjs/next";
+import { VStack } from "@chakra-ui/react";
+import Header from "app/components/header";
+import Footer from "app/components/footer";
 
-const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
-  title,
-  children,
-}) => {
+const Layout: BlitzLayout<{
+  title?: string;
+  children?: React.ReactNode;
+  withFooter: Boolean;
+}> = ({ title, children, withFooter }) => {
   return (
     <>
       <Head>
@@ -13,9 +17,13 @@ const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {children}
+      <VStack w="full" alignItems={"stretch"}>
+        <Header />
+        {children}
+        {withFooter && <Footer />}
+      </VStack>
     </>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
