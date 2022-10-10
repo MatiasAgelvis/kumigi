@@ -5,7 +5,13 @@ import { useRecoilState } from "recoil";
 import Avatara from "../../lib/avatara";
 import applyLayers from "../../utils/applyLayers";
 import URLfromLayers from "../../utils/url";
-import { heightAtom, layersAtom, urlAtom, widthAtom } from "../../utils/store";
+import {
+  baseAtom,
+  heightAtom,
+  layersAtom,
+  urlAtom,
+  widthAtom,
+} from "../../utils/store";
 import Editor from "./editor";
 import Image from "./image";
 import useUndo from "use-undo";
@@ -14,8 +20,8 @@ import { createCard, idCard, layers__Default } from "app/utils/createCard";
 function Designer({ initialLayersState = layers__Default }) {
   const [height, setHeight] = useRecoilState(heightAtom);
   const [width, setWidth] = useRecoilState(widthAtom);
-  const [_, setURL] = useRecoilState(urlAtom);
-  const [BASE, setBASE] = useState("");
+  const [URL, setURL] = useRecoilState(urlAtom);
+  const [BASE, setBase] = useRecoilState(baseAtom);
   let avatar = new Avatara(width, height);
 
   const fonts = avatar.fonts();
@@ -27,10 +33,6 @@ function Designer({ initialLayersState = layers__Default }) {
       (font) => font.load()
       // .then(function () {console.log("My Family has loaded");})
     );
-
-    if (typeof window !== "undefined") {
-      setBASE(window.location.origin + "/api");
-    }
   }, []);
 
   const [image, setImage] = useState(avatar.toDataURL());
