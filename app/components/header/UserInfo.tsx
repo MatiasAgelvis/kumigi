@@ -10,9 +10,10 @@ export default function UserInfo() {
   const [logoutMutation] = useMutation(logout);
 
   return (
-    <HStack spacing={4}>
+    <Box>
       {currentUser ? (
-        <Box>
+        <HStack spacing={4}>
+          <code>{currentUser.email}</code>
           <Button
             onClick={async () => {
               await logoutMutation();
@@ -20,14 +21,9 @@ export default function UserInfo() {
           >
             Logout
           </Button>
-          <Box>
-            User id: <code>{currentUser.id}</code>
-            <br />
-            User role: <code>{currentUser.role}</code>
-          </Box>
-        </Box>
+        </HStack>
       ) : (
-        <Box>
+        <HStack>
           <Link href={Routes.SignupPage()}>
             <Button>
               <strong>Sign Up</strong>
@@ -38,8 +34,8 @@ export default function UserInfo() {
               <strong>Login</strong>
             </Button>
           </Link>
-        </Box>
+        </HStack>
       )}
-    </HStack>
+    </Box>
   );
 }
