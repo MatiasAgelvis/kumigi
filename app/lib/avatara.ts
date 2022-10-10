@@ -131,11 +131,12 @@ function randomText() {
 }
 
 export function randomLayer(): Layer {
+  const shape = choose(Object.keys(shapes));
   return {
-    shape: choose(Object.keys(shapes)),
+    shape,
     color: randomColor(),
-    text: randomText(),
-    font: choose(Object.values(Fonts)),
+    text: shape == "text" ? randomText() : "",
+    font: shape == "text" ? choose(Object.values(Fonts)) : "",
   };
 }
 
