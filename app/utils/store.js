@@ -11,6 +11,11 @@ export const urlAtom = atom({
   default: "",
 });
 
+export const baseAtom = atom({
+  key: "baseState",
+  default: "",
+});
+
 export const heightAtom = atom({
   key: "heightState",
   default: 200,
