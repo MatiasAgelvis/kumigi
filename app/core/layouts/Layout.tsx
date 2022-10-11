@@ -8,7 +8,7 @@ import Footer from "app/components/footer";
 const Layout: BlitzLayout<{
   title?: string;
   children?: React.ReactNode;
-  withFooter: Boolean;
+  withFooter?: boolean;
 }> = ({ title, children, withFooter = false }) => {
   return (
     <>
