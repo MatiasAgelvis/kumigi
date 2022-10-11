@@ -9,7 +9,7 @@ const Layout: BlitzLayout<{
   title?: string;
   children?: React.ReactNode;
   withFooter: Boolean;
-}> = ({ title, children, withFooter }) => {
+}> = ({ title, children, withFooter = false }) => {
   return (
     <>
       <Head>
