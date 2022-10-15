@@ -36,7 +36,7 @@ if (isNode) {
   });
 }
 
-const FONT_FACTOR = 0.35;
+const FONT_FACTOR = 1.1;
 
 export function getKeyByValue(object, value) {
   return Object.keys(object).find((key) => object[key] === value);
@@ -77,7 +77,7 @@ Avatara.prototype.text = async function ({
   font = "pt",
 }) {
   const fontName = getKeyByValue(Fonts, font.toLowerCase()) || "pt";
-  const fontFactor = 3 * FONT_FACTOR * this.canvas.width;
+  const fontFactor = FONT_FACTOR * this.canvas.width;
   let str = graphemeSplitter(emoji.emojify(text)).slice(0, 3).join("");
   // .normalize();
 
