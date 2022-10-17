@@ -13,6 +13,7 @@ export const Fonts = Object.freeze({
   PT: "pt",
   ROBOTO: "roboto",
   EMOJI: "emoji",
+  AWESOME: "awesome",
 });
 
 if (isNode) {
@@ -32,6 +33,9 @@ if (isNode) {
     });
     registerFont("public/fonts/NotoEmoji-Bold.ttf", {
       family: Fonts.EMOJI,
+    });
+    registerFont("public/fonts/Font Awesome 6 Free-Solid-900.otf", {
+      family: Fonts.AWESOME,
     });
   });
 }
@@ -83,13 +87,11 @@ Avatara.prototype.text = async function ({
 
   this.ctx.fillStyle = Color(color).rgb().string();
 
-  this.ctx.font = `bold ${fontFactor / str.length}px ${Fonts[fontName]}, ${
-    Fonts.EMOJI
-  }`;
   this.ctx.textAlign = "center";
   this.ctx.textBaseline = "middle";
   this.ctx.fillText(str, this.canvas.width / 2, this.canvas.height / 2);
 
+    this.ctx.font = `bold ${fontSize}px ${Fonts[fontName]}, ${Fonts.AWESOME}`;
   return this;
 };
 
