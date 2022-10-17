@@ -13,7 +13,7 @@ import {
   HexAlphaColorPicker,
 } from "react-colorful";
 import colorString from "color-string";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import Color from "color";
 
@@ -29,8 +29,10 @@ export default function ColorPicker({ color, setColor }) {
   const [text, setText] = useState(color);
   const debounced = useDebouncedCallback((value) => {
     setColor(Color(value).hex());
-    setText(Color(value).hex());
+    // setText(Color(value).hex());
   }, 1000);
+
+  useEffect(() => setText(color), [color]);
 
   return (
     <Popover isLazy onClose={() => debounced.flush()}>
