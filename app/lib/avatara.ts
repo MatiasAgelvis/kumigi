@@ -1,4 +1,5 @@
 import { createCanvas } from "canvas";
+import GraphemeBreaker from "grapheme-breaker-mjs";
 import Color from "color";
 import {
   isNode, //isBrowser, isWebWorker, isJsDom, isDeno,
@@ -66,8 +67,8 @@ Object.entries(shapes).map(([shape, func]) => {
 });
 
 export function graphemeSplitter(str: string) {
-  return Array.from(new Intl.Segmenter().segment(str)).map(
-    (segment) => segment.segment
+  return GraphemeBreaker.break(str);
+}
   );
 }
 
