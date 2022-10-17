@@ -1,4 +1,5 @@
 import { createCanvas } from "canvas";
+import GraphemeBreaker from "grapheme-breaker-mjs";
 import Color from "color";
 import {
   isNode, //isBrowser, isWebWorker, isJsDom, isDeno,
@@ -13,6 +14,7 @@ export const Fonts = Object.freeze({
   PT: "pt",
   ROBOTO: "roboto",
   EMOJI: "emoji",
+  AWESOME: "awesome",
 });
 
 if (isNode) {
@@ -32,6 +34,9 @@ if (isNode) {
     });
     registerFont("public/fonts/NotoEmoji-Bold.ttf", {
       family: Fonts.EMOJI,
+    });
+    registerFont("public/fonts/Font Awesome 6 Free-Solid-900.otf", {
+      family: Fonts.AWESOME,
     });
   });
 }
@@ -62,13 +67,27 @@ Object.entries(shapes).map(([shape, func]) => {
 });
 
 export function graphemeSplitter(str: string) {
-  return Array.from(new Intl.Segmenter().segment(str)).map(
-    (segment) => segment.segment
+  return GraphemeBreaker.break(str);
+}
+
+export function parseText(str: string) {
+  return str.replace(/:([a-zA-Z0-9_\-\+]+):/g, (match) =>
+    // remove colons -> parse hex int -> convert code to char
+    String.fromCharCode(parseInt(match.replace(/:/g, ""), 16))
   );
 }
 
 export function textLength(str: string) {
-  return graphemeSplitter(emoji.emojify(str)).length;
+  return graphemeSplitter(parseText(str)).length;
+}
+
+function textAreaOnCanvas(ctx, str) {
+  return {
+    width: ctx.measureText(str).width,
+    height:
+      ctx.measureText(str).actualBoundingBoxAscent +
+      ctx.measureText(str).actualBoundingBoxDescent,
+  };
 }
 
 Avatara.prototype.text = async function ({
@@ -76,20 +95,41 @@ Avatara.prototype.text = async function ({
   text = "",
   font = "pt",
 }) {
+  if (text == "") return this;
+
   const fontName = getKeyByValue(Fonts, font.toLowerCase()) || "pt";
   const fontFactor = FONT_FACTOR * this.canvas.width;
-  let str = graphemeSplitter(emoji.emojify(text)).slice(0, 3).join("");
-  // .normalize();
+  let str = parseText(text);
+  const canvasSize =
+    Math.min(this.canvas.height, this.canvas.width) /
+    Math.max(this.canvas.height, this.canvas.width);
 
-  this.ctx.fillStyle = Color(color).rgb().string();
+  let fontSize = 1;
 
-  this.ctx.font = `bold ${fontFactor / str.length}px ${Fonts[fontName]}, ${
-    Fonts.EMOJI
-  }`;
   this.ctx.textAlign = "center";
   this.ctx.textBaseline = "middle";
-  this.ctx.fillText(str, this.canvas.width / 2, this.canvas.height / 2);
+  this.ctx.fillStyle = Color(color).rgb().string();
 
+  let prevWidth = 0;
+  while (
+    textAreaOnCanvas(this.ctx, str).width < 0.7 * this.canvas.width &&
+    textAreaOnCanvas(this.ctx, str).height < 0.7 * this.canvas.height &&
+    textAreaOnCanvas(this.ctx, str).width != prevWidth
+  ) {
+    prevWidth = textAreaOnCanvas(this.ctx, str).width;
+    this.ctx.font = `bold ${fontSize}px ${Fonts[fontName]}, ${Fonts.AWESOME}`;
+    fontSize = fontSize + 2;
+    // console.log(textAreaOnCanvas(this.ctx, str).width, prevWidth);
+    // console.log(fontSize, textAreaOnCanvas(this.ctx, str));
+  }
+
+  // while (1.8 * this.ctx.measureText("M"). > 0.7 * this.canvas.height) {
+  //   this.ctx.font = `bold ${fontSize}px ${Fonts[fontName]}, ${Fonts.AWESOME}`;
+  //   fontSize = fontSize / 1.1;
+  //   console.log("-1 ", fontSize);
+  // }
+
+  this.ctx.fillText(str, this.canvas.width / 2, this.canvas.height / 2);
   return this;
 };
 
