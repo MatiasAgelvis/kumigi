@@ -78,7 +78,8 @@ export function parseText(str: string) {
 }
 
 export function textLength(str: string) {
-  return graphemeSplitter(emoji.emojify(str)).length;
+  return graphemeSplitter(parseText(str)).length;
+}
 }
 
 Avatara.prototype.text = async function ({
@@ -88,8 +89,7 @@ Avatara.prototype.text = async function ({
 }) {
   const fontName = getKeyByValue(Fonts, font.toLowerCase()) || "pt";
   const fontFactor = FONT_FACTOR * this.canvas.width;
-  let str = graphemeSplitter(emoji.emojify(text)).slice(0, 3).join("");
-  // .normalize();
+  let str = parseText(text);
 
   this.ctx.fillStyle = Color(color).rgb().string();
 
