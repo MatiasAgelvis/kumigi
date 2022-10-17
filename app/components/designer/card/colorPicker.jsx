@@ -34,6 +34,12 @@ export default function ColorPicker({ color, setColor }) {
 
   useEffect(() => setText(color), [color]);
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      debounced.flush();
+    }
+  };
+
   return (
     <Popover isLazy onClose={() => debounced.flush()}>
       <HStack>
@@ -51,6 +57,7 @@ export default function ColorPicker({ color, setColor }) {
             setText(e.target.value);
             debounced(e.target.value);
           }}
+          onKeyDown={handleKeyDown}
         />
       </HStack>
       <PopoverContent w="fit-content" mx={5}>
