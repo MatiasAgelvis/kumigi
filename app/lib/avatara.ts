@@ -80,6 +80,14 @@ export function parseText(str: string) {
 export function textLength(str: string) {
   return graphemeSplitter(parseText(str)).length;
 }
+
+function textAreaOnCanvas(ctx, str) {
+  return {
+    width: ctx.measureText(str).width,
+    height:
+      ctx.measureText(str).actualBoundingBoxAscent +
+      ctx.measureText(str).actualBoundingBoxDescent,
+  };
 }
 
 Avatara.prototype.text = async function ({
