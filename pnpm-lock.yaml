@@ -56,6 +56,7 @@ specifiers:
   typescript: ^4.5.3
   url-join: ^5.0.0
   urlencode: ^1.1.0
+  use-debounce: ^8.0.4
   use-undo: ^1.1.0
   uuid: ^8.3.2
   zod: 3.17.3
@@ -96,6 +97,7 @@ dependencies:
   two.js: 0.8.10
   url-join: 5.0.0
   urlencode: 1.1.0
+  use-debounce: 8.0.4_react@18.2.0
   use-undo: 1.1.0_biqbaboplfbrettd7655fr4n2y
   uuid: 8.3.2
   zod: 3.17.3
@@ -10626,6 +10628,15 @@ packages:
       '@types/react': 18.0.17
       react: 18.2.0
       tslib: 2.4.0
+    dev: false
+
+  /use-debounce/8.0.4_react@18.2.0:
+    resolution: {integrity: sha512-fGqsYQzl8kLHF2QpQSgIwgOgJmnh6j5L6SIzQiHdLfwp3q1egUL3btq5Bg2SJysH6A0ILLgT2IqXZKoNJr0nFw==}
+    engines: {node: '>= 10.0.0'}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /use-sidecar/1.1.2_ug65io7jkbhmo4fihdmbrh3ina:
