@@ -30,6 +30,7 @@ specifiers:
   final-form: 4.20.7
   fontfaceobserver: ^2.3.0
   framer-motion: '7'
+  grapheme-breaker-mjs: ^1.0.4
   hex-color-regex: ^1.1.0
   husky: 7.0.4
   jest: 27.5.1
@@ -78,6 +79,7 @@ dependencies:
   final-form: 4.20.7
   fontfaceobserver: 2.3.0
   framer-motion: 7.4.0_biqbaboplfbrettd7655fr4n2y
+  grapheme-breaker-mjs: 1.0.4
   hex-color-regex: 1.1.0
   next: 12.2.5_biqbaboplfbrettd7655fr4n2y
   node-emoji: 1.11.0
@@ -6578,6 +6580,12 @@ packages:
   /graceful-fs/4.2.10:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
 
+  /grapheme-breaker-mjs/1.0.4:
+    resolution: {integrity: sha512-ioZDDccBdDLVRdaVOJaUn70pIlzAoo1E29vXD1vECBaQvE8HSZHe++gklBr4iR3bYThko+MrXdpxty3pzy4azg==}
+    dependencies:
+      unicode-trie: 2.0.0
+    dev: false
+
   /gzip-size/6.0.0:
     resolution: {integrity: sha512-ax7ZYomf6jqPTQ4+XCpUGyXKHk5WweS+e05MBO4/y3WJ5RkmPXNKvX+bx1behVILVwr6JSQvZAku021CHPXG3Q==}
     engines: {node: '>=10'}
@@ -8809,6 +8817,10 @@ packages:
       p-timeout: 3.2.0
     dev: true
 
+  /pako/0.2.9:
+    resolution: {integrity: sha512-NUcwaKxUxWrZLpDG+z/xZaCgQITkA/Dv4V/T6bw7VON6l1Xz/VnrBqrYjZQ12TamKHzITTfOEIYUj48y2KXImA==}
+    dev: false
+
   /parent-module/1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
@@ -10227,6 +10239,10 @@ packages:
       readable-stream: 3.6.0
     dev: false
 
+  /tiny-inflate/1.0.3:
+    resolution: {integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==}
+    dev: false
+
   /tiny-invariant/1.2.0:
     resolution: {integrity: sha512-1Uhn/aqw5C6RI4KejVeTg6mIS7IqxnLJ8Mv2tV5rTc0qWobay7pDUz6Wi392Cnc8ak1H0F2cjoRzb2/AW4+Fvg==}
     dev: false
@@ -10514,6 +10530,13 @@ packages:
   /unicode-property-aliases-ecmascript/2.1.0:
     resolution: {integrity: sha512-6t3foTQI9qne+OZoVQB/8x8rk2k1eVy1gRXhV3oFQ5T6R1dqQ1xtin3XqSlx3+ATBkliTaR/hHyJBm+LVPNM8w==}
     engines: {node: '>=4'}
+    dev: false
+
+  /unicode-trie/2.0.0:
+    resolution: {integrity: sha512-x7bc76x0bm4prf1VLg79uhAzKw8DVboClSN5VxJuQ+LKDOVEW9CdH+VY7SP+vX7xCYQqzzgQpFqz15zeLvAtZQ==}
+    dependencies:
+      pako: 0.2.9
+      tiny-inflate: 1.0.3
     dev: false
 
   /union-value/1.0.1:
