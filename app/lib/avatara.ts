@@ -69,6 +69,11 @@ Object.entries(shapes).map(([shape, func]) => {
 export function graphemeSplitter(str: string) {
   return GraphemeBreaker.break(str);
 }
+
+export function parseText(str: string) {
+  return str.replace(/:([a-zA-Z0-9_\-\+]+):/g, (match) =>
+    // remove colons -> parse hex int -> convert code to char
+    String.fromCharCode(parseInt(match.replace(/:/g, ""), 16))
   );
 }
 
