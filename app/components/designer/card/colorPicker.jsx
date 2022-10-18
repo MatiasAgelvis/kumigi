@@ -7,9 +7,15 @@ import {
   PopoverContent,
   chakra,
 } from "@chakra-ui/react";
-import { RgbaStringColorPicker, HexColorInput } from "react-colorful";
+import {
+  RgbaStringColorPicker,
+  HexColorInput,
+  HexAlphaColorPicker,
+} from "react-colorful";
 import colorString from "color-string";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
+import Color from "color";
 
 function rgba2hex(color) {
   return colorString.to.hex(colorString.get.rgb(color));
@@ -20,13 +26,22 @@ function hex2rgba(color) {
 }
 
 export default function ColorPicker({ color, setColor }) {
-  const [internalColor, setInternalColor] = useState(color);
-  const ChakraHexColorInput = chakra(({ col0r, ...props }) => (
-    <HexColorInput color={col0r} {...props} />
-  ));
+  const [text, setText] = useState(color);
+  const debounced = useDebouncedCallback((value) => {
+    setColor(Color(value).hex());
+    // setText(Color(value).hex());
+  }, 1000);
+
+  useEffect(() => setText(color), [color]);
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      debounced.flush();
+    }
+  };
 
   return (
-    <Popover isLazy>
+    <Popover isLazy onClose={() => debounced.flush()}>
       <HStack>
         <PopoverTrigger>
           <Button
@@ -37,21 +52,17 @@ export default function ColorPicker({ color, setColor }) {
           ></Button>
         </PopoverTrigger>
         <Input
-          as={ChakraHexColorInput}
-          col0r={rgba2hex(color)}
-          onChange={(color) => setColor(hex2rgba(color))}
-          prefixed
-          alpha
+          value={text}
+          fontFamily="mono"
+          onChange={(e) => {
+            setText(e.target.value);
+            debounced(e.target.value);
+          }}
+          onKeyDown={handleKeyDown}
         />
       </HStack>
       <PopoverContent w="fit-content" mx={5}>
-        <RgbaStringColorPicker
-          color={color}
-          onChange={setInternalColor}
-          onMouseUp={() => setColor(internalColor)}
-          onMouseLeave={() => setColor(internalColor)}
-          onTouchEnd={() => setColor(internalColor)}
-        />
+        <HexAlphaColorPicker color={color} onChange={debounced} />
       </PopoverContent>
     </Popover>
   );

@@ -21,10 +21,12 @@ function Card({
   dragTarget,
   ...props
 }) {
-  const [shape, setShape] = useState(layer.shape);
-  const [color, setColor] = useState(layer.color);
-  const [text, setText] = useState(layer.text ? layer.text : "");
-  const [font, setFont] = useState(layer.font ? layer.font : "");
+  const { shape, color, text, font } = layer;
+
+  function setProp(key, value) {
+    updateLayer({ shape, color, text, font, [key]: value });
+  }
+
   const [displayLayer, setdisplayLayer] = useState(true);
   const { isOpen: isEditorOpen, onToggle: onEditorToggle } = useDisclosure({
     defaultIsOpen: true,
@@ -32,15 +34,6 @@ function Card({
 
   const backgroundColor = useColorModeValue("whiteAlpha.900", "gray.800");
   const backgroundColorOnDrag = useColorModeValue("teal.50", "teal.900");
-
-  useDidMountEffect(() => {
-    updateLayer({
-      shape: displayLayer ? shape : null,
-      color: color,
-      text: emoji.unemojify(text),
-      font: font ? font : text && "pt",
-    });
-  }, [shape, color, text, font, displayLayer]);
 
   return (
     <Box
@@ -52,8 +45,8 @@ function Card({
       {...props}
     >
       <CardHeader
-        shape={layer.shape}
-        color={layer.color}
+        shape={shape}
+        color={color}
         displayLayer={displayLayer}
         setdisplayLayer={setdisplayLayer}
         closeButton={deleteLayer}
@@ -66,20 +59,26 @@ function Card({
           <SimpleGrid columns={[1, 2]} spacing={[5, null, 7]}>
             <OptionSelect
               options={options}
-              state={layer.shape}
-              setState={setShape}
+              state={shape}
+              setState={(value) => setProp("shape", value)}
               placeholder="Select a shape"
             />
-            <ColorPicker color={layer.color} setColor={setColor} />
+            <ColorPicker
+              color={color}
+              setColor={(value) => setProp("color", value)}
+            />
 
             {shape == "text" && (
-              <TextInput text={layer.text} setText={setText} />
+              <TextInput
+                text={text}
+                setText={(value) => setProp("text", value)}
+              />
             )}
             {shape == "text" && (
               <OptionSelect
                 options={fonts}
-                state={layer.font}
-                setState={setFont}
+                state={font}
+                setState={(value) => setProp("font", value)}
                 placeholder="Select a Font"
               />
             )}
