@@ -27,7 +27,6 @@ function Card({
     updateLayer({ shape, color, text, font, [key]: value });
   }
 
-  const [displayLayer, setdisplayLayer] = useState(true);
   const { isOpen: isEditorOpen, onToggle: onEditorToggle } = useDisclosure({
     defaultIsOpen: true,
   });
@@ -47,8 +46,8 @@ function Card({
       <CardHeader
         shape={shape}
         color={color}
-        displayLayer={displayLayer}
-        setdisplayLayer={setdisplayLayer}
+        displayLayer={layer.display}
+        setdisplayLayer={(value) => setProp("display", value)}
         closeButton={deleteLayer}
         onEditorToggle={onEditorToggle}
         isEditorOpen={isEditorOpen}
