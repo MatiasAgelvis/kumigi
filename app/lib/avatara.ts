@@ -177,6 +177,7 @@ export function randomLayer(): Layer {
     color: randomColor(),
     text: shape == "text" ? randomText() : "",
     font: shape == "text" ? choose(Object.values(Fonts)) : "",
+    display: true,
   };
 }
 

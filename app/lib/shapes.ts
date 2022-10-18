@@ -3,10 +3,11 @@ import Color from "color";
 
 export type Shape = keyof typeof shapes;
 export type Layer = {
-  shape: Shape;
+  shape: Shape | null;
   color: string;
   text: string;
   font: string;
+  display: boolean;
 };
 
 const shapes = {
