@@ -59,6 +59,7 @@ export default function ColorPicker({ color, setColor }) {
             debounced(e.target.value);
           }}
           onKeyDown={handleKeyDown}
+          onBlur={() => debounced.flush()}
         />
       </HStack>
       <PopoverContent w="fit-content" mx={5}>
