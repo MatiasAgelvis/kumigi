@@ -53,6 +53,7 @@ export default function ColorPicker({ color, setColor }) {
         </PopoverTrigger>
         <Input
           value={text}
+          fontFamily="mono"
           onChange={(e) => {
             setText(e.target.value);
             debounced(e.target.value);
