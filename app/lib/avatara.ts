@@ -171,7 +171,10 @@ function randomText() {
 }
 
 export function randomLayer(): Layer {
-  const shape = choose(Object.keys(shapes));
+  const shape: keyof typeof shapes | "text" = choose([
+    ...Object.keys(shapes),
+    "text",
+  ]);
   return {
     shape,
     color: randomColor(),
@@ -189,7 +192,7 @@ export function randomLayers(min = 1, max = 5): Array<Layer> {
 Avatara.prototype.randomAvatar = function () {
   let layers = randomLayers();
   layers.forEach((layer) => {
-    this[layer.shape](layer);
+    this[layer.shape!](layer);
   });
   return this;
 };
