@@ -1,7 +1,7 @@
 import { Canvas } from "canvas";
 import Color from "color";
 
-export type Shape = keyof typeof shapes;
+export type Shape = keyof typeof shapes | "text";
 export type Layer = {
   shape: Shape | null;
   color: string;
