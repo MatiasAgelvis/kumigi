@@ -23,7 +23,7 @@ const Header = () => {
         <Suspense fallback={<Button disabled>Loading...</Button>}>
           <UserInfo />
         </Suspense>
-        <ColorToggle size={useBreakpointValue({ base: "sm", md: "md" })} />
+        <ColorToggle />
       </Wrap>
     </SimpleGrid>
   );
