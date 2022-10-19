@@ -39,8 +39,10 @@ function Card({
       {...boxOptions}
       my={3}
       p={["0.7rem", 5]}
-      backgroundColor={backgroundColor}
-      {...(dragTarget && { backgroundColor: backgroundColorOnDrag })}
+      backgroundColor={dragTarget ? backgroundColorOnDrag : backgroundColor}
+      _dark={{
+        backgroundColor: dragTarget ? backgroundColorOnDrag : backgroundColor,
+      }}
       {...props}
     >
       <CardHeader
