@@ -47,7 +47,7 @@ specifiers:
   react-dom: 18.2.0
   react-final-form: 6.5.9
   react-icons: ^4.4.0
-  react-infinite-scroll-component: ^6.1.0
+  react-infinite-scroller: ^1.2.6
   react-select: ^5.3.1
   react-sortablejs: ^6.1.1
   recoil: ^0.7.2
@@ -91,7 +91,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-final-form: 6.5.9_b76tjmhm4bpbaoui6lan2hu4pm
   react-icons: 4.4.0_react@18.2.0
-  react-infinite-scroll-component: 6.1.0_react@18.2.0
+  react-infinite-scroller: 1.2.6_react@18.2.0
   react-select: 5.4.0_zxljzmqdrxwnuenbkrz77w74uy
   react-sortablejs: 6.1.4_3am5rxkfsdjgvfeci4ginxgxaq
   recoil: 0.7.5_biqbaboplfbrettd7655fr4n2y
@@ -9299,13 +9299,13 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-infinite-scroll-component/6.1.0_react@18.2.0:
-    resolution: {integrity: sha512-SQu5nCqy8DxQWpnUVLx7V7b7LcA37aM7tvoWjTLZp1dk6EJibM5/4EJKzOnl07/BsM1Y40sKLuqjCwwH/xV0TQ==}
+  /react-infinite-scroller/1.2.6_react@18.2.0:
+    resolution: {integrity: sha512-mGdMyOD00YArJ1S1F3TVU9y4fGSfVVl6p5gh/Vt4u99CJOptfVu/q5V/Wlle72TMgYlBwIhbxK5wF0C/R33PXQ==}
     peerDependencies:
-      react: '>=16.0.0'
+      react: ^0.14.9 || ^15.3.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
+      prop-types: 15.8.1
       react: 18.2.0
-      throttle-debounce: 2.3.0
     dev: false
 
   /react-is/16.13.1:
@@ -10234,11 +10234,6 @@ packages:
   /throat/6.0.1:
     resolution: {integrity: sha512-8hmiGIJMDlwjg7dlJ4yKGLK8EsYqKgPWbG3b4wjJddKNwc7N7Dpn08Df4szr/sZdMVeOstrdYSsqzX6BYbcB+w==}
     dev: true
-
-  /throttle-debounce/2.3.0:
-    resolution: {integrity: sha512-H7oLPV0P7+jgvrk+6mwwwBDmxTaxnu9HMXmloNLXwnNO0ZxZ31Orah2n8lU1eMPvsaowP2CX+USCgyovXfdOFQ==}
-    engines: {node: '>=8'}
-    dev: false
 
   /through/2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
