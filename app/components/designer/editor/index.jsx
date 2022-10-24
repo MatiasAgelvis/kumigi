@@ -13,7 +13,6 @@ import Card from "../card";
 import Toolbar from "./toolbar";
 import sizeComponents from "app/components/sizeComponents";
 
-
 function Editor({ layerState, avatar, shapes, fonts, ...props }) {
   const [dragTarget, setDragTarget] = useState(-1);
   const [dragEvent, setDragEvent] = useState(false);
@@ -100,7 +99,7 @@ function Editor({ layerState, avatar, shapes, fonts, ...props }) {
           </ButtonGroup>
           <AccordionMenu
             name="Size Options"
-            options={sizeComponents}
+            options={sizeComponents()}
             buttonProps={buttonOptions}
           />
         </VStack>
