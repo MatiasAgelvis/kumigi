@@ -1,53 +1,78 @@
 import boxOptions from "app/utils/boxOptions";
-import { Box, Center, Flex, SimpleGrid, Spinner, VStack, Wrap } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Flex,
+  SimpleGrid,
+  Spinner,
+  VStack,
+  Wrap,
+} from "@chakra-ui/react";
 import { useState } from "react";
 
+import InfiniteScroll from "react-infinite-scroller";
+import ImageBox from "../designer/image/imageBox";
+import Avatara, { randomLayers } from "app/lib/avatara";
+import applyLayers from "app/utils/applyLayers";
+import Modalo from "../modal";
 
-import InfiniteScroll from 'react-infinite-scroller';
+function Dummy() {
+  const avatar = new Avatara();
+  const [layers, setLayers] = useState(randomLayers());
+  applyLayers(avatar, layers);
 
-
-function Dummy({ msg }) {
-  return <Box>HIHIHIHIHIHIHI {msg}</Box>;
+  const imageBox = (
+    <Center>
+      <ImageBox image={avatar.toDataURL()} />
+    </Center>
+  );
+  return (
+    <VStack>
+      {imageBox}
+      <Modalo
+        open="View"
+        action="Open in Editor"
+        modalBody={imageBox}
+        onClickAction={console.log}
+      />
+    </VStack>
+  );
 }
 
-
-
 function Gallery({ ...props }) {
-
-  const [hasMore, setHasMore] = useState(true)
-  const [items, setItems] = useState([])
+  // sizeOptions
+  const [hasMore, setHasMore] = useState(true);
+  const [items, setItems] = useState([]);
 
   const fetchMore = () => {
-    setHasMore(items.length < 50)
+    setHasMore(items.length < 50);
     setItems(items.concat(Array.from({ length: 2 })));
   };
 
-
   return (
     <Flex justify={"center"} {...props}>
-
-      <Box as={InfiniteScroll}
-        w='full'
+      <Box
+        as={InfiniteScroll}
+        w="full"
         p={boxOptions.p}
         pageStart={0}
         loadMore={fetchMore}
         hasMore={hasMore}
-        loader={<Spinner />}
+        loader={
+          <Center>
+            <Spinner />
+          </Center>
+        }
       >
-        <SimpleGrid minChildWidth={'120px'} spacing='40px' w='full'>
-          
+        <SimpleGrid minChildWidth={"120px"} spacing="40px" w="full">
           {items.map((i, index) => (
-            <Box
-              {...boxOptions}
-            >
-              <Dummy key={index} msg={'#' + index} />
+            <Box {...boxOptions}>
+              <Dummy key={index} />
             </Box>
           ))}
-
         </SimpleGrid>
       </Box>
-
-    </Flex >
+    </Flex>
   );
 }
 
