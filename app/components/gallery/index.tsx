@@ -27,15 +27,14 @@ function Dummy() {
     </Center>
   );
   return (
-    <VStack>
-      {imageBox}
-      <Modalo
-        open="View"
-        action="Open in Editor"
-        modalBody={imageBox}
-        onClickAction={console.log}
-      />
-    </VStack>
+    <Modalo
+      open={<Box {...boxOptions}>{imageBox}</Box>}
+      buttonProps={{ variant: "link" }}
+      action="Open in Editor"
+      modalBody={imageBox}
+      onClickAction={console.log}
+      modalProps={boxOptions}
+    />
   );
 }
 
@@ -66,9 +65,7 @@ function Gallery({ ...props }) {
       >
         <SimpleGrid minChildWidth={"120px"} spacing="40px" w="full">
           {items.map((i, index) => (
-            <Box {...boxOptions}>
-              <Dummy key={index} />
-            </Box>
+            <Dummy key={index} />
           ))}
         </SimpleGrid>
       </Box>
