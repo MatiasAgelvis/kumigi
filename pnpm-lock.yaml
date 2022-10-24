@@ -16,6 +16,7 @@ specifiers:
   '@types/node': 17.0.16
   '@types/preview-email': 2.0.1
   '@types/react': 18.0.17
+  '@types/react-infinite-scroller': ^1.2.3
   '@typescript-eslint/eslint-plugin': 5.30.5
   blitz: 2.0.0-beta.4
   browser-or-node: 2.0.0
@@ -71,6 +72,7 @@ dependencies:
   '@emotion/react': 11.10.4_ug65io7jkbhmo4fihdmbrh3ina
   '@emotion/styled': 11.10.4_4qlqmspomoqctzkikkhvhnn3qu
   '@prisma/client': 4.0.0_prisma@4.0.0
+  '@types/react-infinite-scroller': 1.2.3
   blitz: 2.0.0-beta.4_s7cbe43ueyxuwrte2p2ddeelsu
   browser-or-node: 2.0.0
   canvas: 2.10.1
@@ -3694,6 +3696,12 @@ packages:
 
   /@types/range-parser/1.2.4:
     resolution: {integrity: sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==}
+    dev: false
+
+  /@types/react-infinite-scroller/1.2.3:
+    resolution: {integrity: sha512-l60JckVoO+dxmKW2eEG7jbliEpITsTJvRPTe97GazjF5+ylagAuyYdXl8YY9DQsTP9QjhqGKZROknzgscGJy0A==}
+    dependencies:
+      '@types/react': 18.0.17
     dev: false
 
   /@types/react-transition-group/4.4.5:
