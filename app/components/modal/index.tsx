@@ -8,18 +8,19 @@ import {
   ModalCloseButton,
   useDisclosure,
   Button,
-  ModalProps,
   ButtonProps,
+  ModalContentProps,
 } from "@chakra-ui/react";
 import { MouseEventHandler, ReactNode } from "react";
 
 type Props = {
-  open: string;
+  open: ReactNode;
   modalHeader?: string;
   modalBody?: ReactNode;
   action: string;
   onClickAction: MouseEventHandler;
   buttonProps?: ButtonProps;
+  modalProps?: ModalContentProps;
 };
 
 export default function Modalo({
@@ -29,6 +30,7 @@ export default function Modalo({
   action,
   onClickAction,
   buttonProps,
+  modalProps,
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -39,7 +41,7 @@ export default function Modalo({
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent {...modalProps}>
           <ModalHeader>{modalHeader}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>{modalBody}</ModalBody>
