@@ -20,6 +20,9 @@ const Header = () => {
         <Link href={Routes.Home()}>Avatara</Link>
       </Heading>
       <Wrap spacing={4} justify="end">
+        <Button>
+          <Link href={Routes.RandomGallery()}>Random Gallery</Link>
+        </Button>
         <Suspense fallback={<Button disabled>Loading...</Button>}>
           <UserInfo />
         </Suspense>

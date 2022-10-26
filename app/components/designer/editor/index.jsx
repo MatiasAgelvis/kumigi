@@ -1,38 +1,22 @@
 import { AddIcon } from "@chakra-ui/icons";
 import { Box, ButtonGroup, Flex, IconButton, VStack } from "@chakra-ui/react";
-import { AnimatePresence, motion } from "framer-motion";
+// import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
 import { ReactSortable } from "react-sortablejs";
-import { useRecoilState } from "recoil";
 import boxOptions from "../../../utils/boxOptions";
 import buttonOptions from "../../../utils/buttonOptions";
 import { randomLayer } from "../../../lib/avatara";
 import { createCard, idCard } from "../../../utils/createCard";
-import { heightAtom, widthAtom } from "../../../utils/store";
 import AccordionMenu from "../accordionMenu/accordionMenu";
 import Card from "../card";
-import NumberInput from "./numberInput";
-import animationOptions from "app/utils/animationOptions";
 import Toolbar from "./toolbar";
+import sizeComponents from "app/components/sizeComponents";
 
 function Editor({ layerState, avatar, shapes, fonts, ...props }) {
   const [dragTarget, setDragTarget] = useState(-1);
   const [dragEvent, setDragEvent] = useState(false);
-  const [height, setHeight] = useRecoilState(heightAtom);
-  const [width, setWidth] = useRecoilState(widthAtom);
   const [{ present: layers }, { set: setLayers }] = layerState;
-
-  const advancedOptions = [
-    {
-      name: "Height",
-      input: <NumberInput value={height} setValue={setHeight} max={2000} />,
-    },
-    {
-      name: "Width",
-      input: <NumberInput value={width} setValue={setWidth} max={2000} />,
-    },
-  ];
 
   const updateLayer = (index) => (update) => {
     console.log("update", index, layers[index], update);
@@ -115,7 +99,7 @@ function Editor({ layerState, avatar, shapes, fonts, ...props }) {
           </ButtonGroup>
           <AccordionMenu
             name="Size Options"
-            options={advancedOptions}
+            options={sizeComponents()}
             buttonProps={buttonOptions}
           />
         </VStack>

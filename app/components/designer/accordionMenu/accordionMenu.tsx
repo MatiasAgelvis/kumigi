@@ -8,20 +8,18 @@ import {
   ButtonProps,
 } from "@chakra-ui/react";
 import boxOptions from "app/utils/boxOptions";
-import { FC } from "react";
+import { ReactNode } from "react";
 import Item from "./item";
 
-type Options = Array<{ name: string; input: string }>;
+export type Options = Array<{ name: string; input: ReactNode }>;
 
-type WrapperProps = BoxProps;
-
-interface Props extends FC {
+type Props = {
   name: string;
   options: Options;
-  spacing: number;
-  wrapperProps: BoxProps;
-  buttonProps: ButtonProps;
-}
+  spacing?: number;
+  wrapperProps?: BoxProps;
+  buttonProps?: ButtonProps;
+};
 
 function AccordionMenu({
   name,
@@ -40,7 +38,7 @@ function AccordionMenu({
       <Collapse in={isOpen} animateOpacity>
         <Box mt={spacing} {...boxOptions}>
           <VStack spacing={spacing} align="stretch">
-            {options.map((option, i) => (
+            {Array.from(options).map((option, i) => (
               <Item key={i} name={option.name} input={option.input} />
             ))}
           </VStack>

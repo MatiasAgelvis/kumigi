@@ -3,7 +3,7 @@ import { DownloadIcon } from "@chakra-ui/icons";
 import { saveAs } from "file-saver";
 import buttonOptions from "../../../utils/buttonOptions";
 
-export default function DownloadButton({ canvas }) {
+export default function DownloadButton({ canvas, ...props }) {
   return (
     <Button
       {...buttonOptions}
@@ -13,6 +13,7 @@ export default function DownloadButton({ canvas }) {
           saveAs(blob, "avatara.png");
         });
       }}
+      {...props}
     >
       Download
     </Button>
