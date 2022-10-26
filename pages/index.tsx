@@ -1,7 +1,6 @@
 import Layout from "app/core/layouts/Layout";
 import { BlitzPage } from "@blitzjs/next";
 import Designer from "app/components/designer";
-import { layers__Default } from "app/utils/createCard";
 import { useRecoilState } from "recoil";
 import { layersAtom } from "app/utils/store";
 
