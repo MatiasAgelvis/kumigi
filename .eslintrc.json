@@ -11,9 +11,7 @@
       "version": "detect"
     }
   },
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react"],
   "rules": {
     "react/jsx-no-bind": [
       "error",
@@ -22,7 +20,7 @@
         "allowBind": false,
         "ignoreRefs": true
       }
-    ],
+    ]
     // "react/no-did-update-set-state": "error",
     // "react/no-unknown-property": "error",
     // "react/no-unused-prop-types": "error",
