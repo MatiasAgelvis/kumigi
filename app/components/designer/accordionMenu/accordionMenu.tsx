@@ -16,9 +16,9 @@ export type Options = Array<{ name: string; input: ReactNode }>;
 type Props = {
   name: string;
   options: Options;
-  spacing: number;
-  wrapperProps: BoxProps;
-  buttonProps: ButtonProps;
+  spacing?: number;
+  wrapperProps?: BoxProps;
+  buttonProps?: ButtonProps;
 };
 
 function AccordionMenu({
