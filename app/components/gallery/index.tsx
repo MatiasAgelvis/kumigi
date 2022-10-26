@@ -3,7 +3,9 @@ import boxOptions from "app/utils/boxOptions";
 import {
   Box,
   Center,
+  CenterProps,
   Flex,
+  ModalProps,
   SimpleGrid,
   Spinner,
   VStack,
@@ -20,8 +22,9 @@ import sizeState from "app/utils/sizeState";
 import { useRecoilState } from "recoil";
 import { layersAtom } from "app/utils/store";
 import { useRouter } from "next/router";
+import DownloadButton from "../designer/image/downloadButton";
 
-function Dummy() {
+function Avatar({ ...props }) {
   const { height, width } = sizeState();
   const avatar = new Avatara(width, height);
   const [layers, setLayers] = useState(randomLayers());
@@ -46,8 +49,14 @@ function Dummy() {
         router.push(Routes.Home());
       }}
       modalProps={boxOptions}
+      extraActions={[
+        <DownloadButton
+          canvas={avatar.canvas}
+          w={"fit-content"}
+          key={"download"}
+        />,
+      ]}
     />
-    // <Designer initialLayersState={layers__Default} />
   );
 }
 
@@ -56,9 +65,10 @@ function Gallery({ ...props }) {
   const [hasMore, setHasMore] = useState(true);
   const [items, setItems] = useState([]);
   const manyMore = 10;
+  const limit = 100;
 
   const fetchMore = () => {
-    setHasMore(items.length < 50);
+    setHasMore(items.length < limit);
     setItems(items.concat(Array.from({ length: manyMore })));
   };
 
@@ -79,7 +89,7 @@ function Gallery({ ...props }) {
       >
         <SimpleGrid minChildWidth={"120px"} spacing="40px" w="full">
           {items.map((i, index) => (
-            <Dummy key={index} />
+            <Avatar key={`avatar_${index}`} />
           ))}
         </SimpleGrid>
       </Box>
