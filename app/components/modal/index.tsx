@@ -10,6 +10,7 @@ import {
   Button,
   ButtonProps,
   ModalContentProps,
+  Wrap,
 } from "@chakra-ui/react";
 import { MouseEventHandler, ReactNode } from "react";
 
@@ -21,6 +22,7 @@ type Props = {
   onClickAction: MouseEventHandler;
   buttonProps?: ButtonProps;
   modalProps?: ModalContentProps;
+  extraActions?: Array<ReactNode>;
 };
 
 export default function Modalo({
@@ -31,6 +33,7 @@ export default function Modalo({
   onClickAction,
   buttonProps,
   modalProps,
+  extraActions,
 }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -47,12 +50,15 @@ export default function Modalo({
           <ModalBody>{modalBody}</ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button colorScheme="teal" onClick={onClickAction}>
-              {action}
-            </Button>
+            <Wrap justify={"center"}>
+              <Button colorScheme="blue" mr={3} onClick={onClose}>
+                Close
+              </Button>
+              <Button colorScheme="teal" onClick={onClickAction}>
+                {action}
+              </Button>
+              {extraActions}
+            </Wrap>
           </ModalFooter>
         </ModalContent>
       </Modal>
