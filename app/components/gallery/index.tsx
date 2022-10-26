@@ -1,16 +1,6 @@
 import { Routes } from "@blitzjs/next";
 import boxOptions from "app/utils/boxOptions";
-import {
-  Box,
-  Center,
-  CenterProps,
-  Flex,
-  ModalProps,
-  SimpleGrid,
-  Spinner,
-  VStack,
-  Wrap,
-} from "@chakra-ui/react";
+import { Box, Center, Flex, SimpleGrid, Spinner } from "@chakra-ui/react";
 import { useState } from "react";
 
 import InfiniteScroll from "react-infinite-scroller";
@@ -56,6 +46,7 @@ function Avatar({ ...props }) {
           key={"download"}
         />,
       ]}
+      {...props}
     />
   );
 }
