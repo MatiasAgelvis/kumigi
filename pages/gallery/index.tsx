@@ -6,7 +6,7 @@ import buttonOptions from "app/utils/buttonOptions";
 import AccordionMenu from "app/components/designer/accordionMenu/accordionMenu";
 import boxOptions from "app/utils/boxOptions";
 
-const RandomGallery: BlitzPage = () => {
+const UserGallery: BlitzPage = () => {
   return (
     <Layout title="Random Gallery">
       <main>
@@ -22,4 +22,4 @@ const RandomGallery: BlitzPage = () => {
   );
 };
 
-export default RandomGallery;
+export default UserGallery;
