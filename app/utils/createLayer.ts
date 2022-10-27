@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { Layer } from "app/lib/shapes";
 
-export function createCard(): Layer {
+export function createLayer(): Layer {
   return idCard({
     shape: null,
     color: "#000000",
@@ -15,4 +15,4 @@ export function idCard(layer: Layer): Layer {
   return { id: uuidv4(), ...layer };
 }
 
-export const layers__Default: Array<Layer> = [createCard()];
+export const layers__Default: Array<Layer> = [idCard(createLayer())];
