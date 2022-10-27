@@ -11,6 +11,9 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { RecoilRoot } from "recoil";
 import "public/css/fonts.css";
 import "public/css/dragHandle.css";
+import { QueryClient, QueryClientProvider, useQuery } from "@blitzjs/rpc";
+
+const queryClient = new QueryClient();
 
 function RootErrorFallback({ error }: ErrorFallbackProps) {
   if (error instanceof AuthenticationError) {
@@ -34,13 +37,17 @@ function RootErrorFallback({ error }: ErrorFallbackProps) {
 
 const theme = extendTheme({});
 
+QueryClientProvider;
+
 function MyApp({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page);
   return (
     <ErrorBoundary FallbackComponent={RootErrorFallback}>
-      <ChakraProvider theme={theme}>
-        <RecoilRoot>{getLayout(<Component {...pageProps} />)}</RecoilRoot>
-      </ChakraProvider>
+      <QueryClientProvider client={queryClient}>
+        <ChakraProvider theme={theme}>
+          <RecoilRoot>{getLayout(<Component {...pageProps} />)}</RecoilRoot>
+        </ChakraProvider>
+      </QueryClientProvider>
     </ErrorBoundary>
   );
 }
