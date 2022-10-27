@@ -6,7 +6,7 @@ export default function applyLayers(
   layers: Array<Layer>
 ) {
   layers.forEach((layer) => {
-    if (layer.shape && layer.display) {
+    if (layer.shape && (!Object.hasOwn(layer, "display") || layer.display)) {
       avatar[layer.shape](layer);
     }
   });
