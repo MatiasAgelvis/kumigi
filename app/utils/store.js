@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { layers__Default } from "./createCard";
+import { layers__Default } from "./createLayer";
 
 export const layersAtom = atom({
   key: "layersState",

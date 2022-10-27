@@ -15,7 +15,7 @@ import {
 import Editor from "./editor";
 import Image from "./image";
 import useUndo from "use-undo";
-import { createCard, idCard, layers__Default } from "app/utils/createCard";
+import { layers__Default } from "app/utils/createLayer";
 
 function Designer({ initialLayersState = layers__Default }) {
   const [height, setHeight] = useRecoilState(heightAtom);
