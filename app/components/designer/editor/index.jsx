@@ -7,7 +7,7 @@ import { ReactSortable } from "react-sortablejs";
 import boxOptions from "../../../utils/boxOptions";
 import buttonOptions from "../../../utils/buttonOptions";
 import { randomLayer } from "../../../lib/avatara";
-import { createCard, idCard } from "../../../utils/createCard";
+import { createLayer, idCard } from "../../../utils/createLayer";
 import AccordionMenu from "../accordionMenu/accordionMenu";
 import Card from "../card";
 import Toolbar from "./toolbar";
@@ -85,7 +85,7 @@ function Editor({ layerState, avatar, shapes, fonts, ...props }) {
             <IconButton
               {...buttonOptions}
               fontSize={"1.4rem"}
-              onClick={() => addLayer(createCard())}
+              onClick={() => addLayer(createLayer())}
               icon={<AddIcon />}
             />
             <IconButton

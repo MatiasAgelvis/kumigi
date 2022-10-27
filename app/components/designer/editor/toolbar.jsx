@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { randomLayers } from "app/lib/avatara";
 import boxOptions from "app/utils/boxOptions";
-import { createCard, idCard, layers__Default } from "app/utils/createCard";
+import { idCard, layers__Default } from "app/utils/createLayer";
 
 export default function Toolbar({ layerState, ...props }) {
   const [
