@@ -12,6 +12,7 @@ specifiers:
   '@prisma/client': 4.0.0
   '@testing-library/jest-dom': 5.16.3
   '@types/color': ^3.0.3
+  '@types/fuzzy-search': ^2.1.2
   '@types/jest': 27.4.1
   '@types/node': 17.0.16
   '@types/preview-email': 2.0.1
@@ -32,6 +33,7 @@ specifiers:
   final-form: 4.20.7
   fontfaceobserver: ^2.3.0
   framer-motion: '7'
+  fuzzy-search: ^3.2.1
   grapheme-breaker-mjs: ^1.0.4
   hex-color-regex: ^1.1.0
   husky: 7.0.4
@@ -83,6 +85,7 @@ dependencies:
   final-form: 4.20.7
   fontfaceobserver: 2.3.0
   framer-motion: 7.4.0_biqbaboplfbrettd7655fr4n2y
+  fuzzy-search: 3.2.1
   grapheme-breaker-mjs: 1.0.4
   hex-color-regex: 1.1.0
   next: 12.2.5_biqbaboplfbrettd7655fr4n2y
@@ -110,6 +113,7 @@ devDependencies:
   '@next/bundle-analyzer': 12.0.8
   '@testing-library/jest-dom': 5.16.3
   '@types/color': 3.0.3
+  '@types/fuzzy-search': 2.1.2
   '@types/jest': 27.4.1
   '@types/node': 17.0.16
   '@types/preview-email': 2.0.1
@@ -3585,6 +3589,10 @@ packages:
       '@types/serve-static': 1.15.0
     dev: false
 
+  /@types/fuzzy-search/2.1.2:
+    resolution: {integrity: sha512-YOqA50Z3xcycm4Br5+MBUpSumfdOAcv34A8A8yFn62zBQPTzJSXQk11qYE5w8BWQ0KrVThXUgEQh7ZLrYI1NaQ==}
+    dev: true
+
   /@types/graceful-fs/4.1.5:
     resolution: {integrity: sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==}
     dependencies:
@@ -6444,6 +6452,10 @@ packages:
   /functions-have-names/1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
     dev: true
+
+  /fuzzy-search/3.2.1:
+    resolution: {integrity: sha512-vAcPiyomt1ioKAsAL2uxSABHJ4Ju/e4UeDM+g1OlR0vV4YhLGMNsdLNvZTpEDY4JCSt0E4hASCNM5t2ETtsbyg==}
+    dev: false
 
   /gauge/3.0.2:
     resolution: {integrity: sha512-+5J6MS/5XksCuXq++uFRsnUd7Ovu1XenbeuIuNRJxYWjgQbPuFhT14lAvsWfqfAmnwluf1OwMjz39HjfLPci0Q==}

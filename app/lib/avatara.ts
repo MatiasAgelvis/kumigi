@@ -4,7 +4,6 @@ import Color from "color";
 import {
   isNode, //isBrowser, isWebWorker, isJsDom, isDeno,
 } from "browser-or-node";
-import emoji from "node-emoji";
 import shapes, { Layer, Shape } from "./shapes";
 
 export const Fonts = Object.freeze({
@@ -13,8 +12,10 @@ export const Fonts = Object.freeze({
   COUSINE: "cousine",
   PT: "pt",
   ROBOTO: "roboto",
-  EMOJI: "emoji",
-  AWESOME: "awesome",
+  NOTO: "noto",
+  FASOLID: "Solid Icons",
+  BRANDS: "Brand Icons",
+  FAREGULAR: "Regular Icons",
 });
 
 if (isNode) {
@@ -33,15 +34,19 @@ if (isNode) {
       family: Fonts.ROBOTO,
     });
     registerFont("public/fonts/NotoEmoji-Bold.ttf", {
-      family: Fonts.EMOJI,
+      family: Fonts.NOTO,
     });
-    registerFont("public/fonts/Font Awesome 6 Free-Solid-900.otf", {
-      family: Fonts.AWESOME,
+    registerFont("public/fonts/fa-solid-900.ttf", {
+      family: Fonts.FASOLID,
+    });
+    registerFont("public/fonts/fa-brands-400.ttf", {
+      family: Fonts.BRANDS,
+    });
+    registerFont("public/fonts/fa-regular-400.ttf", {
+      family: Fonts.FAREGULAR,
     });
   });
 }
-
-const FONT_FACTOR = 1.1;
 
 export function getKeyByValue(object, value) {
   return Object.keys(object).find((key) => object[key] === value);
@@ -98,11 +103,7 @@ Avatara.prototype.text = async function ({
   if (text == "") return this;
 
   const fontName = getKeyByValue(Fonts, font.toLowerCase()) || "pt";
-  const fontFactor = FONT_FACTOR * this.canvas.width;
   let str = parseText(text);
-  const canvasSize =
-    Math.min(this.canvas.height, this.canvas.width) /
-    Math.max(this.canvas.height, this.canvas.width);
 
   let fontSize = 1;
 
@@ -117,17 +118,9 @@ Avatara.prototype.text = async function ({
     textAreaOnCanvas(this.ctx, str).width != prevWidth
   ) {
     prevWidth = textAreaOnCanvas(this.ctx, str).width;
-    this.ctx.font = `bold ${fontSize}px ${Fonts[fontName]}, ${Fonts.AWESOME}`;
+    this.ctx.font = `bold ${fontSize}px ${Fonts[fontName]}, ${Fonts.FASOLID}, ${Fonts.BRANDS}, ${Fonts.FAREGULAR}`;
     fontSize = fontSize + 2;
-    // console.log(textAreaOnCanvas(this.ctx, str).width, prevWidth);
-    // console.log(fontSize, textAreaOnCanvas(this.ctx, str));
   }
-
-  // while (1.8 * this.ctx.measureText("M"). > 0.7 * this.canvas.height) {
-  //   this.ctx.font = `bold ${fontSize}px ${Fonts[fontName]}, ${Fonts.AWESOME}`;
-  //   fontSize = fontSize / 1.1;
-  //   console.log("-1 ", fontSize);
-  // }
 
   this.ctx.fillText(str, this.canvas.width / 2, this.canvas.height / 2);
   return this;

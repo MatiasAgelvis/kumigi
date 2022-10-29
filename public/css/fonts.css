@@ -35,15 +35,28 @@
 
 /* EMOJI */
 @font-face {
-  font-family: "emoji";
+  font-family: "noto";
   src: local("NotoEmoji"), url("../../public/fonts/NotoEmoji-Bold.ttf"),
     url("https://fonts.googleapis.com/css2?family=Noto+Emoji:wght@700&display=swap");
 }
 
 /* ICONS */
 @font-face {
-  font-family: "Awesome";
-  src: local("Font Awesome 6"),
-    url("../../public/fonts/Font\ Awesome\ 6\ Free-Solid-900.otf"),
+  font-family: "Solid Icons";
+  src: local("Font Awesome 6 Solid"), url("../../public/fonts/fa-solid-900.ttf"),
+    url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css");
+}
+
+@font-face {
+  font-family: "Brand Icons";
+  src: local("Font Awesome 6 Brands"),
+    url("../../public/fonts/fa-brands-400.ttf"),
+    url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css");
+}
+
+@font-face {
+  font-family: "Regular Icons";
+  src: local("Font Awesome 6 Regular"),
+    url("../../public/fonts/fa-regular-400.ttf"),
     url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css");
 }
