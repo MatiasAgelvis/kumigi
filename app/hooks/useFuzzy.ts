@@ -13,7 +13,7 @@ function useFuzzy<T>(
 ) {
   const fuse = React.useMemo(
     () => new FuzzySearch(list, keys, options),
-    [list, options, keys]
+    [list, keys, options]
   );
 
   const results = React.useMemo(
