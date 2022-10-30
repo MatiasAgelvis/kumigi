@@ -1,8 +1,8 @@
 import React from "react";
 import FuzzySearch from "fuzzy-search";
 
-function useFuzzy<T>(
-  list: T[],
+function useFuzzy(
+  list: any[],
   keys: string[],
   searchTerm: string = "",
   options: { caseSensitive: boolean; sort: boolean } = {

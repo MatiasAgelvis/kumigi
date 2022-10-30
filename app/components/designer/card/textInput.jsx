@@ -2,29 +2,17 @@
 import {
   HStack,
   Input,
-  InputGroup,
-  InputRightAddon,
-  Code,
-  VStack,
-  Highlight,
-  Text,
-  Box,
   Button,
-  InputRightElement,
   Popover,
   PopoverTrigger,
   PopoverContent,
   PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   PopoverArrow,
   PopoverCloseButton,
-  PopoverAnchor,
   Portal,
-  SimpleGrid,
   Wrap,
 } from "@chakra-ui/react";
-import { textLength } from "app/lib/avatara";
 import { useEffect, useState, useRef, useMemo } from "react";
 import icons from "public/fonts/icons.json";
 import useFuzzy from "app/hooks/useFuzzy";
@@ -53,12 +41,10 @@ function TextInput({ text, setText, maxLength = 3 }) {
     return { id: index, label: value.label, unicode: value.unicode };
   }
 
-  const iconList = useMemo(
-    () =>
-      Object.entries(icons).map(([key, value], index) =>
-        filterIcons(key, value, index)
-      ),
-    [icons]
+  const [iconList, setIconList] = useState(
+    Object.entries(icons).map(([key, value], index) =>
+      filterIcons(key, value, index)
+    )
   );
 
   const results = useFuzzy(
@@ -71,7 +57,6 @@ function TextInput({ text, setText, maxLength = 3 }) {
     },
     true
   );
-  console.log(results);
 
   return (
     <HStack>

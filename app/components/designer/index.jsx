@@ -20,6 +20,7 @@ import { layers__Default } from "app/utils/createLayer";
 function Designer({ initialLayersState = layers__Default }) {
   const [height, setHeight] = useRecoilState(heightAtom);
   const [width, setWidth] = useRecoilState(widthAtom);
+  const [layersRecoil, setLayersRecoil] = useRecoilState(layersAtom);
   const [URL, setURL] = useRecoilState(urlAtom);
   const [BASE, setBase] = useRecoilState(baseAtom);
   let avatar = new Avatara(width, height);
@@ -58,8 +59,9 @@ function Designer({ initialLayersState = layers__Default }) {
   }
 
   useEffect(() => {
-    console.log(layers);
+    // console.log(layers);
     mainUpdate();
+    setLayersRecoil(layers);
   }, [JSON.stringify(layers)]);
 
   useEffect(() => {

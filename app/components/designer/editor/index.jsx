@@ -19,7 +19,7 @@ function Editor({ layerState, avatar, shapes, fonts, ...props }) {
   const [{ present: layers }, { set: setLayers }] = layerState;
 
   const updateLayer = (index) => (update) => {
-    console.log("update", index, layers[index], update);
+    // console.log("update", index, layers[index], update);
     let layersUpdate = [...layers];
     layersUpdate[index] = {
       ...layersUpdate[index],
