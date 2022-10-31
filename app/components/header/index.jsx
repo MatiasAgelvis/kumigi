@@ -15,7 +15,7 @@ import UserInfo from "./UserInfo";
 
 const Header = () => {
   return (
-    <SimpleGrid columns={[1, 2]} {...boxOptions} m="1rem">
+    <SimpleGrid columns={[1, null, 2]} {...boxOptions} m="1rem">
       <Heading as="h1" mr={4} mb={[4, 0]}>
         <Link href={Routes.Home()}>Avatara</Link>
       </Heading>
