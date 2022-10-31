@@ -41,6 +41,7 @@ function Editor({ layerState, avatar, shapes, fonts, ...props }) {
       {/*    Editor    */}
 
       <Box
+        h="fit-content"
         {...boxOptions}
         // mx={["auto", "auto", "auto", 4]}
         w="clamp(200px,100%,700px)"
