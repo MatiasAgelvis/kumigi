@@ -13,11 +13,12 @@ import { useRecoilState } from "recoil";
 import { layersAtom } from "app/utils/store";
 import { useRouter } from "next/router";
 import DownloadButton from "../designer/image/downloadButton";
+import { idCard } from "app/utils/createLayer";
 
 function Avatar({ ...props }) {
   const { height, width } = sizeState();
   const avatar = new Avatara(width, height);
-  const [layers, setLayers] = useState(randomLayers());
+  const [layers, setLayers] = useState(randomLayers().map(idCard));
   applyLayers(avatar, layers);
   const [editorLayers, setEditorLayers] = useRecoilState(layersAtom);
   const router = useRouter();
