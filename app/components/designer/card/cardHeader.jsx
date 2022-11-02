@@ -27,6 +27,7 @@ function CardHeader({
   isEditorOpen,
   onEditorToggle,
   displayButtons,
+  dragHandleProps,
   ...props
 }) {
   function colorName(color, pick = "basic") {
@@ -52,6 +53,7 @@ function CardHeader({
         // gives more room
         mr={["0.1rem", "0.4rem"]}
         _hover={{ cursor: "grab" }}
+        {...dragHandleProps}
       >
         <DragHandleIcon />
       </Center>
