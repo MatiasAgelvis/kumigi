@@ -13,11 +13,50 @@ import Card from "../card";
 import Toolbar from "./toolbar";
 import sizeComponents from "app/components/sizeComponents";
 
+import {
+  useSortable,
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragOverlay,
+} from "@dnd-kit/core";
+import { indexOfId } from "app/utils/indexOfId";
+import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
+
 function Editor({ layerState, avatar, shapes, fonts, ...props }) {
-  const [dragTarget, setDragTarget] = useState(-1);
-  const [dragEvent, setDragEvent] = useState(false);
   const [{ present: layers }, { set: setLayers }] = layerState;
 
+  const [isDragging, setIsDragging] = useState(false);
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  function handleDragArrayMove(items, setItems) {
+    return (event) => {
+      const { active, over } = event;
+      // console.log(active, over);
+      if (over && active.id !== over.id) {
+        const oldIndex = indexOfId(items, active.id);
+        const newIndex = indexOfId(items, over.id);
+        setItems(arrayMove(items, oldIndex, newIndex));
+      }
+    };
+  }
+
+  // console.log(layers);
   const updateLayer = (index) => (update) => {
     // console.log("update", index, layers[index], update);
     let layersUpdate = [...layers];
@@ -52,36 +91,42 @@ function Editor({ layerState, avatar, shapes, fonts, ...props }) {
           <Toolbar layerState={layerState} />
 
           {/* Layer Stack */}
-          <ReactSortable
-            list={layers.map((x) => ({ ...x, chosen: true }))}
-            setList={setLayers}
-            animation={200}
-            // delay={100}
-            delayOnTouchStart={true}
-            // touchStartThreshold={5}
-            fallbackTolerance={2}
-            handle=".dragHandle"
-            onChoose={(e) => setDragTarget(e.oldIndex)}
-            onStart={() => setDragEvent(true)}
-            onEnd={() => setDragEvent(false)}
-            onUnchoose={() => setDragTarget(-1)}
-          >
-            {layers.map((layer, i) => (
-              <Card
-                key={layer.id}
-                index={i}
-                layer={layer}
-                updateLayer={updateLayer(i)}
-                options={shapes}
-                fonts={fonts}
-                deleteLayer={deleteLayer(i)}
-                dragEvent={dragEvent}
-                dragTarget={i == dragTarget}
-              />
-            ))}
-          </ReactSortable>
-          {/* New Layer Button */}
 
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragStart={(event) =>
+              setIsDragging(indexOfId(layers, event.active.id))
+            }
+            onDragEnd={(event) => {
+              handleDragArrayMove(layers, setLayers)(event);
+              setIsDragging(false);
+            }}
+          >
+            <SortableContext
+              items={layers}
+              strategy={verticalListSortingStrategy}
+            >
+              {layers.map((layer, i) => (
+                <Card
+                  key={layer.id}
+                  index={i}
+                  layer={layer}
+                  updateLayer={updateLayer(i)}
+                  options={shapes}
+                  fonts={fonts}
+                  deleteLayer={deleteLayer(i)}
+                />
+              ))}
+            </SortableContext>
+            <DragOverlay>
+              {isDragging ? (
+                <Card layer={layers[isDragging]} isOverlay />
+              ) : null}
+            </DragOverlay>
+          </DndContext>
+
+          {/* New Layer Button */}
           <ButtonGroup isAttached w="full">
             <IconButton
               {...buttonOptions}
