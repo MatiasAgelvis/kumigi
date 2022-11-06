@@ -1,6 +1,6 @@
 import RangeInput from "app/components/designer/editor/rangeInput";
 import sizeState from "app/utils/sizeState";
-import { Options } from "./designer/accordionMenu/accordionMenu";
+import { Options } from "app/components/formatting/fullWidth";
 
 export default function sizeComponents(): Options {
   const { height, setHeight, width, setWidth } = sizeState();
