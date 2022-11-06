@@ -8,6 +8,7 @@ import URLfromLayers from "../../utils/url";
 import {
   baseAtom,
   heightAtom,
+  imageAtom,
   layersAtom,
   urlAtom,
   widthAtom,
@@ -18,8 +19,8 @@ import useUndo from "use-undo";
 import { layers__Default } from "app/utils/createLayer";
 
 function Designer({ initialLayersState = layers__Default }) {
-  const [height, setHeight] = useRecoilState(heightAtom);
-  const [width, setWidth] = useRecoilState(widthAtom);
+  const [height] = useRecoilState(heightAtom);
+  const [width] = useRecoilState(widthAtom);
   const [layersRecoil, setLayersRecoil] = useRecoilState(layersAtom);
   const [URL, setURL] = useRecoilState(urlAtom);
   const [BASE, setBase] = useRecoilState(baseAtom);
@@ -34,9 +35,9 @@ function Designer({ initialLayersState = layers__Default }) {
       (font) => font.load()
       // .then(function () {console.log("My Family has loaded");})
     );
-  }, []);
+  }, [fonts]);
 
-  const [image, setImage] = useState(avatar.toDataURL());
+  const [image, setImage] = useRecoilState(imageAtom);
 
   const layerState = useUndo(initialLayersState);
 
@@ -87,7 +88,12 @@ function Designer({ initialLayersState = layers__Default }) {
       />
 
       {/*    Image    */}
-      <Image image={image} canvas={avatar.canvas} gridArea="image" />
+      <Image
+        image={image}
+        alt="Current state of the avatar"
+        canvas={avatar.canvas}
+        gridArea="image"
+      />
     </SimpleGrid>
   );
 }
