@@ -8,6 +8,7 @@ export type Layer = {
   text: string;
   font: string;
   display: boolean;
+  id?: string;
   [x: string | number | symbol]: unknown;
 };
 
