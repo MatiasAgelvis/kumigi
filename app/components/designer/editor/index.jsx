@@ -3,7 +3,6 @@ import { Box, ButtonGroup, Flex, IconButton, VStack } from "@chakra-ui/react";
 // import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
-import { ReactSortable } from "react-sortablejs";
 import boxOptions from "../../../utils/boxOptions";
 import buttonOptions from "../../../utils/buttonOptions";
 import { randomLayer } from "../../../lib/avatara";
@@ -11,7 +10,7 @@ import { createLayer, idCard } from "../../../utils/createLayer";
 import AccordionMenu from "../accordionMenu/accordionMenu";
 import Card from "../card";
 import Toolbar from "./toolbar";
-import sizeComponents from "app/components/sizeComponents";
+import sizeComponents from "app/components/size/sizeComponents";
 
 import {
   useSortable,
@@ -31,7 +30,7 @@ import {
   DragOverlay,
 } from "@dnd-kit/core";
 import { indexOfId } from "app/utils/indexOfId";
-import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
+// import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
 function Editor({ layerState, avatar, shapes, fonts, ...props }) {
   const [{ present: layers }, { set: setLayers }] = layerState;
