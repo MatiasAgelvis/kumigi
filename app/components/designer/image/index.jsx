@@ -3,7 +3,7 @@ import { Box, Flex, VStack } from "@chakra-ui/react";
 import ImageBox from "./imageBox";
 import DownloadButton from "./downloadButton";
 
-function Image({ image, canvas, ...props }) {
+function Image({ image, alt, canvas, ...props }) {
   return (
     <Flex justify={"center"} {...props}>
       <Box
@@ -19,7 +19,7 @@ function Image({ image, canvas, ...props }) {
           maxW="100%"
         >
           <VStack gap={4}>
-            <ImageBox image={image} />
+            <ImageBox image={image} alt={alt} />
             <DownloadButton canvas={canvas} />
           </VStack>
         </Box>
