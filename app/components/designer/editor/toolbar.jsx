@@ -1,18 +1,10 @@
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
-import {
-  Button,
-  Flex,
-  Heading,
-  HStack,
-  IconButton,
-  SimpleGrid,
-  Spacer,
-  useBreakpointValue,
-  Wrap,
-} from "@chakra-ui/react";
+import { Button, Flex, HStack, IconButton, Spacer } from "@chakra-ui/react";
 import { randomLayers } from "app/lib/avatara";
-import boxOptions from "app/utils/boxOptions";
+import { buttonSize } from "app/utils/buttonOptions";
 import { idCard, layers__Default } from "app/utils/createLayer";
+import { Suspense } from "react";
+import SaveButton from "./saveButton";
 
 export default function Toolbar({ layerState, ...props }) {
   const [
@@ -27,9 +19,9 @@ export default function Toolbar({ layerState, ...props }) {
     },
   ] = layerState;
 
-  const size = useBreakpointValue({ base: "sm", md: "md" });
+  const size = buttonSize;
   return (
-    <Flex {...props}>
+    <Flex {...props} wrap="wrap" gap={4}>
       <HStack spacing={4}>
         <IconButton
           icon={<ArrowBackIcon />}
@@ -50,6 +42,9 @@ export default function Toolbar({ layerState, ...props }) {
       </HStack>
       <Spacer />
       <HStack spacing={4}>
+        <Suspense>
+          <SaveButton />
+        </Suspense>
         <Button
           size={size}
           colorScheme="blue"
