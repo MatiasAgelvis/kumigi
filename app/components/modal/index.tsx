@@ -16,10 +16,10 @@ import { MouseEventHandler, ReactNode } from "react";
 
 type Props = {
   open: ReactNode;
-  modalHeader?: string;
+  modalHeader?: ReactNode;
   modalBody?: ReactNode;
-  action: string;
-  onClickAction: MouseEventHandler;
+  action?: string;
+  onClickAction?: MouseEventHandler;
   buttonProps?: ButtonProps;
   modalProps?: ModalContentProps;
   extraActions?: Array<ReactNode>;
@@ -54,9 +54,11 @@ export default function Modalo({
               <Button colorScheme="blue" mr={3} onClick={onClose}>
                 Close
               </Button>
-              <Button colorScheme="teal" onClick={onClickAction}>
-                {action}
-              </Button>
+              {action && (
+                <Button colorScheme="teal" onClick={onClickAction}>
+                  {action}
+                </Button>
+              )}
               {extraActions}
             </Wrap>
           </ModalFooter>
