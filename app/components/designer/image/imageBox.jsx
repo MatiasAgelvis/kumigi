@@ -1,10 +1,11 @@
 import { Image } from "@chakra-ui/react";
 
-function ImageBox({ image }) {
+function ImageBox({ image, alt, ...props }) {
   return (
     <Image
       src={image}
       // {...boxOptions}
+      alt={alt}
       border="2px"
       borderColor="gray.200"
       _dark={{ borderColor: "gray.600" }}
@@ -14,6 +15,7 @@ function ImageBox({ image }) {
       shadow="md"
       fit="scale-down"
       maxH="70vh"
+      {...props}
     />
   );
 }
