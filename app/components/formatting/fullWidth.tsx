@@ -1,5 +1,7 @@
 import { Flex, FlexProps, Text, TextProps } from "@chakra-ui/react";
-import { ReactElement } from "react";
+import { ReactNode } from "react";
+
+export type Options = Array<{ name: string; input: ReactNode }>;
 
 function FullWidth({
   name,
@@ -7,10 +9,10 @@ function FullWidth({
   flexProps,
   textProps,
 }: {
-  name: ReactElement;
-  input: ReactElement;
-  flexProps: FlexProps;
-  textProps: TextProps;
+  name: ReactNode;
+  input: ReactNode;
+  flexProps?: FlexProps;
+  textProps?: TextProps;
 }) {
   return (
     <Flex
