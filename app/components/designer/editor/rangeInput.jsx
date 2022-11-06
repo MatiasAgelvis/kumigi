@@ -12,7 +12,7 @@ const RangeInput = ({ value, setValue, min = 1, max = 1000, ...props }) => {
       value={value}
       min={min}
       max={max}
-      onChange={setValue}
+      onChange={(string, number) => setValue(number)}
       {...props}
     >
       <NumberInputField />
