@@ -111,7 +111,7 @@ export default function SaveButton({
                   .then(() =>
                     successToast({
                       title: "Avatar created.",
-                      description: "The avatar is saved in your account.",
+                      description: `The avatar "${name}" was saved to your gallery.`,
                     })
                   )
                   .catch(handleError);
@@ -126,9 +126,7 @@ export default function SaveButton({
       />
       <Alert
         header={"Update Avatar"}
-        body={
-          "This Avatar already exists, would you like to overwrite it? This can't be undone."
-        }
+        body={`The Avatar "${name}" already exists, would you like to overwrite it? This can NOT be undone.`}
         action={"Update"}
         onClick={() =>
           currentUser &&
@@ -136,7 +134,7 @@ export default function SaveButton({
             .then(() =>
               successToast({
                 title: "Avatar updated.",
-                description: "The avatar was updated successfully.",
+                description: `The avatar "${name}" was updated successfully.`,
               })
             )
             .catch(handleError)
