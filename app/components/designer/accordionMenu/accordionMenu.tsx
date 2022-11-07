@@ -5,6 +5,7 @@ import {
   Collapse,
   BoxProps,
   ButtonProps,
+  CollapseProps,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
@@ -13,9 +14,18 @@ type Props = {
   body: ReactNode;
   wrapperProps?: BoxProps;
   buttonProps?: ButtonProps;
+  collapseProps?: CollapseProps;
+  drawerProps?: BoxProps;
 };
 
-function AccordionMenu({ name, body, wrapperProps, buttonProps }: Props) {
+function AccordionMenu({
+  name,
+  body,
+  wrapperProps,
+  buttonProps,
+  collapseProps,
+  drawerProps,
+}: Props) {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -23,8 +33,8 @@ function AccordionMenu({ name, body, wrapperProps, buttonProps }: Props) {
       <Button onClick={onToggle} {...buttonProps}>
         {isOpen ? "Hide" : "Show"} {name}
       </Button>
-      <Collapse in={isOpen} animateOpacity>
-        {body}
+      <Collapse in={isOpen} {...collapseProps}>
+        <Box {...drawerProps}>{body}</Box>
       </Collapse>
     </Box>
   );

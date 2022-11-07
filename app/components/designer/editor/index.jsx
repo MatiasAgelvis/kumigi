@@ -10,7 +10,6 @@ import { createLayer, idCard } from "../../../utils/createLayer";
 import AccordionMenu from "../accordionMenu/accordionMenu";
 import Card from "../card";
 import Toolbar from "./toolbar";
-import sizeComponents from "app/components/size/sizeComponents";
 
 import {
   useSortable,
@@ -30,6 +29,7 @@ import {
   DragOverlay,
 } from "@dnd-kit/core";
 import { indexOfId } from "app/utils/indexOfId";
+import sizeFormatted from "app/components/size/sizeFormatted";
 // import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
 function Editor({ layerState, avatar, shapes, fonts, ...props }) {
@@ -144,8 +144,13 @@ function Editor({ layerState, avatar, shapes, fonts, ...props }) {
           </ButtonGroup>
           <AccordionMenu
             name="Size Options"
-            options={sizeComponents()}
+            body={sizeFormatted()}
             buttonProps={buttonOptions}
+            drawerProps={{
+              ...boxOptions,
+              // transform: "translateY(-15px)",
+              // pt: "25px",
+            }}
           />
         </VStack>
       </Box>
