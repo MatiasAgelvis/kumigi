@@ -1,32 +1,34 @@
 import { useMutation } from "@blitzjs/rpc";
 import {
+  Button,
   Center,
   Editable,
   EditableInput,
   EditablePreview,
+  ModalProps,
   useToast,
   UseToastOptions,
 } from "@chakra-ui/react";
 import Modalo from "app/components/modal";
 import { useCurrentUser } from "app/core/hooks/useCurrentUser";
 import useAlertDialog from "app/hooks/useAlertDialog";
+import { Layer } from "app/lib/shapes";
 import createSimpleDesign from "app/simple-designs/mutations/createSimpleDesign";
 import updateSimpleDesign from "app/simple-designs/mutations/updateSimpleDesign";
 import boxOptions from "app/utils/boxOptions";
 import { buttonSize } from "app/utils/buttonOptions";
-import {
-  heightAtom,
-  imageAtom,
-  layersAtom,
-  nameAtom,
-  widthAtom,
-} from "app/utils/store";
+import { heightAtom, imageAtom, nameAtom, widthAtom } from "app/utils/store";
 import { FaSave } from "react-icons/fa";
 import { useRecoilState } from "recoil";
-import ImageBox from "../image/imageBox";
+import ImageBox from "../designer/image/imageBox";
 
-export default function SaveButton({ ...props }) {
-  const [layers] = useRecoilState(layersAtom);
+export default function SaveButton({
+  layers,
+  ...props
+}: {
+  layers: Layer[];
+  props: ModalProps;
+}) {
   const [image] = useRecoilState(imageAtom);
   const [height] = useRecoilState(heightAtom);
   const [width] = useRecoilState(widthAtom);
@@ -88,30 +90,37 @@ export default function SaveButton({ ...props }) {
           size,
         }}
         open={<FaSave />}
-        modalHeader={
+        header={
           <Editable value={name} onChange={setName} w="full">
             <EditablePreview w="full" />
             <EditableInput />
           </Editable>
         }
-        modalBody={
+        body={
           <Center>
             <ImageBox image={image} alt="Current state of the avatar" />
           </Center>
         }
-        action="Save"
-        onClickAction={() => {
-          if (currentUser) {
-            createDesingMutation(update(currentUser.id))
-              .then(() =>
-                successToast({
-                  title: "Avatar created.",
-                  description: "The avatar is saved in your account.",
-                })
-              )
-              .catch(handleError);
-          }
-        }}
+        footer={[
+          <Button
+            key="Save"
+            colorScheme={"green"}
+            onClick={() => {
+              if (currentUser) {
+                createDesingMutation(update(currentUser.id))
+                  .then(() =>
+                    successToast({
+                      title: "Avatar created.",
+                      description: "The avatar is saved in your account.",
+                    })
+                  )
+                  .catch(handleError);
+              }
+            }}
+          >
+            Save
+          </Button>,
+        ]}
         modalProps={boxOptions}
         {...props}
       />

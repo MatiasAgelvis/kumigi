@@ -4,7 +4,7 @@ import { randomLayers } from "app/lib/avatara";
 import { buttonSize } from "app/utils/buttonOptions";
 import { idCard, layers__Default } from "app/utils/createLayer";
 import { Suspense } from "react";
-import SaveButton from "./saveButton";
+import SaveButton from "app/components/functionButtons/saveButton";
 
 export default function Toolbar({ layerState, ...props }) {
   const [
@@ -43,7 +43,7 @@ export default function Toolbar({ layerState, ...props }) {
       <Spacer />
       <HStack spacing={4}>
         <Suspense>
-          <SaveButton />
+          <SaveButton layers={layers} />
         </Suspense>
         <Button
           size={size}
