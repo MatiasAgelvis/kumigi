@@ -39,6 +39,7 @@ const RandomGalleryComponent = () => {
       <Wrap w="full" justify={"center"}>
         <Modalo
           open={"Size Options"}
+          buttonProps={{ variant: "outline", colorScheme: "blue" }}
           body={sizeFormatted()}
           modalProps={boxOptions}
         />
