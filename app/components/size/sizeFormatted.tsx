@@ -12,7 +12,12 @@ export default function sizeFormatted({ boxProps, vstackProps }: Props = {}) {
     <Box {...boxProps}>
       <VStack align="stretch" {...vstackProps}>
         {Array.from(sizeComponents()).map((option, i) => (
-          <FullWidth key={i} name={option.name} input={option.input} />
+          <FullWidth
+            key={i}
+            name={option.name}
+            input={option.input}
+            textProps={{ fontFamily: "mono" }}
+          />
         ))}
       </VStack>
     </Box>
