@@ -6,7 +6,7 @@ import sizeFormatted from "../size/sizeFormatted";
 import Avatar from "./Avatar";
 import { idCard } from "app/utils/createLayer";
 import { v4 as uuidv4 } from "uuid";
-import { Box, VStack, Wrap } from "@chakra-ui/react";
+import { Box, Button, VStack, Wrap } from "@chakra-ui/react";
 import boxOptions from "app/utils/boxOptions";
 
 const RandomGalleryComponent = () => {
@@ -29,6 +29,11 @@ const RandomGalleryComponent = () => {
     );
   };
 
+  function restart() {
+    setItems([]);
+    setHasMore(true);
+  }
+
   return (
     <VStack w="full" spacing={8}>
       <Wrap w="full" justify={"center"}>
@@ -37,6 +42,9 @@ const RandomGalleryComponent = () => {
           body={sizeFormatted()}
           modalProps={boxOptions}
         />
+        <Button colorScheme={"red"} onClick={restart}>
+          Start Over
+        </Button>
       </Wrap>
 
       <Gallery items={items} fetchMore={fetchMore} hasMore={hasMore} w="full" />
