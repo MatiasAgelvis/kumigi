@@ -1,6 +1,6 @@
 import { Routes } from "@blitzjs/next";
 import boxOptions from "app/utils/boxOptions";
-import { Box, Center } from "@chakra-ui/react";
+import { Box, Button, Center } from "@chakra-ui/react";
 import { useState } from "react";
 
 import ImageBox from "../designer/image/imageBox";
@@ -32,18 +32,23 @@ function Avatar({ layers: startLayers, ...props }) {
     <Modalo
       open={<Box {...boxOptions}>{imageBox}</Box>}
       buttonProps={{ variant: "link" }}
-      action="Open in Editor"
-      modalBody={imageBox}
-      onClickAction={() => {
-        setEditorLayers(layers);
-        router.push(Routes.Home());
-      }}
+      body={imageBox}
       modalProps={boxOptions}
-      extraActions={[
+      footer={[
+        <Button
+          key="edit"
+          colorScheme={"teal"}
+          onClick={() => {
+            setEditorLayers(layers);
+            router.push(Routes.Home());
+          }}
+        >
+          Open in Editor
+        </Button>,
         <DownloadButton
+          key="download"
           canvas={avatar.canvas}
           w={"fit-content"}
-          key={"download"}
         />,
       ]}
       {...props}

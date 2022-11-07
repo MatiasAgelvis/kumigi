@@ -8,7 +8,7 @@ import sizeFormatted from "../size/sizeFormatted";
 const RandomGalleryComponent = () => {
   return (
     <>
-      <Modalo open={"Size Options"} modalBody={sizeFormatted()} />
+      <Modalo open={"Size Options"} body={sizeFormatted()} />
       <Gallery layerGenerator={() => randomLayers().map(idCard)} />
     </>
   );
