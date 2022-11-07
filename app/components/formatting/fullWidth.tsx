@@ -1,4 +1,4 @@
-import { Flex, FlexProps, Text, TextProps } from "@chakra-ui/react";
+import { Center, Flex, FlexProps, Text, TextProps } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
 export type Options = Array<{ name: string; input: ReactNode }>;
@@ -21,8 +21,10 @@ function FullWidth({
       justifyContent="space-between"
       {...flexProps}
     >
-      <Text {...textProps}>{name}</Text>
-      {input}
+      <Center>
+        <Text {...textProps}>{name}</Text>
+      </Center>
+      <Center>{input}</Center>
     </Flex>
   );
 }
