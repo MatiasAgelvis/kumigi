@@ -4,29 +4,29 @@ import { Box, Button, Center, ModalProps } from "@chakra-ui/react";
 import { ReactNode, useState } from "react";
 
 import ImageBox from "../designer/image/imageBox";
-import Avatara, { randomLayers } from "app/lib/avatara";
+import Avatara from "app/lib/avatara";
 import applyLayers from "app/utils/applyLayers";
 import Modalo from "../modal";
-import sizeState from "app/utils/sizeState";
 import { useRecoilState } from "recoil";
 import { layersAtom } from "app/utils/store";
 import { useRouter } from "next/router";
 import DownloadButton from "../designer/image/downloadButton";
-import { idCard } from "app/utils/createLayer";
 import { Layer } from "app/lib/shapes";
 
 function Avatar({
   layers: startLayers,
+  size,
   header,
   footer: __footer,
   ...props
 }: {
   layers: Layer[];
+  size: { height: number; width: number };
   header?: ReactNode;
   footer?: ReactNode[];
   props?: ModalProps;
 }) {
-  const { height, width } = sizeState();
+  const { height, width } = size;
   const avatar = new Avatara(width, height);
   const [layers] = useState(startLayers);
   applyLayers(avatar, layers);
