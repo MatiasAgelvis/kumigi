@@ -5,6 +5,8 @@ import { buttonSize } from "app/utils/buttonOptions";
 import { idCard, layers__Default } from "app/utils/createLayer";
 import { Suspense } from "react";
 import SaveButton from "app/components/functionButtons/saveButton";
+import { useRecoilState } from "recoil";
+import { nameAtom } from "app/utils/store";
 
 export default function Toolbar({ layerState, ...props }) {
   const [
@@ -18,6 +20,8 @@ export default function Toolbar({ layerState, ...props }) {
       canRedo,
     },
   ] = layerState;
+
+  const [name, setName] = useRecoilState(nameAtom);
 
   const size = buttonSize;
   return (
@@ -59,6 +63,7 @@ export default function Toolbar({ layerState, ...props }) {
           colorScheme="red"
           onClick={() => {
             resetLayers(layers__Default);
+            setName("Name");
           }}
         >
           Reset
