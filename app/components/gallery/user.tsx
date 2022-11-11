@@ -6,13 +6,24 @@ import sizeFormatted from "../size/sizeFormatted";
 import Avatar from "./Avatar";
 import { idCard } from "app/utils/createLayer";
 import { v4 as uuidv4 } from "uuid";
-import { Box, Button, VStack, Wrap } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  Spacer,
+  Text,
+  VStack,
+  Wrap,
+} from "@chakra-ui/react";
 import boxOptions from "app/utils/boxOptions";
 import { nameAtom } from "app/utils/store";
 import { useRecoilState } from "recoil";
 import getSimpleDesigns from "app/simple-designs/queries/getSimpleDesigns";
 import { useInfiniteQuery } from "@blitzjs/rpc";
 import sizeState from "app/utils/sizeState";
+import DeleteButton from "../functionButtons/deleteButton";
+import UpdateButton from "../functionButtons/renameButton";
 
 function lastElement(arr: any[]) {
   return arr.slice(-1)[0];
@@ -33,9 +44,7 @@ const UserGalleryComponent = () => {
     }
   );
 
-  const layerGenerator = () => randomLayers().map(idCard);
-
-  const fetchMore = (page) => {
+  const fetchMore = () => {
     if (!isFetching) {
       fetchNextPage();
     }
@@ -43,28 +52,33 @@ const UserGalleryComponent = () => {
     if (results && !isFetching) {
       const lastResult = lastElement(results);
       const designs = lastResult.simpleDesigns;
-      console.log("lastResult", lastResult.hasMore, page, lastResult.hasMore);
       setHasMore(lastResult.hasMore);
       setItems(
         items.concat(
           designs.map((design) => (
             <Avatar
               key={uuidv4()}
-              header={design.id}
+              header={
+                <HStack w="full">
+                  <Text w="full">{design.id}</Text>
+                  <UpdateButton design={design} />
+                </HStack>
+              }
               size={{ height: design.height, width: design.width }}
               layers={design.layers}
+              footer={[
+                <DeleteButton
+                  key={`Delete ${design.id}`}
+                  id={design.id}
+                  layers={design.layers}
+                />,
+              ]}
             />
           ))
         )
       );
     }
   };
-
-  function restart() {
-    setItems([]);
-    setHasMore(true);
-    setName("Name");
-  }
 
   return (
     <VStack w="full" spacing={8}>
@@ -75,12 +89,6 @@ const UserGalleryComponent = () => {
           body={sizeFormatted()}
           modalProps={boxOptions}
         />*/}
-        <Button colorScheme={"red"} onClick={restart}>
-          Start Over
-        </Button>
-        <Button colorScheme={"green"} onClick={() => fetchNextPage()}>
-          Load more
-        </Button>
       </Wrap>
 
       <Gallery items={items} fetchMore={fetchMore} hasMore={hasMore} w="full" />
