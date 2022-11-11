@@ -13,7 +13,7 @@ import {
 import { ReactNode, useRef } from "react";
 export default function useAlertDialog() {
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
-  const cancelRef = useRef();
+  const cancelRef = useRef(null);
 
   return {
     isOpen,
