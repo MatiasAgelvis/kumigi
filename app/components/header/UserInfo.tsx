@@ -13,7 +13,12 @@ export default function UserInfo() {
     <Box>
       {currentUser ? (
         <HStack spacing={4}>
-          <code>{currentUser.email}</code>
+          <Link href={Routes.UserGallery()}>
+            <Button>
+              <strong>Your Gallery</strong>
+            </Button>
+          </Link>
+          {/*<code>{currentUser.email}</code>*/}
           <Button
             onClick={async () => {
               await logoutMutation();
