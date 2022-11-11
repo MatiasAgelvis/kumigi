@@ -1,25 +1,62 @@
 import Layout from "app/core/layouts/Layout";
-import { BlitzPage } from "@blitzjs/next";
-import Gallery from "app/components/gallery";
-import sizeComponents from "app/components/sizeComponents";
-import buttonOptions from "app/utils/buttonOptions";
-import AccordionMenu from "app/components/designer/accordionMenu/accordionMenu";
+import { BlitzPage, Routes } from "@blitzjs/next";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  HStack,
+  LinkBox,
+  LinkOverlay,
+  SimpleGrid,
+  VStack,
+} from "@chakra-ui/react";
 import boxOptions from "app/utils/boxOptions";
+import Link from "next/link";
+import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
+import { TbLayoutDashboard } from "react-icons/tb";
 
-const UserGallery: BlitzPage = () => {
+function Card({ href, text, icon, buttonProps }) {
   return (
-    <Layout title="Random Gallery">
+    <LinkBox {...boxOptions} w="full">
+      <Center h="full">
+        <VStack spacing={4}>
+          {icon}
+          <Link href={href} passHref>
+            <LinkOverlay>
+              <Button colorScheme="teal" {...buttonProps}>
+                {text}
+              </Button>
+            </LinkOverlay>
+          </Link>
+        </VStack>
+      </Center>
+    </LinkBox>
+  );
+}
+
+const IntroGallery: BlitzPage = () => {
+  return (
+    <Layout title="Choose a Gallery">
       <main>
-        <AccordionMenu
-          name="Size Options"
-          options={sizeComponents()}
-          buttonProps={buttonOptions}
-          wrapperProps={{ px: boxOptions.p }}
-        />
-        <Gallery />
+        <SimpleGrid w="full" columns={[1, null, 2]} spacing={8} minH={"70vh"}>
+          <Card
+            href={Routes.UserGallery()}
+            buttonProps={{ colorScheme: "teal" }}
+            text="Your Gallery"
+            icon={<TbLayoutDashboard fontSize={"100px"} />}
+          />
+
+          <Card
+            href={Routes.RandomGallery()}
+            buttonProps={{ colorScheme: "blue" }}
+            text="Random Gallery"
+            icon={<GiPerspectiveDiceSixFacesRandom fontSize={"100px"} />}
+          />
+        </SimpleGrid>
       </main>
     </Layout>
   );
 };
 
-export default UserGallery;
+export default IntroGallery;

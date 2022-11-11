@@ -1,32 +1,30 @@
 import {
   Box,
-  VStack,
   useDisclosure,
   Button,
   Collapse,
   BoxProps,
   ButtonProps,
+  CollapseProps,
 } from "@chakra-ui/react";
-import boxOptions from "app/utils/boxOptions";
 import { ReactNode } from "react";
-import Item from "./item";
-
-export type Options = Array<{ name: string; input: ReactNode }>;
 
 type Props = {
   name: string;
-  options: Options;
-  spacing?: number;
+  body: ReactNode;
   wrapperProps?: BoxProps;
   buttonProps?: ButtonProps;
+  collapseProps?: CollapseProps;
+  drawerProps?: BoxProps;
 };
 
 function AccordionMenu({
   name,
-  options,
-  spacing = 4,
+  body,
   wrapperProps,
   buttonProps,
+  collapseProps,
+  drawerProps,
 }: Props) {
   const { isOpen, onToggle } = useDisclosure();
 
@@ -35,14 +33,8 @@ function AccordionMenu({
       <Button onClick={onToggle} {...buttonProps}>
         {isOpen ? "Hide" : "Show"} {name}
       </Button>
-      <Collapse in={isOpen} animateOpacity>
-        <Box mt={spacing} {...boxOptions}>
-          <VStack spacing={spacing} align="stretch">
-            {Array.from(options).map((option, i) => (
-              <Item key={i} name={option.name} input={option.input} />
-            ))}
-          </VStack>
-        </Box>
+      <Collapse in={isOpen} {...collapseProps}>
+        <Box {...drawerProps}>{body}</Box>
       </Collapse>
     </Box>
   );

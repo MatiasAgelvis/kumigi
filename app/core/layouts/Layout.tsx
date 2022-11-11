@@ -1,9 +1,10 @@
 import Head from "next/head";
 import React, { FC } from "react";
 import { BlitzLayout } from "@blitzjs/next";
-import { VStack } from "@chakra-ui/react";
+import { Box, VStack } from "@chakra-ui/react";
 import Header from "app/components/header";
 import Footer from "app/components/footer";
+import boxOptions from "app/utils/boxOptions";
 
 const Layout: BlitzLayout<{
   title?: string;
@@ -19,7 +20,9 @@ const Layout: BlitzLayout<{
 
       <VStack w="full" alignItems={"stretch"}>
         <Header />
-        {children}
+        <Box w="full" p={boxOptions.p}>
+          {children}
+        </Box>
         {withFooter && <Footer />}
       </VStack>
     </>

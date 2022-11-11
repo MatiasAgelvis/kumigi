@@ -7,6 +7,10 @@ import {
   Heading,
   HStack,
   useBreakpointValue,
+  Wrap,
+  Grid,
+  SimpleGrid,
+  Flex,
 } from "@chakra-ui/react";
 import {
   EditIcon,
@@ -17,6 +21,7 @@ import {
 } from "@chakra-ui/icons";
 import namer from "color-namer";
 import capitalize from "../../../utils/capitalize";
+import { buttonSize } from "app/utils/buttonOptions";
 
 function CardHeader({
   shape,
@@ -42,6 +47,8 @@ function CardHeader({
     return `${colorName(color, "pantone")} ${capitalize(shape ? shape : "")}`;
   }
 
+  const size = buttonSize;
+
   return (
     <HStack {...props}>
       <Center
@@ -57,27 +64,7 @@ function CardHeader({
       >
         <DragHandleIcon />
       </Center>
-      <Box w="100%">
-        {displayButtons && (
-          <HStack float="right" mb="0.7rem" ml="5px">
-            <IconButton
-              size={useBreakpointValue({ base: "sm", md: "md" })}
-              onClick={() => setdisplayLayer(!displayLayer)}
-              icon={displayLayer ? <ViewIcon /> : <ViewOffIcon />}
-            />
-            <IconButton
-              size={useBreakpointValue({ base: "sm", md: "md" })}
-              onClick={onEditorToggle}
-              icon={isEditorOpen ? <LockIcon /> : <EditIcon />}
-            />
-            <IconButton
-              size={useBreakpointValue({ base: "sm", md: "md" })}
-              onClick={() => closeButton()}
-              icon={<CloseIcon />}
-            />
-          </HStack>
-        )}
-
+      <SimpleGrid w="100%" columns={[1, null, 2]}>
         <Heading
           as="h4"
           my="0.5rem"
@@ -87,7 +74,28 @@ function CardHeader({
         >
           {layerName(color, shape)}
         </Heading>
-      </Box>
+        {displayButtons && (
+          <Flex alignItems="start" justifyContent="end">
+            <HStack float="right" mb="0.7rem" ml="5px">
+              <IconButton
+                size={size}
+                onClick={() => setdisplayLayer(!displayLayer)}
+                icon={displayLayer ? <ViewIcon /> : <ViewOffIcon />}
+              />
+              <IconButton
+                size={size}
+                onClick={onEditorToggle}
+                icon={isEditorOpen ? <LockIcon /> : <EditIcon />}
+              />
+              <IconButton
+                size={size}
+                onClick={() => closeButton()}
+                icon={<CloseIcon />}
+              />
+            </HStack>
+          </Flex>
+        )}
+      </SimpleGrid>
     </HStack>
   );
 }

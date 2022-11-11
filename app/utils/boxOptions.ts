@@ -5,7 +5,7 @@ const boxOptions: BoxProps = {
   borderRadius: "lg",
   p: 5,
   shadow: "md",
-  backgroundColor: "whiteAlpha.900",
+  backgroundColor: "white",
   _dark: {
     backgroundColor: "gray.800",
   },

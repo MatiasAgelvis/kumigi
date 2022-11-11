@@ -3,7 +3,6 @@ import { Box, ButtonGroup, Flex, IconButton, VStack } from "@chakra-ui/react";
 // import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
-import { ReactSortable } from "react-sortablejs";
 import boxOptions from "../../../utils/boxOptions";
 import buttonOptions from "../../../utils/buttonOptions";
 import { randomLayer } from "../../../lib/avatara";
@@ -11,7 +10,6 @@ import { createLayer, idCard } from "../../../utils/createLayer";
 import AccordionMenu from "../accordionMenu/accordionMenu";
 import Card from "../card";
 import Toolbar from "./toolbar";
-import sizeComponents from "app/components/sizeComponents";
 
 import {
   useSortable,
@@ -31,7 +29,8 @@ import {
   DragOverlay,
 } from "@dnd-kit/core";
 import { indexOfId } from "app/utils/indexOfId";
-import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
+import sizeFormatted from "app/components/size/sizeFormatted";
+// import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
 function Editor({ layerState, avatar, shapes, fonts, ...props }) {
   const [{ present: layers }, { set: setLayers }] = layerState;
@@ -145,8 +144,13 @@ function Editor({ layerState, avatar, shapes, fonts, ...props }) {
           </ButtonGroup>
           <AccordionMenu
             name="Size Options"
-            options={sizeComponents()}
+            body={sizeFormatted()}
             buttonProps={buttonOptions}
+            drawerProps={{
+              ...boxOptions,
+              // transform: "translateY(-15px)",
+              // pt: "25px",
+            }}
           />
         </VStack>
       </Box>

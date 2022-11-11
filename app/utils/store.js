@@ -6,6 +6,11 @@ export const layersAtom = atom({
   default: layers__Default,
 });
 
+export const imageAtom = atom({
+  key: "imageState",
+  default: null,
+});
+
 export const urlAtom = atom({
   key: "urlState",
   default: "",
@@ -24,4 +29,9 @@ export const heightAtom = atom({
 export const widthAtom = atom({
   key: "widthState",
   default: 200,
+});
+
+export const nameAtom = atom({
+  key: "nameState",
+  default: "Name",
 });
