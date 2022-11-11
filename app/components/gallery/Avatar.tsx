@@ -12,6 +12,7 @@ import { layersAtom } from "app/utils/store";
 import { useRouter } from "next/router";
 import DownloadButton from "../designer/image/downloadButton";
 import { Layer } from "app/lib/shapes";
+import { EditIcon } from "@chakra-ui/icons";
 
 function Avatar({
   layers: startLayers,
@@ -55,8 +56,9 @@ function Avatar({
             setEditorLayers(layers);
             router.push(Routes.Home());
           }}
+          leftIcon={<EditIcon />}
         >
-          Open in Editor
+          Edit
         </Button>,
         <DownloadButton
           key="download"
