@@ -73,7 +73,7 @@ function Designer({ initialLayersState = layers__Default }) {
   return (
     <SimpleGrid
       columns={[1, null, 2]}
-      m="1rem"
+      m={["0", "1rem 0"]}
       gap={4}
       templateAreas={["'image' 'editor'", null, "'editor image'"]}
     >

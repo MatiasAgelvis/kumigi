@@ -75,7 +75,7 @@ function Editor({ layerState, avatar, shapes, fonts, ...props }) {
   };
 
   return (
-    <Flex justify={["center", null, "right"]} mx="1rem" {...props}>
+    <Flex justify={["center", null, "right"]} {...props}>
       {/*    Editor    */}
 
       <Box
