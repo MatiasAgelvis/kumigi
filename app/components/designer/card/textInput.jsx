@@ -19,6 +19,7 @@ import useFuzzy from "app/hooks/useFuzzy";
 
 function TextInput({ text, setText, maxLength = 3 }) {
   const inputRef = useRef(null);
+  const initialFocusRef = useRef(null);
   const [search, setSearch] = useState("");
 
   function insertTextAtCursor(ref, text, insert) {
@@ -67,7 +68,7 @@ function TextInput({ text, setText, maxLength = 3 }) {
         ref={inputRef}
       />
 
-      <Popover isLazy>
+      <Popover isLazy initialFocusRef={initialFocusRef}>
         <PopoverTrigger>
           <Button>Icons</Button>
         </PopoverTrigger>
@@ -81,6 +82,7 @@ function TextInput({ text, setText, maxLength = 3 }) {
                 placeholder="Search Icons"
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
+                ref={initialFocusRef}
               />
             </PopoverHeader>
             <PopoverBody
@@ -93,6 +95,7 @@ function TextInput({ text, setText, maxLength = 3 }) {
                     fontFamily={`"Solid Icons", "Brand Icons", "Regular Icons"`}
                     fontSize={"2rem"}
                     fontWeight={"400"}
+                    key={icon.label}
                     aria-label={icon.label + " icon"}
                     onClick={() => handleClick(`:${icon.unicode}:`)}
                   >
