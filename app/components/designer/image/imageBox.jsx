@@ -6,6 +6,7 @@ function ImageBox({ image, alt, ...props }) {
       src={image}
       // {...boxOptions}
       alt={alt}
+      textColor="transparent"
       border="2px"
       borderColor="gray.200"
       _dark={{ borderColor: "gray.600" }}
