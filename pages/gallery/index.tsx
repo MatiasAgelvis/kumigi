@@ -9,14 +9,19 @@ import {
   LinkBox,
   LinkOverlay,
   SimpleGrid,
+  Spinner,
+  Text,
   VStack,
 } from "@chakra-ui/react";
 import boxOptions from "app/utils/boxOptions";
 import Link from "next/link";
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
 import { TbLayoutDashboard } from "react-icons/tb";
+import { Suspense } from "react";
+import { useSession } from "@blitzjs/auth";
+import { useCurrentUser } from "app/core/hooks/useCurrentUser";
 
-function Card({ href, text, icon, buttonProps }) {
+function Card({ href, text, subtext, icon, buttonProps }) {
   return (
     <LinkBox {...boxOptions} w="full">
       <Center h="full">
@@ -24,9 +29,12 @@ function Card({ href, text, icon, buttonProps }) {
           {icon}
           <Link href={href} passHref>
             <LinkOverlay>
-              <Button colorScheme="teal" {...buttonProps}>
-                {text}
-              </Button>
+              <VStack>
+                <Button colorScheme="teal" {...buttonProps}>
+                  {text}
+                </Button>
+                {subtext}
+              </VStack>
             </LinkOverlay>
           </Link>
         </VStack>
@@ -35,25 +43,45 @@ function Card({ href, text, icon, buttonProps }) {
   );
 }
 
+const IntroGalleryPage = () => {
+  const user = useSession();
+
+  return (
+    <SimpleGrid w="full" columns={[1, null, 2]} spacing={8} minH={"70vh"}>
+      <Card
+        href={Routes.UserGallery()}
+        buttonProps={{
+          colorScheme: "teal",
+          disabled: Boolean(!user.userId),
+        }}
+        text="Your Gallery"
+        subtext={
+          <Link href={Routes.LoginPage()}>
+            <Button variant={"link"}>
+              Requires you to&nbsp;<strong>Login</strong>
+            </Button>
+          </Link>
+        }
+        icon={<TbLayoutDashboard fontSize={"100px"} />}
+      />
+
+      <Card
+        href={Routes.RandomGallery()}
+        buttonProps={{ colorScheme: "blue" }}
+        text="Random Gallery"
+        icon={<GiPerspectiveDiceSixFacesRandom fontSize={"100px"} />}
+      />
+    </SimpleGrid>
+  );
+};
+
 const IntroGallery: BlitzPage = () => {
   return (
     <Layout title="Choose a Gallery">
       <main>
-        <SimpleGrid w="full" columns={[1, null, 2]} spacing={8} minH={"70vh"}>
-          <Card
-            href={Routes.UserGallery()}
-            buttonProps={{ colorScheme: "teal" }}
-            text="Your Gallery"
-            icon={<TbLayoutDashboard fontSize={"100px"} />}
-          />
-
-          <Card
-            href={Routes.RandomGallery()}
-            buttonProps={{ colorScheme: "blue" }}
-            text="Random Gallery"
-            icon={<GiPerspectiveDiceSixFacesRandom fontSize={"100px"} />}
-          />
-        </SimpleGrid>
+        <Suspense fallback={<Spinner />}>
+          <IntroGalleryPage />
+        </Suspense>
       </main>
     </Layout>
   );

@@ -1,37 +1,18 @@
 import Gallery from "app/components/gallery";
-import { randomLayers } from "app/lib/avatara";
-import { FC, ReactElement, ReactNode, Suspense, useState } from "react";
-import Modalo from "../modal";
-import sizeFormatted from "../size/sizeFormatted";
+import { ReactNode, useState } from "react";
 import Avatar from "./Avatar";
-import { idCard } from "app/utils/createLayer";
 import { v4 as uuidv4 } from "uuid";
-import {
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Spacer,
-  Text,
-  VStack,
-  Wrap,
-} from "@chakra-ui/react";
-import boxOptions from "app/utils/boxOptions";
-import { nameAtom } from "app/utils/store";
-import { useRecoilState } from "recoil";
+import { HStack, Text, VStack } from "@chakra-ui/react";
+
 import getSimpleDesigns from "app/simple-designs/queries/getSimpleDesigns";
 import { useInfiniteQuery } from "@blitzjs/rpc";
-import sizeState from "app/utils/sizeState";
+
 import DeleteButton from "../functionButtons/deleteButton";
 import UpdateButton from "../functionButtons/renameButton";
-
-function lastElement(arr: any[]) {
-  return arr.slice(-1)[0];
-}
+import { lastElement } from "app/utils/arrays";
 
 const UserGalleryComponent = () => {
   // <Avatar layers={item} key={`avatar_${index}`} />
-  const [name, setName] = useRecoilState(nameAtom);
   const [items, setItems] = useState<ReactNode[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const manyMore = 3;
@@ -82,14 +63,16 @@ const UserGalleryComponent = () => {
 
   return (
     <VStack w="full" spacing={8}>
+      {/*
       <Wrap w="full" justify={"center"}>
-        {/*<Modalo
+        <Modalo
           open={"Size Options"}
           buttonProps={{ variant: "outline", colorScheme: "blue" }}
           body={sizeFormatted()}
           modalProps={boxOptions}
-        />*/}
+        />
       </Wrap>
+        */}
 
       <Gallery items={items} fetchMore={fetchMore} hasMore={hasMore} w="full" />
     </VStack>

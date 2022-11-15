@@ -1,6 +1,6 @@
 import Gallery from "app/components/gallery";
 import { randomLayers } from "app/lib/avatara";
-import { FC, ReactElement, ReactNode, useState } from "react";
+import { FC, ReactNode, useState } from "react";
 import Modalo from "../modal";
 import sizeFormatted from "../size/sizeFormatted";
 import Avatar from "./Avatar";
