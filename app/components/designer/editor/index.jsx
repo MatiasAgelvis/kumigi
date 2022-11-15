@@ -12,7 +12,6 @@ import Card from "../card";
 import Toolbar from "./toolbar";
 
 import {
-  useSortable,
   arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
