@@ -2,7 +2,9 @@ import Layout from "app/core/layouts/Layout";
 import { BlitzPage, Routes } from "@blitzjs/next";
 import {
   Box,
+  BoxProps,
   Button,
+  ButtonProps,
   Center,
   Flex,
   HStack,
@@ -17,13 +19,27 @@ import boxOptions from "app/utils/boxOptions";
 import Link from "next/link";
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
 import { TbLayoutDashboard } from "react-icons/tb";
-import { Suspense } from "react";
+import { ReactNode, Suspense } from "react";
 import { useSession } from "@blitzjs/auth";
 import { useCurrentUser } from "app/core/hooks/useCurrentUser";
+import { RouteUrlObject } from "blitz";
 
-function Card({ href, text, subtext, icon, buttonProps }) {
+function Card({
+  href,
+  text,
+  subtext,
+  icon,
+  buttonProps,
+  ...props
+}: {
+  href: string | RouteUrlObject;
+  text: string;
+  subtext?: ReactNode;
+  icon: ReactNode;
+  buttonProps: ButtonProps;
+} & BoxProps) {
   return (
-    <LinkBox {...boxOptions} w="full">
+    <LinkBox {...boxOptions} w="full" {...props}>
       <Center h="full">
         <VStack spacing={4}>
           {icon}
