@@ -11,6 +11,7 @@ import boxOptions from "app/utils/boxOptions";
 import { nameAtom } from "app/utils/store";
 import { useRecoilState } from "recoil";
 import sizeState from "app/utils/sizeState";
+import { name__default } from "app/utils/name";
 
 const RandomGalleryComponent = () => {
   // <Avatar layers={item} key={`avatar_${index}`} />
@@ -27,7 +28,12 @@ const RandomGalleryComponent = () => {
     setItems(
       items.concat(
         Array.from({ length: manyMore }, () => (
-          <Avatar key={uuidv4()} size={size} layers={layerGenerator()} />
+          <Avatar
+            key={uuidv4()}
+            name={name__default}
+            dimensions={size}
+            layers={layerGenerator()}
+          />
         ))
       )
     );
