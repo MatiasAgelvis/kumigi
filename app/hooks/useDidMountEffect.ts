@@ -6,7 +6,7 @@ const useDidMountEffect = (func: Function, deps: Array<unknown>) => {
   useEffect(() => {
     if (didMount.current) func();
     else didMount.current = true;
-  }, deps);
+  }, [func, ...deps]);
 };
 
 export default useDidMountEffect;

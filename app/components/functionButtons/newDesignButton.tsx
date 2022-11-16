@@ -13,11 +13,8 @@ export default function NewDesignButton({ ...props }: ButtonProps) {
   const [layers, setLayers] = useRecoilState(layersAtom);
   const router = useRouter();
 
-  const size = buttonSize;
-
   return (
     <Button
-      size={size}
       leftIcon={<AddIcon />}
       colorScheme="green"
       onClick={() => {

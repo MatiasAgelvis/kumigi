@@ -4,9 +4,10 @@ import {
   useColorMode,
   Button,
   IconButton,
+  IconButtonProps,
 } from "@chakra-ui/react";
 
-function ColorToggle({ ...props }) {
+function ColorToggle({ ...props }: IconButtonProps) {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <IconButton
