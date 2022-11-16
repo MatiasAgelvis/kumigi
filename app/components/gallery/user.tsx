@@ -45,8 +45,9 @@ const UserGalleryComponent = () => {
                   <UpdateButton design={design} />
                 </HStack>
               }
-              size={{ height: design.height, width: design.width }}
+              dimensions={{ height: design.height, width: design.width }}
               layers={design.layers}
+              name={design.id}
               footer={[
                 <DeleteButton
                   key={`Delete ${design.id}`}
@@ -63,17 +64,6 @@ const UserGalleryComponent = () => {
 
   return (
     <VStack w="full" spacing={8}>
-      {/*
-      <Wrap w="full" justify={"center"}>
-        <Modalo
-          open={"Size Options"}
-          buttonProps={{ variant: "outline", colorScheme: "blue" }}
-          body={sizeFormatted()}
-          modalProps={boxOptions}
-        />
-      </Wrap>
-        */}
-
       <Gallery items={items} fetchMore={fetchMore} hasMore={hasMore} w="full" />
     </VStack>
   );
