@@ -7,6 +7,7 @@ import logout from "app/auth/mutations/logout";
 
 export default function UserInfo() {
   const currentUser = useCurrentUser();
+
   const [logoutMutation] = useMutation(logout);
 
   return (
@@ -14,9 +15,7 @@ export default function UserInfo() {
       {currentUser ? (
         <HStack spacing={4}>
           <Link href={Routes.UserGallery()}>
-            <Button>
-              <strong>Your Gallery</strong>
-            </Button>
+            <Button>Your Gallery</Button>
           </Link>
           {/*<code>{currentUser.email}</code>*/}
           <Button
@@ -30,14 +29,10 @@ export default function UserInfo() {
       ) : (
         <HStack>
           <Link href={Routes.SignupPage()}>
-            <Button>
-              <strong>Sign Up</strong>
-            </Button>
+            <Button>Sign Up</Button>
           </Link>
           <Link href={Routes.LoginPage()}>
-            <Button>
-              <strong>Login</strong>
-            </Button>
+            <Button>Login</Button>
           </Link>
         </HStack>
       )}
