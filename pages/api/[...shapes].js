@@ -3,10 +3,7 @@ import { parseAvataraQuery } from "../../app/utils/parseAvataraQuery";
 import applyLayers from "../../app/utils/applyLayers";
 
 const avatar = (req, res) => {
-  const [height, width, layers] = parseAvataraQuery(
-    req.query,
-    req.query.shapes || []
-  );
+  const [height, width, layers] = parseAvataraQuery(req.query);
 
   const avatar = new Avatara(width, height);
   applyLayers(avatar, layers);

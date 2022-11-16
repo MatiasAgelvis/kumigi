@@ -1,13 +1,14 @@
 import { parseArrayString, testHexColor } from "../utils/common";
 import { makeLayers } from "./makeLayers";
 
-export function parseAvataraQuery(query, shapes) {
+export function parseAvataraQuery(query) {
   const {
     height: heightString = 200,
     width: widthString = 200,
     colors: colorsString = "[000]",
     texts: textString = "",
     fonts: fontsString = "plex",
+    shapes,
   } = query;
 
   // parse the height and width
@@ -24,7 +25,7 @@ export function parseAvataraQuery(query, shapes) {
   const fonts = parseArrayString(fontsString, (x) => x.toLowerCase());
 
   // if only one font is given it will be reused for all texts
-  const layers = makeLayers(shapes, colors, texts, fonts);
+  const layers = makeLayers(shapes || [], colors, texts, fonts);
 
   return [height, width, layers];
 }
