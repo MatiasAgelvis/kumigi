@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 import { Suspense } from "react";
 import boxOptions from "../../utils/boxOptions";
+import NewDesignButton from "../functionButtons/newDesignButton";
 import ColorToggle from "./colorToggle";
 import UserInfo from "./UserInfo";
 
@@ -20,6 +21,7 @@ const Header = () => {
         <Link href={Routes.Home()}>Avatara</Link>
       </Heading>
       <Wrap spacing={4} justify="end">
+        <NewDesignButton variant={"outline"} />
         <Button>
           <Link href={Routes.RandomGallery()}>Random Gallery</Link>
         </Button>
