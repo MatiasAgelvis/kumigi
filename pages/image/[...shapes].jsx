@@ -10,15 +10,12 @@ export default function Page() {
 
   useEffect(() => {
     if (router.isReady) {
-      const [height, width, layers] = parseAvataraQuery(
-        router.query,
-        router.query.shapes || []
-      );
+      const [height, width, layers] = parseAvataraQuery(router.query);
       const avatar = new Avatara(width, height);
       applyLayers(avatar, layers);
       setHtml({ __html: avatar.toHTML() });
     }
-  }, [router.isReady]);
+  }, [router.query, router.isReady]);
 
   return <div dangerouslySetInnerHTML={html} />;
 }
