@@ -1,16 +1,14 @@
 // import Select from "react-select";
 import { DragHandleIcon } from "@chakra-ui/icons";
 import {
-  Box,
   Center,
   IconButton,
   Heading,
   HStack,
-  useBreakpointValue,
-  Wrap,
-  Grid,
   SimpleGrid,
   Flex,
+  StackProps,
+  CenterProps,
 } from "@chakra-ui/react";
 import {
   EditIcon,
@@ -19,9 +17,11 @@ import {
   ViewOffIcon,
   CloseIcon,
 } from "@chakra-ui/icons";
-import namer from "color-namer";
+import namer, { Palette } from "color-namer";
 import capitalize from "../../../utils/capitalize";
 import { buttonSize } from "app/utils/buttonOptions";
+import { Shape } from "app/types/avatara";
+import { Dispatch } from "react";
 
 function CardHeader({
   shape,
@@ -34,16 +34,23 @@ function CardHeader({
   displayButtons,
   dragHandleProps,
   ...props
-}) {
-  function colorName(color, pick = "basic") {
-    try {
-      return capitalize(namer(color, { pick: [pick] })[pick][0].name);
-    } catch {
-      return "";
-    }
+}: {
+  shape: Shape | null;
+  color: string;
+  displayLayer: boolean;
+  setdisplayLayer: Dispatch<boolean>;
+  closeButton: () => void;
+  isEditorOpen: boolean;
+  onEditorToggle: () => void;
+  displayButtons: boolean;
+  dragHandleProps: CenterProps;
+} & StackProps) {
+  function colorName(color: string, pick: Palette = "basic") {
+    const namero = namer(color, { pick: [pick] })[pick];
+    return namero[0] ? capitalize(namero[0].name) : "";
   }
 
-  function layerName(color, shape) {
+  function layerName(color: string, shape: Shape) {
     return `${colorName(color, "pantone")} ${capitalize(shape ? shape : "")}`;
   }
 
@@ -78,16 +85,19 @@ function CardHeader({
           <Flex alignItems="start" justifyContent="end">
             <HStack float="right" mb="0.7rem" ml="5px">
               <IconButton
+                aria-label={`${displayLayer ? "hide" : "show"} this layer`}
                 size={size}
                 onClick={() => setdisplayLayer(!displayLayer)}
                 icon={displayLayer ? <ViewIcon /> : <ViewOffIcon />}
               />
               <IconButton
+                aria-label={`lock this layer`}
                 size={size}
                 onClick={onEditorToggle}
                 icon={isEditorOpen ? <LockIcon /> : <EditIcon />}
               />
               <IconButton
+                aria-label={`remove this layer`}
                 size={size}
                 onClick={() => closeButton()}
                 icon={<CloseIcon />}
