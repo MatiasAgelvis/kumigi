@@ -1,6 +1,10 @@
-import { Image } from "@chakra-ui/react";
+import { Image, ImageProps } from "@chakra-ui/react";
 
-function ImageBox({ image, alt, ...props }) {
+function ImageBox({
+  image,
+  alt,
+  ...props
+}: { image?: string | null; alt?: string } & ImageProps) {
   return (
     <Image
       src={image}
