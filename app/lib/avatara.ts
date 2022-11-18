@@ -4,7 +4,8 @@ import Color from "color";
 import {
   isNode, //isBrowser, isWebWorker, isJsDom, isDeno,
 } from "browser-or-node";
-import shapes, { Layer, Shape } from "./shapes";
+import shapes from "./shapes";
+import { Layer, Shape } from "app/types/avatara";
 
 export const Fonts = Object.freeze({
   PLEX: "plex",
@@ -164,10 +165,7 @@ function randomText() {
 }
 
 export function randomLayer(): Layer {
-  const shape: keyof typeof shapes | "text" = choose([
-    ...Object.keys(shapes),
-    "text",
-  ]);
+  const shape: Shape = choose([...Object.keys(shapes), "text"]);
   return {
     shape,
     color: randomColor(),

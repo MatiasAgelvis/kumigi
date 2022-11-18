@@ -1,16 +1,8 @@
+import { Layer } from "app/types/avatara";
 import { Canvas } from "canvas";
 import Color from "color";
 
-export type Shape = keyof typeof shapes | "text";
-export type Layer = {
-  shape: Shape | null;
-  color: string;
-  text: string;
-  font: string;
-  display: boolean;
-  id?: string;
-  [x: string | number | symbol]: unknown;
-};
+export type DefinedShapes = keyof typeof shapes;
 
 const shapes = {
   background: function (
