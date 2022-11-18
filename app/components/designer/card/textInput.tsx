@@ -1,4 +1,3 @@
-// import Select from "react-select";
 import {
   HStack,
   Input,
@@ -13,16 +12,25 @@ import {
   Portal,
   Wrap,
 } from "@chakra-ui/react";
-import { useEffect, useState, useRef, useMemo } from "react";
+import { useState, useRef, Dispatch, Ref } from "react";
 import icons from "public/fonts/icons.json";
 import useFuzzy from "app/hooks/useFuzzy";
+import { OKey } from "app/types/avatara";
 
-function TextInput({ text, setText, maxLength = 3 }) {
+function TextInput({
+  text,
+  setText,
+  maxLength = 3,
+}: {
+  text: string;
+  setText: Dispatch<string>;
+  maxLength: number;
+}) {
   const inputRef = useRef(null);
   const initialFocusRef = useRef(null);
   const [search, setSearch] = useState("");
 
-  function insertTextAtCursor(ref, text, insert) {
+  function insertTextAtCursor(ref: Ref, text: string, insert: string) {
     const curr = ref.current;
     if (!("selectionStart" in curr) || !("selectionEnd" in curr)) {
       return text;
@@ -33,16 +41,16 @@ function TextInput({ text, setText, maxLength = 3 }) {
     return textBeforeCursorPosition + insert + textAfterCursorPosition;
   }
 
-  const handleClick = (insert) => {
+  const handleClick = (insert: string) => {
     setText(insertTextAtCursor(inputRef, text, insert));
     setSearch("");
   };
 
-  function filterIcons(key, value, index) {
+  function filterIcons(key: OKey, value: any, index: number) {
     return { id: index, label: value.label, unicode: value.unicode };
   }
 
-  const [iconList, setIconList] = useState(
+  const [iconList] = useState(
     Object.entries(icons).map(([key, value], index) =>
       filterIcons(key, value, index)
     )
