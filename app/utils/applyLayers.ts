@@ -1,5 +1,5 @@
 import Avatara from "app/lib/avatara";
-import { Layer } from "app/lib/shapes";
+import { Layer } from "app/types/avatara";
 
 export default function applyLayers(
   avatar: typeof Avatara,

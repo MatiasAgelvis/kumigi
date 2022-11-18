@@ -1,5 +1,5 @@
+import { Layer } from "app/types/avatara";
 import { v4 as uuidv4 } from "uuid";
-import { Layer } from "app/lib/shapes";
 
 export function createLayer(): Layer {
   return idCard({
