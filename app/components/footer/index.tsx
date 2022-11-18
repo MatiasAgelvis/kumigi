@@ -5,10 +5,8 @@ import { baseAtom, urlAtom } from "app/utils/store";
 import { useRecoilState } from "recoil";
 
 import { Box, Heading, Text, Link, Center } from "@chakra-ui/react";
-import { motion } from "framer-motion";
-import animationOptions from "app/utils/animationOptions";
 import { NextComponentType } from "next";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const Footer: NextComponentType = ({ ...props }: BoxProps) => {
   const [url, _] = useRecoilState(urlAtom);
@@ -18,7 +16,7 @@ const Footer: NextComponentType = ({ ...props }: BoxProps) => {
     if (typeof window !== "undefined") {
       setBASE(window.location.origin + "/api");
     }
-  }, []);
+  });
 
   return (
     <Box {...props}>
@@ -26,7 +24,7 @@ const Footer: NextComponentType = ({ ...props }: BoxProps) => {
         <VStack spacing={2} align={"start"}>
           <Text fontSize={"x-small"}>Equivalent API call</Text>
           <Text wordBreak="break-all">
-            <APIurl url={url} />
+            <APIurl href={url}>{url}</APIurl>
           </Text>
         </VStack>
       </Box>
