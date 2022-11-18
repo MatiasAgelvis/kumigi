@@ -1,8 +1,18 @@
 // import Select from "react-select";
 import { Select } from "@chakra-ui/react";
 import capitalize from "../../../utils/capitalize";
-
-function OptionSelect({ options, state, setState, placeholder }) {
+import { Dispatch } from "react";
+function OptionSelect<T>({
+  options,
+  state,
+  setState,
+  placeholder,
+}: {
+  options: T[];
+  state: T;
+  setState: Dispatch<T>;
+  placeholder: string;
+}) {
   return (
     <Select
       placeholder={placeholder}
