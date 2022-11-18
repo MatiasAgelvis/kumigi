@@ -1,15 +1,24 @@
 import { AddIcon } from "@chakra-ui/icons";
-import { Box, ButtonGroup, Flex, IconButton, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  ButtonGroup,
+  Flex,
+  FlexProps,
+  IconButton,
+  VStack,
+} from "@chakra-ui/react";
 // import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
-import boxOptions from "../../../utils/boxOptions";
-import buttonOptions from "../../../utils/buttonOptions";
-import { randomLayer } from "../../../lib/avatara";
-import { createLayer, idCard } from "../../../utils/createLayer";
+import boxOptions from "app/utils/boxOptions";
+import buttonOptions from "app/utils/buttonOptions";
+import { randomLayer } from "app/lib/avatara";
+import { createLayer, idCard } from "app/utils/createLayer";
 import AccordionMenu from "../accordionMenu/accordionMenu";
 import Card from "../card";
 import Toolbar from "./toolbar";
+import { indexOfId } from "app/utils/indexOfId";
+import sizeFormatted from "app/components/size/sizeFormatted";
 
 import {
   arrayMove,
@@ -27,11 +36,23 @@ import {
   useSensors,
   DragOverlay,
 } from "@dnd-kit/core";
-import { indexOfId } from "app/utils/indexOfId";
-import sizeFormatted from "app/components/size/sizeFormatted";
+import { Layer, Shape, UseUndoType } from "app/types/avatara";
+import { State, Actions } from "use-undo";
+
 // import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
-function Editor({ layerState, avatar, shapes, fonts, ...props }) {
+function Editor({
+  layerState,
+  avatar,
+  shapes,
+  fonts,
+  ...props
+}: {
+  layerState: UseUndoType<Layer[]>;
+  avatar: any;
+  shapes: Shape[];
+  fonts: string[];
+} & FlexProps) {
   const [{ present: layers }, { set: setLayers }] = layerState;
 
   const [isDragging, setIsDragging] = useState(false);
