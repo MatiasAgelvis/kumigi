@@ -1,5 +1,12 @@
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
-import { Button, Flex, HStack, IconButton, Spacer } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  FlexProps,
+  HStack,
+  IconButton,
+  Spacer,
+} from "@chakra-ui/react";
 import { randomLayers } from "app/lib/avatara";
 import { buttonSize } from "app/utils/buttonOptions";
 import { idCard, layers__Default } from "app/utils/createLayer";
@@ -7,8 +14,12 @@ import { Suspense } from "react";
 import SaveButton from "app/components/functionButtons/saveButton";
 import { useRecoilState } from "recoil";
 import { nameAtom } from "app/utils/store";
+import { Layer, UseUndoType } from "app/types/avatara";
 
-export default function Toolbar({ layerState, ...props }) {
+export default function Toolbar({
+  layerState,
+  ...props
+}: { layerState: UseUndoType<Layer[]> } & FlexProps) {
   const [
     { present: layers },
     {
