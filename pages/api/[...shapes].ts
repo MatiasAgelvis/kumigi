@@ -1,8 +1,10 @@
 import Avatara from "../../app/lib/avatara";
 import { parseAvataraQuery } from "../../app/utils/parseAvataraQuery";
 import applyLayers from "../../app/utils/applyLayers";
+import { NextApiRequest } from "next";
+import { BlitzNextApiResponse } from "@blitzjs/next";
 
-const avatar = (req, res) => {
+const avatar = (req: NextApiRequest, res: BlitzNextApiResponse) => {
   const [height, width, layers] = parseAvataraQuery(req.query);
 
   const avatar = new Avatara(width, height);
