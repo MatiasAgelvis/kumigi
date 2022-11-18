@@ -1,9 +1,15 @@
 import boxOptions from "../../../utils/boxOptions";
-import { Box, Flex, VStack } from "@chakra-ui/react";
+import { Box, Flex, FlexProps, VStack } from "@chakra-ui/react";
 import ImageBox from "./imageBox";
-import DownloadButton from "./downloadButton";
+import DownloadButton from "app/components/functionButtons/downloadButton";
+import { Canvas } from "canvas";
 
-function Image({ image, alt, canvas, ...props }) {
+function Image({
+  image,
+  alt,
+  canvas,
+  ...props
+}: { image?: string | null; alt?: string; canvas: Canvas } & FlexProps) {
   return (
     <Flex justify={"center"} {...props}>
       <Box
@@ -13,7 +19,7 @@ function Image({ image, alt, canvas, ...props }) {
       >
         <Box
           {...boxOptions}
-          sx={{ position: "-webkit-sticky", position: "sticky", top: "2%" }}
+          sx={{ position: "sticky", top: "2%" }}
           w="fit-content"
           h="fit-content"
           maxW="100%"
