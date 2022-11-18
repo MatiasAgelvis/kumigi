@@ -1,5 +1,11 @@
 // import Select from "react-select";
-import { Box, SimpleGrid, useDisclosure, Collapse } from "@chakra-ui/react";
+import {
+  Box,
+  SimpleGrid,
+  useDisclosure,
+  Collapse,
+  BoxProps,
+} from "@chakra-ui/react";
 import ColorPicker from "./colorPicker";
 import OptionSelect from "./optionSelect";
 import TextInput from "./textInput";
@@ -8,6 +14,8 @@ import CardHeader from "./cardHeader";
 import { useColorModeValue } from "@chakra-ui/react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { Layer, OKey } from "app/types/avatara";
+import { Dispatch } from "react";
 
 function Card({
   index,
@@ -18,11 +26,19 @@ function Card({
   deleteLayer,
   isOverlay,
   ...props
-}) {
-  const { shape, color, text, font } = layer;
+}: {
+  index: number;
+  layer: Layer;
+  updateLayer: Dispatch<Layer>;
+  options: string[];
+  fonts: string[];
+  deleteLayer: () => void;
+  isOverlay: boolean;
+} & BoxProps) {
+  const { shape, color, text, font, ...rest } = layer;
 
-  function setProp(key, value) {
-    updateLayer({ shape, color, text, font, [key]: value });
+  function setProp(key: OKey, value: any) {
+    updateLayer({ ...rest, shape, color, text, font, [key]: value });
   }
 
   const {
@@ -34,7 +50,7 @@ function Card({
     isDragging,
     isSorting,
   } = useSortable({
-    id: layer.id,
+    id: layer.id!,
   });
 
   const { isOpen: isEditorOpen, onToggle: onEditorToggle } = useDisclosure({
@@ -46,7 +62,7 @@ function Card({
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    zIndex: isDragging ? 999 : null,
+    zIndex: isDragging ? 999 : undefined,
   };
   // console.log(attributes);
 
@@ -75,7 +91,7 @@ function Card({
         onEditorToggle={onEditorToggle}
         isEditorOpen={isEditorOpen}
         displayButtons={!isSorting && !isDragging && !isOverlay}
-        dragHandleProps={({ ...attributes }, { ...listeners })}
+        dragHandleProps={{ ...attributes, ...listeners }}
       />
       {!isDragging && !isOverlay && (
         <Collapse in={isEditorOpen && !isSorting}>
