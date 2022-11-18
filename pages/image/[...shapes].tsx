@@ -5,7 +5,7 @@ import applyLayers from "../../app/utils/applyLayers";
 import { useEffect, useState } from "react";
 
 export default function Page() {
-  const [html, setHtml] = useState({ __html: null });
+  const [html, setHtml] = useState({ __html: "" });
   const router = useRouter();
 
   useEffect(() => {
