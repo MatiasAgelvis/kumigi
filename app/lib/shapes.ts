@@ -5,6 +5,7 @@ import Color from "color";
 export type DefinedShapes = keyof typeof shapes;
 
 const shapes = {
+  empty: function (canvas: Canvas, ctx: CanvasRenderingContext2D, {}: Layer) {},
   background: function (
     canvas: Canvas,
     ctx: CanvasRenderingContext2D,
