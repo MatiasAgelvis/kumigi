@@ -6,6 +6,7 @@ import {
 } from "browser-or-node";
 import shapes from "./shapes";
 import { Layer, Shape } from "app/types/avatara";
+import { idCard } from "app/utils/createLayer";
 
 export const Fonts = Object.freeze({
   PLEX: "plex",
@@ -166,13 +167,14 @@ function randomText() {
 
 export function randomLayer(): Layer {
   const shape: Shape = choose([...Object.keys(shapes), "text"]);
-  return {
+
+  return idCard({
     shape,
     color: randomColor(),
     text: shape == "text" ? randomText() : "",
     font: shape == "text" ? choose(Object.values(Fonts)) : "",
     display: true,
-  };
+  });
 }
 
 export function randomLayers(min = 1, max = 5): Array<Layer> {
