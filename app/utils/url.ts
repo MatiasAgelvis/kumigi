@@ -1,17 +1,22 @@
+import { Layer, OKey } from "app/types/avatara";
 import urlJoin from "url-join";
 
-function extractProps(array, prop) {
+function extractProps(array: any[], prop: OKey): any[] {
   return array.map((x) => x[prop]);
 }
 
-function urlParam(name, value) {
+function urlParam(name: string, value: string | string[] | number) {
   const isArray = Array.isArray(value);
   return value
     ? `&${name}=${isArray ? "[" : ""}${value}${isArray ? "]" : ""}`
     : "";
 }
 
-export default function URLfromLayers(BASE, layers, parameters = []) {
+export default function URLfromLayers(
+  BASE: string,
+  layers: Layer[],
+  parameters: { name: string; value: string | number }[] = []
+) {
   const shapes = extractProps(layers, "shape").filter((x) => x);
   const colors = extractProps(layers, "color")
     .filter((x) => x)

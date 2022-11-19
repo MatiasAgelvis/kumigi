@@ -1,9 +1,10 @@
-type ID = number | string;
+import { OKey } from "app/types/avatara";
 
-interface IdObject extends Object {
-	id: ID;
+interface IdObject {
+	id: OKey;
+	[key: OKey]: any;
 }
 
-export function indexOfId(list: IdObject[], id: ID) {
+export function indexOfId(list: IdObject[], id: OKey): number {
 	return list.map((item) => item.id).indexOf(id);
 }

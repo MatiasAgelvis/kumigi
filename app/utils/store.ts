@@ -8,7 +8,7 @@ export const layersAtom = atom({
 
 export const imageAtom = atom({
   key: "imageState",
-  default: null,
+  default: "",
 });
 
 export const urlAtom = atom({

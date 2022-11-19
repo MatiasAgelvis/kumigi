@@ -7,10 +7,10 @@ import applyLayers from "app/utils/applyLayers";
 import { useRecoilState } from "recoil";
 import { layersAtom, nameAtom } from "app/utils/store";
 import { useRouter } from "next/router";
-import { Layer } from "app/lib/shapes";
+import { Layer } from "app/types/avatara";
 import { EditIcon } from "@chakra-ui/icons";
 import { name__default } from "app/utils/name";
-import sizeState from "app/utils/sizeState";
+import useSizeState from "app/hooks/useSizeState";
 
 export default function EditButton({
   layers: startLayers,
@@ -29,7 +29,7 @@ export default function EditButton({
   applyLayers(avatar, layers);
   const [editorLayers, setEditorLayers] = useRecoilState(layersAtom);
   const [nameState, setNameState] = useRecoilState(nameAtom);
-  const { setHeight, setWidth } = sizeState();
+  const { setHeight, setWidth } = useSizeState();
   const router = useRouter();
 
   return (

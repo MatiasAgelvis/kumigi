@@ -1,4 +1,3 @@
-import { Routes } from "@blitzjs/next";
 import { useMutation } from "@blitzjs/rpc";
 import {
   Button,
@@ -7,23 +6,19 @@ import {
   EditableInput,
   EditablePreview,
   Heading,
-  HStack,
   ModalProps,
-  Text,
-  Tooltip,
   useToast,
   UseToastOptions,
 } from "@chakra-ui/react";
 import Modalo from "app/components/modal";
 import { useCurrentUser } from "app/core/hooks/useCurrentUser";
 import useAlertDialog from "app/hooks/useAlertDialog";
-import { Layer } from "app/lib/shapes";
 import createSimpleDesign from "app/simple-designs/mutations/createSimpleDesign";
 import updateSimpleDesign from "app/simple-designs/mutations/updateSimpleDesign";
+import { Layer } from "app/types/avatara";
 import boxOptions from "app/utils/boxOptions";
 import { buttonSize } from "app/utils/buttonOptions";
 import { heightAtom, imageAtom, nameAtom, widthAtom } from "app/utils/store";
-import Link from "next/link";
 import { FaSave } from "react-icons/fa";
 import { useRecoilState } from "recoil";
 import LogInCTA from "../auth/logInCTA";
@@ -34,7 +29,7 @@ export default function SaveButton({
   ...props
 }: {
   layers: Layer[];
-  props: ModalProps;
+  props?: ModalProps;
 }) {
   const [image] = useRecoilState(imageAtom);
   const [height] = useRecoilState(heightAtom);

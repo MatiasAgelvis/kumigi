@@ -1,9 +1,9 @@
+import { Layer, LayerNoId } from "app/types/avatara";
 import { v4 as uuidv4 } from "uuid";
-import { Layer } from "app/lib/shapes";
 
 export function createLayer(): Layer {
   return idCard({
-    shape: null,
+    shape: "empty",
     color: "#000000",
     text: "",
     font: "pt",
@@ -11,7 +11,7 @@ export function createLayer(): Layer {
   });
 }
 
-export function idCard(layer: Layer): Layer {
+export function idCard(layer: LayerNoId): Layer {
   return { id: uuidv4(), ...layer };
 }
 

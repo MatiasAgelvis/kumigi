@@ -1,12 +1,12 @@
 import Avatara from "app/lib/avatara";
-import { Layer } from "app/lib/shapes";
+import { Layer, LayerNoId } from "app/types/avatara";
 
 export default function applyLayers(
   avatar: typeof Avatara,
-  layers: Array<Layer>
+  layers: Layer[] | LayerNoId[]
 ) {
   layers.forEach((layer) => {
-    if (layer.shape && (!("display" in layer) || layer.display)) {
+    if (!("display" in layer) || layer.display) {
       avatar[layer.shape](layer);
     }
   });

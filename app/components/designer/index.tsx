@@ -17,22 +17,27 @@ import Editor from "./editor";
 import Image from "./image";
 import useUndo from "use-undo";
 import { layers__Default } from "app/utils/createLayer";
+import { Layer } from "app/types/avatara";
 
-function Designer({ initialLayersState = layers__Default }) {
+function Designer({
+  initialLayersState = layers__Default,
+}: {
+  initialLayersState: Layer[];
+}) {
   const [height] = useRecoilState(heightAtom);
   const [width] = useRecoilState(widthAtom);
   const [layersRecoil, setLayersRecoil] = useRecoilState(layersAtom);
   const [URL, setURL] = useRecoilState(urlAtom);
-  const [BASE, setBase] = useRecoilState(baseAtom);
+  const [BASE] = useRecoilState(baseAtom);
   let avatar = new Avatara(width, height);
 
   const fonts = avatar.fonts();
   const shapes = avatar.shapes();
 
   useEffect(() => {
-    var fontsLoader = fonts.map((font) => new FontFaceObserver(font));
+    var fontsLoader = fonts.map((font: string) => new FontFaceObserver(font));
     fontsLoader.map(
-      (font) => font.load()
+      (font: FontFace) => font.load()
       // .then(function () {console.log("My Family has loaded");})
     );
   }, [fonts]);
@@ -41,12 +46,14 @@ function Designer({ initialLayersState = layers__Default }) {
 
   const layerState = useUndo(initialLayersState);
 
-  const [{ present: layers }, { set: setLayers }] = layerState;
+  const [{ present: layers }] = layerState;
 
   applyLayers(avatar, layers);
 
   function mainUpdate() {
+    avatar = new Avatara(width, height);
     applyLayers(avatar, layers);
+    console.log(avatar, layers);
     setImage(avatar.toDataURL());
     setURL(
       URLfromLayers(BASE, layers, [
@@ -66,7 +73,6 @@ function Designer({ initialLayersState = layers__Default }) {
   }, [JSON.stringify(layers)]);
 
   useEffect(() => {
-    avatar = new Avatara(width, height);
     mainUpdate();
   }, [height, width]);
 

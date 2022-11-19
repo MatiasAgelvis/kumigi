@@ -1,15 +1,24 @@
 import { AddIcon } from "@chakra-ui/icons";
-import { Box, ButtonGroup, Flex, IconButton, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  ButtonGroup,
+  Flex,
+  FlexProps,
+  IconButton,
+  VStack,
+} from "@chakra-ui/react";
 // import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
-import boxOptions from "../../../utils/boxOptions";
-import buttonOptions from "../../../utils/buttonOptions";
-import { randomLayer } from "../../../lib/avatara";
-import { createLayer, idCard } from "../../../utils/createLayer";
+import boxOptions from "app/utils/boxOptions";
+import buttonOptions from "app/utils/buttonOptions";
+import { randomLayer } from "app/lib/avatara";
+import { createLayer, idCard } from "app/utils/createLayer";
 import AccordionMenu from "../accordionMenu/accordionMenu";
 import Card from "../card";
 import Toolbar from "./toolbar";
+import { indexOfId } from "app/utils/indexOfId";
+import SizeFormatted from "app/components/size/sizeFormatted";
 
 import {
   arrayMove,
@@ -27,14 +36,27 @@ import {
   useSensors,
   DragOverlay,
 } from "@dnd-kit/core";
-import { indexOfId } from "app/utils/indexOfId";
-import sizeFormatted from "app/components/size/sizeFormatted";
+import { Layer, Shape, UseUndoType } from "app/types/avatara";
+import { State, Actions } from "use-undo";
+import DummyCard from "../card/dummy";
+
 // import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
-function Editor({ layerState, avatar, shapes, fonts, ...props }) {
+function Editor({
+  layerState,
+  avatar,
+  shapes,
+  fonts,
+  ...props
+}: {
+  layerState: UseUndoType<Layer[]>;
+  avatar: any;
+  shapes: Shape[];
+  fonts: string[];
+} & FlexProps) {
   const [{ present: layers }, { set: setLayers }] = layerState;
 
-  const [isDragging, setIsDragging] = useState(false);
+  const [isDragging, setIsDragging] = useState(-1);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -98,11 +120,11 @@ function Editor({ layerState, avatar, shapes, fonts, ...props }) {
             }
             onDragEnd={(event) => {
               handleDragArrayMove(layers, setLayers)(event);
-              setIsDragging(false);
+              setIsDragging(-1);
             }}
           >
             <SortableContext
-              items={layers}
+              items={layers.map((layer) => layer.id)}
               strategy={verticalListSortingStrategy}
             >
               {layers.map((layer, i) => (
@@ -118,9 +140,9 @@ function Editor({ layerState, avatar, shapes, fonts, ...props }) {
               ))}
             </SortableContext>
             <DragOverlay>
-              {isDragging ? (
-                <Card layer={layers[isDragging]} isOverlay />
-              ) : null}
+              {isDragging < 0 ? null : (
+                <DummyCard index={1} layer={layers[isDragging]!} isOverlay />
+              )}
             </DragOverlay>
           </DndContext>
 
@@ -128,6 +150,7 @@ function Editor({ layerState, avatar, shapes, fonts, ...props }) {
           <ButtonGroup isAttached w="full">
             <IconButton
               {...buttonOptions}
+              aria-label="Add new empty layer"
               fontSize={"1.4rem"}
               onClick={() => addLayer(createLayer())}
               icon={<AddIcon />}
@@ -135,6 +158,7 @@ function Editor({ layerState, avatar, shapes, fonts, ...props }) {
             <IconButton
               {...buttonOptions}
               colorScheme="blue"
+              aria-label="Add new random layer"
               w={["full", "90%", "60%"]}
               onClick={() => addLayer(idCard(randomLayer()))}
               fontSize={"2rem"}
@@ -143,7 +167,7 @@ function Editor({ layerState, avatar, shapes, fonts, ...props }) {
           </ButtonGroup>
           <AccordionMenu
             name="Size Options"
-            body={sizeFormatted()}
+            body={<SizeFormatted />}
             buttonProps={buttonOptions}
             drawerProps={{
               ...boxOptions,

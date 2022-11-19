@@ -1,9 +1,9 @@
 import RangeInput from "app/components/designer/editor/rangeInput";
-import sizeState from "app/utils/sizeState";
+import useSizeState from "app/hooks/useSizeState";
 import { Options } from "app/components/formatting/fullWidth";
 
-export default function sizeComponents(): Options {
-  const { height, setHeight, width, setWidth } = sizeState();
+export default function useSizeComponents(): Options {
+  const { height, setHeight, width, setWidth } = useSizeState();
 
   return [
     {

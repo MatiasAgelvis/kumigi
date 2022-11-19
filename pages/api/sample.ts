@@ -1,12 +1,13 @@
+import { BlitzNextApiResponse } from "@blitzjs/next";
+import { NextApiRequest } from "next";
 import Avatara from "../../app/lib/avatara";
 import { parseAvataraQuery } from "../../app/utils/parseAvataraQuery";
-import applyLayers from "../../app/utils/applyLayers";
 
-const avatar = (req, res) => {
+const avatar = (req: NextApiRequest, res: BlitzNextApiResponse) => {
   const [height, width, layers] = parseAvataraQuery(req.query);
 
   const avatar = new Avatara(width, height);
-  applyLayers(avatar, layers);
+  avatar.randomAvatar();
 
   res.statusCode = 200;
 

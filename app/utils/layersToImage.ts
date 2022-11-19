@@ -1,5 +1,6 @@
 import Avatara from "app/lib/avatara";
-import { Layer } from "app/lib/shapes";
+import { Layer } from "app/types/avatara";
+
 import applyLayers from "./applyLayers";
 
 export default function layersToImage(

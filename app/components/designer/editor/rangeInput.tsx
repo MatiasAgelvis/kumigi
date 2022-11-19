@@ -4,9 +4,23 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
+  NumberInputProps,
 } from "@chakra-ui/react";
+import { Dispatch } from "react";
+import { SetterOrUpdater } from "recoil";
 
-const RangeInput = ({ value, setValue, min = 1, max = 1000, ...props }) => {
+const RangeInput = ({
+  value,
+  setValue,
+  min = 1,
+  max = 1000,
+  ...props
+}: {
+  value: string | number;
+  setValue: Dispatch<string | number> | SetterOrUpdater<string | number>;
+  min?: number;
+  max?: number;
+} & NumberInputProps) => {
   return (
     <NumberInput
       value={value}

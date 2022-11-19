@@ -2,7 +2,7 @@ import Gallery from "app/components/gallery";
 import { randomLayers } from "app/lib/avatara";
 import { FC, ReactNode, useState } from "react";
 import Modalo from "../modal";
-import sizeFormatted from "../size/sizeFormatted";
+import SizeFormatted from "../size/sizeFormatted";
 import Avatar from "./Avatar";
 import { idCard } from "app/utils/createLayer";
 import { v4 as uuidv4 } from "uuid";
@@ -10,7 +10,7 @@ import { Box, Button, VStack, Wrap } from "@chakra-ui/react";
 import boxOptions from "app/utils/boxOptions";
 import { nameAtom } from "app/utils/store";
 import { useRecoilState } from "recoil";
-import sizeState from "app/utils/sizeState";
+import useSizeState from "app/hooks/useSizeState";
 import { name__default } from "app/utils/name";
 
 const RandomGalleryComponent = () => {
@@ -22,7 +22,7 @@ const RandomGalleryComponent = () => {
   const limit = 100;
 
   const layerGenerator = () => randomLayers().map(idCard);
-  const size = sizeState();
+  const size = useSizeState();
   const fetchMore = () => {
     setHasMore(items.length < limit);
     setItems(
@@ -51,7 +51,7 @@ const RandomGalleryComponent = () => {
         <Modalo
           open={"Size Options"}
           buttonProps={{ variant: "outline", colorScheme: "blue" }}
-          body={sizeFormatted()}
+          body={<SizeFormatted />}
           modalProps={boxOptions}
         />
         <Button colorScheme={"red"} onClick={restart}>

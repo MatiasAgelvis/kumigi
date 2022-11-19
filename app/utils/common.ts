@@ -1,11 +1,14 @@
 import hexColorRegex from "hex-color-regex";
 
-export function queue(arr, item) {
+export function queue<T>(arr: T[], item: T): T | undefined {
   arr.push(item);
   return arr.shift();
 }
 
-export function parseArrayString(arrayString, callback = (x) => x) {
+export function parseArrayString(
+  arrayString: string,
+  callback: (x: any, index?: number, array?: any[]) => any = (x) => x
+) {
   return (
     arrayString
       // remove brackets
@@ -19,6 +22,6 @@ export function parseArrayString(arrayString, callback = (x) => x) {
   );
 }
 
-export function testHexColor(color) {
+export function testHexColor(color: string) {
   return hexColorRegex().test("#" + color);
 }

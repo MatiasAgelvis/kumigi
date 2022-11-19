@@ -13,19 +13,26 @@ import {
   HexAlphaColorPicker,
 } from "react-colorful";
 import colorString from "color-string";
-import { useEffect, useState } from "react";
+import { Dispatch, useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import Color from "color";
+import { Disabled } from "@dnd-kit/sortable/dist/types";
 
-function rgba2hex(color) {
+function rgba2hex(color: string) {
   return colorString.to.hex(colorString.get.rgb(color));
 }
 
-function hex2rgba(color) {
+function hex2rgba(color: string) {
   return colorString.to.rgb(colorString.get.rgb(color));
 }
 
-export default function ColorPicker({ color, setColor }) {
+export default function ColorPicker({
+  color,
+  setColor,
+}: {
+  color: string;
+  setColor: Dispatch<string>;
+}) {
   const [text, setText] = useState(color);
   const debounced = useDebouncedCallback((value) => {
     setColor(Color(value).hex());

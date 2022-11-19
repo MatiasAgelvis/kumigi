@@ -7,8 +7,8 @@ import Avatara from "app/lib/avatara";
 import applyLayers from "app/utils/applyLayers";
 import Modalo from "../modal";
 
-import DownloadButton from "../designer/image/downloadButton";
-import { Layer } from "app/lib/shapes";
+import DownloadButton from "../functionButtons/downloadButton";
+import { Layer } from "app/types/avatara";
 
 import { name__default } from "app/utils/name";
 import EditButton from "../functionButtons/editButton";

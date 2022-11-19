@@ -4,7 +4,9 @@ import Color from "color";
 import {
   isNode, //isBrowser, isWebWorker, isJsDom, isDeno,
 } from "browser-or-node";
-import shapes, { Layer, Shape } from "./shapes";
+import shapes from "./shapes";
+import { Layer, Shape } from "app/types/avatara";
+import { idCard } from "app/utils/createLayer";
 
 export const Fonts = Object.freeze({
   PLEX: "plex",
@@ -164,17 +166,15 @@ function randomText() {
 }
 
 export function randomLayer(): Layer {
-  const shape: keyof typeof shapes | "text" = choose([
-    ...Object.keys(shapes),
-    "text",
-  ]);
-  return {
+  const shape: Shape = choose([...Object.keys(shapes), "text"]);
+
+  return idCard({
     shape,
     color: randomColor(),
     text: shape == "text" ? randomText() : "",
     font: shape == "text" ? choose(Object.values(Fonts)) : "",
     display: true,
-  };
+  });
 }
 
 export function randomLayers(min = 1, max = 5): Array<Layer> {
