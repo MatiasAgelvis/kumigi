@@ -7,6 +7,7 @@ import {
   NumberInputProps,
 } from "@chakra-ui/react";
 import { Dispatch } from "react";
+import { SetterOrUpdater } from "recoil";
 
 const RangeInput = ({
   value,
@@ -16,9 +17,9 @@ const RangeInput = ({
   ...props
 }: {
   value: string | number;
-  setValue: Dispatch<string | number>;
-  min: number;
-  max: number;
+  setValue: Dispatch<string | number> | SetterOrUpdater<string | number>;
+  min?: number;
+  max?: number;
 } & NumberInputProps) => {
   return (
     <NumberInput
