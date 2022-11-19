@@ -29,7 +29,7 @@ function Designer({
   const [layersRecoil, setLayersRecoil] = useRecoilState(layersAtom);
   const [URL, setURL] = useRecoilState(urlAtom);
   const [BASE] = useRecoilState(baseAtom);
-  const [avatar, setAvatar] = useState(new Avatara(width, height));
+  let avatar = new Avatara(width, height);
 
   const fonts = avatar.fonts();
   const shapes = avatar.shapes();
@@ -51,7 +51,9 @@ function Designer({
   applyLayers(avatar, layers);
 
   function mainUpdate() {
+    avatar = new Avatara(width, height);
     applyLayers(avatar, layers);
+    console.log(avatar, layers);
     setImage(avatar.toDataURL());
     setURL(
       URLfromLayers(BASE, layers, [
@@ -71,9 +73,8 @@ function Designer({
   }, [JSON.stringify(layers)]);
 
   useEffect(() => {
-    setAvatar(new Avatara(width, height));
     mainUpdate();
-  }, [height, width, mainUpdate]);
+  }, [height, width]);
 
   return (
     <SimpleGrid
