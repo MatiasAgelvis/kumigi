@@ -13,7 +13,7 @@ import { idCard, layers__Default } from "app/utils/createLayer";
 import { Suspense } from "react";
 import SaveButton from "app/components/functionButtons/saveButton";
 import { useRecoilState } from "recoil";
-import { nameAtom } from "app/utils/store";
+import { imageAtom, nameAtom } from "app/utils/store";
 import { Layer, UseUndoType } from "app/types/avatara";
 
 export default function Toolbar({
@@ -33,6 +33,7 @@ export default function Toolbar({
   ] = layerState;
 
   const [name, setName] = useRecoilState(nameAtom);
+  const [image, setImage] = useRecoilState(imageAtom);
 
   const size = buttonSize;
   return (
@@ -74,6 +75,7 @@ export default function Toolbar({
           colorScheme="red"
           onClick={() => {
             resetLayers(layers__Default);
+            setImage("");
             setName("Name");
           }}
         >
