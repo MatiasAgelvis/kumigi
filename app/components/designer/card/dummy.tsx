@@ -17,29 +17,18 @@ import { CSS } from "@dnd-kit/utilities";
 import { Layer, OKey } from "app/types/avatara";
 import { Dispatch } from "react";
 
-function Card({
+export default function DummyCard({
   index,
   layer,
-  updateLayer,
-  options,
-  fonts,
-  deleteLayer,
-  isOverlay = false,
+  isOverlay = true,
   ...props
 }: {
   index: number;
   layer: Layer;
-  updateLayer: Dispatch<Layer>;
-  options: string[];
-  fonts: string[];
-  deleteLayer: () => void;
+
   isOverlay?: boolean;
 } & BoxProps) {
   const { shape, color, text, font, ...rest } = layer;
-
-  function setProp(key: OKey, value: any) {
-    updateLayer({ ...rest, shape, color, text, font, [key]: value });
-  }
 
   const {
     attributes,
@@ -86,46 +75,13 @@ function Card({
         shape={shape}
         color={color}
         displayLayer={layer.display}
-        setdisplayLayer={(value) => setProp("display", value)}
-        closeButton={deleteLayer}
+        setdisplayLayer={() => {}}
+        closeButton={() => {}}
         onEditorToggle={onEditorToggle}
         isEditorOpen={isEditorOpen}
         displayButtons={!isSorting && !isDragging && !isOverlay}
         dragHandleProps={{ ...attributes, ...listeners }}
       />
-      {!isDragging && !isOverlay && (
-        <Collapse in={isEditorOpen && !isSorting}>
-          <SimpleGrid columns={[1, 2]} spacing={[5, null, 7]}>
-            <OptionSelect
-              options={options}
-              state={shape}
-              setState={(value) => setProp("shape", value)}
-              placeholder="Select a shape"
-            />
-            <ColorPicker
-              color={color}
-              setColor={(value) => setProp("color", value)}
-            />
-
-            {shape == "text" && (
-              <TextInput
-                text={text}
-                setText={(value) => setProp("text", value)}
-              />
-            )}
-            {shape == "text" && (
-              <OptionSelect
-                options={fonts}
-                state={font}
-                setState={(value) => setProp("font", value)}
-                placeholder="Select a Font"
-              />
-            )}
-          </SimpleGrid>
-        </Collapse>
-      )}
     </Box>
   );
 }
-
-export default Card;
