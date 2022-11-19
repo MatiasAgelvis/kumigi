@@ -1,10 +1,16 @@
-import { ApiQuery, AvataraQuery, Layer, Shape } from "app/types/avatara";
+import {
+  ApiQuery,
+  AvataraQuery,
+  Layer,
+  LayerNoId,
+  Shape,
+} from "app/types/avatara";
 import { parseArrayString, testHexColor } from "../utils/common";
 import { makeLayers } from "./makeLayers";
 
 export function parseAvataraQuery(
   query: ApiQuery & AvataraQuery
-): [number, number, Layer[]] {
+): [number, number, Layer[] | LayerNoId[]] {
   const {
     height: heightString = "200",
     width: widthString = "200",
@@ -28,7 +34,7 @@ export function parseAvataraQuery(
   const fonts = parseArrayString(fontsString, (x) => x.toLowerCase());
 
   // if only one font is given it will be reused for all texts
-  const layers: Layer[] = makeLayers(shapes!, colors, texts, fonts);
+  const layers: LayerNoId[] = makeLayers(shapes!, colors, texts, fonts);
 
   return [height, width, layers];
 }

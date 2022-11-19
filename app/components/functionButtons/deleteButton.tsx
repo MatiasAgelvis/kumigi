@@ -13,7 +13,7 @@ import { SimpleDesigns } from "@prisma/client";
 import Modalo from "app/components/modal";
 import { useCurrentUser } from "app/core/hooks/useCurrentUser";
 import useAlertDialog from "app/hooks/useAlertDialog";
-import { Layer } from "app/lib/shapes";
+import { Layer } from "app/types/avatara";
 import deleteSimpleDesign from "app/simple-designs/mutations/deleteSimpleDesign";
 import boxOptions from "app/utils/boxOptions";
 import { buttonSize } from "app/utils/buttonOptions";

@@ -4,7 +4,7 @@ function ImageBox({
   image,
   alt,
   ...props
-}: { image?: string | null; alt?: string } & ImageProps) {
+}: { image: string; alt?: string } & ImageProps) {
   return (
     <Image
       src={image}

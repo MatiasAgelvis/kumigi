@@ -11,8 +11,9 @@ import {
   PopoverCloseButton,
   Portal,
   Wrap,
+  StackProps,
 } from "@chakra-ui/react";
-import { useState, useRef, Dispatch, Ref } from "react";
+import { useState, useRef, Dispatch, Ref, RefObject } from "react";
 import icons from "public/fonts/icons.json";
 import useFuzzy from "app/hooks/useFuzzy";
 import { OKey } from "app/types/avatara";
@@ -20,25 +21,28 @@ import { OKey } from "app/types/avatara";
 function TextInput({
   text,
   setText,
-  maxLength = 3,
+  ...props
 }: {
   text: string;
   setText: Dispatch<string>;
-  maxLength: number;
-}) {
+} & StackProps) {
   const inputRef = useRef(null);
   const initialFocusRef = useRef(null);
   const [search, setSearch] = useState("");
 
-  function insertTextAtCursor(ref: Ref, text: string, insert: string) {
+  function insertTextAtCursor(
+    ref: RefObject<HTMLInputElement>,
+    text: string,
+    insert: string
+  ) {
     const curr = ref.current;
-    if (!("selectionStart" in curr) || !("selectionEnd" in curr)) {
-      return text;
+    if (curr && "selectionStart" in curr && "selectionEnd" in curr) {
+      const textBeforeCursorPosition = text.substring(0, curr.selectionStart!);
+      const textAfterCursorPosition = text.substring(curr.selectionEnd!);
+      return textBeforeCursorPosition + insert + textAfterCursorPosition;
     }
-    const textBeforeCursorPosition = text.substring(0, curr.selectionStart);
-    const textAfterCursorPosition = text.substring(curr.selectionEnd);
 
-    return textBeforeCursorPosition + insert + textAfterCursorPosition;
+    return text;
   }
 
   const handleClick = (insert: string) => {
@@ -68,7 +72,7 @@ function TextInput({
   );
 
   return (
-    <HStack>
+    <HStack {...props}>
       <Input
         value={text}
         onChange={(event) => setText(event.target.value)}

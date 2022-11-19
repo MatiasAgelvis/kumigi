@@ -1,4 +1,4 @@
-import { Layer, Shape } from "app/types/avatara";
+import { Layer, LayerNoId, Shape } from "app/types/avatara";
 import { randomLayer } from "../lib/avatara";
 
 export function makeLayers(
@@ -6,7 +6,7 @@ export function makeLayers(
   colors: string[],
   texts: string[],
   fonts: string[]
-): Layer[] {
+): LayerNoId[] {
   return shapes.map((shape, i) => {
     return shape === "random"
       ? randomLayer()

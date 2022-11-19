@@ -2,22 +2,22 @@
 import { Select } from "@chakra-ui/react";
 import capitalize from "../../../utils/capitalize";
 import { Dispatch } from "react";
-function OptionSelect<T>({
+function OptionSelect({
   options,
   state,
   setState,
   placeholder,
 }: {
-  options: T[];
-  state: T;
-  setState: Dispatch<T>;
+  options: string[];
+  state: string | null;
+  setState: Dispatch<string>;
   placeholder: string;
 }) {
   return (
     <Select
       placeholder={placeholder}
-      value={state || ""}
-      onChange={(e) => setState(event.target.value)}
+      value={state ? state : ""}
+      onChange={(e) => setState(e.target.value)}
     >
       {options.map((op) => (
         <option key={op} value={op}>

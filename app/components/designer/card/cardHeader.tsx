@@ -35,7 +35,7 @@ function CardHeader({
   dragHandleProps,
   ...props
 }: {
-  shape: Shape | null;
+  shape: Shape;
   color: string;
   displayLayer: boolean;
   setdisplayLayer: Dispatch<boolean>;

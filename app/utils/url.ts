@@ -5,7 +5,7 @@ function extractProps(array: any[], prop: OKey): any[] {
   return array.map((x) => x[prop]);
 }
 
-function urlParam(name: string, value: string | string[]) {
+function urlParam(name: string, value: string | string[] | number) {
   const isArray = Array.isArray(value);
   return value
     ? `&${name}=${isArray ? "[" : ""}${value}${isArray ? "]" : ""}`

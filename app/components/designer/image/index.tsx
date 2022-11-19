@@ -4,12 +4,12 @@ import ImageBox from "./imageBox";
 import DownloadButton from "app/components/functionButtons/downloadButton";
 import { Canvas } from "canvas";
 
-function Image({
+export default function Image({
   image,
   alt,
   canvas,
   ...props
-}: { image?: string | null; alt?: string; canvas: Canvas } & FlexProps) {
+}: { image: string; alt?: string; canvas: Canvas } & FlexProps) {
   return (
     <Flex justify={"center"} {...props}>
       <Box
@@ -33,5 +33,3 @@ function Image({
     </Flex>
   );
 }
-
-export default Image;
