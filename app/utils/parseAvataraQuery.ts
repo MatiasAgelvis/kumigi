@@ -17,7 +17,7 @@ export function parseAvataraQuery(
     colors: colorsString = "[000]",
     texts: textString = "",
     fonts: fontsString = "plex",
-    shapes,
+    shapes = [],
   } = query;
 
   // parse the height and width
@@ -34,7 +34,7 @@ export function parseAvataraQuery(
   const fonts = parseArrayString(fontsString, (x) => x.toLowerCase());
 
   // if only one font is given it will be reused for all texts
-  const layers: LayerNoId[] = makeLayers(shapes!, colors, texts, fonts);
+  const layers: LayerNoId[] = makeLayers(shapes, colors, texts, fonts);
 
   return [height, width, layers];
 }
