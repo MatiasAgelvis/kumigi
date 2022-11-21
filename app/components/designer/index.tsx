@@ -53,7 +53,7 @@ function Designer({
   function mainUpdate() {
     avatar = new Avatara(width, height);
     applyLayers(avatar, layers);
-    console.log(avatar, layers);
+    // console.log(avatar, layers);
     setImage(avatar.toDataURL());
     setURL(
       URLfromLayers(BASE, layers, [
