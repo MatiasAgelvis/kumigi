@@ -51,6 +51,7 @@
     "hex-color-regex": "^1.1.0",
     "next": "12.2.5",
     "node-emoji": "^1.11.0",
+    "postmark": "^3.0.14",
     "prisma": "4.0.0",
     "react": "18.2.0",
     "react-colorful": "^5.5.1",
