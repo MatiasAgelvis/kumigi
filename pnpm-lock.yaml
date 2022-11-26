@@ -32,6 +32,7 @@ specifiers:
   color: ^4.2.3
   color-namer: ^1.4.0
   color-string: ^1.9.1
+  detect-browser: ^5.3.0
   eslint: 7.32.0
   eslint-config-next: 12.2.0
   eslint-config-prettier: 8.5.0
@@ -92,6 +93,7 @@ dependencies:
   color: 4.2.3
   color-namer: 1.4.0
   color-string: 1.9.1
+  detect-browser: 5.3.0
   file-saver: 2.0.5
   final-form: 4.20.7
   fontfaceobserver: 2.3.0
@@ -5334,6 +5336,10 @@ packages:
   /depd/2.0.0:
     resolution: {integrity: sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==}
     engines: {node: '>= 0.8'}
+    dev: false
+
+  /detect-browser/5.3.0:
+    resolution: {integrity: sha512-53rsFbGdwMwlF7qvCt0ypLM5V5/Mbl0szB7GPN8y9NCcbknYOeVVXdrXEq+90IwAfrrzt6Hd+u2E2ntakICU8w==}
     dev: false
 
   /detect-libc/2.0.1:
