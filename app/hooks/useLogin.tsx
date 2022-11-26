@@ -4,7 +4,6 @@ import { Button } from "@chakra-ui/react";
 import Link from "next/link";
 import logout from "app/auth/mutations/logout";
 import { useSession, UseSessionOptions } from "@blitzjs/auth";
-import { buttonSize } from "app/utils/buttonOptions";
 
 export default function useLogin(
   options: UseSessionOptions = { suspense: false }
@@ -12,7 +11,7 @@ export default function useLogin(
   const session = useSession(options);
   const [logoutMutation] = useMutation(logout);
 
-  return session
+  return session.userId
     ? [
         <Link key="usergalley" href={Routes.UserGallery()}>
           <Button>Your Gallery </Button>
