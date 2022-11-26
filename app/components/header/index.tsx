@@ -20,7 +20,6 @@ import { Suspense } from "react";
 import boxOptions from "../../utils/boxOptions";
 import NewDesignButton from "../functionButtons/newDesignButton";
 import ColorToggle from "./colorToggle";
-import UserInfo from "./UserInfo";
 
 export default function Header() {
   const content = [
