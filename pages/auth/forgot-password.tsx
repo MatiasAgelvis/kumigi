@@ -14,9 +14,19 @@ import {
   AlertDescription,
 } from "@chakra-ui/react";
 import boxOptions from "app/utils/boxOptions";
+import { detect } from "detect-browser";
 
 const ForgotPasswordPage: BlitzPage = () => {
   const [forgotPasswordMutation, { isSuccess }] = useMutation(forgotPassword);
+  const browser = detect();
+
+  function nonNullValue(
+    obj: object | null,
+    key: string | number | symbol,
+    def: NonNullable<any>
+  ) {
+    return obj && key in obj && obj[key] ? obj[key] : def;
+  }
 
   return (
     <Layout title="Forgot Your Password?">
@@ -36,10 +46,19 @@ const ForgotPasswordPage: BlitzPage = () => {
               title="Forgot your password?"
               submitText="Send Reset Password Instructions"
               schema={ForgotPassword}
-              initialValues={{ email: "" }}
+              initialValues={{
+                email: "",
+                device: { name: "unknown browser 😕", os: "unknown OS 😕" },
+              }}
               onSubmit={async (values) => {
                 try {
-                  await forgotPasswordMutation(values);
+                  await forgotPasswordMutation({
+                    ...values,
+                    device: {
+                      name: nonNullValue(browser, "name", "unknown browser 😕"),
+                      os: nonNullValue(browser, "os", "unknown OS 😕"),
+                    },
+                  });
                 } catch (error: any) {
                   return {
                     [FORM_ERROR]:

@@ -32,6 +32,7 @@ specifiers:
   color: ^4.2.3
   color-namer: ^1.4.0
   color-string: ^1.9.1
+  detect-browser: ^5.3.0
   eslint: 7.32.0
   eslint-config-next: 12.2.0
   eslint-config-prettier: 8.5.0
@@ -47,6 +48,7 @@ specifiers:
   lint-staged: 12.1.7
   next: 12.2.5
   node-emoji: ^1.11.0
+  postmark: ^3.0.14
   prettier: ^2.5.1
   prettier-plugin-prisma: 3.8.0
   pretty-quick: 3.1.3
@@ -91,6 +93,7 @@ dependencies:
   color: 4.2.3
   color-namer: 1.4.0
   color-string: 1.9.1
+  detect-browser: 5.3.0
   file-saver: 2.0.5
   final-form: 4.20.7
   fontfaceobserver: 2.3.0
@@ -100,6 +103,7 @@ dependencies:
   hex-color-regex: 1.1.0
   next: 12.2.5_biqbaboplfbrettd7655fr4n2y
   node-emoji: 1.11.0
+  postmark: 3.0.14
   prisma: 4.0.0
   react: 18.2.0
   react-colorful: 5.6.1_biqbaboplfbrettd7655fr4n2y
@@ -4334,6 +4338,14 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /axios/0.25.0:
+    resolution: {integrity: sha512-cD8FOb0tRH3uuEe6+evtAbgJtfxr7ly3fQjYcMcuPlgkwVS9xboaVIpcDV+cYQe+yGykgwZCs1pzjntcGa6l5g==}
+    dependencies:
+      follow-redirects: 1.15.2
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /axobject-query/2.2.0:
     resolution: {integrity: sha512-Td525n+iPOOyUQIeBfcASuG6uJsDOITl7Mds5gFyerkWiX7qhUTdYUBlSgNMyVqtSJqwpt1kXGLdUt6SykLMRA==}
     dev: true
@@ -5324,6 +5336,10 @@ packages:
   /depd/2.0.0:
     resolution: {integrity: sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==}
     engines: {node: '>= 0.8'}
+    dev: false
+
+  /detect-browser/5.3.0:
+    resolution: {integrity: sha512-53rsFbGdwMwlF7qvCt0ypLM5V5/Mbl0szB7GPN8y9NCcbknYOeVVXdrXEq+90IwAfrrzt6Hd+u2E2ntakICU8w==}
     dev: false
 
   /detect-libc/2.0.1:
@@ -6417,6 +6433,16 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       tslib: 2.4.0
+    dev: false
+
+  /follow-redirects/1.15.2:
+    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
     dev: false
 
   /fontfaceobserver/2.3.0:
@@ -8624,8 +8650,8 @@ packages:
     engines: {node: '>=6.0.0'}
     dev: true
 
-  /nodemailer/6.7.8:
-    resolution: {integrity: sha512-2zaTFGqZixVmTxpJRCFC+Vk5eGRd/fYtvIR+dl5u9QXLTQWGIf48x/JXvo58g9sa0bU6To04XUv554Paykum3g==}
+  /nodemailer/6.8.0:
+    resolution: {integrity: sha512-EjYvSmHzekz6VNkNd12aUqAco+bOkRe3Of5jVhltqKhEsjw/y0PYPJfp83+s9Wzh1dspYAkUW/YNQ350NATbSQ==}
     engines: {node: '>=6.0.0'}
     dev: true
 
@@ -9079,6 +9105,14 @@ packages:
       source-map-js: 1.0.2
     dev: false
 
+  /postmark/3.0.14:
+    resolution: {integrity: sha512-Bkt6msv+I4Z3Y/jwt2owTNVmahOOyJlS1aQLiWsFAz5fzeJPfEqIUMSPPQTk7lYyJvYnLXQuzhFNG7M8yxqPhA==}
+    dependencies:
+      axios: 0.25.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /prelude-ls/1.1.2:
     resolution: {integrity: sha512-ESF23V4SKG6lVSGZgYNpbsiaAkdab6ZgOxe52p7+Kid3W3u3bxR4Vfd/o21dmN7jSt0IwgZ4v5MUd26FEtXE9w==}
     engines: {node: '>= 0.8.0'}
@@ -9138,7 +9172,7 @@ packages:
       display-notification: 2.0.0
       get-port: 5.1.1
       mailparser: 3.5.0
-      nodemailer: 6.7.8
+      nodemailer: 6.8.0
       open: 7.4.2
       p-event: 4.2.0
       p-wait-for: 3.2.0

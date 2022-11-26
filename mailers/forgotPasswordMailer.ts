@@ -5,41 +5,58 @@
  * and use it straight away.
  */
 
-type ResetPasswordMailer = {
-  to: string
-  token: string
-}
+import mailClient from "integrations/mail";
+import forgotPasswordMail from "./mails/forgotPassword";
 
-export function forgotPasswordMailer({ to, token }: ResetPasswordMailer) {
+type ResetPasswordMailer = {
+  to: string;
+  token: string;
+  user: string;
+  expiryInHours: number;
+  operatingSystem: string;
+  browserName: string;
+};
+
+export function forgotPasswordMailer({
+  to,
+  token,
+  user,
+  expiryInHours,
+  operatingSystem,
+  browserName,
+}: ResetPasswordMailer) {
   // In production, set APP_ORIGIN to your production server origin
-  const origin = process.env.APP_ORIGIN || process.env.BLITZ_DEV_SERVER_ORIGIN
-  const resetUrl = `${origin}/auth/reset-password?token=${token}`
+  const origin = process.env.APP_ORIGIN || process.env.BLITZ_DEV_SERVER_ORIGIN;
+  const resetUrl = `${origin}/auth/reset-password?token=${token}`;
+
+  const { html, text } = forgotPasswordMail(
+    "",
+    "Kumigi",
+    "kumigi.com",
+    user,
+    resetUrl,
+    "support@kumigi.com",
+    expiryInHours,
+    operatingSystem,
+    browserName
+  );
 
   const msg = {
-    from: "TODO@example.com",
-    to,
-    subject: "Your Password Reset Instructions",
-    html: `
-      <h1>Reset Your Password</h1>
-      <h3>NOTE: You must set up a production email integration in mailers/forgotPasswordMailer.ts</h3>
-
-      <a href="${resetUrl}">
-        Click here to set a new password
-      </a>
-    `,
-  }
+    From: "support@kumigi.com",
+    To: to,
+    Subject: "Your Password Reset Instructions 🔑",
+    HtmlBody: html,
+    TextBody: text,
+    MessageStream: "forgot-password",
+  };
 
   return {
     async send() {
-      if (process.env.NODE_ENV === "production") {
-        // TODO - send the production email, like this:
-        // await postmark.sendEmail(msg)
-        throw new Error("No production email implementation in mailers/forgotPasswordMailer")
-      } else {
-        // Preview email in the browser
-        const previewEmail = (await import("preview-email")).default
-        await previewEmail(msg)
-      }
+      await mailClient.sendEmail(msg).catch((error) => {
+        throw new Error(
+          "Something went wrong! Please retry, if the problem persists contact Support."
+        );
+      });
     },
-  }
+  };
 }
