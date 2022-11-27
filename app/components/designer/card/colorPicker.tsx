@@ -5,26 +5,12 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-  chakra,
 } from "@chakra-ui/react";
-import {
-  RgbaStringColorPicker,
-  HexColorInput,
-  HexAlphaColorPicker,
-} from "react-colorful";
-import colorString from "color-string";
+import { HexColorPicker } from "react-colorful";
 import { Dispatch, useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import Color from "color";
-import { Disabled } from "@dnd-kit/sortable/dist/types";
-
-function rgba2hex(color: string) {
-  return colorString.to.hex(colorString.get.rgb(color));
-}
-
-function hex2rgba(color: string) {
-  return colorString.to.rgb(colorString.get.rgb(color));
-}
+import { canParseColor } from "app/utils/color";
 
 export default function ColorPicker({
   color,
@@ -35,17 +21,25 @@ export default function ColorPicker({
 }) {
   const [text, setText] = useState(color);
   const debounced = useDebouncedCallback((value) => {
-    setColor(Color(value).hex());
-    // setText(Color(value).hex());
+    if (canParseColor(value)) {
+      setColor(Color(value).hex());
+    }
   }, 1000);
 
   useEffect(() => setText(color), [color]);
 
-  const handleKeyDown = (event) => {
+  function handleKeyDown(event) {
     if (event.key === "Enter") {
       debounced.flush();
     }
-  };
+  }
+
+  function handleOnBlur() {
+    debounced.flush();
+    if (!canParseColor(text)) {
+      setText(color);
+    }
+  }
 
   return (
     <Popover isLazy onClose={() => debounced.flush()}>
@@ -66,11 +60,11 @@ export default function ColorPicker({
             debounced(e.target.value);
           }}
           onKeyDown={handleKeyDown}
-          onBlur={() => debounced.flush()}
+          onBlur={handleOnBlur}
         />
       </HStack>
       <PopoverContent w="fit-content" mx={5}>
-        <HexAlphaColorPicker color={color} onChange={debounced} />
+        <HexColorPicker color={color} onChange={debounced} />
       </PopoverContent>
     </Popover>
   );
