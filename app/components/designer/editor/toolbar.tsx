@@ -5,6 +5,7 @@ import {
   HStack,
   IconButton,
   Spacer,
+  Stack,
 } from "@chakra-ui/react";
 import { randomLayers } from "app/lib/avatara";
 import { buttonSize } from "app/utils/buttonOptions";
