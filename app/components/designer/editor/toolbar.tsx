@@ -1,4 +1,3 @@
-import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import {
   Button,
   Flex,
@@ -6,6 +5,7 @@ import {
   HStack,
   IconButton,
   Spacer,
+  Stack,
 } from "@chakra-ui/react";
 import { randomLayers } from "app/lib/avatara";
 import { buttonSize } from "app/utils/buttonOptions";
@@ -15,6 +15,7 @@ import SaveButton from "app/components/functionButtons/saveButton";
 import { useRecoilState } from "recoil";
 import { imageAtom, nameAtom } from "app/utils/store";
 import { Layer, UseUndoType } from "app/types/avatara";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 export default function Toolbar({
   layerState,
@@ -40,15 +41,16 @@ export default function Toolbar({
     <Flex {...props} wrap="wrap" gap={4}>
       <HStack spacing={4}>
         <IconButton
-          icon={<ArrowBackIcon />}
+          icon={<FaArrowLeft />}
           size={size}
+          fontSize={"2em"}
           aria-label="Undo"
           disabled={!canUndo}
           colorScheme="teal"
           onClick={undoLayers}
         />
         <IconButton
-          icon={<ArrowForwardIcon />}
+          icon={<FaArrowRight />}
           size={size}
           aria-label="Redo"
           disabled={!canRedo}

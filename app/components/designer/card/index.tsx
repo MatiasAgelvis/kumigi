@@ -5,6 +5,8 @@ import {
   useDisclosure,
   Collapse,
   BoxProps,
+  HStack,
+  VStack,
 } from "@chakra-ui/react";
 import ColorPicker from "./colorPicker";
 import OptionSelect from "./optionSelect";
@@ -82,48 +84,51 @@ function Card({
       }}
       {...props}
     >
-      <CardHeader
-        shape={shape}
-        color={color}
-        displayLayer={layer.display}
-        setdisplayLayer={(value) => setProp("display", value)}
-        closeButton={deleteLayer}
-        onEditorToggle={onEditorToggle}
-        isEditorOpen={isEditorOpen}
-        displayButtons={!isSorting && !isDragging && !isOverlay}
-        dragHandleProps={{ ...attributes, ...listeners }}
-      />
-      {!isDragging && !isOverlay && (
-        <Collapse in={isEditorOpen && !isSorting}>
-          <SimpleGrid columns={[1, 2]} spacing={[5, null, 7]}>
-            <OptionSelect
-              options={options}
-              state={shape}
-              setState={(value) => setProp("shape", value)}
-              placeholder="Select a shape"
-            />
-            <ColorPicker
-              color={color}
-              setColor={(value) => setProp("color", value)}
-            />
-
-            {shape == "text" && (
-              <TextInput
-                text={text}
-                setText={(value) => setProp("text", value)}
-              />
-            )}
-            {shape == "text" && (
+      <VStack spacing={4}>
+        <CardHeader
+          shape={shape}
+          color={color}
+          w="full"
+          displayLayer={layer.display}
+          setdisplayLayer={(value) => setProp("display", value)}
+          closeButton={deleteLayer}
+          onEditorToggle={onEditorToggle}
+          isEditorOpen={isEditorOpen}
+          displayButtons={!isSorting && !isDragging && !isOverlay}
+          dragHandleProps={{ ...attributes, ...listeners }}
+        />
+        {!isDragging && !isOverlay && (
+          <Collapse in={isEditorOpen && !isSorting}>
+            <SimpleGrid columns={[1, 2]} spacing={[5, null, 7]}>
               <OptionSelect
-                options={fonts}
-                state={font}
-                setState={(value) => setProp("font", value)}
-                placeholder="Select a Font"
+                options={options}
+                state={shape}
+                setState={(value) => setProp("shape", value)}
+                placeholder="Select a shape"
               />
-            )}
-          </SimpleGrid>
-        </Collapse>
-      )}
+              <ColorPicker
+                color={color}
+                setColor={(value) => setProp("color", value)}
+              />
+
+              {shape == "text" && (
+                <TextInput
+                  text={text}
+                  setText={(value) => setProp("text", value)}
+                />
+              )}
+              {shape == "text" && (
+                <OptionSelect
+                  options={fonts}
+                  state={font}
+                  setState={(value) => setProp("font", value)}
+                  placeholder="Select a Font"
+                />
+              )}
+            </SimpleGrid>
+          </Collapse>
+        )}
+      </VStack>
     </Box>
   );
 }

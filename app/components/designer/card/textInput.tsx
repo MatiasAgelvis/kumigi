@@ -12,6 +12,7 @@ import {
   Portal,
   Wrap,
   StackProps,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { useState, useRef, Dispatch, Ref, RefObject } from "react";
 import icons from "public/fonts/icons.json";
@@ -101,7 +102,7 @@ function TextInput({
               overflow={"scroll"}
               maxHeight={["100px", "150px", "200px"]}
             >
-              <Wrap spacing={[6, null, 4]}>
+              <SimpleGrid spacing={[6, null, 4]} columns={[2, 3, 4]}>
                 {results.map((icon) => (
                   <Button
                     fontFamily={`"Solid Icons", "Brand Icons", "Regular Icons"`}
@@ -114,7 +115,7 @@ function TextInput({
                     {String.fromCharCode(parseInt(icon.unicode, 16))}
                   </Button>
                 ))}
-              </Wrap>
+              </SimpleGrid>
             </PopoverBody>
           </PopoverContent>
         </Portal>
