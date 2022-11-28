@@ -9,6 +9,10 @@ import {
   Flex,
   StackProps,
   CenterProps,
+  Stack,
+  useBreakpointValue,
+  ButtonGroup,
+  Spacer,
 } from "@chakra-ui/react";
 import {
   EditIcon,
@@ -22,6 +26,8 @@ import capitalize from "../../../utils/capitalize";
 import { buttonSize } from "app/utils/buttonOptions";
 import { Shape } from "app/types/avatara";
 import { Dispatch } from "react";
+import Popovero from "app/components/popover";
+import { FaEllipsisH } from "react-icons/fa";
 
 function CardHeader({
   shape,
@@ -56,6 +62,44 @@ function CardHeader({
 
   const size = buttonSize;
 
+  const buttons = (
+    <ButtonGroup flexGrow={0}>
+      <IconButton
+        aria-label={`${displayLayer ? "hide" : "show"} this layer`}
+        size={size}
+        onClick={() => setdisplayLayer(!displayLayer)}
+        icon={displayLayer ? <ViewIcon /> : <ViewOffIcon />}
+      />
+      <IconButton
+        aria-label={`lock this layer`}
+        size={size}
+        onClick={onEditorToggle}
+        icon={isEditorOpen ? <LockIcon /> : <EditIcon />}
+      />
+      <IconButton
+        aria-label={`remove this layer`}
+        size={size}
+        onClick={() => closeButton()}
+        icon={<CloseIcon />}
+      />
+    </ButtonGroup>
+  );
+
+  const popoverButtons = (
+    <Center>
+      <Popovero
+        triggerer={
+          <IconButton icon={<FaEllipsisH />} aria-label={"show card options"} />
+        }
+        body={buttons}
+        contentProps={{ w: "full" }}
+        placement="left"
+      />
+    </Center>
+  );
+
+  const optionButtons = useBreakpointValue([popoverButtons, buttons]);
+
   return (
     <HStack {...props}>
       <Center
@@ -71,41 +115,20 @@ function CardHeader({
       >
         <DragHandleIcon />
       </Center>
-      <SimpleGrid w="100%" columns={[1, null, 2]}>
+      <Flex w="100%" gap={4}>
         <Heading
           as="h4"
           my="0.5rem"
           p="0.2rem"
           size="md"
           fontSize={["lg", "xl"]}
+          flexGrow={1}
         >
           {layerName(color, shape)}
         </Heading>
-        {displayButtons && (
-          <Flex alignItems="start" justifyContent="end">
-            <HStack float="right" mb="0.7rem" ml="5px">
-              <IconButton
-                aria-label={`${displayLayer ? "hide" : "show"} this layer`}
-                size={size}
-                onClick={() => setdisplayLayer(!displayLayer)}
-                icon={displayLayer ? <ViewIcon /> : <ViewOffIcon />}
-              />
-              <IconButton
-                aria-label={`lock this layer`}
-                size={size}
-                onClick={onEditorToggle}
-                icon={isEditorOpen ? <LockIcon /> : <EditIcon />}
-              />
-              <IconButton
-                aria-label={`remove this layer`}
-                size={size}
-                onClick={() => closeButton()}
-                icon={<CloseIcon />}
-              />
-            </HStack>
-          </Flex>
-        )}
-      </SimpleGrid>
+        <Spacer />
+        {displayButtons && optionButtons}
+      </Flex>
     </HStack>
   );
 }
