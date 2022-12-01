@@ -1,15 +1,32 @@
 import boxOptions from "../../../utils/boxOptions";
-import { Box, Flex, FlexProps, VStack } from "@chakra-ui/react";
+import { Box, ButtonGroup, Flex, FlexProps, VStack } from "@chakra-ui/react";
 import ImageBox from "./imageBox";
 import DownloadButton from "app/components/functionButtons/downloadButton";
-import { Canvas } from "canvas";
+import CopyButton from "app/components/functionButtons/copyButton";
+import Avatara from "app/lib/avatara";
+import { Layer } from "app/types/avatara";
+import applyLayers from "app/utils/applyLayers";
+import makeApiUrl from "app/utils/makeApiUrl";
+import { useLocation } from "app/hooks/useLocation";
+import { buttonSize } from "app/utils/buttonOptions";
+import { CopyIcon } from "@chakra-ui/icons";
 
 export default function Image({
-  image,
+  layers,
+  dimensions,
   alt,
-  canvas,
   ...props
-}: { image: string; alt?: string; canvas: Canvas } & FlexProps) {
+}: {
+  layers: Layer[];
+  dimensions: { height: number; width: number };
+  alt?: string;
+} & FlexProps) {
+  const { height, width } = dimensions;
+  const avatar = new Avatara(width, height);
+  applyLayers(avatar, layers);
+  const image = avatar.toDataURL();
+  const location = useLocation();
+
   return (
     <Flex justify={"center"} {...props}>
       <Box
@@ -26,7 +43,22 @@ export default function Image({
         >
           <VStack gap={4}>
             <ImageBox image={image} alt={alt} />
-            <DownloadButton canvas={canvas} />
+            <ButtonGroup
+              variant={"outline"}
+              size={buttonSize}
+              colorScheme={"teal"}
+            >
+              <DownloadButton image={image} />
+              <CopyButton
+                leftIcon={<CopyIcon />}
+                message="Copy URL"
+                value={makeApiUrl(
+                  location ? location.origin : "",
+                  layers,
+                  dimensions
+                )}
+              />
+            </ButtonGroup>
           </VStack>
         </Box>
       </Box>
