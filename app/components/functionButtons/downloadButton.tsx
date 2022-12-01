@@ -1,21 +1,25 @@
-import { Button } from "@chakra-ui/react";
+import { Button, ButtonProps } from "@chakra-ui/react";
 import { DownloadIcon } from "@chakra-ui/icons";
 import { saveAs } from "file-saver";
 import buttonOptions from "app/utils/buttonOptions";
 
-export default function DownloadButton({ canvas, ...props }) {
+export default function DownloadButton({
+  image,
+  message = "Download",
+  ...props
+}: {
+  image: string;
+  message?: string;
+} & ButtonProps) {
   return (
     <Button
-      {...buttonOptions}
       leftIcon={<DownloadIcon />}
       onClick={() => {
-        canvas.toBlob(function (blob) {
-          saveAs(blob, "avatara.png");
-        });
+        saveAs(image, "avatara.png");
       }}
       {...props}
     >
-      Download
+      {message}
     </Button>
   );
 }

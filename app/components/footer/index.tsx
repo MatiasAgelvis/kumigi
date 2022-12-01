@@ -1,39 +1,36 @@
-import { BoxProps, Flex, VStack } from "@chakra-ui/react";
+import { Box, BoxProps, Flex, HStack, VStack } from "@chakra-ui/react";
 import APIurl from "./apiUrl";
 import boxOptions from "app/utils/boxOptions";
-import { baseAtom, urlAtom } from "app/utils/store";
-import { useRecoilState } from "recoil";
 
-import { Box, Heading, Text, Link, Center } from "@chakra-ui/react";
 import { NextComponentType } from "next";
-import { useEffect } from "react";
+import buttonOptions from "app/utils/buttonOptions";
+import SizeFormatted from "../size/sizeFormatted";
+import Modalo from "../modal";
 
 const Footer: NextComponentType = ({ ...props }: BoxProps) => {
-  const [url, _] = useRecoilState(urlAtom);
-  const [BASE, setBASE] = useRecoilState(baseAtom);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setBASE(window.location.origin + "/api");
-    }
-  });
-
   return (
     <Box {...props}>
       <Box {...boxOptions} m="1rem">
-        <VStack spacing={2} align={"start"}>
-          <Text fontSize={"x-small"}>Equivalent API call</Text>
-          <Text wordBreak="break-all">
-            <APIurl href={url}>{url}</APIurl>
-          </Text>
-        </VStack>
+        <HStack spacing={2}>
+          {/*<APIButton
+            message="Copy Equivalent Link"
+            layers={layers}
+            parameters={{ height, width }}
+          />*/}
+          <Modalo
+            open={"Size Options"}
+            buttonProps={{ variant: "outline", colorScheme: "blue" }}
+            body={<SizeFormatted />}
+            modalProps={boxOptions}
+          />
+        </HStack>
       </Box>
-      <Center>
+      {/*<Center>
         <Text mr={2}>by</Text>
         <Heading size={"lg"}>
           <Link href="https://matiasagelvis.com">Matias Agelvis</Link>
         </Heading>
-      </Center>
+      </Center>*/}
     </Box>
   );
 };

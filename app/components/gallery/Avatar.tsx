@@ -57,7 +57,7 @@ function Avatar({
         />,
         <DownloadButton
           key="download"
-          canvas={avatar.canvas}
+          image={avatar.toDataURL()}
           w={"fit-content"}
         />,
         ...footer,

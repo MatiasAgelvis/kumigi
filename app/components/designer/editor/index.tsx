@@ -165,7 +165,7 @@ function Editor({
               icon={<GiPerspectiveDiceSixFacesRandom />}
             />
           </ButtonGroup>
-          <AccordionMenu
+          {/*<AccordionMenu
             name="Size Options"
             body={<SizeFormatted />}
             buttonProps={buttonOptions}
@@ -174,7 +174,7 @@ function Editor({
               // transform: "translateY(-15px)",
               // pt: "25px",
             }}
-          />
+          />*/}
         </VStack>
       </Box>
     </Flex>
