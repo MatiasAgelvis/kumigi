@@ -23,12 +23,12 @@ export const baseAtom = atom({
 
 export const heightAtom = atom({
   key: "heightState",
-  default: 200,
+  default: 400,
 });
 
 export const widthAtom = atom({
   key: "widthState",
-  default: 200,
+  default: 400,
 });
 
 export const nameAtom = atom({
