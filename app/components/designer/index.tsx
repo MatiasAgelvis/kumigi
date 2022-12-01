@@ -4,13 +4,10 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import Avatara from "../../lib/avatara";
 import applyLayers from "../../utils/applyLayers";
-import URLfromLayers from "../../utils/url";
 import {
-  baseAtom,
   heightAtom,
   imageAtom,
   layersAtom,
-  urlAtom,
   widthAtom,
 } from "../../utils/store";
 import Editor from "./editor";
@@ -27,10 +24,7 @@ function Designer({
   const [height] = useRecoilState(heightAtom);
   const [width] = useRecoilState(widthAtom);
   const [layersRecoil, setLayersRecoil] = useRecoilState(layersAtom);
-  const [URL, setURL] = useRecoilState(urlAtom);
-  const [BASE] = useRecoilState(baseAtom);
   let avatar = new Avatara(width, height);
-
   const fonts = avatar.fonts();
   const shapes = avatar.shapes();
 
@@ -55,15 +49,6 @@ function Designer({
     applyLayers(avatar, layers);
     // console.log(avatar, layers);
     setImage(avatar.toDataURL());
-    setURL(
-      URLfromLayers(BASE, layers, [
-        {
-          name: "height",
-          value: height,
-        },
-        { name: "width", value: width },
-      ])
-    );
   }
 
   useEffect(() => {
@@ -95,9 +80,9 @@ function Designer({
 
       {/*    Image    */}
       <Image
-        image={image}
+        layers={layers}
+        dimensions={{ height, width }}
         alt="Current state of the avatar"
-        canvas={avatar.canvas}
         gridArea="image"
       />
     </SimpleGrid>
