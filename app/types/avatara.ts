@@ -39,3 +39,7 @@ export type AvataraQuery = Partial<{
 export type ApiQuery = NextApiRequest["query"];
 
 export type UseUndoType<T> = [State<T>, Actions<T>];
+
+export interface NotNestedObject {
+  [x: string]: number | boolean | string | null | undefined;
+}
