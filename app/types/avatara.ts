@@ -30,6 +30,7 @@ export type Layer = {
 export type AvataraQuery = Partial<{
   height: string;
   width: string;
+  sizes: string;
   colors: string;
   texts: string;
   fonts: string;
