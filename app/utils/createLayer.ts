@@ -1,5 +1,5 @@
-import { Layer, LayerNoId } from "app/types/avatara";
-import { v4 as uuidv4 } from "uuid";
+import { Layer, LayerNoId } from "app/types/avatara"
+import { v4 as uuidv4 } from "uuid"
 
 export function createLayer(): Layer {
   return idCard({
@@ -8,11 +8,11 @@ export function createLayer(): Layer {
     text: "",
     font: "pt",
     display: true,
-  });
+  })
 }
 
 export function idCard(layer: LayerNoId): Layer {
-  return { id: uuidv4(), ...layer };
+  return { id: uuidv4(), ...layer }
 }
 
-export const layers__Default: Array<Layer> = [idCard(createLayer())];
+export const layers__Default: Array<Layer> = [idCard(createLayer())]
