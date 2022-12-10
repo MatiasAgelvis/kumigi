@@ -5,20 +5,15 @@ export function queue<T>(arr: T[], item: T): T | undefined {
   return arr.shift();
 }
 
-export function parseArrayString(
-  arrayString: string,
-  callback: (x: any, index?: number, array?: any[]) => any = (x) => x
-) {
+export function parseArrayString(arrayString: string): string[] {
   return (
     arrayString
       // remove brackets
       .replace(/\[|\]/g, "")
       // replace , not inside parenthesis with |
-      .replace(/,(?![^(]*\))/g, "|")
-      // split by |
-      .split("|")
-      // ensure that all characters are lowercase
-      .map(callback)
+      .replace(/,(?![^(]*\))/g, "==%|%++")
+      // split by divider
+      .split("==%|%++")
   );
 }
 
