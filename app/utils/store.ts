@@ -16,9 +16,9 @@ export const urlAtom = atom({
   default: "",
 });
 
-export const baseAtom = atom({
-  key: "baseState",
-  default: "",
+export const locationAtom = atom({
+  key: "locationState",
+  default: {},
 });
 
 export const heightAtom = atom({
