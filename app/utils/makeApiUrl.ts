@@ -1,5 +1,6 @@
-import { Layer, NotNestedObject, OKey } from "app/types/avatara"
+import { Layer, OKey } from "app/types/avatara"
 import urlJoin from "url-join"
+import { heightAtom } from "./store"
 
 export default function makeApiUrl(
   base: string,
@@ -21,5 +22,8 @@ export default function makeApiUrl(
     )
   )
 
-  return urlJoin(base || "", "api", ...layersUrl)
+  const query =
+    "?sizes=" + sizes.map(([width, height]) => `${width}x${height}`).join(",")
+
+  return urlJoin(base || "", "api", ...layersUrl, query)
 }
