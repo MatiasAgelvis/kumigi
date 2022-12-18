@@ -1,14 +1,14 @@
-import { Box, BoxProps, StackProps, VStack } from "@chakra-ui/react";
-import useSizeComponents from "app/hooks/useSizeComponents";
-import FullWidth from "../formatting/fullWidth";
+import { Box, BoxProps, StackProps, VStack } from "@chakra-ui/react"
+import useSizeComponents from "app/hooks/useSizeComponents"
+import FullWidth from "../formatting/fullWidth"
 
 export default function SizeFormatted({
   vstackProps,
   ...props
 }: {
-  vstackProps?: StackProps;
+  vstackProps?: StackProps
 } & BoxProps) {
-  const sizeComponents = useSizeComponents();
+  const sizeComponents = useSizeComponents(0)
 
   return (
     <Box {...props}>
@@ -23,5 +23,5 @@ export default function SizeFormatted({
         ))}
       </VStack>
     </Box>
-  );
+  )
 }

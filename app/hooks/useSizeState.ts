@@ -1,9 +1,14 @@
-import { heightAtom, widthAtom } from "app/utils/store";
-import { useRecoilState } from "recoil";
+import { sizesAtom } from "app/utils/store"
+import { useRecoilState } from "recoil"
 
-export default function useSizeState() {
-  const [height, setHeight] = useRecoilState(heightAtom);
-  const [width, setWidth] = useRecoilState(widthAtom);
+export default function useSizeState(index: number) {
+  const [sizes, setSizes] = useRecoilState(sizesAtom)
 
-  return { height, setHeight, width, setWidth };
+  function setSize(update: number[]) {
+    const newState = [...sizes]
+    newState[index] = update
+    setSizes(newState)
+  }
+
+  return { size: sizes[index]!, setSize }
 }
