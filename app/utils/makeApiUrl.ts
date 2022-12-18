@@ -1,6 +1,5 @@
-import { Layer, OKey } from "app/types/avatara"
+import { Layer } from "app/types/avatara"
 import urlJoin from "url-join"
-import { heightAtom } from "./store"
 
 export default function makeApiUrl(
   base: string,
