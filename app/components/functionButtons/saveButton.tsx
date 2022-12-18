@@ -1,4 +1,4 @@
-import { useMutation } from "@blitzjs/rpc";
+import { useMutation } from "@blitzjs/rpc"
 import {
   Button,
   Center,
@@ -9,40 +9,40 @@ import {
   ModalProps,
   useToast,
   UseToastOptions,
-} from "@chakra-ui/react";
-import Modalo from "app/components/modal";
-import { useCurrentUser } from "app/core/hooks/useCurrentUser";
-import useAlertDialog from "app/hooks/useAlertDialog";
-import createSimpleDesign from "app/simple-designs/mutations/createSimpleDesign";
-import updateSimpleDesign from "app/simple-designs/mutations/updateSimpleDesign";
-import { Layer } from "app/types/avatara";
-import boxOptions from "app/utils/boxOptions";
-import { buttonSize } from "app/utils/buttonOptions";
-import { heightAtom, imageAtom, nameAtom, widthAtom } from "app/utils/store";
-import { FaSave } from "react-icons/fa";
-import { useRecoilState } from "recoil";
-import LogInCTA from "../auth/logInCTA";
-import ImageBox from "../designer/image/imageBox";
+} from "@chakra-ui/react"
+import Modalo from "app/components/modal"
+import { useCurrentUser } from "app/core/hooks/useCurrentUser"
+import useAlertDialog from "app/hooks/useAlertDialog"
+import useSize from "app/hooks/useSize"
+import createSimpleDesign from "app/simple-designs/mutations/createSimpleDesign"
+import updateSimpleDesign from "app/simple-designs/mutations/updateSimpleDesign"
+import { Layer } from "app/types/avatara"
+import boxOptions from "app/utils/boxOptions"
+import { buttonSize } from "app/utils/buttonOptions"
+import { heightAtom, imageAtom, nameAtom, widthAtom } from "app/utils/store"
+import { FaSave } from "react-icons/fa"
+import { useRecoilState } from "recoil"
+import LogInCTA from "../auth/logInCTA"
+import ImageBox from "../designer/image/imageBox"
 
 export default function SaveButton({
   layers,
   ...props
 }: {
-  layers: Layer[];
-  props?: ModalProps;
+  layers: Layer[]
+  props?: ModalProps
 }) {
-  const [image] = useRecoilState(imageAtom);
-  const [height] = useRecoilState(heightAtom);
-  const [width] = useRecoilState(widthAtom);
-  const [name, setName] = useRecoilState(nameAtom);
+  const [image] = useRecoilState(imageAtom)
+  const { width, height } = useSize()
+  const [name, setName] = useRecoilState(nameAtom)
 
-  const currentUser = useCurrentUser();
+  const currentUser = useCurrentUser()
 
-  const [createDesingMutation] = useMutation(createSimpleDesign);
-  const [updateDesingMutation] = useMutation(updateSimpleDesign);
+  const [createDesingMutation] = useMutation(createSimpleDesign)
+  const [updateDesingMutation] = useMutation(updateSimpleDesign)
 
-  const toast = useToast();
-  const { onToggle, component: Alert } = useAlertDialog();
+  const toast = useToast()
+  const { onToggle, component: Alert } = useAlertDialog()
 
   const update = (userId: number) => {
     return {
@@ -51,8 +51,8 @@ export default function SaveButton({
       layers,
       height,
       width,
-    };
-  };
+    }
+  }
 
   const successToast = (options: UseToastOptions) =>
     toast({
@@ -62,13 +62,13 @@ export default function SaveButton({
       duration: 9000,
       isClosable: true,
       ...options,
-    });
+    })
 
   function handleError(error) {
     switch (error.code) {
       case "P2002":
-        onToggle();
-        break;
+        onToggle()
+        break
       default:
         toast({
           title: "An unknown error ocurred",
@@ -76,13 +76,13 @@ export default function SaveButton({
           status: "error",
           duration: 9000,
           isClosable: true,
-        });
-        console.error(error);
-        break;
+        })
+        console.error(error)
+        break
     }
   }
 
-  const size = buttonSize;
+  const size = buttonSize
 
   return (
     <>
@@ -131,7 +131,7 @@ export default function SaveButton({
                         description: `The avatar "${name}" was saved to your gallery.`,
                       })
                     )
-                    .catch(handleError);
+                    .catch(handleError)
                 }
               }}
             >
@@ -159,5 +159,5 @@ export default function SaveButton({
         }
       />
     </>
-  );
+  )
 }
