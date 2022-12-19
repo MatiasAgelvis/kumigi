@@ -1,26 +1,72 @@
-import { Box, BoxProps, StackProps, VStack } from "@chakra-ui/react"
+import {
+  Box,
+  BoxProps,
+  Button,
+  Flex,
+  StackProps,
+  VStack,
+} from "@chakra-ui/react"
 import useSizeComponents from "app/hooks/useSizeComponents"
+import useSizeState from "app/hooks/useSizeState"
+import { useState } from "react"
+import RangeInput from "../designer/editor/rangeInput"
 import FullWidth from "../formatting/fullWidth"
 
 export default function SizeFormatted({
+  index,
+  onCancelClick,
   vstackProps,
   ...props
 }: {
+  index: number
+  onCancelClick?: () => void
   vstackProps?: StackProps
 } & BoxProps) {
-  const sizeComponents = useSizeComponents(0)
+  const { size, setSize } = useSizeState(index)
+  const [width, height]: number[] = size
+
+  const [localWidth, setLocalWidth] = useState(width)
+  const [localHeight, setLocalHeight] = useState(height)
 
   return (
     <Box {...props}>
       <VStack align="stretch" {...vstackProps}>
-        {Array.from(sizeComponents).map((option, i) => (
-          <FullWidth
-            key={i}
-            name={option.name}
-            input={option.input}
-            textProps={{ fontFamily: "mono" }}
-          />
-        ))}
+        <FullWidth
+          name={"Width"}
+          input={
+            <RangeInput
+              value={localWidth!}
+              setValue={setLocalWidth}
+              max={3000}
+            />
+          }
+          textProps={{ fontFamily: "mono" }}
+        />
+
+        <FullWidth
+          name={"Height"}
+          input={
+            <RangeInput
+              value={localHeight!}
+              setValue={setLocalHeight}
+              max={3000}
+            />
+          }
+          textProps={{ fontFamily: "mono" }}
+        />
+        <Flex justify={"space-between"}>
+          <Button
+            colorScheme="blue"
+            onClick={() => setSize([localWidth!, localHeight!])}
+          >
+            Apply
+          </Button>
+          {onCancelClick ? (
+            <Button colorScheme="red" onClick={onCancelClick}>
+              Cancel
+            </Button>
+          ) : null}
+        </Flex>
       </VStack>
     </Box>
   )
