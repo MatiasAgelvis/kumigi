@@ -6,7 +6,6 @@ import {
   StackProps,
   VStack,
 } from "@chakra-ui/react"
-import useSizeComponents from "app/hooks/useSizeComponents"
 import useSizeState from "app/hooks/useSizeState"
 import { useState } from "react"
 import RangeInput from "../designer/editor/rangeInput"
@@ -24,7 +23,6 @@ export default function SizeFormatted({
 } & BoxProps) {
   const { size, setSize } = useSizeState(index)
   const [width, height]: number[] = size
-
   const [localWidth, setLocalWidth] = useState(width)
   const [localHeight, setLocalHeight] = useState(height)
 

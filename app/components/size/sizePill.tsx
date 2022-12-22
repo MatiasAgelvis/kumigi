@@ -47,6 +47,7 @@ export default function SizePill({
       >
         {width}x{height}
       </Button>
+
       <IconButton
         icon={<CloseIcon />}
         aria-label="Delete size"
