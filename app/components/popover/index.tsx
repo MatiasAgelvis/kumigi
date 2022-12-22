@@ -14,8 +14,8 @@ import {
   PopoverBodyProps,
   PopoverFooterProps,
   PopoverContentProps,
-} from "@chakra-ui/react";
-import { ReactNode, useRef } from "react";
+} from "@chakra-ui/react"
+import { ReactNode, useRef } from "react"
 export default function Popovero({
   arrow = false,
   closeButton = true,
@@ -29,18 +29,18 @@ export default function Popovero({
   footerProps,
   ...props
 }: {
-  arrow?: boolean;
-  closeButton?: boolean;
-  triggerer: ReactNode;
-  contentProps?: PopoverContentProps;
-  header?: ReactNode;
-  headerProps?: PopoverHeaderProps;
-  body?: ReactNode;
-  bodyProps?: PopoverBodyProps;
-  footer?: ReactNode;
-  footerProps?: PopoverFooterProps;
+  arrow?: boolean
+  closeButton?: boolean
+  triggerer: ReactNode
+  contentProps?: PopoverContentProps
+  header?: ReactNode
+  headerProps?: PopoverHeaderProps
+  body?: ReactNode
+  bodyProps?: PopoverBodyProps
+  footer?: ReactNode
+  footerProps?: PopoverFooterProps
 } & PopoverProps) {
-  const initialFocusRef = useRef(null);
+  const initialFocusRef = useRef(null)
   return (
     <Popover initialFocusRef={initialFocusRef} placement="bottom" {...props}>
       <PopoverTrigger>{triggerer}</PopoverTrigger>
@@ -56,5 +56,5 @@ export default function Popovero({
         ) : null}
       </PopoverContent>
     </Popover>
-  );
+  )
 }
