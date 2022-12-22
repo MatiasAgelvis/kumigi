@@ -50,7 +50,7 @@ export default function Image({
               size={buttonSize}
               colorScheme={"teal"}
             >
-              <DownloadButton image={image} />
+              <DownloadButton layers={layers} sizes={sizes} />
               <CopyButton
                 leftIcon={<CopyIcon />}
                 message="Copy URL"

@@ -1,17 +1,17 @@
-import boxOptions from "app/utils/boxOptions";
-import { Box, Center, ModalProps } from "@chakra-ui/react";
-import { ReactNode, useState } from "react";
+import boxOptions from "app/utils/boxOptions"
+import { Box, Center, ModalProps } from "@chakra-ui/react"
+import { ReactNode, useState } from "react"
 
-import ImageBox from "../designer/image/imageBox";
-import Avatara from "app/lib/avatara";
-import applyLayers from "app/utils/applyLayers";
-import Modalo from "../modal";
+import ImageBox from "../designer/image/imageBox"
+import Avatara from "app/lib/avatara"
+import applyLayers from "app/utils/applyLayers"
+import Modalo from "../modal"
 
-import DownloadButton from "../functionButtons/downloadButton";
-import { Layer } from "app/types/avatara";
+import DownloadButton from "../functionButtons/downloadButton"
+import { Layer } from "app/types/avatara"
 
-import { name__default } from "app/utils/name";
-import EditButton from "../functionButtons/editButton";
+import { name__default } from "app/utils/name"
+import EditButton from "../functionButtons/editButton"
 
 function Avatar({
   layers: startLayers,
@@ -21,25 +21,25 @@ function Avatar({
   footer: __footer,
   ...props
 }: {
-  layers: Layer[];
-  name: string;
-  dimensions: { height: number; width: number };
-  header?: ReactNode;
-  footer?: ReactNode[];
-  props?: ModalProps;
+  layers: Layer[]
+  name: string
+  dimensions: { height: number; width: number }
+  header?: ReactNode
+  footer?: ReactNode[]
+  props?: ModalProps
 }) {
-  const { height, width } = dimensions;
-  const avatar = new Avatara(width, height);
-  const [layers] = useState(startLayers);
-  applyLayers(avatar, layers);
+  const { height, width } = dimensions
+  const avatar = new Avatara(width, height)
+  const [layers] = useState(startLayers)
+  applyLayers(avatar, layers)
 
-  const footer = __footer ? Array.from(__footer) : [];
+  const footer = __footer ? Array.from(__footer) : []
 
   const imageBox = (
     <Center>
       <ImageBox image={avatar.toDataURL()} alt="random Avatar" />
     </Center>
-  );
+  )
 
   return (
     <Modalo
@@ -57,13 +57,14 @@ function Avatar({
         />,
         <DownloadButton
           key="download"
-          image={avatar.toDataURL()}
+          layers={layers}
+          sizes={[[width, height]]}
           w={"fit-content"}
         />,
         ...footer,
       ]}
       {...props}
     />
-  );
+  )
 }
-export default Avatar;
+export default Avatar
