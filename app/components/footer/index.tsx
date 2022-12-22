@@ -6,6 +6,7 @@ import {
   HStack,
   IconButton,
   VStack,
+  Wrap,
 } from "@chakra-ui/react"
 import APIurl from "./apiUrl"
 import boxOptions from "app/utils/boxOptions"
@@ -24,18 +25,7 @@ const Footer: NextComponentType = ({ ...props }: BoxProps) => {
   return (
     <Box {...props}>
       <Box {...boxOptions} m="1rem">
-        <HStack spacing={2}>
-          {/*<APIButton
-            message="Copy Equivalent Link"
-            layers={layers}
-            parameters={{ height, width }}
-          />*/}
-          {/*<Modalo
-            open={"Size Options"}
-            buttonProps={{ variant: "outline", colorScheme: "blue" }}
-            body={<SizeFormatted index={0} />}
-            modalProps={boxOptions}
-          />*/}
+        <Wrap spacing={2}>
           {sizes.map((size, index) => (
             <SizePill
               key={`size_${index}`}
@@ -48,14 +38,8 @@ const Footer: NextComponentType = ({ ...props }: BoxProps) => {
             aria-label={"Add another Size"}
             onClick={() => setSizes([...sizes, [400, 400]])}
           />
-        </HStack>
+        </Wrap>
       </Box>
-      {/*<Center>
-        <Text mr={2}>by</Text>
-        <Heading size={"lg"}>
-          <Link href="https://matiasagelvis.com">Matias Agelvis</Link>
-        </Heading>
-      </Center>*/}
     </Box>
   )
 }
