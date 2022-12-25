@@ -46,8 +46,6 @@ const RandomGalleryComponent = () => {
     setName("Name")
   }
 
-  useEffect(restart, [sizes])
-
   return (
     <VStack w="full" spacing={8}>
       <Wrap w="full" justify={"center"}>
