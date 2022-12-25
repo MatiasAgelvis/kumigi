@@ -19,7 +19,7 @@ import updateSimpleDesign from "app/simple-designs/mutations/updateSimpleDesign"
 import { Layer } from "app/types/avatara"
 import boxOptions from "app/utils/boxOptions"
 import { buttonSize } from "app/utils/buttonOptions"
-import { heightAtom, imageAtom, nameAtom, widthAtom } from "app/utils/store"
+import { imageAtom, nameAtom, sizesAtom } from "app/utils/store"
 import { FaSave } from "react-icons/fa"
 import { useRecoilState } from "recoil"
 import LogInCTA from "../auth/logInCTA"
@@ -33,7 +33,7 @@ export default function SaveButton({
   props?: ModalProps
 }) {
   const [image] = useRecoilState(imageAtom)
-  const { width, height } = useSize()
+  const [sizes, setSizes] = useRecoilState(sizesAtom)
   const [name, setName] = useRecoilState(nameAtom)
 
   const currentUser = useCurrentUser()
@@ -49,8 +49,8 @@ export default function SaveButton({
       id: name,
       userId: userId,
       layers,
-      height,
-      width,
+      widths: sizes.map((size) => size[0])!,
+      heights: sizes.map((size) => size[1])!,
     }
   }
 
