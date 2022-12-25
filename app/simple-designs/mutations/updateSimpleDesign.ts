@@ -1,6 +1,6 @@
-import { resolver } from "@blitzjs/rpc";
-import db from "db";
-import { z } from "zod";
+import { resolver } from "@blitzjs/rpc"
+import db from "db"
+import { z } from "zod"
 
 const UpdateSimpleDesign = z.object({
   id: z.string(),
@@ -15,9 +15,9 @@ const UpdateSimpleDesign = z.object({
       display: z.boolean(),
     })
     .array(),
-  height: z.number(),
-  width: z.number(),
-});
+  heights: z.number().array(),
+  widths: z.number().array(),
+})
 
 export default resolver.pipe(
   resolver.zod(UpdateSimpleDesign),
@@ -27,8 +27,8 @@ export default resolver.pipe(
     const simpleDesign = await db.simpleDesigns.update({
       where: { id },
       data,
-    });
+    })
 
-    return simpleDesign;
+    return simpleDesign
   }
-);
+)

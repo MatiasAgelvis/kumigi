@@ -59,31 +59,31 @@ Create simple avatars with text from a simple and composable API.
 	</p>
 </dl>
 
-## Options
+## Options 🚧
 
-The following parameters can be passed to all queries.
+~The following parameters can be passed to all queries.~
 
 - `width` : Number, sets the width of the resulting image (ex. `width=300`)
 - `height` : Number, sets the height of the resulting image (ex. `height=140`)
 - `colors` : String of comma separated CSS parsable colors (ex. `colors=rgb(100,0,200),dodgerblue`), colors in HEX should not be prepended with a #.
 - `texts` : String of comma separated strings (ex. `texts=abc,123,xyz`)
-- `fonts` : String of comma separated strings of [ plex, courier, cousine, pt, roboto ] (ex. font=[pt,cousine])
+- `fonts` : String of comma separated strings of [ plex, courier, cousine, pt, roboto ] (ex. font=[pt,cousine])~
 
-## Example
+## Examples 🚧
 
-`https://avatara.onrender.com/api/circle/text?colors=234567,white&texts=MAD&fonts=courier`
+~`https://avatara.onrender.com/api/circle/text?colors=234567,white&texts=MAD&fonts=courier`~
 
 <p align="center">
 <img src="images/example.png">
 </p>
 
-`https://avatara.onrender.com/api/background/linear/circle/square/rectangle/linear?colors=black,grey,blue,yellow,red,green`
+~`https://avatara.onrender.com/api/background/linear/circle/square/rectangle/linear?colors=black,grey,blue,yellow,red,green`~
 
 <p align="center">
 <img src="images/background.gradient.circle.square.rectangle.gradient%3Fcolors=black%2Cgrey%2Cblue%2Cyellow%2Cred%2Cgreen.png">
 </p>
 
-`https://avatara.onrender.com/api/background/circle/square/rectangle/linear/text?colors=crimson,tan,mediumblue,green,teal,gold&texts=[777]`
+~`https://avatara.onrender.com/api/background/circle/square/rectangle/linear/text?colors=crimson,tan,mediumblue,green,teal,gold&texts=[777]`~
 
 <p align="center">
 <img src="images/background.circle.square.rectangle.gradient%3Fcolors%3Dcrimson%2Ctan%2Cmediumblue%2Cgreen%2Cteal%26text%3D777%26textColor%3Dgold.png">

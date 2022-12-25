@@ -1,4 +1,4 @@
-import { atom } from "recoil"
+import { atom, selector } from "recoil"
 import { layers__Default } from "./createLayer"
 
 export const layersAtom = atom({
@@ -26,12 +26,23 @@ export const currentSizeAtom = atom({
   default: 0,
 })
 
-export const sizesAtom = atom({
-  key: "sizesState",
-  default: [[400, 400]],
-})
-
 export const nameAtom = atom({
   key: "nameState",
   default: "Name",
+})
+
+const _default_size = [[400, 400]]
+const sizesAtomRoot = atom({
+  key: "sizesStateRoot",
+  default: _default_size,
+})
+
+export const sizesAtom = selector({
+  key: "sizesState",
+  get: ({ get }) => get(sizesAtomRoot),
+  set: ({ set }, newValue) =>
+    set(
+      sizesAtomRoot,
+      !Array.isArray(newValue) || !newValue.length ? _default_size : newValue
+    ),
 })

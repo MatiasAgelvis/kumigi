@@ -35,7 +35,13 @@ export default function SizePill({
       {...props}
     >
       <Popovero
-        triggerer={<IconButton icon={<EditIcon />} aria-label="Change size" />}
+        triggerer={
+          <IconButton
+            icon={<EditIcon />}
+            aria-label="Change size"
+            {...editButtonProps}
+          />
+        }
         placement={"top"}
         body={<SizeFormatted index={index} />}
       />

@@ -1,8 +1,9 @@
 import { currentSizeAtom, sizesAtom } from "app/utils/store"
-import { useRecoilState } from "recoil"
+import { SetterOrUpdater, useRecoilState } from "recoil"
 
 export default function useSizeState(index: number) {
-  const [sizes, setSizes] = useRecoilState(sizesAtom)
+  const [sizes, setSizes]: [number[][], SetterOrUpdater<number[][]>] =
+    useRecoilState(sizesAtom)
   const [currentSize, setCurrentSize] = useRecoilState(currentSizeAtom)
 
   function setSize(update: number[]) {
@@ -14,7 +15,8 @@ export default function useSizeState(index: number) {
   function deleteSize() {
     const newSizeState = [...sizes]
     newSizeState.splice(index, 1)
-    setSizes(newSizeState)
+    // prevent empty size state
+    setSizes(newSizeState.length == 0 ? [[400, 400]] : newSizeState)
     if (!(currentSize < newSizeState.length)) {
       setCurrentSize(newSizeState.length - 1)
     }

@@ -65,8 +65,8 @@ model SimpleDesigns {
   userId    Int
   id        String   @id @default(uuid())
   layers    Json
-  height    Int      @default(200)
-  width     Int      @default(200)
+  widths    Int[]    @default([400])
+  heights   Int[]    @default([400])
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

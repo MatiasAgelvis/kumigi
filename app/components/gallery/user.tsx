@@ -1,39 +1,39 @@
-import Gallery from "app/components/gallery";
-import { ReactNode, useState } from "react";
-import Avatar from "./Avatar";
-import { v4 as uuidv4 } from "uuid";
-import { HStack, Text, VStack } from "@chakra-ui/react";
+import Gallery from "app/components/gallery"
+import { ReactNode, useState } from "react"
+import Avatar from "./Avatar"
+import { v4 as uuidv4 } from "uuid"
+import { HStack, Text, VStack } from "@chakra-ui/react"
 
-import getSimpleDesigns from "app/simple-designs/queries/getSimpleDesigns";
-import { useInfiniteQuery } from "@blitzjs/rpc";
+import getSimpleDesigns from "app/simple-designs/queries/getSimpleDesigns"
+import { useInfiniteQuery } from "@blitzjs/rpc"
 
-import DeleteButton from "../functionButtons/deleteButton";
-import UpdateButton from "../functionButtons/renameButton";
-import { lastElement } from "app/utils/arrays";
+import DeleteButton from "../functionButtons/deleteButton"
+import UpdateButton from "../functionButtons/renameButton"
+import { lastElement, zip } from "app/utils/arrays"
 
 const UserGalleryComponent = () => {
   // <Avatar layers={item} key={`avatar_${index}`} />
-  const [items, setItems] = useState<ReactNode[]>([]);
-  const [hasMore, setHasMore] = useState(true);
-  const manyMore = 3;
-  const limit = 100;
+  const [items, setItems] = useState<ReactNode[]>([])
+  const [hasMore, setHasMore] = useState(true)
+  const manyMore = 3
+  const limit = 100
   const [results, { fetchNextPage, isFetching }] = useInfiniteQuery(
     getSimpleDesigns,
     (page = { take: manyMore, skip: 0 }) => page,
     {
       getNextPageParam: (lastPage) => lastPage.nextPage,
     }
-  );
+  )
 
   const fetchMore = () => {
     if (!isFetching) {
-      fetchNextPage();
+      fetchNextPage()
     }
 
     if (results && !isFetching) {
-      const lastResult = lastElement(results);
-      const designs = lastResult.simpleDesigns;
-      setHasMore(lastResult.hasMore);
+      const lastResult = lastElement(results)
+      const designs = lastResult.simpleDesigns
+      setHasMore(lastResult.hasMore)
       setItems(
         items.concat(
           designs.map((design) => (
@@ -45,7 +45,7 @@ const UserGalleryComponent = () => {
                   <UpdateButton design={design} />
                 </HStack>
               }
-              dimensions={{ height: design.height, width: design.width }}
+              sizes={zip(design.widths, design.heights)}
               layers={design.layers}
               name={design.id}
               footer={[
@@ -58,15 +58,15 @@ const UserGalleryComponent = () => {
             />
           ))
         )
-      );
+      )
     }
-  };
+  }
 
   return (
     <VStack w="full" spacing={8}>
       <Gallery items={items} fetchMore={fetchMore} hasMore={hasMore} w="full" />
     </VStack>
-  );
-};
+  )
+}
 
-export default UserGalleryComponent;
+export default UserGalleryComponent
