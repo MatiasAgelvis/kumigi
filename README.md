@@ -1,6 +1,6 @@
 ![](images/avatara.png)
 
-# Avatara
+# Kumigi
 
 Create simple avatars with text from a simple and composable API.
 

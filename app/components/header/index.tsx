@@ -1,4 +1,4 @@
-import { Routes } from "@blitzjs/next";
+import { Routes } from "@blitzjs/next"
 import {
   Box,
   Button,
@@ -11,15 +11,15 @@ import {
   useBreakpointValue,
   VStack,
   Wrap,
-} from "@chakra-ui/react";
-import useDrawer from "app/hooks/useDrawer";
-import useLogin from "app/hooks/useLogin";
+} from "@chakra-ui/react"
+import useDrawer from "app/hooks/useDrawer"
+import useLogin from "app/hooks/useLogin"
 
-import Link from "next/link";
-import { Suspense } from "react";
-import boxOptions from "../../utils/boxOptions";
-import NewDesignButton from "../functionButtons/newDesignButton";
-import ColorToggle from "./colorToggle";
+import Link from "next/link"
+import { Suspense } from "react"
+import boxOptions from "../../utils/boxOptions"
+import NewDesignButton from "../functionButtons/newDesignButton"
+import ColorToggle from "./colorToggle"
 
 export default function Header() {
   const content = [
@@ -30,15 +30,15 @@ export default function Header() {
     <Suspense key="userinfo" fallback={<Button disabled>Loading...</Button>}>
       {/*<UserInfo />*/ useLogin()}
     </Suspense>,
-  ];
+  ]
 
   const desktop = (
     <Wrap spacing={4} justify="end" align={"center"}>
       {content}
     </Wrap>
-  );
+  )
 
-  const { toggle: Toggle, drawer: Drawer } = useDrawer();
+  const { toggle: Toggle, drawer: Drawer } = useDrawer()
   const mobile = (
     <>
       <Toggle variant={"outline"}>Menu</Toggle>
@@ -46,15 +46,15 @@ export default function Header() {
         <VStack>{content}</VStack>
       </Drawer>
     </>
-  );
+  )
 
-  const header = useBreakpointValue([mobile, null, desktop]);
+  const header = useBreakpointValue([mobile, null, desktop])
 
   return (
     <Flex {...boxOptions} m="1rem" rowGap={4}>
       <Heading as="h1" mr={8}>
         <Link href={Routes.Home()}>
-          <Center>Avatara</Center>
+          <Center>Kumigi</Center>
         </Link>
       </Heading>
       <Spacer />
@@ -63,5 +63,5 @@ export default function Header() {
         <ColorToggle aria-label="toggle color mode" />
       </HStack>
     </Flex>
-  );
+  )
 }
