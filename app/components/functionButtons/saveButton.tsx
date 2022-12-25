@@ -49,8 +49,8 @@ export default function SaveButton({
       id: name,
       userId: userId,
       layers,
-      widths: sizes.map((size) => size[0])!,
-      heights: sizes.map((size) => size[1])!,
+      widths: sizes.map((size) => size[0]!)!,
+      heights: sizes.map((size) => size[1]!)!,
     }
   }
 
