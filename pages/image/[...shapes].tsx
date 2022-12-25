@@ -2,30 +2,45 @@ import { useRouter } from "next/router"
 import Avatara from "../../app/lib/avatara"
 import { parseAvataraQuery } from "../../app/utils/parseAvataraQuery"
 import applyLayers from "../../app/utils/applyLayers"
-import { useEffect, useState } from "react"
-import { makeLayers } from "app/utils/makeLayers"
-import { Shape } from "app/types/avatara"
+import { ReactNode, useEffect, useState } from "react"
+import { Layer, LayerNoId, SetStateType } from "app/types/avatara"
+import { Box, Code, VStack, Wrap } from "@chakra-ui/react"
+import ImageBox from "app/components/designer/image/imageBox"
 
 export default function Page() {
-  const [html, setHtml] = useState({ __html: "" })
+  const [results, setResults]: SetStateType<ReactNode[]> = useState([
+    <Box key="placeholder">Please Wait</Box>,
+  ])
   const router = useRouter()
 
   useEffect(() => {
+    const images: ReactNode[] = []
     if (router.isReady) {
-      // const [height, width, layers] = parseAvataraQuery(router.query);
-      // console.log(layers);
+      const { sizes, layers } = parseAvataraQuery(router.query)
 
-      const layers = makeLayers(
-        router.query.shapes as Shape[],
-        colors as string[],
-        texts as string[],
-        fonts as string[]
-      )
-      const avatar = new Avatara(width as number, height as number)
-      applyLayers(avatar, layers)
-      setHtml({ __html: avatar.toHTML() })
+      sizes.forEach(([width, height]) => {
+        const avatar = new Avatara(width, height)
+        applyLayers(avatar, layers)
+        images.push(
+          <VStack>
+            <Code>
+              {width}x{height}
+            </Code>
+            <ImageBox
+              image={avatar.toDataURL()}
+              alt={`image in ${width} by ${height}`}
+            />
+          </VStack>
+        )
+      })
+
+      setResults(images)
     }
   }, [router.query, router.isReady])
 
-  return <div dangerouslySetInnerHTML={html} />
+  return (
+    <Wrap m={8} spacing={8}>
+      {results}
+    </Wrap>
+  )
 }
