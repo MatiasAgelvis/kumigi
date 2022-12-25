@@ -1,6 +1,6 @@
-import { resolver } from "@blitzjs/rpc";
-import db, { Prisma } from "db";
-import { z } from "zod";
+import { resolver } from "@blitzjs/rpc"
+import db, { Prisma } from "db"
+import { z } from "zod"
 
 const CreateSimpleDesign = z.object({
   id: z.string(),
@@ -15,16 +15,16 @@ const CreateSimpleDesign = z.object({
       display: z.boolean(),
     })
     .array(),
-  height: z.number(),
-  width: z.number(),
-});
+  heights: z.number().array(),
+  widths: z.number().array(),
+})
 
 export default resolver.pipe(
   resolver.zod(CreateSimpleDesign),
   resolver.authorize(),
   async (input) => {
-    const simpleDesign = await db.simpleDesigns.create({ data: input });
+    const simpleDesign = await db.simpleDesigns.create({ data: input })
 
-    return simpleDesign;
+    return simpleDesign
   }
-);
+)
