@@ -12,23 +12,26 @@ import { Layer } from "app/types/avatara"
 
 import { name__default } from "app/utils/name"
 import EditButton from "../functionButtons/editButton"
+import { useRecoilValue } from "recoil"
+import { currentSizeAtom } from "app/utils/store"
 
 function Avatar({
   layers: startLayers,
   name = name__default,
-  dimensions,
+  sizes,
   header,
   footer: __footer,
   ...props
 }: {
   layers: Layer[]
   name: string
-  dimensions: { height: number; width: number }
+  sizes: number[][]
   header?: ReactNode
   footer?: ReactNode[]
   props?: ModalProps
 }) {
-  const { height, width } = dimensions
+  const currentSize = useRecoilValue(currentSizeAtom)
+  const [width, height] = sizes[currentSize]!
   const avatar = new Avatara(width, height)
   const [layers] = useState(startLayers)
   applyLayers(avatar, layers)
@@ -49,16 +52,11 @@ function Avatar({
       body={imageBox}
       modalProps={boxOptions}
       footer={[
-        <EditButton
-          key="edit"
-          layers={layers}
-          name={name}
-          dimensions={dimensions}
-        />,
+        <EditButton key="edit" layers={layers} name={name} sizes={sizes} />,
         <DownloadButton
           key="download"
           layers={layers}
-          sizes={[[width, height]]}
+          sizes={sizes}
           w={"fit-content"}
         />,
         ...footer,
