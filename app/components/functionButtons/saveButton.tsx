@@ -46,8 +46,8 @@ export default function SaveButton({
 
   const update = (userId: number) => {
     return {
-      id: name,
-      userId: userId,
+      name,
+      userId,
       layers,
       widths: sizes.map((size) => size[0]!)!,
       heights: sizes.map((size) => size[1]!)!,

@@ -3,7 +3,7 @@ import db, { Prisma } from "db"
 import { z } from "zod"
 
 const CreateSimpleDesign = z.object({
-  id: z.string(),
+  name: z.string(),
   userId: z.number(),
   layers: z
     .object({
