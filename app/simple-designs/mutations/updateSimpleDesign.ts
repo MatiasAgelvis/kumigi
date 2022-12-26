@@ -3,7 +3,7 @@ import db from "db"
 import { z } from "zod"
 
 const UpdateSimpleDesign = z.object({
-  id: z.string(),
+  name: z.string(),
   userId: z.number(),
   layers: z
     .object({

@@ -10,18 +10,26 @@ import { useInfiniteQuery } from "@blitzjs/rpc"
 import DeleteButton from "../functionButtons/deleteButton"
 import UpdateButton from "../functionButtons/renameButton"
 import { lastElement, zip } from "app/utils/arrays"
+import { useSession } from "@blitzjs/auth"
 
 const UserGalleryComponent = () => {
   // <Avatar layers={item} key={`avatar_${index}`} />
   const [items, setItems] = useState<ReactNode[]>([])
+  const session = useSession({ suspense: false })
   const [hasMore, setHasMore] = useState(true)
   const manyMore = 3
   const limit = 100
   const [results, { fetchNextPage, isFetching }] = useInfiniteQuery(
     getSimpleDesigns,
-    (page = { take: manyMore, skip: 0 }) => page,
+    (page = { take: manyMore, skip: 0, where: { userId: session.userId } }) =>
+      page,
     {
-      getNextPageParam: (lastPage) => lastPage.nextPage,
+      getNextPageParam: (lastPage) => {
+        return {
+          ...lastPage.nextPage,
+          where: { userId: session.userId },
+        }
+      },
     }
   )
 

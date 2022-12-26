@@ -37,7 +37,7 @@ export default function generateResponse(
     sizes.forEach(([width, height]) => {
       const avatar = new Avatara(width, height)
       applyLayers(avatar, layers)
-      const rendered = render(avatar, browser)
+      // const rendered = render(avatar, browser)
       zip.file(`avatara/${width}x${height}` + ".png", render(avatar, browser))
     })
 
