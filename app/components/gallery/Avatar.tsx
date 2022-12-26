@@ -1,5 +1,5 @@
 import boxOptions from "app/utils/boxOptions"
-import { Box, Center, ModalProps } from "@chakra-ui/react"
+import { Box, BoxProps, Center, ModalProps } from "@chakra-ui/react"
 import { ReactNode, useState } from "react"
 
 import ImageBox from "../designer/image/imageBox"
@@ -20,6 +20,7 @@ function Avatar({
   name = name__default,
   sizes,
   header,
+  openProps,
   footer: __footer,
   ...props
 }: {
@@ -27,9 +28,9 @@ function Avatar({
   name: string
   sizes: number[][]
   header?: ReactNode
+  openProps?: BoxProps
   footer?: ReactNode[]
-  props?: ModalProps
-}) {
+} & Omit<ModalProps, "children" | "isOpen" | "onClose">) {
   const currentSize = useRecoilValue(currentSizeAtom)
   const [width, height] = sizes[currentSize]!
   const avatar = new Avatara(width, height)
@@ -46,7 +47,11 @@ function Avatar({
 
   return (
     <Modalo
-      open={<Box {...boxOptions}>{imageBox}</Box>}
+      open={
+        <Box {...boxOptions} {...openProps}>
+          {imageBox}
+        </Box>
+      }
       buttonProps={{ variant: "link" }}
       header={header}
       body={imageBox}
