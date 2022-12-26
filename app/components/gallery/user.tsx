@@ -2,7 +2,7 @@ import Gallery from "app/components/gallery"
 import { ReactNode, useState } from "react"
 import Avatar from "./Avatar"
 import { v4 as uuidv4 } from "uuid"
-import { HStack, Text, VStack } from "@chakra-ui/react"
+import { Button, HStack, Text, VStack } from "@chakra-ui/react"
 
 import getSimpleDesigns from "app/simple-designs/queries/getSimpleDesigns"
 import { useInfiniteQuery } from "@blitzjs/rpc"
@@ -11,12 +11,16 @@ import DeleteButton from "../functionButtons/deleteButton"
 import UpdateButton from "../functionButtons/renameButton"
 import { lastElement, zip } from "app/utils/arrays"
 import { useSession } from "@blitzjs/auth"
+import { useRouter } from "next/router"
 
 const UserGalleryComponent = () => {
   // <Avatar layers={item} key={`avatar_${index}`} />
   const [items, setItems] = useState<ReactNode[]>([])
+  const [display, setDisplay] = useState<Object>({})
   const session = useSession({ suspense: false })
   const [hasMore, setHasMore] = useState(true)
+  const router = useRouter()
+
   const manyMore = 3
   const limit = 100
   const [results, { fetchNextPage, isFetching }] = useInfiniteQuery(
@@ -42,6 +46,9 @@ const UserGalleryComponent = () => {
       const lastResult = lastElement(results)
       const designs = lastResult.simpleDesigns
       setHasMore(lastResult.hasMore)
+
+      designs.map((design) => setDisplay({ ...display, [design.id]: true }))
+
       setItems(
         items.concat(
           designs.map((design) => (
@@ -49,18 +56,22 @@ const UserGalleryComponent = () => {
               key={uuidv4()}
               header={
                 <HStack w="full">
-                  <Text w="full">{design.id}</Text>
+                  <Text w="full">{design.name}</Text>
                   <UpdateButton design={design} />
                 </HStack>
               }
               sizes={zip(design.widths, design.heights)}
               layers={design.layers}
-              name={design.id}
+              name={design.name}
               footer={[
                 <DeleteButton
-                  key={`Delete ${design.id}`}
+                  key={`Delete ${design.name}`}
                   id={design.id}
+                  name={design.name}
                   layers={design.layers}
+                  onSuccess={() => {
+                    router.reload()
+                  }}
                 />,
               ]}
             />
