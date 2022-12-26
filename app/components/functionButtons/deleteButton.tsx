@@ -1,5 +1,5 @@
-import { useMutation } from "@blitzjs/rpc";
-import { DeleteIcon } from "@chakra-ui/icons";
+import { useMutation } from "@blitzjs/rpc"
+import { DeleteIcon } from "@chakra-ui/icons"
 import {
   Button,
   ModalProps,
@@ -8,34 +8,40 @@ import {
   useToast,
   UseToastOptions,
   VStack,
-} from "@chakra-ui/react";
-import { SimpleDesigns } from "@prisma/client";
-import Modalo from "app/components/modal";
-import { useCurrentUser } from "app/core/hooks/useCurrentUser";
-import useAlertDialog from "app/hooks/useAlertDialog";
-import { Layer } from "app/types/avatara";
-import deleteSimpleDesign from "app/simple-designs/mutations/deleteSimpleDesign";
-import boxOptions from "app/utils/boxOptions";
-import { buttonSize } from "app/utils/buttonOptions";
-import layersToImage from "app/utils/layersToImage";
-import ImageBox from "../designer/image/imageBox";
+} from "@chakra-ui/react"
+import { SimpleDesigns } from "@prisma/client"
+import Modalo from "app/components/modal"
+import { useCurrentUser } from "app/core/hooks/useCurrentUser"
+import useAlertDialog from "app/hooks/useAlertDialog"
+import { Layer } from "app/types/avatara"
+import deleteSimpleDesign from "app/simple-designs/mutations/deleteSimpleDesign"
+import boxOptions from "app/utils/boxOptions"
+import { buttonSize } from "app/utils/buttonOptions"
+import layersToImage from "app/utils/layersToImage"
+import ImageBox from "../designer/image/imageBox"
 
 export default function DeleteButton({
   layers,
   id,
+  name,
+  onSuccess = () => {},
+  onFailure = () => {},
   ...props
 }: {
-  layers?: Layer[];
-  id: SimpleDesigns["id"];
-  props?: ModalProps;
+  layers?: Layer[]
+  id: SimpleDesigns["id"]
+  name: SimpleDesigns["name"]
+  onSuccess?: () => void
+  onFailure?: () => void
+  props?: ModalProps
 }) {
-  const currentUser = useCurrentUser();
-  const [deleteDesignMutation] = useMutation(deleteSimpleDesign);
+  const currentUser = useCurrentUser()
+  const [deleteDesignMutation] = useMutation(deleteSimpleDesign)
 
-  const image = layers && layersToImage(layers);
+  const image = layers && layersToImage(layers)
 
-  const toast = useToast();
-  const { onToggle, component: Alert } = useAlertDialog();
+  const toast = useToast()
+  const { onToggle, component: Alert } = useAlertDialog()
 
   const successToast = (options?: UseToastOptions | undefined) =>
     toast({
@@ -45,7 +51,7 @@ export default function DeleteButton({
       duration: 9000,
       isClosable: true,
       ...options,
-    });
+    })
 
   function handleError(error) {
     toast({
@@ -54,11 +60,11 @@ export default function DeleteButton({
       status: "error",
       duration: 9000,
       isClosable: true,
-    });
-    console.error(error);
+    })
+    console.error(error)
   }
 
-  const size = buttonSize;
+  // const size = buttonSize
 
   return (
     <>
@@ -66,11 +72,11 @@ export default function DeleteButton({
         buttonProps={{
           "aria-label": "Delete design",
           colorScheme: "red",
-          size,
+          // size,
           leftIcon: <DeleteIcon />,
         }}
         open={"Delete"}
-        header={<Text>Delete {id}?</Text>}
+        header={<Text>Delete {name}?</Text>}
         body={
           <VStack>
             {layers && (
@@ -96,22 +102,26 @@ export default function DeleteButton({
 
       <Alert
         header={"Update Avatar"}
-        body={`The Avatar "${id}" will be deleted, are you sure? This can NOT be undone.`}
+        body={`The Avatar "${name}" will be deleted, are you sure? This can NOT be undone.`}
         action={"Yes, Delete"}
         buttonProps={{ colorScheme: "red" }}
         onClick={() => {
           if (currentUser) {
             deleteDesignMutation({ id })
-              .then(() =>
+              .then(() => {
                 successToast({
-                  title: `"${id}" was Deleted.`,
-                  description: `The avatar "${id}" was removed from your gallery.`,
+                  title: `"${name}" was Deleted.`,
+                  description: `The avatar "${name}" was removed from your gallery.`,
                 })
-              )
-              .catch(handleError);
+                onSuccess()
+              })
+              .catch((error) => {
+                handleError(error)
+                onFailure()
+              })
           }
         }}
       />
     </>
-  );
+  )
 }

@@ -22,10 +22,10 @@ const UpdateSimpleDesign = z.object({
 export default resolver.pipe(
   resolver.zod(UpdateSimpleDesign),
   resolver.authorize(),
-  async ({ id, ...data }) => {
+  async ({ name, ...data }) => {
     // TODO: in multi-tenant app, you must add validation to ensure correct tenant
     const simpleDesign = await db.simpleDesigns.update({
-      where: { id },
+      where: { name },
       data,
     })
 
