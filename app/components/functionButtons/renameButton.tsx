@@ -18,6 +18,7 @@ import { Layer } from "app/types/avatara"
 import createSimpleDesign from "app/simple-designs/mutations/createSimpleDesign"
 import updateSimpleDesign from "app/simple-designs/mutations/updateSimpleDesign"
 import deleteSimpleDesign from "app/simple-designs/mutations/deleteSimpleDesign"
+import deleteSimpleDesignWithName from "app/simple-designs/mutations/deleteSimpleDesignWithName"
 import boxOptions from "app/utils/boxOptions"
 import { buttonSize } from "app/utils/buttonOptions"
 import layersToImage from "app/utils/layersToImage"
@@ -38,6 +39,7 @@ export default function UpdateButton({
   const [createDesingMutation] = useMutation(createSimpleDesign)
   const [updateDesingMutation] = useMutation(updateSimpleDesign)
   const [deleteDesignMutation] = useMutation(deleteSimpleDesign)
+  const [deleteDesignNameMutation] = useMutation(deleteSimpleDesignWithName)
   const router = useRouter()
   const toast = useToast()
   const { onToggle, component: Alert } = useAlertDialog()
@@ -109,18 +111,14 @@ export default function UpdateButton({
             key="Update"
             colorScheme={"green"}
             onClick={() =>
-              createDesingMutation(update(name))
-                .then(() =>
-                  deleteDesignMutation({ id: design.id })
-                    .then(() => {
-                      successToast({
-                        title: "Avatar updated.",
-                        description: `The avatar "${design.name}" was renamed to "${name}" successfully.`,
-                      })
-                      router.reload()
-                    })
-                    .catch(handleError)
-                )
+              updateDesingMutation(update(name))
+                .then(() => {
+                  successToast({
+                    title: "Avatar updated.",
+                    description: `The avatar "${design.name}" was renamed to "${name}" successfully.`,
+                  })
+                  router.reload()
+                })
                 .catch(handleError)
             }
           >
@@ -134,21 +132,25 @@ export default function UpdateButton({
         header={"Update Avatar"}
         body={`The Avatar "${name}" already exists, would you like to overwrite it? This can NOT be undone.`}
         action={"Update"}
-        onClick={() =>
-          updateDesingMutation(update(name))
+        onClick={() => {
+          deleteDesignNameMutation({ name: name })
             .then(() =>
-              deleteDesignMutation({ id: design.id })
+              createDesingMutation(update(name))
                 .then(() => {
-                  successToast({
-                    title: "Avatar updated.",
-                    description: `The avatar "${design.name}" was renamed to "${name}" successfully.`,
-                  })
-                  router.reload()
+                  deleteDesignMutation({ id: design.id })
+                    .then(() => {
+                      successToast({
+                        title: "Avatar updated.",
+                        description: `The avatar "${design.name}" was renamed to "${name}" successfully.`,
+                      })
+                      router.reload()
+                    })
+                    .catch(handleError)
                 })
                 .catch(handleError)
             )
             .catch(handleError)
-        }
+        }}
       />
     </>
   )
