@@ -8,7 +8,7 @@ import { AddIcon } from "@chakra-ui/icons"
 export default function SizesBar({ ...props }: WrapProps) {
   const [sizes, setSizes] = useRecoilState(sizesAtom)
   return (
-    <Wrap spacing={2} {...props}>
+    <Wrap spacing={2} direction={["column", "row"]} {...props}>
       {sizes.map((size, index) => (
         <SizePill key={`size_${index}`} index={index} colorScheme={"teal"} />
       ))}
