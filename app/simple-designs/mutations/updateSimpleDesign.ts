@@ -3,6 +3,7 @@ import db from "db"
 import { z } from "zod"
 
 const UpdateSimpleDesign = z.object({
+  id: z.number(),
   name: z.string(),
   userId: z.number(),
   layers: z
@@ -22,10 +23,10 @@ const UpdateSimpleDesign = z.object({
 export default resolver.pipe(
   resolver.zod(UpdateSimpleDesign),
   resolver.authorize(),
-  async ({ name, ...data }) => {
+  async ({ id, ...data }) => {
     // TODO: in multi-tenant app, you must add validation to ensure correct tenant
     const simpleDesign = await db.simpleDesigns.update({
-      where: { name },
+      where: { id },
       data,
     })
 
