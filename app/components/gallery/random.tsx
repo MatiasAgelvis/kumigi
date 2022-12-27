@@ -13,11 +13,12 @@ import { useRecoilState } from "recoil"
 import { name__default } from "app/utils/name"
 import SizesBar from "../size/sizesBar"
 import { RepeatIcon } from "@chakra-ui/icons"
+import { Layer, LayerNoId } from "app/types/avatara"
 
 const RandomGalleryComponent = () => {
   // <Avatar layers={item} key={`avatar_${index}`} />
   const [name, setName] = useRecoilState(nameAtom)
-  const [items, setItems] = useState<ReactNode[]>([])
+  const [items, setItems] = useState<LayerNoId[][] | Layer[][]>([])
   const [sizes, setSizes] = useRecoilState(sizesAtom)
   const [hasMore, setHasMore] = useState(true)
   const manyMore = 10
@@ -26,18 +27,7 @@ const RandomGalleryComponent = () => {
   const layerGenerator = () => randomLayers().map(idCard)
   const fetchMore = () => {
     setHasMore(items.length < limit)
-    setItems(
-      items.concat(
-        Array.from({ length: manyMore }, () => (
-          <Avatar
-            key={uuidv4()}
-            name={name__default}
-            sizes={sizes}
-            layers={layerGenerator()}
-          />
-        ))
-      )
-    )
+    setItems(items.concat(Array.from({ length: manyMore }, layerGenerator)))
   }
 
   function restart() {
@@ -52,7 +42,19 @@ const RandomGalleryComponent = () => {
         <SizesBar />
       </Wrap>
 
-      <Gallery items={items} fetchMore={fetchMore} hasMore={hasMore} w="full" />
+      <Gallery
+        items={items.map((layer) => (
+          <Avatar
+            key={uuidv4()}
+            name={name__default}
+            sizes={sizes}
+            layers={layer}
+          />
+        ))}
+        fetchMore={fetchMore}
+        hasMore={hasMore}
+        w="full"
+      />
       <Button colorScheme={"red"} onClick={restart} leftIcon={<RepeatIcon />}>
         Start Over
       </Button>
