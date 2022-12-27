@@ -32,7 +32,7 @@ function Avatar({
   footer?: ReactNode[]
 } & Omit<ModalProps, "children" | "isOpen" | "onClose">) {
   const currentSize = useRecoilValue(currentSizeAtom)
-  const [width, height] = sizes[currentSize]!
+  const [width, height] = sizes[currentSize || 0]!
   const avatar = new Avatara(width, height)
   const [layers] = useState(startLayers)
   applyLayers(avatar, layers)
