@@ -1,4 +1,4 @@
-import { useMutation } from "@blitzjs/rpc"
+import { useMutation, useQuery } from "@blitzjs/rpc"
 import {
   Button,
   Center,
@@ -15,7 +15,9 @@ import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import useAlertDialog from "app/hooks/useAlertDialog"
 import useSize from "app/hooks/useSize"
 import createSimpleDesign from "app/simple-designs/mutations/createSimpleDesign"
+import deleteSimpleDesignWithName from "app/simple-designs/mutations/deleteSimpleDesignWithName"
 import updateSimpleDesign from "app/simple-designs/mutations/updateSimpleDesign"
+import getDesignNameUser from "app/simple-designs/queries/getDesignNameUser"
 import { Layer } from "app/types/avatara"
 import boxOptions from "app/utils/boxOptions"
 import { buttonSize } from "app/utils/buttonOptions"
@@ -40,6 +42,7 @@ export default function SaveButton({
 
   const [createDesingMutation] = useMutation(createSimpleDesign)
   const [updateDesingMutation] = useMutation(updateSimpleDesign)
+  const [deleteDesignNameMutation] = useMutation(deleteSimpleDesignWithName)
 
   const toast = useToast()
   const { onToggle, component: Alert } = useAlertDialog()
@@ -148,12 +151,16 @@ export default function SaveButton({
         action={"Update"}
         onClick={() =>
           currentUser &&
-          updateDesingMutation(update(currentUser.id))
+          deleteDesignNameMutation({ name: name })
             .then(() =>
-              successToast({
-                title: "Avatar updated.",
-                description: `The avatar "${name}" was updated successfully.`,
-              })
+              createDesingMutation(update(currentUser.id))
+                .then(() =>
+                  successToast({
+                    title: "Avatar updated.",
+                    description: `The avatar "${name}" was updated successfully.`,
+                  })
+                )
+                .catch(handleError)
             )
             .catch(handleError)
         }
