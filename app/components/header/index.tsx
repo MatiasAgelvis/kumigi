@@ -51,7 +51,7 @@ export default function Header() {
   const header = useBreakpointValue([mobile, null, desktop])
 
   return (
-    <Flex {...boxOptions} m="1rem" rowGap={4}>
+    <Flex {...boxOptions} m="1rem" p={["0.75rem 0.5rem ", "1rem"]} rowGap={4}>
       <Heading as="h1" mr={8}>
         <Link href={Routes.Home()}>
           <Center>Kumigi</Center>
