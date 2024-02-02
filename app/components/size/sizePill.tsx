@@ -5,6 +5,7 @@ import {
   ButtonGroupProps,
   ButtonProps,
   IconButton,
+  useDisclosure
 } from "@chakra-ui/react"
 import useSizeState from "app/hooks/useSizeState"
 import { currentSizeAtom } from "app/utils/store"
@@ -27,6 +28,7 @@ export default function SizePill({
   const { size, setSize, deleteSize, length: sizeLength } = useSizeState(index)
   const [width, height] = size
   const [currentSize, setCurrentSize] = useRecoilState(currentSizeAtom)
+  const { onOpen, onClose, isOpen } = useDisclosure()
 
   return (
     <ButtonGroup
@@ -39,11 +41,16 @@ export default function SizePill({
           <IconButton
             icon={<EditIcon />}
             aria-label="Change size"
+            onClick={onOpen}
             {...editButtonProps}
-          />
+          /> 
         }
         placement={"top"}
-        body={<SizeFormatted index={index} />}
+        body={<SizeFormatted index={index} onClose={onClose} />}
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+        closeButton={false}
       />
 
       <Button

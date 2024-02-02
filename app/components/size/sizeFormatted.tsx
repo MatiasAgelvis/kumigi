@@ -5,20 +5,22 @@ import {
   Flex,
   StackProps,
   VStack,
+  ButtonGroup
 } from "@chakra-ui/react"
 import useSizeState from "app/hooks/useSizeState"
 import { useState } from "react"
 import RangeInput from "../designer/editor/rangeInput"
 import FullWidth from "../formatting/fullWidth"
+import buttonOptions from "app/utils/buttonOptions";
 
 export default function SizeFormatted({
   index,
-  onCancelClick,
+  onClose,
   vstackProps,
   ...props
 }: {
   index: number
-  onCancelClick?: () => void
+  onClose?: () => void
   vstackProps?: StackProps
 } & BoxProps) {
   const { size, setSize } = useSizeState(index)
@@ -53,17 +55,20 @@ export default function SizeFormatted({
           textProps={{ fontFamily: "mono" }}
         />
         <Flex justify={"space-between"}>
+        <ButtonGroup isAttached w="full">
           <Button
+          {...buttonOptions}
             colorScheme="blue"
-            onClick={() => setSize([localWidth!, localHeight!])}
+            onClick={() => {setSize([localWidth!, localHeight!]); onClose()}}
           >
             Apply
           </Button>
-          {onCancelClick ? (
-            <Button colorScheme="red" onClick={onCancelClick}>
+          {onClose ? (
+            <Button {...buttonOptions} colorScheme="red" onClick={onClose}>
               Cancel
             </Button>
           ) : null}
+          </ButtonGroup>
         </Flex>
       </VStack>
     </Box>

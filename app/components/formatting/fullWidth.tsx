@@ -24,7 +24,7 @@ function FullWidth({
       <Center>
         <Text {...textProps}>{name}</Text>
       </Center>
-      <Center>{input}</Center>
+      <Center w='full'>{input}</Center>
     </Flex>
   );
 }
