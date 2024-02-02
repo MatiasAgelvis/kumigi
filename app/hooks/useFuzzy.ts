@@ -1,4 +1,4 @@
-import React from "react";
+import {useMemo} from "react";
 import FuzzySearch from "fuzzy-search";
 
 function useFuzzy(
@@ -11,12 +11,12 @@ function useFuzzy(
   },
   defaultEmpty: boolean = false
 ) {
-  const fuse = React.useMemo(
+  const fuse = useMemo(
     () => new FuzzySearch(list, keys, options),
     [list, keys, options]
   );
 
-  const results = React.useMemo(
+  const results = useMemo(
     () => fuse.search(searchTerm),
     [fuse, searchTerm]
   );
