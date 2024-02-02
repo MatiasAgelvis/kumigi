@@ -15,7 +15,7 @@ import buttonOptions from "app/utils/buttonOptions";
 
 export default function SizeFormatted({
   index,
-  onClose,
+  onClose = ()=>{},
   vstackProps,
   ...props
 }: {

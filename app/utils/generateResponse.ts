@@ -3,7 +3,7 @@ import applyLayers from "../../app/utils/applyLayers"
 import JSZip from "jszip"
 import { Layer, LayerNoId } from "app/types/avatara"
 import saveAs from "file-saver"
-import _name from "app/utils/defaults"
+import {_name} from "app/utils/defaults"
 
 function render(avatar, browser = false) {
   return browser ? dataURLtoBlob(avatar.toDataURL()) : avatar.toBuffer()

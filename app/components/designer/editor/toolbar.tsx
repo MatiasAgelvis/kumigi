@@ -10,7 +10,6 @@ import {
 import { randomLayers } from "app/lib/avatara";
 import { buttonSize } from "app/utils/buttonOptions";
 import { idCard, layers__Default } from "app/utils/createLayer";
-import SaveButton from "app/components/functionButtons/saveButton";
 import { useRecoilState } from "recoil";
 import { imageAtom, nameAtom } from "app/utils/store";
 import { Layer, UseUndoType } from "app/types/avatara";

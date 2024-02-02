@@ -3,7 +3,7 @@ import { DownloadIcon } from "@chakra-ui/icons"
 import { Layer, LayerNoId } from "app/types/avatara"
 import generateResponse from "app/utils/generateResponse"
 import saveAs from "file-saver"
-import _name from "app/utils/defaults"
+import {_name} from "app/utils/defaults"
 
 export default function DownloadButton({
   message = "Download",

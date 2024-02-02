@@ -12,7 +12,6 @@ import {
   Wrap,
 } from "@chakra-ui/react"
 import useDrawer from "app/hooks/useDrawer"
-import useLogin from "app/hooks/useLogin"
 
 import Link from "next/link"
 import { Suspense } from "react"

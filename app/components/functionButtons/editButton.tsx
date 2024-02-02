@@ -38,7 +38,7 @@ export default function EditButton({
         setEditorLayers(layers)
         setNameState(name)
         setSizes(sizes)
-        router.push(#)
+        router.push("#")
       }}
       leftIcon={<EditIcon />}
       {...props}
