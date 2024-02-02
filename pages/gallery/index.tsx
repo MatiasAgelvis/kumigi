@@ -1,5 +1,4 @@
 import Layout from "app/core/layouts/Layout";
-import { BlitzPage, Routes } from "@blitzjs/next";
 import {
   Box,
   BoxProps,
@@ -20,9 +19,7 @@ import Link from "next/link";
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
 import { TbLayoutDashboard } from "react-icons/tb";
 import { ReactNode, Suspense } from "react";
-import { useSession } from "@blitzjs/auth";
 import { useCurrentUser } from "app/core/hooks/useCurrentUser";
-import { RouteUrlObject } from "blitz";
 
 function Card({
   href,
@@ -32,7 +29,7 @@ function Card({
   buttonProps,
   ...props
 }: {
-  href: string | RouteUrlObject;
+  href: string;
   text: string;
   subtext?: ReactNode;
   icon: ReactNode;
@@ -65,14 +62,14 @@ const IntroGalleryPage = () => {
   return (
     <SimpleGrid w="full" columns={[1, null, 2]} spacing={8} minH={"70vh"}>
       <Card
-        href={Routes.UserGallery()}
+        href={"#"}
         buttonProps={{
           colorScheme: "teal",
           disabled: Boolean(!user.userId),
         }}
         text="Your Gallery"
         subtext={
-          <Link href={Routes.LoginPage()}>
+          <Link href={"#"}>
             <Button variant={"link"}>
               Requires you to&nbsp;<strong>Login</strong>
             </Button>
@@ -82,7 +79,7 @@ const IntroGalleryPage = () => {
       />
 
       <Card
-        href={Routes.RandomGallery()}
+        href={"#"}
         buttonProps={{ colorScheme: "blue" }}
         text="Random Gallery"
         icon={<GiPerspectiveDiceSixFacesRandom fontSize={"100px"} />}
@@ -91,7 +88,7 @@ const IntroGalleryPage = () => {
   );
 };
 
-const IntroGallery: BlitzPage = () => {
+const IntroGallery = () => {
   return (
     <Layout title="Choose a Gallery">
       <main>

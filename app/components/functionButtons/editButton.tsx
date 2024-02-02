@@ -1,4 +1,3 @@
-import { Routes } from "@blitzjs/next"
 import { Button, ButtonProps, Center } from "@chakra-ui/react"
 import { ReactNode, useState } from "react"
 
@@ -39,7 +38,7 @@ export default function EditButton({
         setEditorLayers(layers)
         setNameState(name)
         setSizes(sizes)
-        router.push(Routes.Home())
+        router.push(#)
       }}
       leftIcon={<EditIcon />}
       {...props}

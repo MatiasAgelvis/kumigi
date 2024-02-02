@@ -1,10 +1,9 @@
-import { BlitzNextApiResponse } from "@blitzjs/next"
 import generateResponse from "app/utils/generateResponse"
 import { NextApiRequest } from "next"
 import { randomLayers } from "../../app/lib/avatara"
 import { parseAvataraQuery } from "../../app/utils/parseAvataraQuery"
 
-const avatar = (req: NextApiRequest, res: BlitzNextApiResponse) => {
+const avatar = (req, res) => {
   const { sizes } = parseAvataraQuery(req.query)
   const layers = randomLayers()
 

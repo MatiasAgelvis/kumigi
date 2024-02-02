@@ -5,37 +5,21 @@ import { v4 as uuidv4 } from "uuid"
 import { Button, HStack, Text, VStack } from "@chakra-ui/react"
 
 import getSimpleDesigns from "app/simple-designs/queries/getSimpleDesigns"
-import { useInfiniteQuery } from "@blitzjs/rpc"
-
 import DeleteButton from "../functionButtons/deleteButton"
 import UpdateButton from "../functionButtons/renameButton"
 import { lastElement, zip } from "app/utils/arrays"
-import { useSession } from "@blitzjs/auth"
 import { useRouter } from "next/router"
 
 const UserGalleryComponent = () => {
   // <Avatar layers={item} key={`avatar_${index}`} />
   const [items, setItems] = useState<ReactNode[]>([])
   const [display, setDisplay] = useState<Object>({})
-  const session = useSession({ suspense: false })
   const [hasMore, setHasMore] = useState(true)
   const router = useRouter()
 
   const manyMore = 3
   const limit = 100
-  const [results, { fetchNextPage, isFetching }] = useInfiniteQuery(
-    getSimpleDesigns,
-    (page = { take: manyMore, skip: 0, where: { userId: session.userId } }) =>
-      page,
-    {
-      getNextPageParam: (lastPage) => {
-        return {
-          ...lastPage.nextPage,
-          where: { userId: session.userId },
-        }
-      },
-    }
-  )
+  const [results, { fetchNextPage, isFetching }] = ()=>{}
 
   const fetchMore = () => {
     if (!isFetching) {

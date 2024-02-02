@@ -10,7 +10,6 @@ import {
 import { randomLayers } from "app/lib/avatara";
 import { buttonSize } from "app/utils/buttonOptions";
 import { idCard, layers__Default } from "app/utils/createLayer";
-import { Suspense } from "react";
 import SaveButton from "app/components/functionButtons/saveButton";
 import { useRecoilState } from "recoil";
 import { imageAtom, nameAtom } from "app/utils/store";
@@ -60,9 +59,6 @@ export default function Toolbar({
       </HStack>
       <Spacer />
       <HStack spacing={4}>
-        <Suspense>
-          <SaveButton layers={layers} />
-        </Suspense>
         <Button
           size={size}
           colorScheme="blue"

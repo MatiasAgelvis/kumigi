@@ -6,7 +6,6 @@ import { useRecoilState, useSetRecoilState } from "recoil"
 import { layersAtom, nameAtom, sizesAtom } from "app/utils/store"
 import { name__default } from "app/utils/name"
 import { useRouter } from "next/router"
-import { Routes } from "@blitzjs/next"
 import { _default_size } from "app/utils/defaults"
 
 export default function NewDesignButton({ ...props }: ButtonProps) {
@@ -23,7 +22,7 @@ export default function NewDesignButton({ ...props }: ButtonProps) {
         setLayers(layers__Default)
         setName(name__default)
         setSizes(_default_size)
-        router.push(Routes.Home())
+        router.push("#")
       }}
       {...props}
     >

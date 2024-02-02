@@ -1,4 +1,3 @@
-import { useMutation } from "@blitzjs/rpc"
 import { EditIcon } from "@chakra-ui/icons"
 import {
   Button,
@@ -15,10 +14,6 @@ import Modalo from "app/components/modal"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import useAlertDialog from "app/hooks/useAlertDialog"
 import { Layer } from "app/types/avatara"
-import createSimpleDesign from "app/simple-designs/mutations/createSimpleDesign"
-import updateSimpleDesign from "app/simple-designs/mutations/updateSimpleDesign"
-import deleteSimpleDesign from "app/simple-designs/mutations/deleteSimpleDesign"
-import deleteSimpleDesignWithName from "app/simple-designs/mutations/deleteSimpleDesignWithName"
 import boxOptions from "app/utils/boxOptions"
 import { buttonSize } from "app/utils/buttonOptions"
 import layersToImage from "app/utils/layersToImage"
@@ -36,10 +31,10 @@ export default function UpdateButton({
   const layers = design.layers as Layer[]
   const [name, setName] = useState(design.name)
   const currentUser = useCurrentUser()
-  const [createDesingMutation] = useMutation(createSimpleDesign)
-  const [updateDesingMutation] = useMutation(updateSimpleDesign)
-  const [deleteDesignMutation] = useMutation(deleteSimpleDesign)
-  const [deleteDesignNameMutation] = useMutation(deleteSimpleDesignWithName)
+  const [createDesingMutation] = ()=>{}
+  const [updateDesingMutation] = ()=>{}
+  const [deleteDesignMutation] = ()=>{}
+  const [deleteDesignNameMutation] = ()=>{}
   const router = useRouter()
   const toast = useToast()
   const { onToggle, component: Alert } = useAlertDialog()

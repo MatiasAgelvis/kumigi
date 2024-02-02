@@ -1,4 +1,3 @@
-import { Routes } from "@blitzjs/next"
 import {
   Box,
   Button,
@@ -23,13 +22,10 @@ import ColorToggle from "./colorToggle"
 
 export default function Header() {
   const content = [
-    <NewDesignButton variant={"outline"} key="newdesign" />,
-    <Button key="randomgallery">
-      <Link href={Routes.RandomGallery()}>Random Gallery</Link>
-    </Button>,
-    <Suspense key="userinfo" fallback={<Button disabled>Loading...</Button>}>
-      {/*<UserInfo />*/ useLogin()}
-    </Suspense>,
+    // <NewDesignButton variant={"outline"} key="newdesign" />,
+    // <Button key="randomgallery">
+    //   <Link href={"#"}>Random Gallery</Link>
+    // </Button>,
   ]
 
   const desktop = (
@@ -53,13 +49,13 @@ export default function Header() {
   return (
     <Flex {...boxOptions} m="1rem" p={["0.75rem 0.5rem ", "1rem"]} rowGap={4}>
       <Heading as="h1" mr={8}>
-        <Link href={Routes.Home()}>
+        <Link href={"#"}>
           <Center>Kumigi</Center>
         </Link>
       </Heading>
       <Spacer />
       <HStack spacing={4} justify="end">
-        {header}
+        {/*{header}*/}
         <ColorToggle aria-label="toggle color mode" />
       </HStack>
     </Flex>

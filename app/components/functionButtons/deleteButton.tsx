@@ -1,4 +1,3 @@
-import { useMutation } from "@blitzjs/rpc"
 import { DeleteIcon } from "@chakra-ui/icons"
 import {
   Button,
@@ -14,7 +13,6 @@ import Modalo from "app/components/modal"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import useAlertDialog from "app/hooks/useAlertDialog"
 import { Layer } from "app/types/avatara"
-import deleteSimpleDesign from "app/simple-designs/mutations/deleteSimpleDesign"
 import boxOptions from "app/utils/boxOptions"
 import { buttonSize } from "app/utils/buttonOptions"
 import layersToImage from "app/utils/layersToImage"
@@ -35,8 +33,8 @@ export default function DeleteButton({
   onFailure?: () => void
   props?: ModalProps
 }) {
-  const currentUser = useCurrentUser()
-  const [deleteDesignMutation] = useMutation(deleteSimpleDesign)
+  const currentUser = true
+  const [deleteDesignMutation] = ()=>{}
 
   const image = layers && layersToImage(layers)
 
