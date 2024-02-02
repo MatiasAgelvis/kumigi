@@ -51,7 +51,7 @@ export default function Image({
               colorScheme={"teal"}
             >
               <DownloadButton layers={layers} sizes={sizes} />
-              <CopyButton
+              {/*<CopyButton
                 leftIcon={<CopyIcon />}
                 message="Copy URL"
                 value={makeApiUrl(
@@ -59,7 +59,7 @@ export default function Image({
                   layers,
                   sizes
                 )}
-              />
+              />*/}
             </ButtonGroup>
           </VStack>
         </Box>
