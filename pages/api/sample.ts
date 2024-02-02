@@ -2,6 +2,7 @@ import generateResponse from "app/utils/generateResponse"
 import { NextApiRequest } from "next"
 import { randomLayers } from "../../app/lib/avatara"
 import { parseAvataraQuery } from "../../app/utils/parseAvataraQuery"
+import _name from "app/utils/defaults"
 
 const avatar = (req, res) => {
   const { sizes } = parseAvataraQuery(req.query)
@@ -13,14 +14,14 @@ const avatar = (req, res) => {
     res.setHeader("Content-Type", "image/png")
     res.setHeader(
       "Content-Disposition",
-      "attachment;filename=" + "avatara" + ".png"
+      "attachment;filename=" + _name + ".png"
     )
   } else {
     // returns a zip with multiple images
     res.setHeader("Content-Type", "application/zip")
     res.setHeader(
       "Content-Disposition",
-      "attachment;filename=" + "avatara" + ".zip"
+      "attachment;filename=" + _name + ".zip"
     )
     res.setHeader("Content-Encoding", "base64")
   }

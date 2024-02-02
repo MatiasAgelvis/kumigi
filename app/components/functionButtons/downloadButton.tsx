@@ -3,6 +3,7 @@ import { DownloadIcon } from "@chakra-ui/icons"
 import { Layer, LayerNoId } from "app/types/avatara"
 import generateResponse from "app/utils/generateResponse"
 import saveAs from "file-saver"
+import _name from "app/utils/defaults"
 
 export default function DownloadButton({
   message = "Download",
@@ -20,9 +21,9 @@ export default function DownloadButton({
       onClick={() => {
         const res = generateResponse(layers, sizes, true)
         sizes.length == 1
-          ? saveAs(res, "avatara.png")
+          ? saveAs(res, `${_name}.png`)
           : res.then(function (blob) {
-              saveAs(blob, "avatara.zip")
+              saveAs(blob, `${_name}.zip`)
             })
       }}
       {...props}

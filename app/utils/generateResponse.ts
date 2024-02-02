@@ -3,6 +3,7 @@ import applyLayers from "../../app/utils/applyLayers"
 import JSZip from "jszip"
 import { Layer, LayerNoId } from "app/types/avatara"
 import saveAs from "file-saver"
+import _name from "app/utils/defaults"
 
 function render(avatar, browser = false) {
   return browser ? dataURLtoBlob(avatar.toDataURL()) : avatar.toBuffer()
@@ -38,7 +39,7 @@ export default function generateResponse(
       const avatar = new Avatara(width, height)
       applyLayers(avatar, layers)
       // const rendered = render(avatar, browser)
-      zip.file(`avatara/${width}x${height}` + ".png", render(avatar, browser))
+      zip.file(`${_name}/${width}x${height}` + ".png", render(avatar, browser))
     })
 
     return browser
