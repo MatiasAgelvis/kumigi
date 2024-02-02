@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: blitzapp
-    env: node
-    plan: free
-    buildCommand: yarn --frozen-lockfile --prod=false && blitz build
-    startCommand: blitz start -p 3000
