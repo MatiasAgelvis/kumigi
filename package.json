@@ -11,6 +11,9 @@
     "test:watch": "jest --watch",
     "prepare": "husky install"
   },
+  "engines": {
+    "node": "24.x"
+  },
   "prisma": {
     "schema": "db/schema.prisma"
   },
